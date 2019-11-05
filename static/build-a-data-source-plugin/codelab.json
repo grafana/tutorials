@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-05T01:50:47+01:00",
-  "id": "getting-started",
-  "duration": 2,
-  "title": "Getting started",
+  "updated": "2019-11-05T02:06:31+01:00",
+  "id": "build-a-data-source-plugin",
+  "duration": 11,
+  "title": "Build a data source plugin",
   "authors": "Grafana Labs",
-  "summary": "Getting started",
-  "source": "getting-started.md",
+  "summary": "Build a data source plugin",
+  "source": "../src/data-source-plugins.md",
   "theme": "",
   "status": [
     "published"
@@ -21,5 +21,5 @@
     "beginner"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "getting-started"
+  "url": "build-a-data-source-plugin"
 }

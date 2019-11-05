@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-05T01:49:54+01:00",
-  "id": "build-a-backend-plugin",
-  "duration": 1,
-  "title": "Build a backend plugin",
+  "updated": "2019-11-05T02:06:31+01:00",
+  "id": "getting-started",
+  "duration": 2,
+  "title": "Getting started",
   "authors": "Grafana Labs",
-  "summary": "Build a backend plugin",
-  "source": "backend-plugins.md",
+  "summary": "Getting started",
+  "source": "../src/getting-started.md",
   "theme": "",
   "status": [
     "published"
@@ -18,8 +18,8 @@
     "plugins"
   ],
   "tags": [
-    "intermediate"
+    "beginner"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-backend-plugin"
+  "url": "getting-started"
 }
