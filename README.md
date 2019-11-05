@@ -2,6 +2,8 @@
 
 Grafana codelabs are a series of lab assignment to teach you about how to get started developing plugins for Grafana.
 
+![Screenshot](screenshot.png)
+
 ## Requirements
 
 - [claat](https://github.com/googlecodelabs/tools)
