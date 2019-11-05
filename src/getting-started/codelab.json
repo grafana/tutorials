@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-11-05T01:50:47+01:00",
+  "id": "getting-started",
+  "duration": 2,
+  "title": "Getting started",
+  "authors": "Grafana Labs",
+  "summary": "Getting started",
+  "source": "getting-started.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "plugins"
+  ],
+  "tags": [
+    "beginner"
+  ],
+  "feedback": "https://github.com/grafana/grafana",
+  "url": "getting-started"
+}

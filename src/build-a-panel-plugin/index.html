@@ -1,0 +1,68 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Build a panel plugin</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="build-a-panel-plugin"
+                  title="Build a panel plugin"
+                  environment="web"
+                  feedback-link="https://github.com/grafana/grafana">
+    
+      <google-codelab-step label="Overview" duration="1">
+        <p>In this codelab, you&#39;ll learn how to build a panel plugin.</p>
+<h2 is-upgraded>What you&#39;ll need</h2>
+<ul>
+<li>Grafana version 6.4+</li>
+<li>NodeJS</li>
+<li>yarn</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create a new panel plugin" duration="1">
+        <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I&#39;m going to use grafana-toolkit.</p>
+<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.</p>
+<ul>
+<li>Create a data source plugin from template, using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create codelab1
+</code></pre>
+</li>
+<li>Download necessary dependencies:<pre><code>yarn install
+</code></pre>
+</li>
+<li>Build the plugin:<pre><code>yarn dev
+</code></pre>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>
