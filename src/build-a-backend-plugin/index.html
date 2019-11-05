@@ -51,6 +51,7 @@
 <ul>
 <li>Create another directory <code>backend</code> in your project root directory, containing a <code>main.go</code> file.</li>
 </ul>
+<p><strong>main.go</strong></p>
 <pre><code>package main
 
 import (
@@ -118,6 +119,7 @@ _windows_amd64.exe
         <ul>
 <li>Add two structs to represent the query and the options:</li>
 </ul>
+<p><strong>main.go</strong></p>
 <pre><code>type Query struct {
 	RefID  string `json:&#34;refId&#34;`
 	Values string `json:&#34;values&#34;`
@@ -172,6 +174,7 @@ type Options struct {
 <li>Install <code>@grafana/runtime</code>, by running <code>yarn add --dev @grafana/runtime</code>. <code>getBackendSrv</code> is a function that returns runtime information about the Grafana backend.</li>
 <li>In <code>DataSource.ts</code>, import the <code>getBackendSrv</code>.</li>
 </ul>
+<p><strong>DataSource.ts</strong></p>
 <pre><code>import { getBackendSrv } from &#39;@grafana/runtime&#39;;
 </code></pre>
 <ul>

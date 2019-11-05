@@ -63,6 +63,7 @@ For most data sources, you probably want to give your users the ability to confi
 
 - In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
 
+**type.ts**
 ```ts
 export interface MyDataSourceOptions extends DataSourceJsonData {
   path?: string;
@@ -71,6 +72,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 
 - In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for our path option:
 
+**ConfigEditor.tsx**
 ```ts
 return (
   <div className="gf-form-group">
@@ -108,6 +110,7 @@ Most likely you want your users to be able to select the data they're interested
 
 - In `types.ts`, update `MyQuery` to contain a optional field named `values`:
 
+**types.ts**
 ```ts
 export interface MyQuery extends DataQuery {
   values?: string;
@@ -122,6 +125,7 @@ export const defaultQuery: Partial<MyQuery> = {
 
 - In `QueryEditor.tsx`, update the `render` function to return a `FormField` for our query string:
 
+**QueryEditor.tsx**
 ```ts
 render() {
   const query = defaults(this.props.query, defaultQuery);
@@ -137,6 +141,7 @@ render() {
 
 - Update `DataSource.ts` to return a data frame with the values from the query editor.
 
+**DataSource.ts**
 ```ts
 query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
   const { range } = options;
@@ -180,6 +185,7 @@ Duration: 4
 
 Use `throw` to display a friendly error message in the top-left corner of the panel whenever a data source error occurred:
 
+**DataSource.ts**
 ```ts
 async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
   throw { message: 'Malformed query' };

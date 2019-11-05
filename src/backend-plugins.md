@@ -34,6 +34,7 @@ Last time, we started writing a data source plugin that would read CSV files. Le
 
 - Create another directory `backend` in your project root directory, containing a `main.go` file. 
 
+**main.go**
 ```go
 package main
 
@@ -111,6 +112,7 @@ $ ps aux | grep csv-datasource
 
 - Add two structs to represent the query and the options:
 
+**main.go**
 ```go
 type Query struct {
 	RefID  string `json:"refId"`
@@ -166,6 +168,7 @@ Let's make the `testDatasource` call our backend to make sure it's responding co
 
 - In `DataSource.ts`, import the `getBackendSrv`.
 
+**DataSource.ts**
 ```ts
 import { getBackendSrv } from '@grafana/runtime';
 ```

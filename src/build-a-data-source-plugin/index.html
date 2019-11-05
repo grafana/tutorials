@@ -70,6 +70,7 @@
 <ul>
 <li>In <code>types.ts</code>, update <code>MyDataSourceOptions</code> to contain a optional field named <code>path</code>:</li>
 </ul>
+<p><strong>type.ts</strong></p>
 <pre><code>export interface MyDataSourceOptions extends DataSourceJsonData {
   path?: string;
 }
@@ -77,6 +78,7 @@
 <ul>
 <li>In <code>ConfigEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for our path option:</li>
 </ul>
+<p><strong>ConfigEditor.tsx</strong></p>
 <pre><code>return (
   &lt;div className=&#34;gf-form-group&#34;&gt;
     &lt;div className=&#34;gf-form&#34;&gt;
@@ -112,6 +114,7 @@
 <ul>
 <li>In <code>types.ts</code>, update <code>MyQuery</code> to contain a optional field named <code>values</code>:</li>
 </ul>
+<p><strong>types.ts</strong></p>
 <pre><code>export interface MyQuery extends DataQuery {
   values?: string;
 }
@@ -123,6 +126,7 @@
 <ul>
 <li>In <code>QueryEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for our query string:</li>
 </ul>
+<p><strong>QueryEditor.tsx</strong></p>
 <pre><code>render() {
   const query = defaults(this.props.query, defaultQuery);
   const { values } = query;
@@ -137,6 +141,7 @@
 <ul>
 <li>Update <code>DataSource.ts</code> to return a data frame with the values from the query editor.</li>
 </ul>
+<p><strong>DataSource.ts</strong></p>
 <pre><code>query(options: DataQueryRequest&lt;MyQuery&gt;): Promise&lt;DataQueryResponse&gt; {
   const { range } = options;
   const from = range.from.valueOf();
@@ -176,6 +181,7 @@
     
       <google-codelab-step label="Error handling" duration="4">
         <p>Use <code>throw</code> to display a friendly error message in the top-left corner of the panel whenever a data source error occurred:</p>
+<p><strong>DataSource.ts</strong></p>
 <pre><code>async query(options: DataQueryRequest&lt;MyQuery&gt;): Promise&lt;DataQueryResponse&gt; {
   throw { message: &#39;Malformed query&#39; };
 }

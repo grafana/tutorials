@@ -17,6 +17,7 @@ Every plugin you create requires at least two files, `plugin.json`, and `module.
 
 `plugin.json` contains information about your plugin, and tells Grafana about what capabilities the plugin needs.
 
+**plugin.json**
 ```json
 {
   "id": "<your-github-handle>-my-datasource",
