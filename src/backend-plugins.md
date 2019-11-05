@@ -2,13 +2,14 @@ summary: Build a backend plugin
 id: build-a-backend-plugin
 categories: Plugins
 tags: intermediate
-status: Published 
+status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/grafana
 
 # Build a backend plugin
 
 ## Overview
+
 Duration: 1
 
 In this codelab, you'll learn how to build a backend plugin to support your data source plugin.
@@ -32,9 +33,10 @@ Luckily, Grafana has support for _backend plugins_, which lets your data source 
 
 Last time, we started writing a data source plugin that would read CSV files. Let's see how a backend plugin lets you read a file on the server and return the data back to the client.
 
-- Create another directory `backend` in your project root directory, containing a `main.go` file. 
+- Create another directory `backend` in your project root directory, containing a `main.go` file.
 
 **main.go**
+
 ```go
 package main
 
@@ -105,7 +107,7 @@ The value should be the name of the binary, with the suffix removed.
 - Restart Grafana and verify that your plugin is running:
 
 ```
-$ ps aux | grep csv-datasource
+ps aux | grep csv-datasource
 ```
 
 ## Add a backend handler
@@ -113,6 +115,7 @@ $ ps aux | grep csv-datasource
 - Add two structs to represent the query and the options:
 
 **main.go**
+
 ```go
 type Query struct {
 	RefID  string `json:"refId"`
@@ -127,6 +130,7 @@ type Options struct {
 - Implement the `Query` method.
 
 ```go
+
 func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataSourceInfo, queries []sdk.Query) ([]sdk.QueryResult, error) {
 	var opts Options
 	if err := json.Unmarshal(ds.JsonData, &opts); err != nil {
@@ -141,18 +145,18 @@ func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataS
 			return nil, err
 		}
 
-    var values []int
-    for _, val := range strings.Split(query.values, ",") {
-        num, _ := strconv.Atoi(val)
-        values = append(values, num)
-    }
+		var values []int
+		for _, val := range strings.Split(query.values, ",") {
+			num, _ := strconv.Atoi(val)
+			values = append(values, num)
+		}
 
 		res = append(res, sdk.QueryResult{
-        RefID:      query.RefID,
-        DataFrames: []sdk.DataFrame{dataframe.New("", dataframe.Labels{},
-            dataframe.NewField("timestamp", dataframe.FieldTypeTime, []time.Time{}),
-            dataframe.NewField("value", dataframe.FieldTypeNumber, values),
-        )},
+			RefID: query.RefID,
+			DataFrames: []sdk.DataFrame{dataframe.New("", dataframe.Labels{},
+				dataframe.NewField("timestamp", dataframe.FieldTypeTime, []time.Time{}),
+				dataframe.NewField("value", dataframe.FieldTypeNumber, values),
+			)},
 		})
 	}
 
@@ -164,13 +168,13 @@ func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataS
 
 Let's make the `testDatasource` call our backend to make sure it's responding correctly.
 
-- Install `@grafana/runtime`, by running `yarn add --dev @grafana/runtime`. `getBackendSrv` is a function that returns runtime information about the Grafana backend.
-
-- In `DataSource.ts`, import the `getBackendSrv`.
+- Install `@grafana/runtime`, by running `yarn add --dev @grafana/runtime`. 
+- In `DataSource.ts`, import the `getBackendSrv`. `getBackendSrv` is a function that returns runtime information about the Grafana backend.
 
 **DataSource.ts**
+
 ```ts
-import { getBackendSrv } from '@grafana/runtime';
+import { getBackendSrv } from "@grafana/runtime";
 ```
 
 - Define the backend request:

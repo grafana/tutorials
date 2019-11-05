@@ -109,7 +109,7 @@ _windows_amd64.exe
 </code></pre>
 <p>The value should be the name of the binary, with the suffix removed.</p>
 <ul>
-<li>Restart Grafana and verify that your plugin is running:<br><br><code>$ ps aux | grep csv-datasource<br></code></li>
+<li>Restart Grafana and verify that your plugin is running:<br><br><code>ps aux | grep csv-datasource<br></code></li>
 </ul>
 
 
@@ -146,18 +146,18 @@ type Options struct {
 			return nil, err
 		}
 
-    var values []int
-    for _, val := range strings.Split(query.values, &#34;,&#34;) {
-        num, _ := strconv.Atoi(val)
-        values = append(values, num)
-    }
+		var values []int
+		for _, val := range strings.Split(query.values, &#34;,&#34;) {
+			num, _ := strconv.Atoi(val)
+			values = append(values, num)
+		}
 
 		res = append(res, sdk.QueryResult{
-        RefID:      query.RefID,
-        DataFrames: []sdk.DataFrame{dataframe.New(&#34;&#34;, dataframe.Labels{},
-            dataframe.NewField(&#34;timestamp&#34;, dataframe.FieldTypeTime, []time.Time{}),
-            dataframe.NewField(&#34;value&#34;, dataframe.FieldTypeNumber, values),
-        )},
+			RefID: query.RefID,
+			DataFrames: []sdk.DataFrame{dataframe.New(&#34;&#34;, dataframe.Labels{},
+				dataframe.NewField(&#34;timestamp&#34;, dataframe.FieldTypeTime, []time.Time{}),
+				dataframe.NewField(&#34;value&#34;, dataframe.FieldTypeNumber, values),
+			)},
 		})
 	}
 
@@ -171,11 +171,11 @@ type Options struct {
       <google-codelab-step label="Use the backend plugin from the client" duration="0">
         <p>Let&#39;s make the <code>testDatasource</code> call our backend to make sure it&#39;s responding correctly.</p>
 <ul>
-<li>Install <code>@grafana/runtime</code>, by running <code>yarn add --dev @grafana/runtime</code>. <code>getBackendSrv</code> is a function that returns runtime information about the Grafana backend.</li>
-<li>In <code>DataSource.ts</code>, import the <code>getBackendSrv</code>.</li>
+<li>Install <code>@grafana/runtime</code>, by running <code>yarn add --dev @grafana/runtime</code>.</li>
+<li>In <code>DataSource.ts</code>, import the <code>getBackendSrv</code>. <code>getBackendSrv</code> is a function that returns runtime information about the Grafana backend.</li>
 </ul>
 <p><strong>DataSource.ts</strong></p>
-<pre><code>import { getBackendSrv } from &#39;@grafana/runtime&#39;;
+<pre><code>import { getBackendSrv } from &#34;@grafana/runtime&#34;;
 </code></pre>
 <ul>
 <li>Define the backend request:</li>
