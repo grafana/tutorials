@@ -11,7 +11,9 @@ Feedback Link: https://github.com/grafana/grafana
 ## Overview
 Duration: 1
 
-In this codelab, you'll learn how to build a panel plugin.
+### What you'll learn
+
+- Build a panel plugin.
 
 ### What you'll need
 

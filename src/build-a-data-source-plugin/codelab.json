@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-05T02:06:31+01:00",
-  "id": "build-a-panel-plugin",
-  "duration": 2,
-  "title": "Build a panel plugin",
+  "updated": "2019-11-05T02:42:20+01:00",
+  "id": "build-a-data-source-plugin",
+  "duration": 11,
+  "title": "Build a data source plugin",
   "authors": "Grafana Labs",
-  "summary": "Build a panel plugin",
-  "source": "../src/panel-plugins.md",
+  "summary": "Build a data source plugin",
+  "source": "data-source-plugins.md",
   "theme": "",
   "status": [
     "published"
@@ -21,5 +21,5 @@
     "beginner"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-panel-plugin"
+  "url": "build-a-data-source-plugin"
 }
