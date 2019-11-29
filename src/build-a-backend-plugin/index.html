@@ -29,7 +29,7 @@
     
       <google-codelab-step label="Overview" duration="1">
         <p>In this codelab, you&#39;ll learn how to build a backend plugin to support your data source plugin.</p>
-<h2 is-upgraded>Preqrequisites</h2>
+<h2 is-upgraded>Prerequisites</h2>
 <ul>
 <li>Complete <a href="/modules/1-data-source-plugins" target="_blank">Build data source plugins</a></li>
 </ul>
@@ -55,35 +55,35 @@
 <pre><code>package main
 
 import (
-	&#34;context&#34;
-	&#34;log&#34;
-	&#34;os&#34;
+    &#34;context&#34;
+    &#34;log&#34;
+    &#34;os&#34;
 
-	sdk &#34;github.com/grafana/grafana-plugin-sdk-go&#34;
+    sdk &#34;github.com/grafana/grafana-plugin-sdk-go&#34;
 )
 
 const pluginID = &#34;myorg-custom-datasource&#34;
 
 type MyDataSource struct {
-	logger *log.Logger
+    logger *log.Logger
 }
 
 func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataSourceInfo, queries []sdk.Query) ([]sdk.QueryResult, error) {
-	return []sdk.QueryResult{}, nil
+    return []sdk.QueryResult{}, nil
 }
 
 func main() {
-	logger := log.New(os.Stderr, &#34;&#34;, 0)
+    logger := log.New(os.Stderr, &#34;&#34;, 0)
 
-	srv := sdk.NewServer()
+    srv := sdk.NewServer()
 
-	srv.HandleDataSource(pluginID, &amp;MyDataSource{
-		logger: logger,
-	})
+    srv.HandleDataSource(pluginID, &amp;MyDataSource{
+        logger: logger,
+    })
 
-	if err := srv.Serve(); err != nil {
-		logger.Fatal(err)
-	}
+    if err := srv.Serve(); err != nil {
+        logger.Fatal(err)
+    }
 }
 </code></pre>
 <aside class="special"><p>The Grafana backend plugin system uses the <a href="https://github.com/hashicorp/go-plugin" target="_blank">go-plugin</a> library from <a href="https://www.hashicorp.com/" target="_blank">Hashicorp</a>, and while communication happens over gRPC, here we&#39;ll use a Go client library that wraps the boilerplate for you.</p>
@@ -121,47 +121,47 @@ _windows_amd64.exe
 </ul>
 <p><strong>main.go</strong></p>
 <pre><code>type Query struct {
-	RefID  string `json:&#34;refId&#34;`
-	Values string `json:&#34;values&#34;`
+    RefID  string `json:&#34;refId&#34;`
+    Values string `json:&#34;values&#34;`
 }
 
 type Options struct {
-	Path string `json:&#34;path&#34;`
+    Path string `json:&#34;path&#34;`
 }
 </code></pre>
 <ul>
 <li>Implement the <code>Query</code> method.</li>
 </ul>
 <pre><code>func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataSourceInfo, queries []sdk.Query) ([]sdk.QueryResult, error) {
-	var opts Options
-	if err := json.Unmarshal(ds.JsonData, &amp;opts); err != nil {
-		return nil, err
-	}
+    var opts Options
+    if err := json.Unmarshal(ds.JsonData, &amp;opts); err != nil {
+        return nil, err
+    }
 
-	var res []sdk.QueryResult
+    var res []sdk.QueryResult
 
-	for _, q := range queries {
-		var query Query
-		if err := json.Unmarshal(q.ModelJson, &amp;query); err != nil {
-			return nil, err
-		}
+    for _, q := range queries {
+        var query Query
+        if err := json.Unmarshal(q.ModelJson, &amp;query); err != nil {
+            return nil, err
+        }
 
-		var values []int
-		for _, val := range strings.Split(query.values, &#34;,&#34;) {
-			num, _ := strconv.Atoi(val)
-			values = append(values, num)
-		}
+        var values []int
+        for _, val := range strings.Split(query.values, &#34;,&#34;) {
+            num, _ := strconv.Atoi(val)
+            values = append(values, num)
+        }
 
-		res = append(res, sdk.QueryResult{
-			RefID: query.RefID,
-			DataFrames: []sdk.DataFrame{dataframe.New(&#34;&#34;, dataframe.Labels{},
-				dataframe.NewField(&#34;timestamp&#34;, dataframe.FieldTypeTime, []time.Time{}),
-				dataframe.NewField(&#34;value&#34;, dataframe.FieldTypeNumber, values),
-			)},
-		})
-	}
+        res = append(res, sdk.QueryResult{
+            RefID: query.RefID,
+            DataFrames: []sdk.DataFrame{dataframe.New(&#34;&#34;, dataframe.Labels{},
+                dataframe.NewField(&#34;timestamp&#34;, dataframe.FieldTypeTime, []time.Time{}),
+                dataframe.NewField(&#34;value&#34;, dataframe.FieldTypeNumber, values),
+            )},
+        })
+    }
 
-	return res, nil
+    return res, nil
 }
 </code></pre>
 

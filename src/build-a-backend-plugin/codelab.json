@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-05T03:11:57+01:00",
+  "updated": "2019-11-29T17:39:35+01:00",
   "id": "build-a-backend-plugin",
   "duration": 1,
   "title": "Build a backend plugin",
   "authors": "Grafana Labs",
   "summary": "Build a backend plugin",
-  "source": "backend-plugins.md",
+  "source": "build-a-backend-plugin.md",
   "theme": "",
   "status": [
     "published"

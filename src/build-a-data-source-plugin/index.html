@@ -28,7 +28,7 @@
                   feedback-link="https://github.com/grafana/grafana">
     
       <google-codelab-step label="Overview" duration="1">
-        <p>Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. This means that it&#39;s very likely that you can already visualize metrics from the systems you&#39;ve already set up. In some cases though, you might already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards. Luckily, Grafana supports data source plugins, which lets you build a custom integration for your specific source of data.</p>
+        <p>Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. This means that it&#39;s likely that you can already visualize metrics from the systems you&#39;ve already set up. In some cases though, you might already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards. Luckily, Grafana supports data source plugins, which lets you build a custom integration for your specific source of data.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
 <li>Build a plugin to integrate with a custom data source.</li>
@@ -82,7 +82,13 @@
 <pre><code>return (
   &lt;div className=&#34;gf-form-group&#34;&gt;
     &lt;div className=&#34;gf-form&#34;&gt;
-      &lt;FormField label=&#34;Path&#34; labelWidth={6} onChange={this.onPathChange} value={jsonData.path || &#39;&#39;} placeholder=&#34;sample.csv&#34; /    &gt;
+      &lt;FormField
+        label=&#34;Path&#34;
+        labelWidth={6}
+        onChange={this.onPathChange}
+        value={jsonData.path || &#34;&#34;}
+        placeholder=&#34;sample.csv&#34;
+      /&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 );
@@ -94,7 +100,7 @@
   const { onOptionsChange, options } = this.props;
   const jsonData = {
     ...options.jsonData,
-    path: event.target.value,
+    path: event.target.value
   };
   onOptionsChange({ ...options, jsonData });
 };
@@ -120,7 +126,7 @@
 }
 </code></pre>
 <pre><code>export const defaultQuery: Partial&lt;MyQuery&gt; = {
-  values: &#39;value&#39;,
+  values: &#34;value&#34;
 };
 </code></pre>
 <ul>
@@ -160,7 +166,7 @@
     return new MutableDataFrame({
       refId: query.refId,
       fields: [
-        { name: &#39;Time&#39;, values: timestamps, type: FieldType.time }, 
+        { name: &#39;Time&#39;, values: timestamps, type: FieldType.time },
         { name: &#39;Value&#39;, values: values, type: FieldType.number },
       ],
     });
