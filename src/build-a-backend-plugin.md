@@ -14,7 +14,7 @@ Duration: 1
 
 In this codelab, you'll learn how to build a backend plugin to support your data source plugin.
 
-### Preqrequisites
+### Prerequisites
 
 - Complete [Build data source plugins](/modules/1-data-source-plugins)
 
@@ -168,7 +168,7 @@ func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataS
 
 Let's make the `testDatasource` call our backend to make sure it's responding correctly.
 
-- Install `@grafana/runtime`, by running `yarn add --dev @grafana/runtime`. 
+- Install `@grafana/runtime`, by running `yarn add --dev @grafana/runtime`.
 - In `DataSource.ts`, import the `getBackendSrv`. `getBackendSrv` is a function that returns runtime information about the Grafana backend.
 
 **DataSource.ts**

@@ -2,13 +2,14 @@ summary: Getting started
 id: getting-started
 categories: Plugins
 tags: beginner
-status: Published 
+status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/grafana
 
 # Getting started
 
 ## Plugin structure
+
 Duration: 1
 
 Every plugin you create requires at least two files, `plugin.json`, and `module.ts`.
@@ -18,6 +19,7 @@ Every plugin you create requires at least two files, `plugin.json`, and `module.
 `plugin.json` contains information about your plugin, and tells Grafana about what capabilities the plugin needs.
 
 **plugin.json**
+
 ```json
 {
   "id": "<your-github-handle>-my-datasource",
@@ -50,6 +52,7 @@ Every plugin you create requires at least two files, `plugin.json`, and `module.
 ### Directory structure
 
 ## Configure Grafana for plugin development
+
 Duration: 1
 
 There are three ways Grafana can find your plugin:
