@@ -41,35 +41,35 @@ Last time, we started writing a data source plugin that would read CSV files. Le
 package main
 
 import (
-	"context"
-	"log"
-	"os"
+    "context"
+    "log"
+    "os"
 
-	sdk "github.com/grafana/grafana-plugin-sdk-go"
+    sdk "github.com/grafana/grafana-plugin-sdk-go"
 )
 
 const pluginID = "myorg-custom-datasource"
 
 type MyDataSource struct {
-	logger *log.Logger
+    logger *log.Logger
 }
 
 func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataSourceInfo, queries []sdk.Query) ([]sdk.QueryResult, error) {
-	return []sdk.QueryResult{}, nil
+    return []sdk.QueryResult{}, nil
 }
 
 func main() {
-	logger := log.New(os.Stderr, "", 0)
+    logger := log.New(os.Stderr, "", 0)
 
-	srv := sdk.NewServer()
+    srv := sdk.NewServer()
 
-	srv.HandleDataSource(pluginID, &MyDataSource{
-		logger: logger,
-	})
+    srv.HandleDataSource(pluginID, &MyDataSource{
+        logger: logger,
+    })
 
-	if err := srv.Serve(); err != nil {
-		logger.Fatal(err)
-	}
+    if err := srv.Serve(); err != nil {
+        logger.Fatal(err)
+    }
 }
 ```
 
@@ -118,12 +118,12 @@ ps aux | grep csv-datasource
 
 ```go
 type Query struct {
-	RefID  string `json:"refId"`
-	Values string `json:"values"`
+    RefID  string `json:"refId"`
+    Values string `json:"values"`
 }
 
 type Options struct {
-	Path string `json:"path"`
+    Path string `json:"path"`
 }
 ```
 
@@ -132,35 +132,35 @@ type Options struct {
 ```go
 
 func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataSourceInfo, queries []sdk.Query) ([]sdk.QueryResult, error) {
-	var opts Options
-	if err := json.Unmarshal(ds.JsonData, &opts); err != nil {
-		return nil, err
-	}
+    var opts Options
+    if err := json.Unmarshal(ds.JsonData, &opts); err != nil {
+        return nil, err
+    }
 
-	var res []sdk.QueryResult
+    var res []sdk.QueryResult
 
-	for _, q := range queries {
-		var query Query
-		if err := json.Unmarshal(q.ModelJson, &query); err != nil {
-			return nil, err
-		}
+    for _, q := range queries {
+        var query Query
+        if err := json.Unmarshal(q.ModelJson, &query); err != nil {
+            return nil, err
+        }
 
-		var values []int
-		for _, val := range strings.Split(query.values, ",") {
-			num, _ := strconv.Atoi(val)
-			values = append(values, num)
-		}
+        var values []int
+        for _, val := range strings.Split(query.values, ",") {
+            num, _ := strconv.Atoi(val)
+            values = append(values, num)
+        }
 
-		res = append(res, sdk.QueryResult{
-			RefID: query.RefID,
-			DataFrames: []sdk.DataFrame{dataframe.New("", dataframe.Labels{},
-				dataframe.NewField("timestamp", dataframe.FieldTypeTime, []time.Time{}),
-				dataframe.NewField("value", dataframe.FieldTypeNumber, values),
-			)},
-		})
-	}
+        res = append(res, sdk.QueryResult{
+            RefID: query.RefID,
+            DataFrames: []sdk.DataFrame{dataframe.New("", dataframe.Labels{},
+                dataframe.NewField("timestamp", dataframe.FieldTypeTime, []time.Time{}),
+                dataframe.NewField("value", dataframe.FieldTypeNumber, values),
+            )},
+        })
+    }
 
-	return res, nil
+    return res, nil
 }
 ```
 
