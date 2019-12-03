@@ -32,6 +32,8 @@ Tooling for modern web development can be tricky to wrap your head around. While
 
 [grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.
 
+All Grafana plugins needs to be located in `/var/lib/grafana/plugins` or `data/plugins`. Therefore, we recommend to move to one of these directories before following with the next steps. 
+
 - Create a data source plugin from template, using the `plugin:create` command:
 
 ```
