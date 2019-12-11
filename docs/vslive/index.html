@@ -1,0 +1,138 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Come learn about Google Cloud Platform by completing codelabs and coding challenges! The following codelabs will step you through using different parts of Google Cloud Platform. These challenges cover a range of topics such as Compute Engine, App Engine, Kubernetes, Cloud Shell. Go to https://g.co/codelabs/vslive to find more codelabs you can try at home.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Visual Studio Live">
+<meta name="application-name" content="Visual Studio Live">
+<link rel="canonical" href="https://example.com/vslive/">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-49880327-14', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<title>Visual Studio Live</title>
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="import" href="/elements/elements.html">
+<style is="custom-style">
+:root{--paper-tabs-selection-bar-color:currentcolor;--paper-input-container-underline:{display:none};--paper-input-container-underline-focus:{display:none};}.dropdown-filter{--paper-input-container:{padding:8px}} </style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
+<meta name="apple-mobile-web-app-title" content="Visual Studio Live">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="/images/favicons/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#455a64">
+<meta name="msapplication-TileColor" content="#455a64">
+<meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+<meta name="theme-color" content="#455a64">
+<meta name="og:type" property="og:type" content="website">
+<meta name="og:title" property="og:title" content="Visual Studio Live">
+<meta name="og:description" property="og:description" content="Come learn about Google Cloud Platform by completing codelabs and coding challenges! The following codelabs will step you through using different parts of Google Cloud Platform. These challenges cover a range of topics such as Compute Engine, App Engine, Kubernetes, Cloud Shell. Go to https://g.co/codelabs/vslive to find more codelabs you can try at home.">
+<meta name="og:url" property="og:url" content="https://example.com/vslive/">
+<meta name="og:site_name" property="og:site_name" content="Codelabs">
+<meta name="og:determiner" property="og:determiner" content="the">
+<meta name="og:locale" property="og:locale" content="en_US">
+<meta name="og:image" property="og:image" content="/images/og-image.png">
+<meta name="og:image:url" property="og:image:url" content="/images/og-image.png">
+<meta name="og:image:type" property="og:image:type" content="image/png">
+<meta name="og:image:width" property="og:image:width" content="1200">
+<meta name="og:image:height" property="og:image:height" content="1200">
+<meta name="og:image:alt" property="og:image:alt" content="Codelabs">
+<meta name="twitter:card" property="twitter:card" content="summary_large_image">
+<meta name="twitter:title" property="twitter:title" content="Visual Studio Live">
+<meta name="twitter:description" property="twitter:description" content="Come learn about Google Cloud Platform by completing codelabs and coding challenges! The following codelabs will step you through using different parts of Google Cloud Platform. These challenges cover a range of topics such as Compute Engine, App Engine, Kubernetes, Cloud Shell. Go to https://g.co/codelabs/vslive to find more codelabs you can try at home.">
+<meta name="twitter:image" property="twitter:image" content="/images/og-image.png">
+<meta name="twitter:url" property="twitter:url" content="https://example.com/vslive/">
+</head>
+<body id="app" is="body-bind" class="loading fullbleed view">
+<paper-header-panel id="main" mode="standard" main>
+<div id="mainToolbar" class="paper-header">
+<div class="site-width layout horizontal">
+<a href="/">
+<img src="/images/logo.png" class="logo-devs" alt="Codelabs Logo">
+</a>
+<div id="searchbar">
+<paper-input-container no-label-float>
+<paper-icon-button prefix icon="search"></paper-icon-button>
+<label>Search</label>
+<input is="iron-input" bind-value="{{searchVal}}" on-keydown="onSearchKeyDown">
+</paper-input-container>
+</div>
+</div>
+</div>
+<header id="banner" down>
+<div class="site-width">
+<div class="banner-description">
+<img id="logo" src="/vslive/vslive-logo.jpg" alt="Event logo">
+<div class="banner-meta">
+<h3>Visual Studio Live</h3>
+<p>Come learn about Google Cloud Platform by completing codelabs and coding challenges! The following codelabs will step you through using different parts of Google Cloud Platform. These challenges cover a range of topics such as Compute Engine, App Engine, Kubernetes, Cloud Shell. Go to https://g.co/codelabs/vslive to find more codelabs you can try at home.</p>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div id="filters" class="site-width layout horizontal center justified">
+<div id="sortby">
+<paper-tabs selected="0" noink on-iron-activate="sortBy">
+<paper-tab>A-Z</paper-tab>
+<paper-tab>Recent</paper-tab>
+<paper-tab>Duration</paper-tab>
+</paper-tabs>
+</div>
+</div>
+<card-sorter id="cards" class="site-width">
+</card-sorter>
+<div id="loading-placeholder" class="site-width">
+Loading Codelabs, please wait...
+</div>
+</main>
+<footer id="footer">
+<div class="footer-wrapper site-width">
+<div class="link-list">
+<label>Connect</label>
+<ul>
+<li><a href="https://www.example.com/">Example</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Programs</label>
+<ul>
+<li><a href="https://www.example.com/">Example</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Developer Consoles</label>
+<ul>
+<li><a href="https://www.example.com/">Example</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Explore</label>
+<ul>
+<li><a href="https://www.example.com/">Example</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<div class="footerbar">
+<div class="site-width layout horizontal center justified">
+<span>
+<a href="https://example.com">Terms</a>
+&nbsp; | &nbsp;
+<a href="https://example.com">Privacy</a>
+</span>
+</div>
+</div>
+</paper-header-panel>
+<script src="/scripts/main.js"></script>
+</body>
+</html>
