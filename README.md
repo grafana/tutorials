@@ -1,7 +1,11 @@
 # Grafana Tutorials
 
 [![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
-[![Staging](https://img.shields.io/badge/env-staging-success)](https://grafana-codelabs.firebaseapp.com/)
+
+| Environment | URL |
+| ----------- | --- |
+| Production | https://storage.googleapis.com/grafana-codelabs-prod/index.html |
+| Staging | https://storage.googleapis.com/grafana-codelabs-staging/index.html |
 
 Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
 
