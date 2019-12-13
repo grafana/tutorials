@@ -1,6 +1,6 @@
-# Grafana Codelabs
+# Grafana Tutorials
 
-Grafana codelabs are a series of lab assignment to teach you about how to get started developing plugins for Grafana.
+Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
 
 ![Screenshot](screenshot.png)
 
@@ -10,7 +10,7 @@ Grafana codelabs are a series of lab assignment to teach you about how to get st
 
 ## Usage
 
-To export codelabs from Markdown to HTML:
+To export tutorials from Markdown to HTML:
 
 ``` 
 claat export <file>.md
@@ -25,4 +25,4 @@ claat serve
 ## Links
 
 - [Google Developer Codelabs](https://codelabs.developers.google.com/)
-- [Ubuntu Codelabs](https://tutorials.ubuntu.com/)
+- [Ubuntu Tutorials](https://tutorials.ubuntu.com/)
