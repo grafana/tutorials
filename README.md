@@ -13,23 +13,35 @@ Grafana Tutorials are step-by-step guides that help you make the most of Grafana
 
 ## Requirements
 
-- [claat](https://github.com/googlecodelabs/tools)
+Tutorials are built using [claat](https://github.com/googlecodelabs/tools/tree/master/claat):
+
+```
+go get github.com/googlecodelabs/tools/claat
+```
 
 ## Usage
 
+<<<<<<< HEAD
 To export tutorials from Markdown to HTML:
+=======
+To build tutorials and landing site altogether:
+>>>>>>> Create landing page
 
-``` 
-claat export <file>.md
+```
+make
 ```
 
-To serve codelabs:
+## Development
 
-``` 
-claat serve
+After running `make`, run a web server inside the `public` directory:
+
+```
+cd public/
+python -m SimpleHTTPServer
 ```
 
-## Links
+## Resources
 
+- [Google Codelabs Tools](https://github.com/googlecodelabs/tools)
 - [Google Developer Codelabs](https://codelabs.developers.google.com/)
 - [Ubuntu Tutorials](https://tutorials.ubuntu.com/)

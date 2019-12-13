@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-02T10:17:13+01:00",
-  "id": "build-a-panel-plugin",
-  "duration": 2,
-  "title": "Build a panel plugin",
+  "updated": "2019-12-11T23:27:15+01:00",
+  "id": "build-a-backend-plugin",
+  "duration": 1,
+  "title": "Build a backend plugin",
   "authors": "Grafana Labs",
-  "summary": "Build a panel plugin",
-  "source": "build-a-panel-plugin.md",
+  "summary": "Build a backend plugin",
+  "source": "tutorial/build-a-backend-plugin.md",
   "theme": "",
   "status": [
     "published"
@@ -18,8 +18,8 @@
     "plugins"
   ],
   "tags": [
-    "beginner"
+    "intermediate"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-panel-plugin"
+  "url": "build-a-backend-plugin"
 }

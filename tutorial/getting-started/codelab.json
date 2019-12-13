@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-29T17:39:35+01:00",
+  "updated": "2019-12-11T23:27:15+01:00",
   "id": "getting-started",
   "duration": 2,
   "title": "Getting started",
   "authors": "Grafana Labs",
   "summary": "Getting started",
-  "source": "getting-started.md",
+  "source": "tutorial/getting-started.md",
   "theme": "",
   "status": [
     "published"

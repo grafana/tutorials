@@ -26,7 +26,7 @@
                   title="Build a panel plugin"
                   environment="web"
                   feedback-link="https://github.com/grafana/grafana">
-    
+
       <google-codelab-step label="Overview" duration="1">
         <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
@@ -41,7 +41,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Create a new panel plugin" duration="1">
         <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I&#39;m going to use grafana-toolkit.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.</p>
@@ -62,7 +62,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="The render function" duration="0">
         <p>Since Grafana 6.X, panels are ReactJS components. The simplest panel consists of a single function, the <code>render</code> function.</p>
 <p>The <code>render</code> function returns the content of the panel.</p>
@@ -93,7 +93,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Configure your panel" duration="0">
         <p>Sometimes you want to offer the users of your panel to configure the behavior of your plugin.</p>
 <p>A <em>panel editor</em> allows your panel to accept user input, or <em>options</em>.</p>
@@ -147,7 +147,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Use time-series data" duration="0">
         <p>The panel properties also contains the results from a data source query.</p>
 <pre><code>const { data } = this.props;
@@ -170,7 +170,7 @@ if (current &gt; 0) {
 
 
       </google-codelab-step>
-    
+
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>

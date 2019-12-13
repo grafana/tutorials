@@ -26,7 +26,7 @@
                   title="Build a backend plugin"
                   environment="web"
                   feedback-link="https://github.com/grafana/grafana">
-    
+
       <google-codelab-step label="Overview" duration="1">
         <p>In this codelab, you&#39;ll learn how to build a backend plugin to support your data source plugin.</p>
 <h2 is-upgraded>Prerequisites</h2>
@@ -43,7 +43,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Create a backend plugin" duration="0">
         <p>In the previous part of this guide, we looked at how to get started with writing data source plugins for Grafana. For many data sources, integrating a custom data source can be done completely in the Grafana browser client. For others, you might want the plugin to be able to continue running even after closing your browser window, such as alerting, or authentication.</p>
 <p>Luckily, Grafana has support for <em>backend plugins</em>, which lets your data source plugin communicate with a process running on the server.</p>
@@ -114,7 +114,7 @@ _windows_amd64.exe
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Add a backend handler" duration="0">
         <ul>
 <li>Add two structs to represent the query and the options:</li>
@@ -167,7 +167,7 @@ type Options struct {
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Use the backend plugin from the client" duration="0">
         <p>Let&#39;s make the <code>testDatasource</code> call our backend to make sure it&#39;s responding correctly.</p>
 <ul>
@@ -220,7 +220,7 @@ type Options struct {
 
 
       </google-codelab-step>
-    
+
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>

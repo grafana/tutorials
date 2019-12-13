@@ -26,7 +26,7 @@
                   title="Build a data source plugin"
                   environment="web"
                   feedback-link="https://github.com/grafana/grafana">
-    
+
       <google-codelab-step label="Overview" duration="1">
         <p>Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. This means that it&#39;s likely that you can already visualize metrics from the systems you&#39;ve already set up. In some cases though, you might already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards. Luckily, Grafana supports data source plugins, which lets you build a custom integration for your specific source of data.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
@@ -42,7 +42,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Create a new plugin" duration="1">
         <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I&#39;m going to use grafana-toolkit.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.</p>
@@ -64,7 +64,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Add a config editor" duration="2">
         <p>For most data sources, you probably want to give your users the ability to configure things like hostname or authentication method. You can accomplish this by adding an <em>config editor</em>.</p>
 <ul>
@@ -114,7 +114,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Add a query editor" duration="3">
         <p>Most likely you want your users to be able to select the data they&#39;re interested in. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called PromQL. Let&#39;s add query support for our plugin, using a custom <em>query editor</em>.</p>
 <ul>
@@ -184,7 +184,7 @@
 
 
       </google-codelab-step>
-    
+
       <google-codelab-step label="Error handling" duration="4">
         <p>Use <code>throw</code> to display a friendly error message in the top-left corner of the panel whenever a data source error occurred:</p>
 <p><strong>DataSource.ts</strong></p>
@@ -195,7 +195,7 @@
 
 
       </google-codelab-step>
-    
+
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>

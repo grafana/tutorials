@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-11-29T17:39:35+01:00",
+  "updated": "2019-12-11T23:27:15+01:00",
   "id": "build-a-data-source-plugin",
   "duration": 11,
   "title": "Build a data source plugin",
   "authors": "Grafana Labs",
   "summary": "Build a data source plugin",
-  "source": "build-a-data-source-plugin.md",
+  "source": "tutorial/build-a-data-source-plugin.md",
   "theme": "",
   "status": [
     "published"
