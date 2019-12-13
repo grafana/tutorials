@@ -2,10 +2,10 @@
 
 [![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
 
-| Environment | URL |
-| ----------- | --- |
-| Production | https://storage.googleapis.com/grafana-codelabs-prod/index.html |
-| Staging | https://storage.googleapis.com/grafana-codelabs-staging/index.html |
+| Environment | URL                                                                 |
+| ----------- | ------------------------------------------------------------------- |
+| Production  | https://storage.googleapis.com/grafana-tutorials-prod/index.html    |
+| Staging     | https://storage.googleapis.com/grafana-tutorials-staging/index.html |
 
 Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
 
@@ -21,11 +21,7 @@ go get github.com/googlecodelabs/tools/claat
 
 ## Usage
 
-<<<<<<< HEAD
-To export tutorials from Markdown to HTML:
-=======
 To build tutorials and landing site altogether:
->>>>>>> Create landing page
 
 ```
 make
