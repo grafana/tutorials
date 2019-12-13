@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- This is the default template for 'html' output format of the tool -->
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="theme-color" content="#4F7DC9" />
+    <meta charset="UTF-8" />
+    <title>{{.Meta.Title}}</title>
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono"
+    />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="{{.Prefix}}/codelab-elements/codelab-elements.css"
+    />
+    <style>
+      .success {
+        color: #1e8e3e;
+      }
+      .error {
+        color: red;
+      }
+      body {
+        font-family: "PT Sans", sans-serif;
+      }
+      google-codelab {
+        color: #b8b8b8;
+      }
+      google-codelab google-codelab-step {
+        background-color: #262626;
+      }
+      google-codelab google-codelab-step .instructions {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      google-codelab google-codelab-step .instructions .inner {
+        background-color: #262626;
+        border: none;
+        box-shadow: none;
+      }
+
+      google-codelab-step pre {
+        background-color: #1f1f1f;
+      }
+
+      google-codelab #previous-step {
+        border-radius: 2px;
+        border: 1px solid white;
+        background: transparent;
+        color: #eaeaea;
+        font-weight: 400;
+      }
+
+      google-codelab #next-step {
+        border-radius: 2px;
+        font-weight: 400;
+        border: 1px solid #f46800;
+        background: transparent;
+        color: #f46800;
+      }
+
+      google-codelab #done {
+        color: #fefefe;
+        background-color: #f46800;
+        background: linear-gradient(#f46800, #c15200);
+        border-radius: 2px;
+        border: 1px solid #f46800;
+        font-weight: 400;
+      }
+
+      google-codelab #codelab-title {
+        background-color: black;
+        box-shadow: 0 0 20px #111;
+        color: #eaeaea;
+      }
+      google-codelab #steps {
+        background-color: #262626;
+      }
+      google-codelab #drawer .steps,
+      google-codelab #drawer .metadata {
+        background-color: #333333;
+      }
+      google-codelab #drawer ol li a {
+        background: linear-gradient(135deg, #2f2f2f 0%, #2c2c2c 100%);
+        border: 1px solid #edf4ff;
+        border-radius: 4px;
+        border: none;
+      }
+      google-codelab #drawer ol li[completed] a {
+        color: #888888;
+      }
+      google-codelab #drawer ol li[completed] .step:before {
+        background-color: #ff9830;
+      }
+
+      google-codelab #drawer ol li a:focus {
+        background: linear-gradient(135deg, #2a2a2a 0%, #272727 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <google-codelab-analytics gaid="{{.GlobalGA}}"></google-codelab-analytics>
+    <google-codelab
+      codelab-gaid="{{.Meta.GA}}"
+      id="{{.Meta.ID}}"
+      title="{{.Meta.Title}}"
+      environment="{{index .Env}}"
+      feedback-link="{{.Meta.Feedback}}"
+    >
+      {{range $i, $e := .Steps}}{{if matchEnv .Tags $.Env}}
+      <google-codelab-step label="{{.Title}}" duration="{{.Duration.Minutes}}">
+        {{.Content | renderHTML $.Env}}
+      </google-codelab-step>
+      {{end}}{{end}}
+    </google-codelab>
+
+    <script src="{{.Prefix}}/codelab-elements/native-shim.js"></script>
+    <script src="{{.Prefix}}/codelab-elements/custom-elements.min.js"></script>
+    <script src="{{.Prefix}}/codelab-elements/prettify.js"></script>
+    <script src="{{.Prefix}}/codelab-elements/codelab-elements.js"></script>
+    <script src="//support.google.com/inapp/api.js"></script>
+  </body>
+</html>
