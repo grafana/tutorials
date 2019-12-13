@@ -1,5 +1,8 @@
 # Grafana Tutorials
 
+[![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
+[![Staging](https://img.shields.io/badge/env-staging-success)](https://grafana-codelabs.firebaseapp.com/)
+
 Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
 
 ![Screenshot](screenshot.png)
