@@ -1,0 +1,79 @@
+body {
+  font-family: "PT Sans", sans-serif;
+}
+
+google-codelab {
+  color: #b8b8b8;
+}
+google-codelab google-codelab-step {
+  background-color: #262626;
+}
+google-codelab google-codelab-step code,
+google-codelab google-codelab-step pre {
+  background-color: #1f1f1f;
+}
+google-codelab google-codelab-step .instructions {
+  border: none !important;
+  box-shadow: none !important;
+}
+google-codelab google-codelab-step .instructions .inner {
+  background-color: #262626;
+  border: none;
+  box-shadow: none;
+  font-size: 16px;
+}
+google-codelab #codelab-title {
+  background-color: black;
+  box-shadow: 0 0 20px 0px black;
+  color: #eaeaea;
+}
+google-codelab #steps {
+  background-color: #262626;
+}
+google-codelab #controls #previous-step {
+  border-radius: 2px;
+  border: 1px solid white;
+  background: transparent;
+  color: #eaeaea;
+  font-weight: 400;
+}
+google-codelab #controls #next-step {
+  border-radius: 2px;
+  font-weight: 400;
+  border: 1px solid #f46800;
+  background: transparent;
+  color: #f46800;
+}
+google-codelab #controls #done {
+  color: #fefefe;
+  background-color: #f46800;
+  background: linear-gradient(#f46800, #c15200);
+  border-radius: 2px;
+  border: 1px solid #f46800;
+  font-weight: 400;
+}
+google-codelab #drawer .steps,
+google-codelab #drawer .metadata {
+  background-color: #333333;
+}
+google-codelab #drawer ol li a {
+  background: linear-gradient(135deg, #2f2f2f 0%, #2c2c2c 100%);
+  border: 1px solid #edf4ff;
+  border-radius: 4px;
+  border: none;
+}
+google-codelab #drawer ol li a:focus {
+  background: linear-gradient(135deg, #2a2a2a 0%, #272727 100%);
+}
+google-codelab #drawer ol li[completed] a {
+  color: #888888;
+}
+google-codelab #drawer ol li[completed] .step:before {
+  background-color: #ff9830;
+}
+google-codelab #drawer ol li[selected] a {
+  color: #888888;
+  background: linear-gradient(135deg, #2a2a2a 0%, #272727 100%);
+}
+
+/*# sourceMappingURL=google-codelab.css.map */

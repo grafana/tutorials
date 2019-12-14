@@ -37,7 +37,7 @@ func main() {
 	var (
 		codelabsDir   = flag.String("codelabs-dir", "tutorials", "Directory where the codelabs are located")
 		htmlTemplate  = flag.String("template", "layout/template.tmpl", "Template to use when building landing page")
-		landingStyles = flag.String("landing-styles", "layout/styles.css", "Stylesheet for landing page")
+		landingStyles = flag.String("asset-dir", "layout/assets", "Assets for landing page")
 		outputDir     = flag.String("output-dir", "public", "Directory where to put the generated site")
 	)
 
