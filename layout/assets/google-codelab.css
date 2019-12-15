@@ -16,11 +16,25 @@ google-codelab google-codelab-step .instructions {
   border: none !important;
   box-shadow: none !important;
 }
+google-codelab google-codelab-step .instructions a {
+  color: #f46800 !important;
+  text-decoration: none;
+}
+google-codelab google-codelab-step .instructions a:active, google-codelab google-codelab-step .instructions a:visited {
+  color: #f46800 !important;
+}
+google-codelab google-codelab-step .instructions a:hover {
+  color: #ff8428 !important;
+}
 google-codelab google-codelab-step .instructions .inner {
   background-color: #262626;
   border: none;
   box-shadow: none;
   font-size: 16px;
+}
+google-codelab google-codelab-step .instructions aside.special {
+  background: #333333 !important;
+  color: #b8b8b8 !important;
 }
 google-codelab #codelab-title {
   background-color: black;

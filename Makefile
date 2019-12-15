@@ -8,13 +8,14 @@ build-landing:
 	go run cmd/claat-landing/main.go -template $(TEMPLATE) -codelabs-dir $(CODELABS_DIR) -output-dir $(OUTPUT_DIR)
 
 build-tutorials:
+	pushd layout/assets; sass google-codelab.scss google-codelab.css; popd
 	claat export -f layout/template.html -o tutorial tutorial/*.md
 
 publish-staging:
-	gsutil -m rsync -r public/ gs://grafana-tutorials-staging
+	gsutil -m rsync -d -r public/ gs://grafana-tutorials-staging
 
 publish-prod:
-	gsutil -m rsync -r public/ gs://grafana-tutorials-prod
+	gsutil -m rsync -d -r public/ gs://grafana-tutorials-prod
 
 clean:
 	rm -rf $(OUTPUT_DIR)

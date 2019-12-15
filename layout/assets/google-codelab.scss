@@ -17,11 +17,30 @@ google-codelab {
       border: none !important;
       box-shadow: none !important;
 
+      a {
+        color: #f46800 !important;
+        text-decoration: none;
+
+        &:active,
+        &:visited {
+          color: #f46800 !important;
+        }
+
+        &:hover {
+          color: #ff8428 !important;
+        }
+      }
+
       .inner {
         background-color: #262626;
         border: none;
         box-shadow: none;
         font-size: 16px;
+      }
+
+      aside.special {
+        background: #333333 !important;
+        color: #b8b8b8 !important;
       }
     }
   }
