@@ -1,4 +1,4 @@
-summary: Build a data source plugin
+summary: See how to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: Plugins
 tags: beginner
@@ -23,6 +23,10 @@ Grafana has support for a wide range of data sources, like Prometheus, MySQL, or
 - Grafana version 6.4+
 - NodeJS
 - yarn
+
+## Create a new plugin
+
+Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 

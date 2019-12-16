@@ -1,4 +1,4 @@
-summary: Build a panel plugin
+summary: Learn at how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
 categories: Plugins
 tags: beginner
@@ -21,6 +21,10 @@ Duration: 1
 - Grafana version 6.4+
 - NodeJS
 - yarn
+
+## Create a new plugin
+
+Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
@@ -72,14 +76,20 @@ A panel editor is a React component that extends `PureComponent<PanelEditorProps
 You can register the editor to the plugin in `module.ts`.
 
 ```ts
-new PanelPlugin<SimpleOptions>(SimplePanel)
-  .setEditor(SimpleEditor);
+new PanelPlugin<SimpleOptions>(SimplePanel).setEditor(SimpleEditor);
 ```
 
 **SimpleEditor.tsx**
 
 ```tsx
-<FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
+<FormField
+  label="Text"
+  labelWidth={5}
+  inputWidth={20}
+  type="text"
+  onChange={this.onTextChanged}
+  value={options.text || ""}
+/>
 ```
 
 The `onChange` attribute on the `FormField` lets you update the panel properties. Here, `onTextChanged` is a function that updates the panel properties whenever the value of the `FormField` changes.
@@ -109,7 +119,7 @@ To be able to test our panel, you'll be adding Switch to toggle the health of ou
 **SimpleEditor.tsx**
 
 ```tsx
-import { Switch } from '@grafana/ui';
+import { Switch } from "@grafana/ui";
 ```
 
 - Add the Switch to the render function.
@@ -131,7 +141,10 @@ render() {
 
 ```tsx
 onHealthyChanged = ({ target }: any) => {
-  this.props.onOptionsChange({ ...this.props.options, healthy: !this.props.options.healthy });
+  this.props.onOptionsChange({
+    ...this.props.options,
+    healthy: !this.props.options.healthy
+  });
 };
 ```
 
@@ -155,11 +168,11 @@ Let's make the background color change depending on the last value in the time s
 let color;
 
 let values = data.series[0].fields[0].values;
-let current = values.get(values.length-1);
+let current = values.get(values.length - 1);
 
 if (current > 0) {
-  color = '#00ff00';
+  color = "#00ff00";
 } else {
-  color = '#ff0000';
+  color = "#ff0000";
 }
 ```

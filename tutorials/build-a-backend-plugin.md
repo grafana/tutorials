@@ -1,4 +1,4 @@
-summary: Build a backend plugin
+summary: Discover how you can extend your data source plugin with a backend.
 id: build-a-backend-plugin
 categories: Plugins
 tags: intermediate
