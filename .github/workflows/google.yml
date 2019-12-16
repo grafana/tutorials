@@ -5,10 +5,6 @@ on:
     branches:
       - master
 
-env:
-  SERVICE_ACCOUNT_EMAIL: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
-  SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, and Publish
@@ -23,7 +19,5 @@ jobs:
           service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
           service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
-      - run: |
-          gcloud auth login
       - run: |
           gsutil ls gs://grafana-tutorials-staging
