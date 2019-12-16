@@ -20,4 +20,4 @@ jobs:
           service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
       - run: |
-          gsutil ls gs://grafana-tutorials-staging
+          gsutil -m rsync -r public/ ${{ secrets.GCS_BUCKET }}

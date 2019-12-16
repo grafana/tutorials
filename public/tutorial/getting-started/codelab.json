@@ -3,13 +3,13 @@
   "format": "../layout/template.html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-16T10:24:26+01:00",
-  "id": "build-a-panel-plugin",
-  "duration": 1,
-  "title": "Build a panel plugin",
+  "updated": "2019-12-13T15:08:34+01:00",
+  "id": "getting-started",
+  "duration": 2,
+  "title": "Getting started",
   "authors": "Grafana Labs",
-  "summary": "Build a panel plugin",
-  "source": "build-a-panel-plugin.md",
+  "summary": "Getting started",
+  "source": "getting-started.md",
   "theme": "",
   "status": [
     "published"
@@ -21,5 +21,5 @@
     "beginner"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-panel-plugin"
+  "url": "getting-started"
 }
