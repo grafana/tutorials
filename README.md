@@ -21,19 +21,19 @@ go get github.com/googlecodelabs/tools/claat
 
 ## Usage
 
-To build tutorials and landing site altogether:
+To build the static site, run the build script:
 
 ```
-make
+./build.sh
 ```
 
 ## Development
 
-After running `make`, run a web server inside the `public` directory:
+To run a web server inside the `public` directory:
 
 ```
-cd public/
-python -m SimpleHTTPServer
+cd public
+claat serve
 ```
 
 ## Resources
