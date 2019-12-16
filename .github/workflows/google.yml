@@ -1,9 +1,9 @@
-name: Build and Deploy to GKE
+name: Build and Publish to GCS
 
 on:
   push:
     branches:
-    - master
+      - master
 
 env:
   SERVICE_ACCOUNT_EMAIL: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
@@ -11,20 +11,19 @@ env:
 
 jobs:
   setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+    name: Setup, Build, and Publish
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Checkout
-      uses: actions/checkout@v1
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: "270.0.0"
+          service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
-        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-
-    - run: |
-        gcloud auth login
-    - run: |
-        gsutil ls gs://grafana-tutorials-staging
+      - run: |
+          gcloud auth login
+      - run: |
+          gsutil ls gs://grafana-tutorials-staging
