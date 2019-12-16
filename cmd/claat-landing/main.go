@@ -37,6 +37,7 @@ func main() {
 		codelabsDir  = flag.String("codelabs-dir", "tutorials", "Directory where the codelabs are located")
 		htmlTemplate = flag.String("template", "layout/template.tmpl", "Template to use when building landing page")
 		outputDir    = flag.String("output-dir", "public", "Directory where to put the generated site")
+		prefix       = flag.String("prefix", "", "Prefix for stylesheets")
 	)
 
 	flag.Parse()
@@ -76,7 +77,13 @@ func main() {
 	}
 
 	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, struct{ Codelabs []codelab }{labs}); err != nil {
+	if err := tmpl.Execute(&buf, struct {
+		Prefix   string
+		Codelabs []codelab
+	}{
+		Prefix:   *prefix,
+		Codelabs: labs,
+	}); err != nil {
 		log.Fatal(err)
 	}
 
