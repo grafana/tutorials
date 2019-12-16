@@ -29,3 +29,5 @@ go run cmd/claat-landing/main.go  \
     -prefix "${PREFIX}"
 
 cp "${TEMPLATES_DIR}/landing.css" "${OUTPUT_DIR}"
+
+cp -r codelab-elements "${OUTPUT_DIR}"
