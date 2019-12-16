@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Grafana Tutorials</title>
+
+    <link
+      rel="shortcut icon"
+      href="/static/assets/img/fav32.png"
+      type="image/x-icon"
+    />
+
+    <meta name="application-name" content="Grafana Labs" />
+    <meta name="Copyright" content="Grafana Labs" />
+
+    <link href="{{.Prefix}}/landing.css" type="text/css" rel="stylesheet" />
+
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="section-tutorials">
+    <div class="page-header">
+      <div class="wrapper">
+        <div class="page-header__branding site-nav-dropdown-logo">
+          <div class="page-header__site-logo">
+            <img
+              src="https://grafana.com/static/assets/internal/grafana_logo-web.svg"
+              alt="Grafana Labs Logo"
+              width="148"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="page__content">
+        <div class="page-section page-section--main">
+          <div class="wrapper">
+            <div class="row">
+              <div class="col col--md-12">
+                <h1>Do more with Grafana!</h1>
+                <p>
+                  Grafana Tutorials are step-by-step guides that help you make
+                  the most of Grafana.
+                </p>
+                <p>
+                  <a
+                    class="btn btn-outline"
+                    href="https://github.com/grafana/tutorials"
+                    >Contribute</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              {{ range .Codelabs }}
+              <div class="col col--md-4">
+                <div class="card-container">
+                  <h4>{{ .Title }}</h4>
+                  {{ range .Category }}
+                  <h5 class="blog-categories__item"><a href="#">{{ . }}</a></h5>
+                  {{ end }}
+                  <small>{{ .Duration }} min</small>
+                  <p>
+                    {{ .Summary }}
+                  </p>
+                  <a class="btn btn--primary" href="{{ .URL }}/index.html"
+                    >Start</a
+                  >
+                </div>
+              </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
