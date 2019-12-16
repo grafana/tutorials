@@ -22,6 +22,10 @@ Duration: 1
 - NodeJS
 - yarn
 
+## Create a new plugin
+
+Duration: 1
+
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
 ## The render function

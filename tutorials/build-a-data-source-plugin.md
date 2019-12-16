@@ -24,6 +24,10 @@ Grafana has support for a wide range of data sources, like Prometheus, MySQL, or
 - NodeJS
 - yarn
 
+## Create a new plugin
+
+Duration: 1
+
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
 ## Add a config editor
