@@ -1,7 +1,7 @@
 {
   "environment": "web",
   "format": "../templates/codelab.html",
-  "prefix": "https://storage.googleapis.com",
+  "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
   "updated": "2019-12-16T10:24:26+01:00",
   "id": "build-a-data-source-plugin",
