@@ -1,4 +1,4 @@
-summary: Build a data source plugin
+summary: See how to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: Plugins
 tags: beginner

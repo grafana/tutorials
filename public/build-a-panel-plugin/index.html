@@ -125,11 +125,17 @@
 <p>A <em>panel editor</em> allows your panel to accept user input, or <em>options</em>.</p>
 <p>A panel editor is a React component that extends <code>PureComponent&lt;PanelEditorProps&lt;SimpleOptions&gt;&gt;</code>, where <code>SimpleOptions</code> is a TypeScript interface that defines the available options.</p>
 <p>You can register the editor to the plugin in <code>module.ts</code>.</p>
-<pre><code>new PanelPlugin&lt;SimpleOptions&gt;(SimplePanel)
-  .setEditor(SimpleEditor);
+<pre><code>new PanelPlugin&lt;SimpleOptions&gt;(SimplePanel).setEditor(SimpleEditor);
 </code></pre>
 <p><strong>SimpleEditor.tsx</strong></p>
-<pre><code>&lt;FormField label=&#34;Text&#34; labelWidth={5} inputWidth={20} type=&#34;text&#34; onChange={this.onTextChanged} value={options.text || &#39;&#39;} /&gt;
+<pre><code>&lt;FormField
+  label=&#34;Text&#34;
+  labelWidth={5}
+  inputWidth={20}
+  type=&#34;text&#34;
+  onChange={this.onTextChanged}
+  value={options.text || &#34;&#34;}
+/&gt;
 </code></pre>
 <p>The <code>onChange</code> attribute on the <code>FormField</code> lets you update the panel properties. Here, <code>onTextChanged</code> is a function that updates the panel properties whenever the value of the <code>FormField</code> changes.</p>
 <pre><code>onTextChanged = ({ target }: any) =&gt; {
@@ -147,7 +153,7 @@
 <li>Import the Switch component from the Grafana UI package.</li>
 </ul>
 <p><strong>SimpleEditor.tsx</strong></p>
-<pre><code>import { Switch } from &#39;@grafana/ui&#39;;
+<pre><code>import { Switch } from &#34;@grafana/ui&#34;;
 </code></pre>
 <ul>
 <li>Add the Switch to the render function.</li>
@@ -167,7 +173,10 @@
 <li>Add the <code>onHealthyChanged</code> callback to toggle between healthy and unhealthy whenever the user presses the switch.</li>
 </ul>
 <pre><code>onHealthyChanged = ({ target }: any) =&gt; {
-  this.props.onOptionsChange({ ...this.props.options, healthy: !this.props.options.healthy });
+  this.props.onOptionsChange({
+    ...this.props.options,
+    healthy: !this.props.options.healthy
+  });
 };
 </code></pre>
 
@@ -185,12 +194,12 @@
 <pre><code>let color;
 
 let values = data.series[0].fields[0].values;
-let current = values.get(values.length-1);
+let current = values.get(values.length - 1);
 
 if (current &gt; 0) {
-  color = &#39;#00ff00&#39;;
+  color = &#34;#00ff00&#34;;
 } else {
-  color = &#39;#ff0000&#39;;
+  color = &#34;#ff0000&#34;;
 }
 </code></pre>
 
