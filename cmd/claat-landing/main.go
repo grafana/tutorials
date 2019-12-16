@@ -34,9 +34,9 @@ type codelab struct {
 
 func main() {
 	var (
-		codelabsDir  = flag.String("codelabs-dir", "tutorials", "Directory where the codelabs are located")
-		htmlTemplate = flag.String("template", "layout/template.tmpl", "Template to use when building landing page")
-		outputDir    = flag.String("output-dir", "public", "Directory where to put the generated site")
+		codelabsDir  = flag.String("codelabs-dir", "", "Directory where the codelabs are located")
+		htmlTemplate = flag.String("template", "", "Template to use when building landing page")
+		outputDir    = flag.String("output-dir", "", "Directory where to put the generated site")
 		prefix       = flag.String("prefix", "", "Prefix for stylesheets")
 	)
 

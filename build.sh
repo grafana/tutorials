@@ -24,7 +24,7 @@ popd
 # Build landing page
 go run cmd/claat-landing/main.go  \
     -template "${TEMPLATES_DIR}/landing.html" \
-    -codelabs-dir "${TUTORIALS_DIR}" \
+    -codelabs-dir "${OUTPUT_DIR}" \
     -output-dir "${OUTPUT_DIR}" \
     -prefix "${PREFIX}"
 
