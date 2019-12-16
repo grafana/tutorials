@@ -1,9 +1,9 @@
-name: Build and Publish to GCS
+name: Build and Publish to Staging Bucket
 
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   setup-build-publish-deploy:
@@ -20,4 +20,4 @@ jobs:
           service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
       - run: |
-          gsutil -m rsync -r public/ ${{ secrets.GCS_BUCKET }}
+          gsutil -m rsync -r public/ ${{ secrets.GCS_BUCKET_STAGING }}
