@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"text/template"
 	"time"
@@ -35,10 +34,9 @@ type codelab struct {
 
 func main() {
 	var (
-		codelabsDir   = flag.String("codelabs-dir", "tutorials", "Directory where the codelabs are located")
-		htmlTemplate  = flag.String("template", "layout/template.tmpl", "Template to use when building landing page")
-		landingStyles = flag.String("asset-dir", "layout/assets", "Assets for landing page")
-		outputDir     = flag.String("output-dir", "public", "Directory where to put the generated site")
+		codelabsDir  = flag.String("codelabs-dir", "tutorials", "Directory where the codelabs are located")
+		htmlTemplate = flag.String("template", "layout/template.tmpl", "Template to use when building landing page")
+		outputDir    = flag.String("output-dir", "public", "Directory where to put the generated site")
 	)
 
 	flag.Parse()
@@ -84,14 +82,6 @@ func main() {
 
 	// Write all files to the output directory.
 	if err := os.MkdirAll(*outputDir, os.ModePerm); err != nil {
-		log.Fatal(err)
-	}
-	err = exec.Command("cp", "-a", *codelabsDir, *outputDir).Run()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = exec.Command("cp", "-a", *landingStyles, *outputDir).Run()
-	if err != nil {
 		log.Fatal(err)
 	}
 	err = ioutil.WriteFile(filepath.Join(*outputDir, "index.html"), buf.Bytes(), os.ModePerm)

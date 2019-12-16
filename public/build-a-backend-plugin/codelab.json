@@ -1,15 +1,15 @@
 {
   "environment": "web",
-  "format": "../layout/template.html",
+  "format": "../layout/codelab.html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-16T10:24:26+01:00",
-  "id": "build-a-panel-plugin",
+  "updated": "2019-12-13T15:08:34+01:00",
+  "id": "build-a-backend-plugin",
   "duration": 1,
-  "title": "Build a panel plugin",
+  "title": "Build a backend plugin",
   "authors": "Grafana Labs",
-  "summary": "Build a panel plugin",
-  "source": "build-a-panel-plugin.md",
+  "summary": "Build a backend plugin",
+  "source": "build-a-backend-plugin.md",
   "theme": "",
   "status": [
     "published"
@@ -18,8 +18,8 @@
     "plugins"
   ],
   "tags": [
-    "beginner"
+    "intermediate"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-panel-plugin"
+  "url": "build-a-backend-plugin"
 }

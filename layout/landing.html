@@ -15,7 +15,11 @@
     <meta name="application-name" content="Grafana Labs" />
     <meta name="Copyright" content="Grafana Labs" />
 
-    <link href="/grafana-tutorials-staging/assets/styles.css" type="text/css" rel="stylesheet" />
+    <link
+      href="/grafana-tutorials-staging/landing.css"
+      type="text/css"
+      rel="stylesheet"
+    />
 
     <link
       href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
@@ -47,20 +51,23 @@
         <div class="page-section page-section--main">
           <div class="wrapper">
             <div class="row">
-
               <div class="col col--md-12">
                 <h1>Do more with Grafana!</h1>
                 <p>
-                  Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
+                  Grafana Tutorials are step-by-step guides that help you make
+                  the most of Grafana.
                 </p>
                 <p>
-                  <a class="btn btn-outline" href="https://github.com/grafana/tutorials">Contribute</a>
+                  <a
+                    class="btn btn-outline"
+                    href="https://github.com/grafana/tutorials"
+                    >Contribute</a
+                  >
                 </p>
               </div>
-
             </div>
             <div class="row">
-            {{ range .Codelabs }}
+              {{ range .Codelabs }}
               <div class="col col--md-4">
                 <div class="card-container">
                   <h4>{{ .Title }}</h4>
@@ -71,7 +78,9 @@
                   <p>
                     {{ .Summary }}
                   </p>
-                  <a class="btn btn--primary" href="tutorial/{{ .URL }}/index.html">Start</a>
+                  <a class="btn btn--primary" href="{{ .URL }}/index.html"
+                    >Start</a
+                  >
                 </div>
               </div>
               {{ end }}
