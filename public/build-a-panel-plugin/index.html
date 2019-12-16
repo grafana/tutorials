@@ -19,12 +19,12 @@
     />
     <link
       rel="stylesheet"
-      href="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.css"
+      href="/codelab-elements/codelab-elements.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://storage.googleapis.com/grafana-tutorials-staging/google-codelab.css"
+      href="/google-codelab.css"
     />
     <style>
       .success {
@@ -45,10 +45,15 @@
       feedback-link="https://github.com/grafana/grafana"
     >
       
-      <google-codelab-step label="Overview" duration="1">
-        <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
+      <google-codelab-step label="Introduction" duration="1">
+        <p>Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel from scratch.</p>
+<p>For more information about panels, refer to the documentation on <a href="https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel" target="_blank">Panels</a>.</p>
+<h2 is-upgraded>What you&#39;ll build</h2>
+<p>In this tutorial, you&#39;ll build a simple, but complete panel that will visualize health of a service through the use of color.</p>
+<h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>Build a panel plugin.</li>
+<li>How to scaffold a panel plugin</li>
+<li>How to customize the panel through a panel editor</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
@@ -66,12 +71,15 @@
 <li><code>plugin.json</code> contains information about your plugin, and tells Grafana about what capabilities the plugin needs.</li>
 <li><code>module.ts</code> is the entry point for your plugin, and where you should export the implementation for your plugin. Your <code>module.ts</code> will look differently depending on the type of plugin you&#39;re building.</li>
 </ul>
-<p>All Grafana plugins needs to be located in <code>/var/lib/grafana/plugins</code> or <code>data/plugins</code>. Therefore, we recommend to move to one of these directories before following with the next steps.</p>
+<h2 is-upgraded>The plugin directory</h2>
+<p>To discover plugins, Grafana scans a plugin directory which location depends on the system your running.</p>
+<p>On Unix systems, the plugin directory defaults to <code>/var/lib/grafana/plugins</code>. If you&#39;re building from source, Grafana instead scans the <code>data/plugins</code> directory in the repository root directory.</p>
+<p>For Grafana to discover your plugin, either create your plugin in the default plugin directory, or reconfigure the location of the plugin directory in the Grafana configuration file.</p>
 <h2 is-upgraded>grafana-toolkit</h2>
 <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll learn how to use <em>grafana-toolkit</em>.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.</p>
 <ul>
-<li>Create a panel plugin from template, using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
+<li>In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
 </code></pre>
 </li>
 <li>Change directory.<pre><code>cd my-plugin
@@ -89,9 +97,9 @@
 
       </google-codelab-step>
       
-      <google-codelab-step label="The render function" duration="0">
-        <p>Since Grafana 6.X, panels are ReactJS components. The simplest panel consists of a single function, the <code>render</code> function.</p>
-<p>The <code>render</code> function returns the content of the panel.</p>
+      <google-codelab-step label="Render the panel" duration="0">
+        <p>Since Grafana 6.x, panels are <a href="https://reactjs.org/docs/components-and-props.html" target="_blank">React components</a>. The simplest panel consists of a single function, the <code>render</code> function, which returns the content of the panel.</p>
+<p>In this step, you&#39;ll customize how your panel looks like, by editing its <code>render</code> function.</p>
 <h2 is-upgraded>Display the health of a service</h2>
 <p>Service health is one of the first things you want to monitor. In this exercise, you&#39;ll build a panel that tells you if a service is healthy or not.</p>
 <p>You&#39;ll use the background color of the panel to be able to tell when the service is healthy (green), or when it&#39;s unhealthy (red).</p>
@@ -208,10 +216,10 @@ if (current &gt; 0) {
       
     </google-codelab>
 
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/native-shim.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/custom-elements.min.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/prettify.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.js"></script>
+    <script src="/codelab-elements/native-shim.js"></script>
+    <script src="/codelab-elements/custom-elements.min.js"></script>
+    <script src="/codelab-elements/prettify.js"></script>
+    <script src="/codelab-elements/codelab-elements.js"></script>
     <script src="//support.google.com/inapp/api.js"></script>
   </body>
 </html>

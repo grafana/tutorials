@@ -1,9 +1,8 @@
 {
   "environment": "web",
   "format": "../templates/codelab.html",
-  "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-16T14:14:43+01:00",
+  "updated": "2019-12-16T14:18:48+01:00",
   "id": "build-a-backend-plugin",
   "duration": 1,
   "title": "Build a backend plugin",

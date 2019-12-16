@@ -8,13 +8,22 @@ Feedback Link: https://github.com/grafana/grafana
 
 # Build a panel plugin
 
-## Overview
+## Introduction
 
 Duration: 1
 
+Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel from scratch.
+
+For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel).
+
+### What you'll build
+
+In this tutorial, you'll build a simple, but complete panel that will visualize health of a service through the use of color.
+
 ### What you'll learn
 
-- Build a panel plugin.
+- How to scaffold a panel plugin
+- How to customize the panel through a panel editor
 
 ### What you'll need
 
@@ -28,11 +37,11 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## The render function
+## Render the panel
 
-Since Grafana 6.X, panels are ReactJS components. The simplest panel consists of a single function, the `render` function.
+Since Grafana 6.x, panels are [React components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
 
-The `render` function returns the content of the panel.
+In this step, you'll customize how your panel looks like, by editing its `render` function.
 
 ### Display the health of a service
 

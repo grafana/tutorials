@@ -19,12 +19,12 @@
     />
     <link
       rel="stylesheet"
-      href="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.css"
+      href="/codelab-elements/codelab-elements.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://storage.googleapis.com/grafana-tutorials-staging/google-codelab.css"
+      href="/google-codelab.css"
     />
     <style>
       .success {
@@ -67,12 +67,15 @@
 <li><code>plugin.json</code> contains information about your plugin, and tells Grafana about what capabilities the plugin needs.</li>
 <li><code>module.ts</code> is the entry point for your plugin, and where you should export the implementation for your plugin. Your <code>module.ts</code> will look differently depending on the type of plugin you&#39;re building.</li>
 </ul>
-<p>All Grafana plugins needs to be located in <code>/var/lib/grafana/plugins</code> or <code>data/plugins</code>. Therefore, we recommend to move to one of these directories before following with the next steps.</p>
+<h2 is-upgraded>The plugin directory</h2>
+<p>To discover plugins, Grafana scans a plugin directory which location depends on the system your running.</p>
+<p>On Unix systems, the plugin directory defaults to <code>/var/lib/grafana/plugins</code>. If you&#39;re building from source, Grafana instead scans the <code>data/plugins</code> directory in the repository root directory.</p>
+<p>For Grafana to discover your plugin, either create your plugin in the default plugin directory, or reconfigure the location of the plugin directory in the Grafana configuration file.</p>
 <h2 is-upgraded>grafana-toolkit</h2>
 <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll learn how to use <em>grafana-toolkit</em>.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.</p>
 <ul>
-<li>Create a panel plugin from template, using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
+<li>In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
 </code></pre>
 </li>
 <li>Change directory.<pre><code>cd my-plugin
@@ -223,10 +226,10 @@
       
     </google-codelab>
 
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/native-shim.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/custom-elements.min.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/prettify.js"></script>
-    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.js"></script>
+    <script src="/codelab-elements/native-shim.js"></script>
+    <script src="/codelab-elements/custom-elements.min.js"></script>
+    <script src="/codelab-elements/prettify.js"></script>
+    <script src="/codelab-elements/codelab-elements.js"></script>
     <script src="//support.google.com/inapp/api.js"></script>
   </body>
 </html>

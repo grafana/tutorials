@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
 body {
   font-family: "PT Sans", sans-serif;
 }
@@ -15,6 +16,18 @@ google-codelab google-codelab-step pre {
 google-codelab google-codelab-step .instructions {
   border: none !important;
   box-shadow: none !important;
+}
+google-codelab google-codelab-step .instructions h2.step-title {
+  font-family: "PT Sans", sans-serif !important;
+  font-size: 2rem !important;
+  color: #eaeaea;
+  font-weight: 400 !important;
+}
+google-codelab google-codelab-step .instructions h2 {
+  font-family: "PT Sans", sans-serif !important;
+  font-size: 1.5rem !important;
+  color: #eaeaea;
+  font-weight: 400 !important;
 }
 google-codelab google-codelab-step .instructions a {
   color: #f46800 !important;
