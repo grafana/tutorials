@@ -1,6 +1,6 @@
 {
   "environment": "web",
-  "format": "../layout/codelab.html",
+  "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
   "updated": "2019-12-13T15:08:34+01:00",
