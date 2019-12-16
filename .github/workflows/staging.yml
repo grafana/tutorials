@@ -20,4 +20,4 @@ jobs:
           service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
       - run: |
-          gsutil -m -h "Cache-Control:no-cache,max-age=0" rsync -d -r public/ ${{ secrets.GCS_BUCKET_STAGING }}
+          gsutil -m -h "Cache-Control:no-cache,max-age=0" cp -r public/* ${{ secrets.GCS_BUCKET_STAGING }}
