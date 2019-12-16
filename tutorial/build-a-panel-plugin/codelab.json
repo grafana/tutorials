@@ -1,15 +1,15 @@
 {
   "environment": "web",
-  "format": "layout/template.html",
+  "format": "../layout/template.html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-13T15:08:34+01:00",
+  "updated": "2019-12-15T23:00:53+01:00",
   "id": "build-a-panel-plugin",
-  "duration": 2,
+  "duration": 1,
   "title": "Build a panel plugin",
   "authors": "Grafana Labs",
   "summary": "Build a panel plugin",
-  "source": "tutorial/build-a-panel-plugin.md",
+  "source": "build-a-panel-plugin.md",
   "theme": "",
   "status": [
     "published"

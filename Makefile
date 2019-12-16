@@ -9,7 +9,7 @@ build-landing:
 
 build-tutorials:
 	pushd layout/assets; sass google-codelab.scss google-codelab.css; popd
-	claat export -f layout/template.html -o tutorial tutorial/*.md
+	pushd tutorial; claat export -f ../layout/template.html -o ../tutorial *.md; popd
 
 publish-staging:
 	gsutil -m rsync -d -r public/ gs://grafana-tutorials-staging

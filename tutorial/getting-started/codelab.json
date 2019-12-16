@@ -1,6 +1,6 @@
 {
   "environment": "web",
-  "format": "layout/template.html",
+  "format": "../layout/template.html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
   "updated": "2019-12-13T15:08:34+01:00",
@@ -9,7 +9,7 @@
   "title": "Getting started",
   "authors": "Grafana Labs",
   "summary": "Getting started",
-  "source": "tutorial/getting-started.md",
+  "source": "getting-started.md",
   "theme": "",
   "status": [
     "published"

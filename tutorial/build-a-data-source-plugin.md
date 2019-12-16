@@ -24,41 +24,7 @@ Grafana has support for a wide range of data sources, like Prometheus, MySQL, or
 - NodeJS
 - yarn
 
-## Create a new plugin
-
-Duration: 1
-
-Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I'm going to use grafana-toolkit.
-
-[grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.
-
-All Grafana plugins needs to be located in `/var/lib/grafana/plugins` or `data/plugins`. Therefore, we recommend to move to one of these directories before following with the next steps. 
-
-- Create a data source plugin from template, using the `plugin:create` command:
-
-```
-npx grafana-toolkit plugin:create codelab2
-```
-
-- Download necessary dependencies:
-
-```
-yarn install
-```
-
-- Build the plugin:
-
-```
-yarn dev
-```
-
-- Start Grafana to verify your plugin loads correctly.
-
-- To add the data source, navigate to **Configuration** -> **Data Sources**, and click **Add data source**.
-
-- Type "codelab2", and select your data source.
-
-- Click **Save & Test**.
+[[**import** [create-plugin](shared/create-plugin.md)]]
 
 ## Add a config editor
 

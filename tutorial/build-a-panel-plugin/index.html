@@ -24,7 +24,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/grafana-tutorials-prod/assets/google-codelab.css"
+      href="/grafana-tutorials-staging/assets/google-codelab.css"
     />
     <style>
       .success {
@@ -56,13 +56,10 @@
 <li>NodeJS</li>
 <li>yarn</li>
 </ul>
-
-
-      </google-codelab-step>
-      
-      <google-codelab-step label="Create a new panel plugin" duration="1">
-        <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I&#39;m going to use grafana-toolkit.</p>
+<p>Create a new panel plugin</p>
+<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly could write you own webpack configuration, for this guide, I&#39;m going to use grafana-toolkit.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for us.</p>
+<p>All Grafana plugins needs to be located in <code>/var/lib/grafana/plugins</code> or <code>data/plugins</code>. Therefore, we recommend to move to one of these directories before following with the next steps.</p>
 <ul>
 <li>Create a panel plugin from template, using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create codelab1
 </code></pre>
@@ -77,6 +74,7 @@
 </code></pre>
 </li>
 </ul>
+
 
 
       </google-codelab-step>
