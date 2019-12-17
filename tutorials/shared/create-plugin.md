@@ -3,7 +3,13 @@ Every plugin you create requires at least two files, `plugin.json`, and `module.
 - `plugin.json` contains information about your plugin, and tells Grafana about what capabilities the plugin needs.
 - `module.ts` is the entry point for your plugin, and where you should export the implementation for your plugin. Your `module.ts` will look differently depending on the type of plugin you're building.
 
-All Grafana plugins needs to be located in `/var/lib/grafana/plugins` or `data/plugins`. Therefore, we recommend to move to one of these directories before following with the next steps.
+### The plugin directory
+
+To discover plugins, Grafana scans a plugin directory which location depends on the system your running.
+
+On Unix systems, the plugin directory defaults to `/var/lib/grafana/plugins`. If you're building from source, Grafana instead scans the `data/plugins` directory in the repository root directory.
+
+For Grafana to discover your plugin, either create your plugin in the default plugin directory, or reconfigure the location of the plugin directory in the Grafana configuration file.
 
 ### grafana-toolkit
 
@@ -11,7 +17,7 @@ Tooling for modern web development can be tricky to wrap your head around. While
 
 [grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.
 
-- Create a panel plugin from template, using the `plugin:create` command:
+- In the plugin directory, create a panel plugin from template using the `plugin:create` command:
 
 ```
 npx grafana-toolkit plugin:create my-plugin

@@ -3,7 +3,7 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-16T13:57:50+01:00",
+  "updated": "2019-12-16T14:18:48+01:00",
   "id": "build-a-data-source-plugin",
   "duration": 11,
   "title": "Build a data source plugin",
