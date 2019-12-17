@@ -45,7 +45,8 @@ google-codelab google-codelab-step .instructions .inner {
   box-shadow: none;
   font-size: 16px;
 }
-google-codelab google-codelab-step .instructions aside.special {
+google-codelab google-codelab-step .instructions aside.special,
+google-codelab google-codelab-step .instructions aside.warning {
   background: #333333 !important;
   color: #b8b8b8 !important;
 }
