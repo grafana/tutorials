@@ -180,7 +180,7 @@ You've already seen that the `this.props` object provides useful data to your pa
 const { data } = this.props;
 ```
 
-Next, we'll make the background color of our panel change based on the results from a data source query.
+Next, you'll make the background color of the panel change based on the results from a data source query.
 
 ### Data frames
 
