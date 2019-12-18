@@ -190,6 +190,65 @@
 
       </google-codelab-step>
       
+      <google-codelab-step label="Complete example" duration="0">
+        <pre><code>import React, { PureComponent } from &#39;react&#39;;
+import { withTheme } from &#39;@grafana/ui&#39;;
+import { PanelProps, GrafanaTheme } from &#39;@grafana/data&#39;;
+
+import { SimpleOptions } from &#39;types&#39;;
+import { select } from &#39;d3&#39;;
+
+interface Props extends PanelProps&lt;SimpleOptions&gt; {
+  theme: GrafanaTheme;
+}
+
+class PartialSimplePanel extends PureComponent&lt;Props&gt; {
+  containerElement: any;
+
+  componentDidMount() {
+    this.draw();
+  }
+
+  componentDidUpdate() {
+    this.draw();
+  }
+
+  draw() {
+    const { width, height, theme } = this.props;
+
+    const data = [4, 8, 15, 16, 23, 42];
+
+    const maxValue = Math.max.apply(
+      Math,
+      data.map(o =&gt; o)
+    );
+
+    const chart = select(this.containerElement)
+      .html(&#39;&#39;)
+      .attr(&#39;width&#39;, width)
+      .attr(&#39;height&#39;, height);
+
+    chart
+      .selectAll(&#39;div&#39;)
+      .data(data)
+      .enter()
+      .append(&#39;div&#39;)
+      .style(&#39;height&#39;, height / data.length + &#39;px&#39;)
+      .style(&#39;width&#39;, d =&gt; (d * width) / maxValue + &#39;px&#39;)
+      .style(&#39;background-color&#39;, theme.colors.red);
+  }
+
+  render() {
+    return &lt;div ref={element =&gt; (this.containerElement = element)}&gt;&lt;/div&gt;;
+  }
+}
+
+export const SimplePanel = withTheme(PartialSimplePanel);
+</code></pre>
+
+
+      </google-codelab-step>
+      
     </google-codelab>
 
     <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/native-shim.js"></script>
