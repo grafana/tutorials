@@ -3,13 +3,13 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-17T11:49:44+01:00",
-  "id": "build-a-panel-plugin",
+  "updated": "2019-12-19T10:15:06+01:00",
+  "id": "build-a-panel-plugin-with-d3",
   "duration": 2,
-  "title": "Build a panel plugin",
+  "title": "Build a panel plugin with D3.js",
   "authors": "Grafana Labs",
-  "summary": "Learn at how to create a custom visualization for your dashboards.",
-  "source": "build-a-panel-plugin.md",
+  "summary": "Learn how to use D3.js in your panel plugins.",
+  "source": "build-a-panel-plugin-with-d3.md",
   "theme": "",
   "status": [
     "published"
@@ -21,5 +21,5 @@
     "beginner"
   ],
   "feedback": "https://github.com/grafana/grafana",
-  "url": "build-a-panel-plugin"
+  "url": "build-a-panel-plugin-with-d3"
 }

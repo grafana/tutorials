@@ -40,3 +40,13 @@ yarn install
 ```
 yarn dev
 ```
+
+- Restart the Grafana server for Grafana to discover your plugin.
+
+By default, Grafana logs whenever it discovers a plugin:
+
+```
+INFO[01-01|12:00:00] Registering plugin            logger=plugins name=my-plugin
+```
+
+- Open Grafana and go to **Configuration** -> **Plugins**, and make sure that your plugin is there.

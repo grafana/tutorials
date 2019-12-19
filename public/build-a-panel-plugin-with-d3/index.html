@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="theme-color" content="#4F7DC9" />
+    <meta charset="UTF-8" />
+    <title>Build a panel plugin with D3.js</title>
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono"
+    />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://storage.googleapis.com/grafana-tutorials-staging/google-codelab.css"
+    />
+    <style>
+      .success {
+        color: #1e8e3e;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+    <google-codelab
+      codelab-gaid=""
+      id="build-a-panel-plugin-with-d3"
+      title="Build a panel plugin with D3.js"
+      environment="web"
+      feedback-link="https://github.com/grafana/grafana"
+    >
+      
+      <google-codelab-step label="Introduction" duration="1">
+        <p>Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel using <a href="https://d3js.org/" target="_blank">D3.js</a>.</p>
+<p>For more information about panels, refer to the documentation on <a href="https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel" target="_blank">Panels</a>.</p>
+<h2 is-upgraded>What you&#39;ll build</h2>
+<p>In this tutorial, you&#39;ll build a simple, but complete bar graph panel.</p>
+<h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
+<ul class="checklist">
+<li>How to scaffold a panel plugin</li>
+</ul>
+<h2 is-upgraded>What you&#39;ll need</h2>
+<ul>
+<li>Grafana version 6.4+</li>
+<li>NodeJS</li>
+<li>yarn</li>
+</ul>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Create a new plugin" duration="1">
+        <p>Every plugin you create requires at least two files, <code>plugin.json</code>, and <code>module.ts</code>.</p>
+<ul>
+<li><code>plugin.json</code> contains information about your plugin, and tells Grafana about what capabilities the plugin needs.</li>
+<li><code>module.ts</code> is the entry point for your plugin, and where you should export the implementation for your plugin. Your <code>module.ts</code> will look differently depending on the type of plugin you&#39;re building.</li>
+</ul>
+<h2 is-upgraded>The plugin directory</h2>
+<p>To discover plugins, Grafana scans a plugin directory which location depends on the system your running.</p>
+<p>On Unix systems, the plugin directory defaults to <code>/var/lib/grafana/plugins</code>. If you&#39;re building from source, Grafana instead scans the <code>data/plugins</code> directory in the repository root directory.</p>
+<p>For Grafana to discover your plugin, either create your plugin in the default plugin directory, or reconfigure the location of the plugin directory in the Grafana configuration file.</p>
+<h2 is-upgraded>grafana-toolkit</h2>
+<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll learn how to use <em>grafana-toolkit</em>.</p>
+<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.</p>
+<ul>
+<li>In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
+</code></pre>
+</li>
+<li>Change directory.<pre><code>cd my-plugin
+</code></pre>
+</li>
+<li>Download necessary dependencies:<pre><code>yarn install
+</code></pre>
+</li>
+<li>Build the plugin:<pre><code>yarn dev
+</code></pre>
+</li>
+<li>Restart the Grafana server for Grafana to discover your plugin.</li>
+</ul>
+<p>By default, Grafana logs whenever it discovers a plugin:</p>
+<pre><code>INFO[01-01|12:00:00] Registering plugin            logger=plugins name=my-plugin
+</code></pre>
+<ul>
+<li>Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>, and make sure that your plugin is there.</li>
+</ul>
+
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Data-driven transformations using D3.js" duration="0">
+        <p>[D3.js] is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.</p>
+<p>D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
+<p><strong>SimplePanel.tsx</strong></p>
+<pre><code>import { select } from &#39;d3&#39;;
+</code></pre>
+<ul>
+<li>Create a function called <code>draw</code>, where we&#39;ll construct our chart, and call it in <code>componentDidMount</code>, and <code>componentDidUpdate</code>. By doing this, the <code>render</code> function returns a prebuilt chart to avoid rebuilding the chart on every call to <code>render</code>.</li>
+</ul>
+<pre><code>class SimplePanel extends PureComponent&lt;Props&gt; {
+  containerElement: any;
+
+  componentDidMount() {
+    this.draw();
+  }
+
+  componentDidUpdate() {
+    this.draw();
+  }
+
+  draw() {
+    const { width, height } = this.props;
+
+    const chart = select(this.containerElement)
+      .html(&#39;&#39;)
+      .attr(&#39;width&#39;, width)
+      .attr(&#39;height&#39;, height)
+      .text(&#39;Hello, world!&#39;);
+  }
+
+  render() {
+    return &lt;div ref={element =&gt; (this.containerElement = element)}&gt;&lt;/div&gt;;
+  }
+}
+</code></pre>
+<p>Notice that, in the <code>render</code> function, the <code>ref</code> attribute is used to replace the <code>div</code> with <code>containerElement</code>.</p>
+<ul>
+<li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
+</ul>
+<p>When you add the panel to your dashboard, it will have the text ‘Hello, world!&#39; written in it.</p>
+<h2 is-upgraded>Build chart from data</h2>
+<p>You&#39;ve seen how to use D3.js to create a container element with some hard-coded text in it. Next, you&#39;ll build the graph from actual data.</p>
+<ul>
+<li>Update the <code>draw</code> function with the following code:</li>
+</ul>
+<pre><code>draw() {
+  const { width, height } = this.props;
+
+  const data = [4, 8, 15, 16, 23, 42];
+
+  const maxValue = Math.max.apply(Math, data.map(o =&gt; o));
+
+  const chart = select(this.containerElement)
+    .html(&#39;&#39;)
+    .attr(&#39;width&#39;, width)
+    .attr(&#39;height&#39;, height);
+
+  chart
+    .selectAll(&#39;div&#39;)
+    .data(data)
+    .enter()
+    .append(&#39;div&#39;)
+    .style(&#39;height&#39;, height / data.length + &#39;px&#39;)
+    .style(&#39;width&#39;, d =&gt; (d * width) / maxValue + &#39;px&#39;)
+    .style(&#39;background-color&#39;, &#39;blue&#39;);
+}
+</code></pre>
+<ul>
+<li>Run <code>yarn dev</code>, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.</li>
+</ul>
+<p>With relatively little code, you&#39;ve created a dynamic bar chart. Still, you&#39;ve only touched the surface of what&#39;s possible with D3. To learn more, check out the <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">D3 Gallery</a>.</p>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Theme your panel" duration="0">
+        <p>To provide your users with a consistent look-and-feel, you&#39;ll want to use the same colors as the built-in panels.</p>
+<p>In this step, you&#39;ll learn how to use the colors from the current theme.</p>
+<ul>
+<li>In <code>SimplePanel.tsx</code>, add a <code>GrafanaTheme</code> property to the <code>PanelProps</code>.</li>
+</ul>
+<pre><code>interface Props extends PanelProps&lt;SimpleOptions&gt; {
+  theme: GrafanaTheme;
+}
+</code></pre>
+<p><code>GrafanaTheme</code> is available from the <code>grafana/data</code> package:</p>
+<pre><code>import { PanelProps, GrafanaTheme } from &#39;@grafana/data&#39;;
+</code></pre>
+<p>The <code>theme</code> property is not set by default, so you need to use the <code>withTheme</code> to provide the current theme to the panel.</p>
+<ul>
+<li>Rename <code>SimplePanel</code> to <code>PartialSimplePanel</code>.</li>
+</ul>
+<pre><code>class PartialSimplePanel extends PureComponent&lt;Props&gt;
+</code></pre>
+<ul>
+<li>Import <code>withTheme</code> from <code>grafana/ui</code>.</li>
+</ul>
+<pre><code>import { withTheme } from &#39;@grafana/ui&#39;;
+</code></pre>
+<ul>
+<li>Export the <code>SimplePanel</code>, now complete with a theme. <code>withTheme</code> assigns the current theme to the <code>theme</code> property.</li>
+</ul>
+<pre><code>export const SimplePanel = withTheme(PartialSimplePanel);
+</code></pre>
+<p>The theme property is now available from within the component.</p>
+<pre><code>const { width, height, theme } = this.props;
+</code></pre>
+<ul>
+<li>Replace the current background color with a color from the theme.</li>
+</ul>
+<pre><code>style(&#39;background-color&#39;, theme.colors.red)
+</code></pre>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Complete example" duration="0">
+        <pre><code>import React, { PureComponent } from &#39;react&#39;;
+import { withTheme } from &#39;@grafana/ui&#39;;
+import { PanelProps, GrafanaTheme } from &#39;@grafana/data&#39;;
+
+import { SimpleOptions } from &#39;types&#39;;
+import { select } from &#39;d3&#39;;
+
+interface Props extends PanelProps&lt;SimpleOptions&gt; {
+  theme: GrafanaTheme;
+}
+
+class PartialSimplePanel extends PureComponent&lt;Props&gt; {
+  containerElement: any;
+
+  componentDidMount() {
+    this.draw();
+  }
+
+  componentDidUpdate() {
+    this.draw();
+  }
+
+  draw() {
+    const { width, height, theme } = this.props;
+
+    const data = [4, 8, 15, 16, 23, 42];
+
+    const maxValue = Math.max.apply(
+      Math,
+      data.map(o =&gt; o)
+    );
+
+    const chart = select(this.containerElement)
+      .html(&#39;&#39;)
+      .attr(&#39;width&#39;, width)
+      .attr(&#39;height&#39;, height);
+
+    chart
+      .selectAll(&#39;div&#39;)
+      .data(data)
+      .enter()
+      .append(&#39;div&#39;)
+      .style(&#39;height&#39;, height / data.length + &#39;px&#39;)
+      .style(&#39;width&#39;, d =&gt; (d * width) / maxValue + &#39;px&#39;)
+      .style(&#39;background-color&#39;, theme.colors.red);
+  }
+
+  render() {
+    return &lt;div ref={element =&gt; (this.containerElement = element)}&gt;&lt;/div&gt;;
+  }
+}
+
+export const SimplePanel = withTheme(PartialSimplePanel);
+</code></pre>
+
+
+      </google-codelab-step>
+      
+    </google-codelab>
+
+    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/native-shim.js"></script>
+    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/custom-elements.min.js"></script>
+    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/prettify.js"></script>
+    <script src="https://storage.googleapis.com/grafana-tutorials-staging/codelab-elements/codelab-elements.js"></script>
+    <script src="//support.google.com/inapp/api.js"></script>
+  </body>
+</html>

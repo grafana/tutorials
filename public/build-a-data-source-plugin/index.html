@@ -45,11 +45,15 @@
       feedback-link="https://github.com/grafana/grafana"
     >
       
-      <google-codelab-step label="Overview" duration="1">
-        <p>Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. This means that it&#39;s likely that you can already visualize metrics from the systems you&#39;ve already set up. In some cases though, you might already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards. Luckily, Grafana supports data source plugins, which lets you build a custom integration for your specific source of data.</p>
+      <google-codelab-step label="Introduction" duration="1">
+        <p>Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. There&#39;s a good chance you already can visualize metrics from the systems you&#39;ve already set up. In some cases though, you already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards.</p>
+<p>This tutorial gives you a hands-on walkthrough of how to add support for a new data source.</p>
+<h2 is-upgraded>What you&#39;ll build</h2>
+<p>In this tutorial, you&#39;ll build a simple but complete data source plugin.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>Build a plugin to integrate with a custom data source.</li>
+<li>How to configure a data source</li>
+<li>How to construct data source queries</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
@@ -87,6 +91,13 @@
 <li>Build the plugin:<pre><code>yarn dev
 </code></pre>
 </li>
+<li>Restart the Grafana server for Grafana to discover your plugin.</li>
+</ul>
+<p>By default, Grafana logs whenever it discovers a plugin:</p>
+<pre><code>INFO[01-01|12:00:00] Registering plugin            logger=plugins name=my-plugin
+</code></pre>
+<ul>
+<li>Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>, and make sure that your plugin is there.</li>
 </ul>
 
 
@@ -94,7 +105,7 @@
       </google-codelab-step>
       
       <google-codelab-step label="Add a config editor" duration="2">
-        <p>For most data sources, you probably want to give your users the ability to configure things like hostname or authentication method. You can accomplish this by adding an <em>config editor</em>.</p>
+        <p>To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a <em>config editor</em> users can configure your data source plugin to fit their needs.</p>
 <ul>
 <li>In <code>types.ts</code>, update <code>MyDataSourceOptions</code> to contain a optional field named <code>path</code>:</li>
 </ul>
@@ -104,7 +115,7 @@
 }
 </code></pre>
 <ul>
-<li>In <code>ConfigEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for our path option:</li>
+<li>In <code>ConfigEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for the <code>path</code> option:</li>
 </ul>
 <p><strong>ConfigEditor.tsx</strong></p>
 <pre><code>return (
@@ -133,7 +144,7 @@
   onOptionsChange({ ...options, jsonData });
 };
 </code></pre>
-<aside class="special"><p>Note: You might have noticed that we added the path to an object called <code>jsonData</code>. This object is automatically persisted for you, and will be made available to your data source implementation as well.</p>
+<aside class="special"><p>Did you notice the <code>jsonData</code> object? This object is automatically persisted for you, and will be available to your data source implementation as well.</p>
 </aside>
 <ul>
 <li>Build your assets with <code>yarn dev</code>.</li>
@@ -144,7 +155,7 @@
       </google-codelab-step>
       
       <google-codelab-step label="Add a query editor" duration="3">
-        <p>Most likely you want your users to be able to select the data they&#39;re interested in. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called PromQL. Let&#39;s add query support for our plugin, using a custom <em>query editor</em>.</p>
+        <p>Most data sources offer a way to query specific data. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called <em>PromQL</em>. Let&#39;s add query support for our plugin, using a custom <em>query editor</em>.</p>
 <ul>
 <li>In <code>types.ts</code>, update <code>MyQuery</code> to contain a optional field named <code>values</code>:</li>
 </ul>
@@ -158,7 +169,7 @@
 };
 </code></pre>
 <ul>
-<li>In <code>QueryEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for our query string:</li>
+<li>In <code>QueryEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for the query string:</li>
 </ul>
 <p><strong>QueryEditor.tsx</strong></p>
 <pre><code>render() {

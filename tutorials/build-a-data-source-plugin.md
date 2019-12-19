@@ -8,15 +8,22 @@ Feedback Link: https://github.com/grafana/grafana
 
 # Build a data source plugin
 
-## Overview
+## Introduction
 
 Duration: 1
 
-Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. This means that it’s likely that you can already visualize metrics from the systems you've already set up. In some cases though, you might already have an in-house metrics solution that you’d like to add to your Grafana dashboards. Luckily, Grafana supports data source plugins, which lets you build a custom integration for your specific source of data.
+Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. There's a good chance you already can visualize metrics from the systems you've already set up. In some cases though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards.
+
+This tutorial gives you a hands-on walkthrough of how to add support for a new data source.
+
+### What you'll build
+
+In this tutorial, you'll build a simple but complete data source plugin.
 
 ### What you'll learn
 
-- Build a plugin to integrate with a custom data source.
+- How to configure a data source
+- How to construct data source queries
 
 ### What you'll need
 
@@ -34,7 +41,7 @@ Duration: 1
 
 Duration: 2
 
-For most data sources, you probably want to give your users the ability to configure things like hostname or authentication method. You can accomplish this by adding an _config editor_.
+To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a _config editor_ users can configure your data source plugin to fit their needs.
 
 - In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
 
@@ -46,7 +53,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 }
 ```
 
-- In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for our path option:
+- In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for the `path` option:
 
 **ConfigEditor.tsx**
 
@@ -80,7 +87,7 @@ onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
 ```
 
 Positive
-: Note: You might have noticed that we added the path to an object called `jsonData`. This object is automatically persisted for you, and will be made available to your data source implementation as well.
+: Did you notice the `jsonData` object? This object is automatically persisted for you, and will be available to your data source implementation as well.
 
 - Build your assets with `yarn dev`.
 
@@ -90,7 +97,7 @@ Positive
 
 Duration: 3
 
-Most likely you want your users to be able to select the data they're interested in. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called PromQL. Let's add query support for our plugin, using a custom _query editor_.
+Most data sources offer a way to query specific data. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called _PromQL_. Let's add query support for our plugin, using a custom _query editor_.
 
 - In `types.ts`, update `MyQuery` to contain a optional field named `values`:
 
@@ -108,7 +115,7 @@ export const defaultQuery: Partial<MyQuery> = {
 };
 ```
 
-- In `QueryEditor.tsx`, update the `render` function to return a `FormField` for our query string:
+- In `QueryEditor.tsx`, update the `render` function to return a `FormField` for the query string:
 
 **QueryEditor.tsx**
 
