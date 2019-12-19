@@ -104,12 +104,13 @@
       </google-codelab-step>
       
       <google-codelab-step label="Data-driven transformations using D3.js" duration="0">
-        <p>D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
+        <p>[D3.js] is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.</p>
+<p>D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
 <p><strong>SimplePanel.tsx</strong></p>
 <pre><code>import { select } from &#39;d3&#39;;
 </code></pre>
 <ul>
-<li>Update <code>SimplePanel</code>.</li>
+<li>Create a function called <code>draw</code>, where we&#39;ll construct our chart, and call it in <code>componentDidMount</code>, and <code>componentDidUpdate</code>. By doing this, the <code>render</code> function returns a prebuilt chart to avoid rebuilding the chart on every call to <code>render</code>.</li>
 </ul>
 <pre><code>class SimplePanel extends PureComponent&lt;Props&gt; {
   containerElement: any;
@@ -123,28 +124,13 @@
   }
 
   draw() {
-    const { width, height, theme } = this.props;
-
-    const data = [4, 8, 15, 16, 23, 42];
-
-    const maxValue = Math.max.apply(
-      Math,
-      data.map(o =&gt; o)
-    );
+    const { width, height } = this.props;
 
     const chart = select(this.containerElement)
       .html(&#39;&#39;)
       .attr(&#39;width&#39;, width)
-      .attr(&#39;height&#39;, height);
-
-    chart
-      .selectAll(&#39;div&#39;)
-      .data(data)
-      .enter()
-      .append(&#39;div&#39;)
-      .style(&#39;height&#39;, height / data.length + &#39;px&#39;)
-      .style(&#39;width&#39;, d =&gt; (d * width) / maxValue + &#39;px&#39;)
-      .style(&#39;background-color&#39;, &#39;blue&#39;);
+      .attr(&#39;height&#39;, height)
+      .text(&#39;Hello, world!&#39;);
   }
 
   render() {
@@ -152,33 +138,76 @@
   }
 }
 </code></pre>
+<p>Notice that, in the <code>render</code> function, the <code>ref</code> attribute is used to replace the <code>div</code> with <code>containerElement</code>.</p>
+<ul>
+<li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
+</ul>
+<p>When you add the panel to your dashboard, it will have the text ‘Hello, world!&#39; written in it.</p>
+<h2 is-upgraded>Build chart from data</h2>
+<p>You&#39;ve seen how to use D3.js to create a container element with some hard-coded text in it. Next, you&#39;ll build the graph from actual data.</p>
+<ul>
+<li>Update the <code>draw</code> function with the following code:</li>
+</ul>
+<pre><code>draw() {
+  const { width, height } = this.props;
+
+  const data = [4, 8, 15, 16, 23, 42];
+
+  const maxValue = Math.max.apply(Math, data.map(o =&gt; o));
+
+  const chart = select(this.containerElement)
+    .html(&#39;&#39;)
+    .attr(&#39;width&#39;, width)
+    .attr(&#39;height&#39;, height);
+
+  chart
+    .selectAll(&#39;div&#39;)
+    .data(data)
+    .enter()
+    .append(&#39;div&#39;)
+    .style(&#39;height&#39;, height / data.length + &#39;px&#39;)
+    .style(&#39;width&#39;, d =&gt; (d * width) / maxValue + &#39;px&#39;)
+    .style(&#39;background-color&#39;, &#39;blue&#39;);
+}
+</code></pre>
+<ul>
+<li>Run <code>yarn dev</code>, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.</li>
+</ul>
+<p>With relatively little code, you&#39;ve created a dynamic bar chart. Still, you&#39;ve only touched the surface of what&#39;s possible with D3. To learn more, check out the <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">D3 Gallery</a>.</p>
 
 
       </google-codelab-step>
       
       <google-codelab-step label="Theme your panel" duration="0">
-        <ul>
-<li>Add a <code>GrafanaTheme</code> field to the <code>PanelProps</code>.</li>
+        <p>To provide your users with a consistent look-and-feel, you&#39;ll want to use the same colors as the built-in panels.</p>
+<p>In this step, you&#39;ll learn how to use the colors from the current theme.</p>
+<ul>
+<li>In <code>SimplePanel.tsx</code>, add a <code>GrafanaTheme</code> property to the <code>PanelProps</code>.</li>
 </ul>
-<pre><code>import { PanelProps, GrafanaTheme } from &#39;@grafana/data&#39;;
-</code></pre>
 <pre><code>interface Props extends PanelProps&lt;SimpleOptions&gt; {
   theme: GrafanaTheme;
 }
 </code></pre>
+<p><code>GrafanaTheme</code> is available from the <code>grafana/data</code> package:</p>
+<pre><code>import { PanelProps, GrafanaTheme } from &#39;@grafana/data&#39;;
+</code></pre>
+<p>The <code>theme</code> property is not set by default, so you need to use the <code>withTheme</code> to provide the current theme to the panel.</p>
 <ul>
 <li>Rename <code>SimplePanel</code> to <code>PartialSimplePanel</code>.</li>
 </ul>
 <pre><code>class PartialSimplePanel extends PureComponent&lt;Props&gt;
 </code></pre>
 <ul>
-<li>Import <code>withTheme</code>.</li>
+<li>Import <code>withTheme</code> from <code>grafana/ui</code>.</li>
 </ul>
 <pre><code>import { withTheme } from &#39;@grafana/ui&#39;;
 </code></pre>
+<ul>
+<li>Export the <code>SimplePanel</code>, now complete with a theme. <code>withTheme</code> assigns the current theme to the <code>theme</code> property.</li>
+</ul>
 <pre><code>export const SimplePanel = withTheme(PartialSimplePanel);
 </code></pre>
-<p><code>withTheme</code> assigns the current theme to the <code>theme</code> property.</p>
+<p>The theme property is now available from within the component.</p>
 <pre><code>const { width, height, theme } = this.props;
 </code></pre>
 <ul>

@@ -38,6 +38,9 @@ Duration: 1
 
 ## Data-driven transformations using D3.js
 
+[D3.js] is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
+
+###
 D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
 
 **SimplePanel.tsx**
@@ -46,7 +49,7 @@ D3.js is already bundled with Grafana, and you can access it by importing the `d
 import { select } from 'd3';
 ```
 
-- Update `SimplePanel`.
+- Create a function called `draw`, where we'll construct our chart, and call it in `componentDidMount`, and `componentDidUpdate`. By doing this, the `render` function returns a prebuilt chart to avoid rebuilding the chart on every call to `render`.
 
 ```tsx
 class SimplePanel extends PureComponent<Props> {
@@ -61,28 +64,13 @@ class SimplePanel extends PureComponent<Props> {
   }
 
   draw() {
-    const { width, height, theme } = this.props;
-
-    const data = [4, 8, 15, 16, 23, 42];
-
-    const maxValue = Math.max.apply(
-      Math,
-      data.map(o => o)
-    );
+    const { width, height } = this.props;
 
     const chart = select(this.containerElement)
       .html('')
       .attr('width', width)
-      .attr('height', height);
-
-    chart
-      .selectAll('div')
-      .data(data)
-      .enter()
-      .append('div')
-      .style('height', height / data.length + 'px')
-      .style('width', d => (d * width) / maxValue + 'px')
-      .style('background-color', 'blue');
+      .attr('height', height)
+      .text('Hello, world!');
   }
 
   render() {
@@ -91,13 +79,53 @@ class SimplePanel extends PureComponent<Props> {
 }
 ```
 
-## Theme your panel
+Notice that, in the `render` function, the `ref` attribute is used to replace the `div` with `containerElement`.
 
-- Add a `GrafanaTheme` field to the `PanelProps`.
+- Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+
+When you add the panel to your dashboard, it will have the text 'Hello, world!' written in it.
+
+### Build chart from data
+
+You've seen how to use D3.js to create a container element with some hard-coded text in it. Next, you'll build the graph from actual data.
+
+- Update the `draw` function with the following code:
 
 ```tsx
-import { PanelProps, GrafanaTheme } from '@grafana/data';
+draw() {
+  const { width, height } = this.props;
+
+  const data = [4, 8, 15, 16, 23, 42];
+
+  const maxValue = Math.max.apply(Math, data.map(o => o));
+
+  const chart = select(this.containerElement)
+    .html('')
+    .attr('width', width)
+    .attr('height', height);
+
+  chart
+    .selectAll('div')
+    .data(data)
+    .enter()
+    .append('div')
+    .style('height', height / data.length + 'px')
+    .style('width', d => (d * width) / maxValue + 'px')
+    .style('background-color', 'blue');
+}
 ```
+
+- Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
+
+With relatively little code, you've created a dynamic bar chart. Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
+
+## Theme your panel
+
+To provide your users with a consistent look-and-feel, you'll want to use the same colors as the built-in panels.
+
+In this step, you'll learn how to use the colors from the current theme.
+
+- In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
 
 ```tsx
 interface Props extends PanelProps<SimpleOptions> {
@@ -105,23 +133,33 @@ interface Props extends PanelProps<SimpleOptions> {
 }
 ```
 
+`GrafanaTheme` is available from the `grafana/data` package:
+
+```tsx
+import { PanelProps, GrafanaTheme } from '@grafana/data';
+```
+
+The `theme` property is not set by default, so you need to use the `withTheme` to provide the current theme to the panel.
+
 - Rename `SimplePanel` to `PartialSimplePanel`.
 
 ```tsx
 class PartialSimplePanel extends PureComponent<Props>
 ```
 
-- Import `withTheme`.
+- Import `withTheme` from `grafana/ui`.
 
 ```tsx
 import { withTheme } from '@grafana/ui';
 ```
 
+- Export the `SimplePanel`, now complete with a theme. `withTheme` assigns the current theme to the `theme` property.
+
 ```tsx
 export const SimplePanel = withTheme(PartialSimplePanel);
 ```
 
-`withTheme` assigns the current theme to the `theme` property.
+The theme property is now available from within the component.
 
 ```tsx
 const { width, height, theme } = this.props;
