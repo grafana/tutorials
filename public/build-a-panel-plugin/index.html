@@ -66,39 +66,32 @@
       </google-codelab-step>
       
       <google-codelab-step label="Create a new plugin" duration="1">
-        <p>Every plugin you create requires at least two files, <code>plugin.json</code>, and <code>module.ts</code>.</p>
-<ul>
-<li><code>plugin.json</code> contains information about your plugin, and tells Grafana about what capabilities the plugin needs.</li>
-<li><code>module.ts</code> is the entry point for your plugin, and where you should export the implementation for your plugin. Your <code>module.ts</code> will look differently depending on the type of plugin you&#39;re building.</li>
-</ul>
-<h2 is-upgraded>The plugin directory</h2>
-<p>To discover plugins, Grafana scans a plugin directory which location depends on the system your running.</p>
-<p>On Unix systems, the plugin directory defaults to <code>/var/lib/grafana/plugins</code>. If you&#39;re building from source, Grafana instead scans the <code>data/plugins</code> directory in the repository root directory.</p>
-<p>For Grafana to discover your plugin, either create your plugin in the default plugin directory, or reconfigure the location of the plugin directory in the Grafana configuration file.</p>
+        <h2 is-upgraded>The plugin directory</h2>
+<p>To discover plugins, Grafana scans a <em>plugin directory</em> which location depends on the system your running.</p>
+<ol type="1">
+<li>Create a directory called <code>grafana-plugins</code> in your preferred workspace.</li>
+<li>Find the <code>plugins</code> property in the Grafana configuration file, and set it to the path of your <code>grafana-plugins</code> directory.</li>
+</ol>
 <h2 is-upgraded>grafana-toolkit</h2>
 <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll learn how to use <em>grafana-toolkit</em>.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.</p>
-<ul>
-<li>In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:<pre><code>npx grafana-toolkit plugin:create my-plugin
+<p>1. In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:</p>
+<pre><code>npx grafana-toolkit plugin:create my-plugin
 </code></pre>
-</li>
-<li>Change directory.<pre><code>cd my-plugin
+<p>2. Change directory.</p>
+<pre><code>cd my-plugin
 </code></pre>
-</li>
-<li>Download necessary dependencies:<pre><code>yarn install
+<p>3. Download necessary dependencies:</p>
+<pre><code>yarn install
 </code></pre>
-</li>
-<li>Build the plugin:<pre><code>yarn dev
+<p>4. Build the plugin:</p>
+<pre><code>yarn dev
 </code></pre>
-</li>
-<li>Restart the Grafana server for Grafana to discover your plugin.</li>
-</ul>
+<p>5. Restart the Grafana server for Grafana to discover your plugin.</p>
+<p>6. Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>, and make sure that your plugin is there.</p>
 <p>By default, Grafana logs whenever it discovers a plugin:</p>
-<pre><code>INFO[01-01|12:00:00] Registering plugin            logger=plugins name=my-plugin
+<pre><code>INFO[01-01|12:00:00] Registering plugin       logger=plugins name=my-plugin
 </code></pre>
-<ul>
-<li>Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>, and make sure that your plugin is there.</li>
-</ul>
 
 
 

@@ -14,8 +14,6 @@ Duration: 1
 
 Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. There's a good chance you already can visualize metrics from the systems you've already set up. In some cases though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards.
 
-This tutorial gives you a hands-on walkthrough of how to add support for a new data source.
-
 ### What you'll build
 
 In this tutorial, you'll build a simple but complete data source plugin.
@@ -43,7 +41,7 @@ Duration: 2
 
 To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a _config editor_ users can configure your data source plugin to fit their needs.
 
-- In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
+1\. In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
 
 **type.ts**
 
@@ -53,7 +51,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 }
 ```
 
-- In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for the `path` option:
+2\. In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for the `path` option:
 
 **ConfigEditor.tsx**
 
@@ -73,7 +71,7 @@ return (
 );
 ```
 
-- Change the `onChange` function to update the path option with the value from the `FormField`.
+3\. Change the `onChange` function to update the path option with the value from the `FormField`.
 
 ```ts
 onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -89,9 +87,13 @@ onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
 Positive
 : Did you notice the `jsonData` object? This object is automatically persisted for you, and will be available to your data source implementation as well.
 
-- Build your assets with `yarn dev`.
+4\. Build your assets:
 
-- Navigate to Configuration -> Data Sources, and select your data source. The settings should now allow you to configure the path.
+```
+yarn dev
+```
+
+5\. In Grafana, navigate to **Configuration** -> **Data Sources**, and select your data source. The settings should now allow you to configure the path.
 
 ## Add a query editor
 
@@ -99,7 +101,7 @@ Duration: 3
 
 Most data sources offer a way to query specific data. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called _PromQL_. Let's add query support for our plugin, using a custom _query editor_.
 
-- In `types.ts`, update `MyQuery` to contain a optional field named `values`:
+1\. In `types.ts`, update `MyQuery` to contain a optional field named `values`:
 
 **types.ts**
 
@@ -115,7 +117,7 @@ export const defaultQuery: Partial<MyQuery> = {
 };
 ```
 
-- In `QueryEditor.tsx`, update the `render` function to return a `FormField` for the query string:
+2\. In `QueryEditor.tsx`, update the `render` function to return a `FormField` for the query string:
 
 **QueryEditor.tsx**
 
@@ -132,7 +134,7 @@ render() {
 }
 ```
 
-- Update `DataSource.ts` to return a data frame with the values from the query editor.
+3\. Update `DataSource.ts` to return a data frame with the values from the query editor.
 
 **DataSource.ts**
 
@@ -165,24 +167,14 @@ query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
 }
 ```
 
-- Build your assets with `yarn dev`.
+4\. Build your assets:
 
-- Create a new dashboard.
-
-- Add a graph panel.
-
-- In the query editor, try adding a sequence of numbers, separated by commas.
-
-## Error handling
-
-Duration: 4
-
-Use `throw` to display a friendly error message in the top-left corner of the panel whenever a data source error occurred:
-
-**DataSource.ts**
-
-```ts
-async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
-  throw { message: 'Malformed query' };
-}
 ```
+yarn dev
+```
+
+5\. In Grafana, create a new dashboard.
+
+6\. Add a graph panel.
+
+7\. In the query editor, try adding a sequence of numbers, separated by commas.
