@@ -1,15 +1,15 @@
 ### The plugin directory
 
-To discover plugins, Grafana scans a _plugin directory_ which location depends on the system your running.
+To discover plugins, Grafana scans a _plugin directory_, the location of which depends on your operating system.
 
 1. Create a directory called `grafana-plugins` in your preferred workspace.
-1. Find the `plugins` property in the Grafana configuration file, and set it to the path of your `grafana-plugins` directory.
+1. Find the `plugins` property in the Grafana configuration file, and set it to the path of your `grafana-plugins` directory. Refer to the (Grafana configuration documentation)[https://grafana.com/docs/grafana/latest/installation/configuration/#plugins] for more information.
 
 ### grafana-toolkit
 
-Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you'll learn how to use _grafana-toolkit_.
+Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you'll use _grafana-toolkit_.
 
-[grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.
+[grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that aims to simplify Grafana plugin development so that you can focus on code. The toolkit takes care of building and testing for you.
 
 1\. In the plugin directory, create a panel plugin from template using the `plugin:create` command:
 
