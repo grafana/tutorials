@@ -1,4 +1,4 @@
-summary: See how to add support for your own data sources.
+summary: Create a plugin to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: Plugins
 tags: beginner
@@ -12,7 +12,7 @@ Feedback Link: https://github.com/grafana/grafana
 
 Duration: 1
 
-Grafana has support for a wide range of data sources, like Prometheus, MySQL, or even Datadog. There's a good chance you already can visualize metrics from the systems you've already set up. In some cases though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards.
+Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There's a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.
 
 ### What you'll build
 
@@ -39,7 +39,7 @@ Duration: 1
 
 Duration: 2
 
-To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a _config editor_ users can configure your data source plugin to fit their needs.
+To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a _config editor_, users can configure your data source plugin to fit their needs.
 
 1\. In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
 
@@ -99,7 +99,7 @@ yarn dev
 
 Duration: 3
 
-Most data sources offer a way to query specific data. For MySQL and PostgreSQL this would be SQL queries, while Prometheus has its own query language, called _PromQL_. Let's add query support for our plugin, using a custom _query editor_.
+Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL queries, while Prometheus has its own query language, called _PromQL_. Let's add query support for our plugin, using a custom _query editor_.
 
 1\. In `types.ts`, update `MyQuery` to contain a optional field named `values`:
 
