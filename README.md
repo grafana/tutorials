@@ -11,13 +11,13 @@ Grafana Tutorials are step-by-step guides that help you make the most of Grafana
 
 ![Screenshot](screenshot.png)
 
+**Important:** This project is in early development, and is not fit for production use. The tutorials are based on experimental APIs, which are subject to change.
+
 ## Requirements
 
 Tutorials are built using [claat](https://github.com/googlecodelabs/tools/tree/master/claat):
 
-```
-go get github.com/googlecodelabs/tools/claat
-```
+**Important:** This repository currently needs a [fork](https://github.com/marcusolsson/tools/tree/markdown-import), that support fragment imports for Markdown. For more information, refer to the [pull request](https://github.com/googlecodelabs/tools/pull/375).
 
 ## Usage
 

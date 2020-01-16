@@ -65,13 +65,7 @@ google-codelab #controls #previous-step {
   color: #eaeaea;
   font-weight: 400;
 }
-google-codelab #controls #next-step {
-  border-radius: 2px;
-  font-weight: 400;
-  border: 1px solid #f46800;
-  background: transparent;
-  color: #f46800;
-}
+google-codelab #controls #next-step,
 google-codelab #controls #done {
   color: #fefefe;
   background-color: #f46800;
