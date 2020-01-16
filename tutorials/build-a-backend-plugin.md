@@ -4,7 +4,7 @@ categories: Plugins
 tags: intermediate
 status: Published
 authors: Grafana Labs
-Feedback Link: https://github.com/grafana/grafana
+Feedback Link: https://github.com/grafana/tutorials/issues/new
 
 # Build a backend plugin
 

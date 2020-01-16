@@ -42,7 +42,7 @@
       id="build-a-panel-plugin"
       title="Build a panel plugin"
       environment="web"
-      feedback-link="https://github.com/grafana/grafana"
+      feedback-link="https://github.com/grafana/tutorials/issues/new"
     >
       
       <google-codelab-step label="Introduction" duration="1">
@@ -67,14 +67,14 @@
       
       <google-codelab-step label="Create a new plugin" duration="1">
         <h2 is-upgraded>The plugin directory</h2>
-<p>To discover plugins, Grafana scans a <em>plugin directory</em> which location depends on the system your running.</p>
+<p>To discover plugins, Grafana scans a <em>plugin directory</em>, the location of which depends on your operating system.</p>
 <ol type="1">
 <li>Create a directory called <code>grafana-plugins</code> in your preferred workspace.</li>
-<li>Find the <code>plugins</code> property in the Grafana configuration file, and set it to the path of your <code>grafana-plugins</code> directory.</li>
+<li>Find the <code>plugins</code> property in the Grafana configuration file, and set it to the path of your <code>grafana-plugins</code> directory. Refer to the (Grafana configuration documentation)[https://grafana.com/docs/grafana/latest/installation/configuration/#plugins] for more information.</li>
 </ol>
 <h2 is-upgraded>grafana-toolkit</h2>
-<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll learn how to use <em>grafana-toolkit</em>.</p>
-<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development, so that you can focus on code, and the toolkit takes care of building and testing it for you.</p>
+<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll use <em>grafana-toolkit</em>.</p>
+<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development so that you can focus on code. The toolkit takes care of building and testing for you.</p>
 <p>1. In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:</p>
 <pre><code>npx grafana-toolkit plugin:create my-plugin
 </code></pre>

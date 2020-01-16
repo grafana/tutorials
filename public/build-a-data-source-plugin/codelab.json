@@ -3,12 +3,12 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-20T16:52:26+01:00",
+  "updated": "2020-01-16T18:26:00+01:00",
   "id": "build-a-data-source-plugin",
   "duration": 7,
   "title": "Build a data source plugin",
   "authors": "Grafana Labs",
-  "summary": "See how to add support for your own data sources.",
+  "summary": "Create a plugin to add support for your own data sources.",
   "source": "build-a-data-source-plugin.md",
   "theme": "",
   "status": [
@@ -20,6 +20,6 @@
   "tags": [
     "beginner"
   ],
-  "feedback": "https://github.com/grafana/grafana",
+  "feedback": "https://github.com/grafana/tutorials/issues/new",
   "url": "build-a-data-source-plugin"
 }

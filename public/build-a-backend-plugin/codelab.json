@@ -3,7 +3,7 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2019-12-20T16:39:56+01:00",
+  "updated": "2020-01-16T18:26:07+01:00",
   "id": "build-a-backend-plugin",
   "duration": 1,
   "title": "Build a backend plugin",
@@ -20,6 +20,6 @@
   "tags": [
     "intermediate"
   ],
-  "feedback": "https://github.com/grafana/grafana",
+  "feedback": "https://github.com/grafana/tutorials/issues/new",
   "url": "build-a-backend-plugin"
 }
