@@ -1,0 +1,23 @@
+name: Build and Publish to Google Cloud Storage Bucket
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: "270.0.0"
+          service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+
+      - run: |
+          gsutil -m -h "Cache-Control:no-cache,max-age=0" cp -r public/* ${{ secrets.GCS_BUCKET }}
