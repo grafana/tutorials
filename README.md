@@ -2,12 +2,7 @@
 
 [![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
 
-| Environment | URL                                                                 |
-| ----------- | ------------------------------------------------------------------- |
-| Production  | https://storage.googleapis.com/grafana-tutorials-prod/index.html    |
-| Staging     | https://storage.googleapis.com/grafana-tutorials-staging/index.html |
-
-Grafana Tutorials are step-by-step guides that help you make the most of Grafana.
+[Grafana Tutorials](https://storage.googleapis.com/grafana-tutorials/index.html) are step-by-step guides that help you make the most of Grafana.
 
 ![Screenshot](screenshot.png)
 
