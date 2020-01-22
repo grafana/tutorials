@@ -3,7 +3,7 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2020-01-16T18:26:07+01:00",
+  "updated": "2020-01-16T18:28:04+01:00",
   "id": "build-a-backend-plugin",
   "duration": 1,
   "title": "Build a backend plugin",

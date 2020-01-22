@@ -12,7 +12,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 
 Duration: 1
 
-Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel from scratch.
+Panels are the building blocks of Grafana. They allow you to visualize data in different ways. While Grafana has several types of panels already built-in, you can also build your own panel, to add support other visualizations.
 
 For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel).
 
@@ -27,7 +27,7 @@ In this tutorial, you'll build a simple, but complete panel that will visualize 
 
 ### What you'll need
 
-- Grafana version 6.4+
+- Grafana version 7.0+
 - NodeJS
 - yarn
 
@@ -39,25 +39,22 @@ Duration: 1
 
 ## Render the panel
 
-Since Grafana 6.x, panels are [React components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
+Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
 
-Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). Even though we still support plugins written in AngularJS, we recommend that you write new plugins using React.
+Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). Even though we still support plugins written in AngularJS, we highly recommend that you write new plugins using ReactJS.
 
 In this step, you'll customize how your panel looks, by editing its `render` function.
 
 ### Display the health of a service
 
-Service health is one of the first things you start monitoring. Let's change the `render` function to return a `div` with a background color.
-You'll use the background color of the panel to tell when the service is healthy (green), or when it's unhealthy (red).
+For many applications, knowing whether a service is healthy is one of the first things you'd want to monitor. Let's change the `render` function to return a `div` with a background color. You'll use the background color of the panel to tell when the service is healthy (green), or when it's unhealthy (red).
 
-- Change the `render` function of the SimplePanel component to return a `div` with a background color.
+- Change the `render` function of the `SimplePanel` component to return a `div` with a background color.
 
 **SimplePanel.tsx**
-
 ```tsx
 render() {
   const { width, height } = this.props;
-
   return (
     <div
       style={{
@@ -72,9 +69,20 @@ render() {
 
 `this.props` contains current dimensions of the panel, which you're using here to make the `div` fill the whole panel.
 
-- Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+- Run `yarn dev` to build the plugin with the new changes.
 
-In the next step, you'll add a switch to toggle the color of the panel using _options_.
+### Try out the new changes
+
+To be able to see the changes you made, the next step is to add your panel to a dashboard.
+
+- Open Grafana in your browser.
+- Create a new dashboard, and select **Choose Visualization** in the **New Panel** view.
+- Select your panel from the list of visualizations.
+- Congrats! The dashboard displays a red panel.
+
+Before continuing to the next step, try changing the background to a color of your choosing. Run `yarn dev` again, and reload the browser to reflect the change.
+
+Next, you'll add a switch to toggle the color of the panel using _options_.
 
 ## Configure your panel
 
@@ -107,7 +115,24 @@ The `onChange` attribute on the `FormField` lets you update the panel properties
 
 ### Add more options
 
-To be able to test the panel, you'll be adding a `Switch` to simulate the health of the service.
+To be able to test the panel, you'll be adding a option to simulate the health of the service.
+
+- Change the `SimpleOptions` interface to include a boolean property called `healthy`.
+- Update the `defaults` to make the service unhealthy by default.
+
+**types.ts**
+
+```
+export interface SimpleOptions {
+  healthy: boolean;
+}
+
+export const defaults: SimpleOptions = {
+  healthy: false,
+};
+```
+
+The `grafana/ui` package contains a collection of useful UI components. The `Switch` component lets you toggle the option between true and false.
 
 - Import the `Switch` component from the `grafana/ui` package.
 
@@ -145,6 +170,8 @@ onHealthyChanged = ({ target }: any) => {
 
 - Update `SimplePanel` return a different color based on the current health.
 
+**SimplePanel.tsx**
+
 ```tsx
 render() {
   const { options, width, height } = this.props;
@@ -172,7 +199,7 @@ render() {
 
 ## Access time series data
 
-Most panels visualize dynamic data from a Grafana data source. In this step, you'll see how to access time series data from a data source.
+Most panels visualize dynamic data from a Grafana data source. In this step, you'll learn how to access time series data from a data source.
 
 You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
 
@@ -184,11 +211,11 @@ Next, you'll make the background color of the panel change based on the results 
 
 ### Data frames
 
-Data sources in Grafana return the results of a query in a format called _data frames_. A data frame is a _columnar data structure_, which means values are organized by fields, rather then by records.
+Data sources in Grafana return the results of a query in a format called _data frames_. A data frame is a _columnar data structure_, which means values are organized by fields, rather than by records.
 
-Columnar data is commonly used for analytics, as it can greatly reduce the amount data read.
+Columnar data is a common occurrence in analytics, as it can greatly reduce the amount data read.
 
-Here's an example of what a query result can look like.
+Here's an example of what a query result that contains a data frame can look like:
 
 ```json
 {
@@ -235,3 +262,7 @@ if (current > 0) {
 ```
 
 - Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+
+## Congratulations
+
+Congratulations, you made it to the end of this tutorial!

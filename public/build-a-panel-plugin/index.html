@@ -46,7 +46,7 @@
     >
       
       <google-codelab-step label="Introduction" duration="1">
-        <p>Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel from scratch.</p>
+        <p>Panels are the building blocks of Grafana. They allow you to visualize data in different ways. While Grafana has several types of panels already built-in, you can also build your own panel, to add support other visualizations.</p>
 <p>For more information about panels, refer to the documentation on <a href="https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel" target="_blank">Panels</a>.</p>
 <h2 is-upgraded>What you&#39;ll build</h2>
 <p>In this tutorial, you&#39;ll build a simple, but complete panel that will visualize health of a service through the use of color.</p>
@@ -57,7 +57,7 @@
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
-<li>Grafana version 6.4+</li>
+<li>Grafana version 7.0+</li>
 <li>NodeJS</li>
 <li>yarn</li>
 </ul>
@@ -68,13 +68,15 @@
       <google-codelab-step label="Create a new plugin" duration="1">
         <h2 is-upgraded>The plugin directory</h2>
 <p>To discover plugins, Grafana scans a <em>plugin directory</em>, the location of which depends on your operating system.</p>
-<ol type="1">
-<li>Create a directory called <code>grafana-plugins</code> in your preferred workspace.</li>
-<li>Find the <code>plugins</code> property in the Grafana configuration file, and set it to the path of your <code>grafana-plugins</code> directory. Refer to the (Grafana configuration documentation)[https://grafana.com/docs/grafana/latest/installation/configuration/#plugins] for more information.</li>
-</ol>
+<p>1. Create a directory called <code>grafana-plugins</code> in your preferred workspace.</p>
+<p>2. Find the <code>plugins</code> property in the Grafana configuration file and set the <code>plugins</code> property to the path of your <code>grafana-plugins</code> directory. Refer to the <a href="https://grafana.com/docs/grafana/latest/installation/configuration/#plugins" target="_blank">Grafana configuration documentation</a> for more information.</p>
+<pre><code>[paths]
+plugins = &#34;/path/to/grafana-plugins&#34;
+</code></pre>
+<p>Restart Grafana if it&#39;s already running, to load the new configuration.</p>
 <h2 is-upgraded>grafana-toolkit</h2>
-<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll use <em>grafana-toolkit</em>.</p>
-<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that aims to simplify Grafana plugin development so that you can focus on code. The toolkit takes care of building and testing for you.</p>
+<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll be using <em>grafana-toolkit</em>.</p>
+<p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that simplifies Grafana plugin development, so that you can focus on code. The toolkit takes care of building and testing for you.</p>
 <p>1. In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:</p>
 <pre><code>npx grafana-toolkit plugin:create my-plugin
 </code></pre>
@@ -88,7 +90,7 @@
 <pre><code>yarn dev
 </code></pre>
 <p>5. Restart the Grafana server for Grafana to discover your plugin.</p>
-<p>6. Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>, and make sure that your plugin is there.</p>
+<p>6. Open Grafana and go to <strong>Configuration</strong> -&gt; <strong>Plugins</strong>. Make sure that your plugin is there.</p>
 <p>By default, Grafana logs whenever it discovers a plugin:</p>
 <pre><code>INFO[01-01|12:00:00] Registering plugin       logger=plugins name=my-plugin
 </code></pre>
@@ -98,18 +100,17 @@
       </google-codelab-step>
       
       <google-codelab-step label="Render the panel" duration="0">
-        <p>Since Grafana 6.x, panels are <a href="https://reactjs.org/docs/components-and-props.html" target="_blank">React components</a>. The simplest panel consists of a single function, the <code>render</code> function, which returns the content of the panel.</p>
-<p>Prior to Grafana 6.0, plugins were written in <a href="https://angular.io/" target="_blank">AngularJS</a>. Even though we still support plugins written in AngularJS, we recommend that you write new plugins using React.</p>
+        <p>Since Grafana 6.x, panels are <a href="https://reactjs.org/docs/components-and-props.html" target="_blank">ReactJS components</a>. The simplest panel consists of a single function, the <code>render</code> function, which returns the content of the panel.</p>
+<p>Prior to Grafana 6.0, plugins were written in <a href="https://angular.io/" target="_blank">AngularJS</a>. Even though we still support plugins written in AngularJS, we highly recommend that you write new plugins using ReactJS.</p>
 <p>In this step, you&#39;ll customize how your panel looks, by editing its <code>render</code> function.</p>
 <h2 is-upgraded>Display the health of a service</h2>
-<p>Service health is one of the first things you start monitoring. Let&#39;s change the <code>render</code> function to return a <code>div</code> with a background color. You&#39;ll use the background color of the panel to tell when the service is healthy (green), or when it&#39;s unhealthy (red).</p>
+<p>For many applications, knowing whether a service is healthy is one of the first things you&#39;d want to monitor. Let&#39;s change the <code>render</code> function to return a <code>div</code> with a background color. You&#39;ll use the background color of the panel to tell when the service is healthy (green), or when it&#39;s unhealthy (red).</p>
 <ul>
-<li>Change the <code>render</code> function of the SimplePanel component to return a <code>div</code> with a background color.</li>
+<li>Change the <code>render</code> function of the <code>SimplePanel</code> component to return a <code>div</code> with a background color.</li>
 </ul>
 <p><strong>SimplePanel.tsx</strong></p>
 <pre><code>render() {
   const { width, height } = this.props;
-
   return (
     &lt;div
       style=&#123;&#123;
@@ -123,9 +124,18 @@
 </code></pre>
 <p><code>this.props</code> contains current dimensions of the panel, which you&#39;re using here to make the <code>div</code> fill the whole panel.</p>
 <ul>
-<li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
+<li>Run <code>yarn dev</code> to build the plugin with the new changes.</li>
 </ul>
-<p>In the next step, you&#39;ll add a switch to toggle the color of the panel using <em>options</em>.</p>
+<h2 is-upgraded>Try out the new changes</h2>
+<p>To be able to see the changes you made, the next step is to add your panel to a dashboard.</p>
+<ul>
+<li>Open Grafana in your browser.</li>
+<li>Create a new dashboard, and select <strong>Choose Visualization</strong> in the <strong>New Panel</strong> view.</li>
+<li>Select your panel from the list of visualizations.</li>
+<li>Congrats! The dashboard displays a red panel.</li>
+</ul>
+<p>Before continuing to the next step, try changing the background to a color of your choosing. Run <code>yarn dev</code> again, and reload the browser to reflect the change.</p>
+<p>Next, you&#39;ll add a switch to toggle the color of the panel using <em>options</em>.</p>
 
 
       </google-codelab-step>
@@ -153,7 +163,21 @@
 </code></pre>
 <p>The <code>onChange</code> attribute on the <code>FormField</code> lets you update the panel properties. Here, <code>onTextChanged</code> is a function that updates the panel properties whenever the value of the <code>FormField</code> changes.</p>
 <h2 is-upgraded>Add more options</h2>
-<p>To be able to test the panel, you&#39;ll be adding a <code>Switch</code> to simulate the health of the service.</p>
+<p>To be able to test the panel, you&#39;ll be adding a option to simulate the health of the service.</p>
+<ul>
+<li>Change the <code>SimpleOptions</code> interface to include a boolean property called <code>healthy</code>.</li>
+<li>Update the <code>defaults</code> to make the service unhealthy by default.</li>
+</ul>
+<p><strong>types.ts</strong></p>
+<pre><code>export interface SimpleOptions {
+  healthy: boolean;
+}
+
+export const defaults: SimpleOptions = {
+  healthy: false,
+};
+</code></pre>
+<p>The <code>grafana/ui</code> package contains a collection of useful UI components. The <code>Switch</code> component lets you toggle the option between true and false.</p>
 <ul>
 <li>Import the <code>Switch</code> component from the <code>grafana/ui</code> package.</li>
 </ul>
@@ -187,6 +211,7 @@
 <ul>
 <li>Update <code>SimplePanel</code> return a different color based on the current health.</li>
 </ul>
+<p><strong>SimplePanel.tsx</strong></p>
 <pre><code>render() {
   const { options, width, height } = this.props;
 
@@ -216,15 +241,15 @@
       </google-codelab-step>
       
       <google-codelab-step label="Access time series data" duration="0">
-        <p>Most panels visualize dynamic data from a Grafana data source. In this step, you&#39;ll see how to access time series data from a data source.</p>
+        <p>Most panels visualize dynamic data from a Grafana data source. In this step, you&#39;ll learn how to access time series data from a data source.</p>
 <p>You&#39;ve already seen that the <code>this.props</code> object provides useful data to your panel. It also contains the results from a data source query, which you can access through the <code>data</code> property:</p>
 <pre><code>const { data } = this.props;
 </code></pre>
 <p>Next, you&#39;ll make the background color of the panel change based on the results from a data source query.</p>
 <h2 is-upgraded>Data frames</h2>
-<p>Data sources in Grafana return the results of a query in a format called <em>data frames</em>. A data frame is a <em>columnar data structure</em>, which means values are organized by fields, rather then by records.</p>
-<p>Columnar data is commonly used for analytics, as it can greatly reduce the amount data read.</p>
-<p>Here&#39;s an example of what a query result can look like.</p>
+<p>Data sources in Grafana return the results of a query in a format called <em>data frames</em>. A data frame is a <em>columnar data structure</em>, which means values are organized by fields, rather than by records.</p>
+<p>Columnar data is a common occurrence in analytics, as it can greatly reduce the amount data read.</p>
+<p>Here&#39;s an example of what a query result that contains a data frame can look like:</p>
 <pre><code>{
   series: [
     {
@@ -266,6 +291,12 @@ if (current &gt; 0) {
 <ul>
 <li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
 </ul>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Congratulations" duration="0">
+        <p>Congratulations, you made it to the end of this tutorial!</p>
 
 
       </google-codelab-step>
