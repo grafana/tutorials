@@ -22,14 +22,19 @@ In this tutorial, you'll build a simple, but complete panel that will visualize 
 
 ### What you'll learn
 
-- How to scaffold a panel plugin
-- How to customize the panel through a panel editor
+- How to create a plugin
 
 ### What you'll need
 
 - Grafana version 7.0+
 - NodeJS
 - yarn
+
+## Set up your environment
+
+Duration: 1
+
+[[**import** [set-up-environment](shared/set-up-environment.md)]]
 
 ## Create a new plugin
 

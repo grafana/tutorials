@@ -52,8 +52,7 @@
 <p>In this tutorial, you&#39;ll build a simple, but complete panel that will visualize health of a service through the use of color.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>How to scaffold a panel plugin</li>
-<li>How to customize the panel through a panel editor</li>
+<li>How to create a plugin</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
@@ -65,8 +64,8 @@
 
       </google-codelab-step>
       
-      <google-codelab-step label="Create a new plugin" duration="1">
-        <h2 is-upgraded>The plugin directory</h2>
+      <google-codelab-step label="Set up your environment" duration="1">
+        <p>Before you can get started building plugins, you need to set up your environment for plugin development.</p>
 <p>To discover plugins, Grafana scans a <em>plugin directory</em>, the location of which depends on your operating system.</p>
 <p>1. Create a directory called <code>grafana-plugins</code> in your preferred workspace.</p>
 <p>2. Find the <code>plugins</code> property in the Grafana configuration file and set the <code>plugins</code> property to the path of your <code>grafana-plugins</code> directory. Refer to the <a href="https://grafana.com/docs/grafana/latest/installation/configuration/#plugins" target="_blank">Grafana configuration documentation</a> for more information.</p>
@@ -74,8 +73,20 @@
 plugins = &#34;/path/to/grafana-plugins&#34;
 </code></pre>
 <p>Restart Grafana if it&#39;s already running, to load the new configuration.</p>
-<h2 is-upgraded>grafana-toolkit</h2>
-<p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll be using <em>grafana-toolkit</em>.</p>
+<h2 is-upgraded>Alternative method: Docker</h2>
+<p>If you don&#39;t want to install Grafana on your local machine, you can use <a href="https://www.docker.com" target="_blank">Docker</a>. To set up Grafana for plugin development using Docker, run the following command:</p>
+<pre><code>docker run -d -p 3000:3000 -v &#34;$(pwd)&#34;/grafana-plugins:/var/lib/grafana/plugins --name=grafana grafana/grafana
+</code></pre>
+<p>Since Grafana only loads plugins on start-up, you need to restart the container whenever you add or remove a plugin.</p>
+<pre><code>docker restart grafana
+</code></pre>
+
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Create a new plugin" duration="1">
+        <p>Tooling for modern web development can be tricky to wrap your head around. While you certainly can write you own webpack configuration, for this guide, you&#39;ll be using <em>grafana-toolkit</em>.</p>
 <p><a href="https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit" target="_blank">grafana-toolkit</a> is a CLI application that simplifies Grafana plugin development, so that you can focus on code. The toolkit takes care of building and testing for you.</p>
 <p>1. In the plugin directory, create a panel plugin from template using the <code>plugin:create</code> command:</p>
 <pre><code>npx grafana-toolkit plugin:create my-plugin
