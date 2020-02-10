@@ -3,7 +3,7 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2020-02-10T14:43:57+01:00",
+  "updated": "2020-02-10T16:31:57+01:00",
   "id": "build-a-panel-plugin",
   "duration": 3,
   "title": "Build a panel plugin",
