@@ -14,20 +14,23 @@ Duration: 1
 
 Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There's a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.
 
-### What you'll build
-
-In this tutorial, you'll build a simple but complete data source plugin.
-
 ### What you'll learn
 
-- How to configure a data source
-- How to construct data source queries
+- How to build a data source
+- How to construct queries using the query editor
+- How to configure your data source using the config editor
 
 ### What you'll need
 
-- Grafana version 6.4+
+- Grafana version 7.0+
 - NodeJS
 - yarn
+
+## Set up your environment
+
+Duration: 1
+
+[[**import** [set-up-environment](shared/set-up-environment.md)]]
 
 ## Create a new plugin
 
@@ -35,146 +38,121 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## Add a config editor
+## Your first data source
 
 Duration: 2
 
-To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a _config editor_, users can configure your data source plugin to fit their needs.
+A data source in Grafana must extend the `DataSourceApi` interface, which requires you to defines two methods: `query` and `testDatasource`.
 
-1\. In `types.ts`, update `MyDataSourceOptions` to contain a optional field named `path`:
+### Query data
 
-**type.ts**
+The `query` method accepts a query from the user, and returns the data in a format that Grafana recognizes. This is where most of the work happens.
 
-```ts
-export interface MyDataSourceOptions extends DataSourceJsonData {
-  path?: string;
-}
+```
+async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse>
 ```
 
-2\. In `ConfigEditor.tsx`, update the `render` function to return a `FormField` for the `path` option:
+The `DataQueryRequest` object contains the queries, or _targets_, that the user made, along with context information, like the current time interval. Use this information to query an external database.
 
-**ConfigEditor.tsx**
-
-```ts
-return (
-  <div className="gf-form-group">
-    <div className="gf-form">
-      <FormField
-        label="Path"
-        labelWidth={6}
-        onChange={this.onPathChange}
-        value={jsonData.path || ""}
-        placeholder="sample.csv"
-      />
-    </div>
-  </div>
-);
-```
-
-3\. Change the `onChange` function to update the path option with the value from the `FormField`.
-
-```ts
-onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
-  const { onOptionsChange, options } = this.props;
-  const jsonData = {
-    ...options.jsonData,
-    path: event.target.value
-  };
-  onOptionsChange({ ...options, jsonData });
-};
-```
+After you receive the results from your database query, you need to return it as a _data frame_—the data format that Grafana uses internally.
 
 Positive
-: Did you notice the `jsonData` object? This object is automatically persisted for you, and will be available to your data source implementation as well.
+: The term _target_ originates from Graphite, and the earlier days of Grafana when Graphite was the only supported data source. As Grafana gained support for more data sources, the term "target" became synonymous with any type of query.
 
-4\. Build your assets:
+### Test your data source
+
+`testDatasource` implements a health check for your data source. For example, Grafana calls this method whenever the user clicks the **Save & Test** button, after changing the connection settings.
 
 ```
-yarn dev
+async testDatasource()
 ```
 
-5\. In Grafana, navigate to **Configuration** -> **Data Sources**, and select your data source. The settings should now allow you to configure the path.
-
-## Add a query editor
+## Support custom queries
 
 Duration: 3
 
-Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL queries, while Prometheus has its own query language, called _PromQL_. Let's add query support for our plugin, using a custom _query editor_.
+Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called _PromQL_. No matter what query language your databases are using, Grafana lets you build support for it.
 
-1\. In `types.ts`, update `MyQuery` to contain a optional field named `values`:
+Add support for custom queries to your data source, by implementing a your own _query editor_, a React component that enables users to build their own queries, through a user-friendly graphical interface.
+
+A query editor can be as simple a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.
+
+The first step in designing your query editor is to define its _query model_. The query model defines the user input to your data source. The query model in the starter plugin you created, defines two values: the query text, and a constant.
 
 **types.ts**
 
 ```ts
 export interface MyQuery extends DataQuery {
-  values?: string;
+  queryText?: string;
+  constant: number;
 }
 ```
 
-```ts
-export const defaultQuery: Partial<MyQuery> = {
-  values: "value"
-};
-```
-
-2\. In `QueryEditor.tsx`, update the `render` function to return a `FormField` for the query string:
+Now that you've defined the query model you wish to support, the next step is to bind the model to a form. The `FormField` is a text field component from `grafana/ui` that lets you register a listener, which will be invoked whenever the form field value changes.
 
 **QueryEditor.tsx**
 
-```ts
-render() {
-  const query = defaults(this.props.query, defaultQuery);
-  const { values } = query;
+```tsx
+<FormField value={queryText || ''} onChange={this.onQueryTextChange} label="Query Text"></FormField>
+```
 
-  return (
-    <div className="gf-form">
-      <FormField label="Values" value={values || ''} onChange={this.onValuesChange} />
-    </div>
-  );
+The registered listener, `onQueryTextChange`, calls `onChange` to update the current query:
+
+```tsx
+onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, query } = this.props;
+    onChange({ ...query, queryText: event.target.value });
+  };
+```
+
+If you want the query to run automatically after updating the query, you can add a call to `onRunQuery`:
+
+```
+onRunQuery();
+```
+
+## Configure your data source
+
+Duration: 2
+
+To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A _config editor_ lets you users configure your data source plugin to fit their needs.
+
+The config editor looks similar to the query editor, in that it defines a model and binds it to a form.
+
+**types.ts**
+
+```tsx
+export interface MyDataSourceOptions extends DataSourceJsonData {
+  path?: string;
 }
 ```
 
-3\. Update `DataSource.ts` to return a data frame with the values from the query editor.
+Just like query editor, the form field in the config editor calls the registered listener whenever the value changes.
 
-**DataSource.ts**
+**ConfigEditor.tsx**
 
-```ts
-query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
-  const { range } = options;
-  const from = range.from.valueOf();
-  const to = range.to.valueOf();
-
-  const data = options.targets.map(target => {
-    const query = defaults(target, defaultQuery);
-
-    const values = query.values.split(',').map(value => parseFloat(value));
-
-    // Generate timestamps for every value.
-    const timestamps = values.map((value, index) => {
-      return from + (index / (values.length - 1)) * (to - from);
-    });
-
-    return new MutableDataFrame({
-      refId: query.refId,
-      fields: [
-        { name: 'Time', values: timestamps, type: FieldType.time },
-        { name: 'Value', values: values, type: FieldType.number },
-      ],
-    });
-  });
-
-  return Promise.resolve({ data });
-}
+```tsx
+<FormField
+  label="Path"
+  onChange={this.onPathChange}
+  value={jsonData.path || ''}
+  placeholder="json field returned to frontend"
+/>
 ```
 
-4\. Build your assets:
+To update the options for the data source, call the `onOptionsChange` method:
 
 ```
-yarn dev
+onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      path: event.target.value,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
 ```
 
-5\. In Grafana, create a new dashboard.
+## Congratulations
 
-6\. Add a graph panel.
-
-7\. In the query editor, try adding a sequence of numbers, separated by commas.
+Congratulations, you made it to the end of this tutorial!

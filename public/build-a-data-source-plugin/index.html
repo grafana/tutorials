@@ -47,19 +47,39 @@
       
       <google-codelab-step label="Introduction" duration="1">
         <p>Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There&#39;s a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you&#39;d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.</p>
-<h2 is-upgraded>What you&#39;ll build</h2>
-<p>In this tutorial, you&#39;ll build a simple but complete data source plugin.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>How to configure a data source</li>
-<li>How to construct data source queries</li>
+<li>How to build a data source</li>
+<li>How to construct queries using the query editor</li>
+<li>How to configure your data source using the config editor</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
-<li>Grafana version 6.4+</li>
+<li>Grafana version 7.0+</li>
 <li>NodeJS</li>
 <li>yarn</li>
 </ul>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Set up your environment" duration="1">
+        <p>Before you can get started building plugins, you need to set up your environment for plugin development.</p>
+<p>To discover plugins, Grafana scans a <em>plugin directory</em>, the location of which depends on your operating system.</p>
+<p>1. Create a directory called <code>grafana-plugins</code> in your preferred workspace.</p>
+<p>2. Find the <code>plugins</code> property in the Grafana configuration file and set the <code>plugins</code> property to the path of your <code>grafana-plugins</code> directory. Refer to the <a href="https://grafana.com/docs/grafana/latest/installation/configuration/#plugins" target="_blank">Grafana configuration documentation</a> for more information.</p>
+<pre><code>[paths]
+plugins = &#34;/path/to/grafana-plugins&#34;
+</code></pre>
+<p>Restart Grafana if it&#39;s already running, to load the new configuration.</p>
+<h2 is-upgraded>Alternative method: Docker</h2>
+<p>If you don&#39;t want to install Grafana on your local machine, you can use <a href="https://www.docker.com" target="_blank">Docker</a>. To set up Grafana for plugin development using Docker, run the following command:</p>
+<pre><code>docker run -d -p 3000:3000 -v &#34;$(pwd)&#34;/grafana-plugins:/var/lib/grafana/plugins --name=grafana grafana/grafana
+</code></pre>
+<p>Since Grafana only loads plugins on start-up, you need to restart the container whenever you add or remove a plugin.</p>
+<pre><code>docker restart grafana
+</code></pre>
+
 
 
       </google-codelab-step>
@@ -89,110 +109,85 @@
 
       </google-codelab-step>
       
-      <google-codelab-step label="Add a config editor" duration="2">
-        <p>To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. By adding a <em>config editor</em>, users can configure your data source plugin to fit their needs.</p>
-<p>1. In <code>types.ts</code>, update <code>MyDataSourceOptions</code> to contain a optional field named <code>path</code>:</p>
-<p><strong>type.ts</strong></p>
-<pre><code>export interface MyDataSourceOptions extends DataSourceJsonData {
-  path?: string;
-}
+      <google-codelab-step label="Your first data source" duration="2">
+        <p>A data source in Grafana must extend the <code>DataSourceApi</code> interface, which requires you to defines two methods: <code>query</code> and <code>testDatasource</code>.</p>
+<h2 is-upgraded>Query data</h2>
+<p>The <code>query</code> method accepts a query from the user, and returns the data in a format that Grafana recognizes. This is where most of the work happens.</p>
+<pre><code>async query(options: DataQueryRequest&lt;MyQuery&gt;): Promise&lt;DataQueryResponse&gt;
 </code></pre>
-<p>2. In <code>ConfigEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for the <code>path</code> option:</p>
-<p><strong>ConfigEditor.tsx</strong></p>
-<pre><code>return (
-  &lt;div className=&#34;gf-form-group&#34;&gt;
-    &lt;div className=&#34;gf-form&#34;&gt;
-      &lt;FormField
-        label=&#34;Path&#34;
-        labelWidth={6}
-        onChange={this.onPathChange}
-        value={jsonData.path || &#34;&#34;}
-        placeholder=&#34;sample.csv&#34;
-      /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<p>3. Change the <code>onChange</code> function to update the path option with the value from the <code>FormField</code>.</p>
-<pre><code>onPathChange = (event: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
-  const { onOptionsChange, options } = this.props;
-  const jsonData = {
-    ...options.jsonData,
-    path: event.target.value
-  };
-  onOptionsChange({ ...options, jsonData });
-};
-</code></pre>
-<aside class="special"><p>Did you notice the <code>jsonData</code> object? This object is automatically persisted for you, and will be available to your data source implementation as well.</p>
+<p>The <code>DataQueryRequest</code> object contains the queries, or <em>targets</em>, that the user made, along with context information, like the current time interval. Use this information to query an external database.</p>
+<p>After you receive the results from your database query, you need to return it as a _data frame_—the data format that Grafana uses internally.</p>
+<aside class="special"><p>The term <em>target</em> originates from Graphite, and the earlier days of Grafana when Graphite was the only supported data source. As Grafana gained support for more data sources, the term &#34;target&#34; became synonymous with any type of query.</p>
 </aside>
-<p>4. Build your assets:</p>
-<pre><code>yarn dev
+<h2 is-upgraded>Test your data source</h2>
+<p><code>testDatasource</code> implements a health check for your data source. For example, Grafana calls this method whenever the user clicks the <strong>Save &amp; Test</strong> button, after changing the connection settings.</p>
+<pre><code>async testDatasource()
 </code></pre>
-<p>5. In Grafana, navigate to <strong>Configuration</strong> -&gt; <strong>Data Sources</strong>, and select your data source. The settings should now allow you to configure the path.</p>
 
 
       </google-codelab-step>
       
-      <google-codelab-step label="Add a query editor" duration="3">
-        <p>Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL queries, while Prometheus has its own query language, called <em>PromQL</em>. Let&#39;s add query support for our plugin, using a custom <em>query editor</em>.</p>
-<p>1. In <code>types.ts</code>, update <code>MyQuery</code> to contain a optional field named <code>values</code>:</p>
+      <google-codelab-step label="Support custom queries" duration="3">
+        <p>Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called <em>PromQL</em>. No matter what query language your databases are using, Grafana lets you build support for it.</p>
+<p>Add support for custom queries to your data source, by implementing a your own <em>query editor</em>, a React component that enables users to build their own queries, through a user-friendly graphical interface.</p>
+<p>A query editor can be as simple a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.</p>
+<p>The first step in designing your query editor is to define its <em>query model</em>. The query model defines the user input to your data source. The query model in the starter plugin you created, defines two values: the query text, and a constant.</p>
 <p><strong>types.ts</strong></p>
 <pre><code>export interface MyQuery extends DataQuery {
-  values?: string;
+  queryText?: string;
+  constant: number;
 }
 </code></pre>
-<pre><code>export const defaultQuery: Partial&lt;MyQuery&gt; = {
-  values: &#34;value&#34;
-};
-</code></pre>
-<p>2. In <code>QueryEditor.tsx</code>, update the <code>render</code> function to return a <code>FormField</code> for the query string:</p>
+<p>Now that you&#39;ve defined the query model you wish to support, the next step is to bind the model to a form. The <code>FormField</code> is a text field component from <code>grafana/ui</code> that lets you register a listener, which will be invoked whenever the form field value changes.</p>
 <p><strong>QueryEditor.tsx</strong></p>
-<pre><code>render() {
-  const query = defaults(this.props.query, defaultQuery);
-  const { values } = query;
+<pre><code>&lt;FormField value={queryText || &#39;&#39;} onChange={this.onQueryTextChange} label=&#34;Query Text&#34;&gt;&lt;/FormField&gt;
+</code></pre>
+<p>The registered listener, <code>onQueryTextChange</code>, calls <code>onChange</code> to update the current query:</p>
+<pre><code>onQueryTextChange = (event: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    const { onChange, query } = this.props;
+    onChange({ ...query, queryText: event.target.value });
+  };
+</code></pre>
+<p>If you want the query to run automatically after updating the query, you can add a call to <code>onRunQuery</code>:</p>
+<pre><code>onRunQuery();
+</code></pre>
 
-  return (
-    &lt;div className=&#34;gf-form&#34;&gt;
-      &lt;FormField label=&#34;Values&#34; value={values || &#39;&#39;} onChange={this.onValuesChange} /&gt;
-    &lt;/div&gt;
-  );
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Configure your data source" duration="2">
+        <p>To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A <em>config editor</em> lets you users configure your data source plugin to fit their needs.</p>
+<p>The config editor looks similar to the query editor, in that it defines a model and binds it to a form.</p>
+<p><strong>types.ts</strong></p>
+<pre><code>export interface MyDataSourceOptions extends DataSourceJsonData {
+  path?: string;
 }
 </code></pre>
-<p>3. Update <code>DataSource.ts</code> to return a data frame with the values from the query editor.</p>
-<p><strong>DataSource.ts</strong></p>
-<pre><code>query(options: DataQueryRequest&lt;MyQuery&gt;): Promise&lt;DataQueryResponse&gt; {
-  const { range } = options;
-  const from = range.from.valueOf();
-  const to = range.to.valueOf();
-
-  const data = options.targets.map(target =&gt; {
-    const query = defaults(target, defaultQuery);
-
-    const values = query.values.split(&#39;,&#39;).map(value =&gt; parseFloat(value));
-
-    // Generate timestamps for every value.
-    const timestamps = values.map((value, index) =&gt; {
-      return from + (index / (values.length - 1)) * (to - from);
-    });
-
-    return new MutableDataFrame({
-      refId: query.refId,
-      fields: [
-        { name: &#39;Time&#39;, values: timestamps, type: FieldType.time },
-        { name: &#39;Value&#39;, values: values, type: FieldType.number },
-      ],
-    });
-  });
-
-  return Promise.resolve({ data });
-}
+<p>Just like query editor, the form field in the config editor calls the registered listener whenever the value changes.</p>
+<p><strong>ConfigEditor.tsx</strong></p>
+<pre><code>&lt;FormField
+  label=&#34;Path&#34;
+  onChange={this.onPathChange}
+  value={jsonData.path || &#39;&#39;}
+  placeholder=&#34;json field returned to frontend&#34;
+/&gt;
 </code></pre>
-<p>4. Build your assets:</p>
-<pre><code>yarn dev
+<p>To update the options for the data source, call the <code>onOptionsChange</code> method:</p>
+<pre><code>onPathChange = (event: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      path: event.target.value,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
 </code></pre>
-<p>5. In Grafana, create a new dashboard.</p>
-<p>6. Add a graph panel.</p>
-<p>7. In the query editor, try adding a sequence of numbers, separated by commas.</p>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Congratulations" duration="0">
+        <p>Congratulations, you made it to the end of this tutorial!</p>
 
 
       </google-codelab-step>
