@@ -42,52 +42,44 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## Render the panel
+## Render your panel
 
 Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
 
 Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). Even though we still support plugins written in AngularJS, we highly recommend that you write new plugins using ReactJS.
 
-In this step, you'll customize how your panel looks, by editing its `render` function.
+### The `render` function
 
-### Display the health of a service
+The `render` function in `SimplePanel.tsx` determines how Grafana displays the panel in a dashboard.
 
-For many applications, knowing whether a service is healthy is one of the first things you'd want to monitor. Let's change the `render` function to return a `div` with a background color. You'll use the background color of the panel to tell when the service is healthy (green), or when it's unhealthy (red).
+### Panel properties
 
-- Change the `render` function of the `SimplePanel` component to return a `div` with a background color.
+The [PanelProps](https://github.com/grafana/grafana/blob/747b546c260f9a448e2cb56319f796d0301f4bb9/packages/grafana-data/src/types/panel.ts#L27-L40) interface exposes runtime information about the panel, such as panel dimensions, and the current time range.
+
+You can access the panel properties through `this.props`, as seen in your plugin.
 
 **SimplePanel.tsx**
+
 ```tsx
-render() {
-  const { width, height } = this.props;
-  return (
-    <div
-      style={{
-        width,
-        height,
-        backgroundColor: '#ff0000',
-      }}
-    ></div>
-  );
-}
+const { options, data, width, height } = this.props;
 ```
 
-`this.props` contains current dimensions of the panel, which you're using here to make the `div` fill the whole panel.
+### Development workflow
 
-- Run `yarn dev` to build the plugin with the new changes.
+Next, you'll learn the basic workflow of making a change to your panel, building it, and reloading Grafana to reflect the change you made.
 
-### Try out the new changes
+First, you need to add your panel to a dashboard:
 
-To be able to see the changes you made, the next step is to add your panel to a dashboard.
+1. Open Grafana in your browser.
+1. Create a new dashboard, and select **Choose Visualization** in the **New Panel** view.
+1. Select your panel from the list of visualizations.
+1. Save the dashboard.
 
-- Open Grafana in your browser.
-- Create a new dashboard, and select **Choose Visualization** in the **New Panel** view.
-- Select your panel from the list of visualizations.
-- Congrats! The dashboard displays a red panel.
+Now that you can view your panel, make a change to the panel plugin:
 
-Before continuing to the next step, try changing the background to a color of your choosing. Run `yarn dev` again, and reload the browser to reflect the change.
-
-Next, you'll add a switch to toggle the color of the panel using _options_.
+1. In the panel `render` function, change the fill color of the circle.
+1. Run `yarn dev` to build the plugin.
+1. In the browser, reload Grafana with the new changes.
 
 ## Configure your panel
 
@@ -95,124 +87,37 @@ Sometimes you want to offer the users of your panel to configure the behavior of
 
 A panel editor is a React component that extends `PureComponent<PanelEditorProps<SimpleOptions>>`. Here, `SimpleOptions` is a TypeScript interface that defines the available options.
 
+```tsx
+export const defaults: SimpleOptions = {
+  text: 'The default text!',
+};
+```
+
+Just like the panel itself, the panel editor is a React component, which returns a form that lets users update the value of the options defined by `SimpleOptions`.
+
 **SimpleEditor.tsx**
 
 ```tsx
-export class SimpleEditor extends PureComponent<PanelEditorProps<SimpleOptions>> {
-  onTextChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, text: target.value });
-  };
-
-  render() {
-    const { options } = this.props;
-
-    return (
-      <div className="section gf-form-group">
-        <h5 className="section-heading">Display</h5>
-        <FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
-      </div>
-    );
-  }
-}
+<FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
 ```
 
 The `onChange` attribute on the `FormField` lets you update the panel properties. Here, `onTextChanged` is a function that updates the panel properties whenever the value of the `FormField` changes.
 
-### Add more options
-
-To be able to test the panel, you'll be adding a option to simulate the health of the service.
-
-- Change the `SimpleOptions` interface to include a boolean property called `healthy`.
-- Update the `defaults` to make the service unhealthy by default.
-
-**types.ts**
-
-```
-export interface SimpleOptions {
-  healthy: boolean;
-}
-
-export const defaults: SimpleOptions = {
-  healthy: false,
-};
-```
-
-The `grafana/ui` package contains a collection of useful UI components. The `Switch` component lets you toggle the option between true and false.
-
-- Import the `Switch` component from the `grafana/ui` package.
-
-**SimpleEditor.tsx**
+You can update the value of an option, by calling `this.props.onOptionsChange`:
 
 ```tsx
-import { Switch } from "@grafana/ui";
+onTextChanged = ({ target }: any) => {
+    this.props.onOptionsChange({ ...this.props.options, text: target.value });
+  };
 ```
-
-- Add the `Switch` to the `render` function.
-
-```tsx
-render() {
-  const { options } = this.props;
-
-  return (
-    <div className="section gf-form-group">
-      <h5 className="section-heading">Debug</h5>
-      <Switch label="Healthy" checked={options.healthy} onChange={this.onHealthyChanged} />
-    </div>
-  );
-}
-```
-
-- Add the `onHealthyChanged` callback to toggle between healthy and unhealthy whenever the user presses the switch.
-
-```tsx
-onHealthyChanged = ({ target }: any) => {
-  this.props.onOptionsChange({
-    ...this.props.options,
-    healthy: !this.props.options.healthy
-  });
-};
-```
-
-- Update `SimplePanel` return a different color based on the current health.
-
-**SimplePanel.tsx**
-
-```tsx
-render() {
-  const { options, width, height } = this.props;
-
-  let color;
-  if (options.healthy) {
-    color = "#00ff00";
-  } else {
-    color = "#ff0000";
-  }
-
-  return (
-    <div
-      style={{
-        width,
-        height,
-        backgroundColor: color,
-      }}
-    ></div>
-  );
-}
-```
-
-- Run `yarn dev`, and reload Grafana to reflect the changes you've made. Try toggling the switch to see that the background color changes.
 
 ## Access time series data
 
-Most panels visualize dynamic data from a Grafana data source. In this step, you'll learn how to access time series data from a data source.
-
-You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
+Most panels visualize dynamic data from a Grafana data source. You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
 
 ```tsx
 const { data } = this.props;
 ```
-
-Next, you'll make the background color of the panel change based on the results from a data source query.
 
 ### Data frames
 
@@ -245,28 +150,7 @@ Here's an example of what a query result that contains a data frame can look lik
 }
 ```
 
-### Set color based on time series value
-
-Let's make the background color change depending on the last value in the time series. If the value is greater than zero, the service is healthy.
-
-- In `SimplePanel`, set the color based on the last value in the data frame. If it's more than 0, we assume the service is healthy.
-
-**SimplePanel.tsx**
-
-```tsx
-let color;
-
-let values = data.series[0].fields[0].values;
-let current = values.get(values.length - 1);
-
-if (current > 0) {
-  color = "#00ff00";
-} else {
-  color = "#ff0000";
-}
-```
-
-- Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+The current panel implementation only displays the number of series returned. Try changing it to display the current value, i.e. the last value in a series.
 
 ## Congratulations
 
