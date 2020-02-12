@@ -48,6 +48,8 @@ Duration: 1
 
 In fact, D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
 
+- Import the `select` function from `d3`:
+
 **SimplePanel.tsx**
 
 ```tsx
@@ -84,7 +86,7 @@ class SimplePanel extends PureComponent<Props> {
 }
 ```
 
-Notice that, in the `render` function, the `ref` attribute is used to replace the `div` with `containerElement`.
+Notice that, in the `render` function, the `ref` attribute lets you replace the `div` with your `containerElement`.
 
 - Run `yarn dev`, and reload Grafana to reflect the changes you've made.
 
