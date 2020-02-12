@@ -52,14 +52,35 @@
 <p>In this tutorial, you&#39;ll build a simple, but complete bar graph panel.</p>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>How to scaffold a panel plugin</li>
+<li>How to use D3.js to build a panel using data-driven transformations.</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
-<li>Grafana version 6.4+</li>
+<li>Grafana version 7.0+</li>
 <li>NodeJS</li>
 <li>yarn</li>
 </ul>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Set up your environment" duration="1">
+        <p>Before you can get started building plugins, you need to set up your environment for plugin development.</p>
+<p>To discover plugins, Grafana scans a <em>plugin directory</em>, the location of which depends on your operating system.</p>
+<p>1. Create a directory called <code>grafana-plugins</code> in your preferred workspace.</p>
+<p>2. Find the <code>plugins</code> property in the Grafana configuration file and set the <code>plugins</code> property to the path of your <code>grafana-plugins</code> directory. Refer to the <a href="https://grafana.com/docs/grafana/latest/installation/configuration/#plugins" target="_blank">Grafana configuration documentation</a> for more information.</p>
+<pre><code>[paths]
+plugins = &#34;/path/to/grafana-plugins&#34;
+</code></pre>
+<p>Restart Grafana if it&#39;s already running, to load the new configuration.</p>
+<h2 is-upgraded>Alternative method: Docker</h2>
+<p>If you don&#39;t want to install Grafana on your local machine, you can use <a href="https://www.docker.com" target="_blank">Docker</a>. To set up Grafana for plugin development using Docker, run the following command:</p>
+<pre><code>docker run -d -p 3000:3000 -v &#34;$(pwd)&#34;/grafana-plugins:/var/lib/grafana/plugins --name=grafana grafana/grafana
+</code></pre>
+<p>Since Grafana only loads plugins on start-up, you need to restart the container whenever you add or remove a plugin.</p>
+<pre><code>docker restart grafana
+</code></pre>
+
 
 
       </google-codelab-step>
@@ -89,9 +110,9 @@
 
       </google-codelab-step>
       
-      <google-codelab-step label="Data-driven transformations using D3.js" duration="0">
-        <p>[D3.js] is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.</p>
-<p>D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
+      <google-codelab-step label="Data-driven transformations" duration="0">
+        <p><a href="https://d3js.org/" target="_blank">D3.js</a> is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.</p>
+<p>In fact, D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
 <p><strong>SimplePanel.tsx</strong></p>
 <pre><code>import { select } from &#39;d3&#39;;
 </code></pre>
@@ -129,7 +150,7 @@
 <li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
 </ul>
 <p>When you add the panel to your dashboard, it will have the text ‘Hello, world!&#39; written in it.</p>
-<h2 is-upgraded>Build chart from data</h2>
+<h2 is-upgraded>Build a chart from data</h2>
 <p>You&#39;ve seen how to use D3.js to create a container element with some hard-coded text in it. Next, you&#39;ll build the graph from actual data.</p>
 <ul>
 <li>Update the <code>draw</code> function with the following code:</li>
@@ -159,7 +180,7 @@
 <ul>
 <li>Run <code>yarn dev</code>, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.</li>
 </ul>
-<p>With relatively little code, you&#39;ve created a dynamic bar chart. Still, you&#39;ve only touched the surface of what&#39;s possible with D3. To learn more, check out the <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">D3 Gallery</a>.</p>
+<p>Congratulations, you&#39;ve created a dynamic bar chart! Still, you&#39;ve only touched the surface of what&#39;s possible with D3. To learn more, check out the <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">D3 Gallery</a>.</p>
 
 
       </google-codelab-step>
@@ -260,6 +281,12 @@ class PartialSimplePanel extends PureComponent&lt;Props&gt; {
 
 export const SimplePanel = withTheme(PartialSimplePanel);
 </code></pre>
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Congratulations" duration="0">
+        <p>Congratulations, you made it to the end of this tutorial!</p>
 
 
       </google-codelab-step>

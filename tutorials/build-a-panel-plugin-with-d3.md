@@ -22,13 +22,19 @@ In this tutorial, you'll build a simple, but complete bar graph panel.
 
 ### What you'll learn
 
-- How to scaffold a panel plugin
+- How to use D3.js to build a panel using data-driven transformations.
 
 ### What you'll need
 
-- Grafana version 6.4+
+- Grafana version 7.0+
 - NodeJS
 - yarn
+
+## Set up your environment
+
+Duration: 1
+
+[[**import** [set-up-environment](shared/set-up-environment.md)]]
 
 ## Create a new plugin
 
@@ -36,12 +42,11 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## Data-driven transformations using D3.js
+## Data-driven transformations
 
-[D3.js] is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
+[D3.js](https://d3js.org/) is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
 
-###
-D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
+In fact, D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
 
 **SimplePanel.tsx**
 
@@ -85,7 +90,7 @@ Notice that, in the `render` function, the `ref` attribute is used to replace th
 
 When you add the panel to your dashboard, it will have the text 'Hello, world!' written in it.
 
-### Build chart from data
+### Build a chart from data
 
 You've seen how to use D3.js to create a container element with some hard-coded text in it. Next, you'll build the graph from actual data.
 
@@ -117,7 +122,7 @@ draw() {
 
 - Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
 
-With relatively little code, you've created a dynamic bar chart. Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
+Congratulations, you've created a dynamic bar chart! Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
 
 ## Theme your panel
 
@@ -228,3 +233,7 @@ class PartialSimplePanel extends PureComponent<Props> {
 
 export const SimplePanel = withTheme(PartialSimplePanel);
 ```
+
+## Congratulations
+
+Congratulations, you made it to the end of this tutorial!
