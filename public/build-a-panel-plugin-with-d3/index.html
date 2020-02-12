@@ -113,6 +113,9 @@ plugins = &#34;/path/to/grafana-plugins&#34;
       <google-codelab-step label="Data-driven transformations" duration="0">
         <p><a href="https://d3js.org/" target="_blank">D3.js</a> is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.</p>
 <p>In fact, D3.js is already bundled with Grafana, and you can access it by importing the <code>d3</code> package.</p>
+<ul>
+<li>Import the <code>select</code> function from <code>d3</code>:</li>
+</ul>
 <p><strong>SimplePanel.tsx</strong></p>
 <pre><code>import { select } from &#39;d3&#39;;
 </code></pre>
@@ -145,7 +148,7 @@ plugins = &#34;/path/to/grafana-plugins&#34;
   }
 }
 </code></pre>
-<p>Notice that, in the <code>render</code> function, the <code>ref</code> attribute is used to replace the <code>div</code> with <code>containerElement</code>.</p>
+<p>Notice that, in the <code>render</code> function, the <code>ref</code> attribute lets you replace the <code>div</code> with your <code>containerElement</code>.</p>
 <ul>
 <li>Run <code>yarn dev</code>, and reload Grafana to reflect the changes you&#39;ve made.</li>
 </ul>
