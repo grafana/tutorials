@@ -1,4 +1,4 @@
-summary: Learn at how to create a custom visualization for your dashboards.
+summary: Learn how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
 categories: Plugins
 tags: beginner
@@ -42,7 +42,13 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## Render your panel
+## Anatomy of a plugin
+
+Duration: 1
+
+[[**import** [plugin-anatomy](shared/plugin-anatomy.md)]]
+
+## Panel plugins
 
 Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
 

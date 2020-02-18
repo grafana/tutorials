@@ -109,7 +109,32 @@ plugins = &#34;/path/to/grafana-plugins&#34;
 
       </google-codelab-step>
       
-      <google-codelab-step label="Your first data source" duration="2">
+      <google-codelab-step label="Anatomy of a plugin" duration="1">
+        <p>Plugins come in different shapes and sizes. Before we dive deeper, let&#39;s look at some of the properties that are shared by all of them.</p>
+<p>Every plugin you create will require at least two files: <code>plugin.json</code> and <code>module.ts</code>.</p>
+<h2 is-upgraded>plugin.json</h2>
+<p>When Grafana starts, it scans the plugin directory for any subdirectory that contains a <code>plugin.json</code> file. The <code>plugin.json</code> file contains information about your plugin, and tells Grafana about what capabilities and dependencies your plugin needs.</p>
+<p>While certain plugin types can have specific configuration options, let&#39;s look at the mandatory ones:</p>
+<ul>
+<li><code>type</code> tells Grafana what type of plugin to expect. Grafana supports three types of plugins: <code>panel</code>, <code>datasource</code>, and <code>app</code>.</li>
+<li><code>name</code> is what users will see in the list of plugins. If you&#39;re creating a data source, this is typically the name of the database it connects to, such as Prometheus, PostgreSQL, or Stackdriver.</li>
+<li><code>id</code> uniquely identifies your plugin, and should start with your GitHub username, to avoid clashing with other plugins.</li>
+</ul>
+<p>To see all the available configuration settings for the <code>plugin.json</code>, refer to the <a href="https://grafana.com/docs/grafana/latest/plugins/developing/plugin.json/" target="_blank">plugin.json Schema</a>.</p>
+<h2 is-upgraded>module.ts</h2>
+<p>After discovering your plugin, Grafana loads the <code>module.ts</code> file, the entrypoint for your plugin. <code>module.ts</code> exposes the implementation of your plugin, which depends on the type of plugin you&#39;re building.</p>
+<p>Specifically, <code>module.ts</code> needs to expose an object that extends <a href="https://github.com/grafana/grafana/blob/08bf2a54523526a7f59f7c6a8dafaace79ab87db/packages/grafana-data/src/types/plugin.ts#L124" target="_blank">GrafanaPlugin</a>, and can be any of the following:</p>
+<ul>
+<li><a href="https://github.com/grafana/grafana/blob/08bf2a54523526a7f59f7c6a8dafaace79ab87db/packages/grafana-data/src/types/panel.ts#L73" target="_blank">PanelPlugin</a></li>
+<li><a href="https://github.com/grafana/grafana/blob/08bf2a54523526a7f59f7c6a8dafaace79ab87db/packages/grafana-data/src/types/datasource.ts#L33" target="_blank">DataSourcePlugin</a></li>
+<li><a href="https://github.com/grafana/grafana/blob/45b7de1910819ad0faa7a8aeac2481e675870ad9/packages/grafana-data/src/types/app.ts#L27" target="_blank">AppPlugin</a></li>
+</ul>
+
+
+
+      </google-codelab-step>
+      
+      <google-codelab-step label="Data source plugins" duration="1">
         <p>A data source in Grafana must extend the <code>DataSourceApi</code> interface, which requires you to defines two methods: <code>query</code> and <code>testDatasource</code>.</p>
 <h2 is-upgraded>Query data</h2>
 <p>The <code>query</code> method accepts a query from the user, and returns the data in a format that Grafana recognizes. This is where most of the work happens.</p>
@@ -127,7 +152,7 @@ plugins = &#34;/path/to/grafana-plugins&#34;
 
       </google-codelab-step>
       
-      <google-codelab-step label="Support custom queries" duration="3">
+      <google-codelab-step label="Support custom queries" duration="1">
         <p>Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called <em>PromQL</em>. No matter what query language your databases are using, Grafana lets you build support for it.</p>
 <p>Add support for custom queries to your data source, by implementing a your own <em>query editor</em>, a React component that enables users to build their own queries, through a user-friendly graphical interface.</p>
 <p>A query editor can be as simple a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.</p>
@@ -155,7 +180,7 @@ plugins = &#34;/path/to/grafana-plugins&#34;
 
       </google-codelab-step>
       
-      <google-codelab-step label="Configure your data source" duration="2">
+      <google-codelab-step label="Configure your data source" duration="1">
         <p>To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A <em>config editor</em> lets you users configure your data source plugin to fit their needs.</p>
 <p>The config editor looks similar to the query editor, in that it defines a model and binds it to a form.</p>
 <p><strong>types.ts</strong></p>

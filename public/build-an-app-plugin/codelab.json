@@ -3,13 +3,13 @@
   "format": "../templates/codelab.html",
   "prefix": "https://storage.googleapis.com/grafana-tutorials-staging",
   "mainga": "UA-49880327-14",
-  "updated": "2020-02-18T13:33:12+01:00",
-  "id": "build-a-data-source-plugin",
-  "duration": 7,
-  "title": "Build a data source plugin",
+  "updated": "2020-02-18T13:36:05+01:00",
+  "id": "build-an-app-plugin",
+  "duration": 4,
+  "title": "Build an app plugin",
   "authors": "Grafana Labs",
-  "summary": "Create a plugin to add support for your own data sources.",
-  "source": "build-a-data-source-plugin.md",
+  "summary": "Learn how to create an app plugin.",
+  "source": "build-an-app-plugin.md",
   "theme": "",
   "status": [
     "published"
@@ -18,8 +18,8 @@
     "plugins"
   ],
   "tags": [
-    "beginner"
+    "intermediate"
   ],
   "feedback": "https://github.com/grafana/tutorials/issues/new",
-  "url": "build-a-data-source-plugin"
+  "url": "build-an-app-plugin"
 }

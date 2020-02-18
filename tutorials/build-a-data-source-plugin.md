@@ -38,9 +38,15 @@ Duration: 1
 
 [[**import** [create-plugin](shared/create-plugin.md)]]
 
-## Your first data source
+## Anatomy of a plugin
 
-Duration: 2
+Duration: 1
+
+[[**import** [plugin-anatomy](shared/plugin-anatomy.md)]]
+
+## Data source plugins
+
+Duration: 1
 
 A data source in Grafana must extend the `DataSourceApi` interface, which requires you to defines two methods: `query` and `testDatasource`.
 
@@ -69,7 +75,7 @@ async testDatasource()
 
 ## Support custom queries
 
-Duration: 3
+Duration: 1
 
 Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called _PromQL_. No matter what query language your databases are using, Grafana lets you build support for it.
 
@@ -113,7 +119,7 @@ onRunQuery();
 
 ## Configure your data source
 
-Duration: 2
+Duration: 1
 
 To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A _config editor_ lets you users configure your data source plugin to fit their needs.
 
