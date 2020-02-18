@@ -31,8 +31,6 @@ In the previous part of this guide, we looked at how to get started with writing
 
 Luckily, Grafana has support for _backend plugins_, which lets your data source plugin communicate with a process running on the server.
 
-Last time, we started writing a data source plugin that would read CSV files. Let's see how a backend plugin lets you read a file on the server and return the data back to the client.
-
 - Create another directory `backend` in your project root directory, containing a `main.go` file.
 
 **main.go**
