@@ -20,12 +20,12 @@ In this codelab, you'll learn how to build a backend plugin to support your data
 
 ### What you'll need
 
-- Grafana version 6.4+
+- Grafana version 7.0+
 - NodeJS
 - yarn
-- Go
+- Go 1.11+
 
-## Create a backend plugin
+## Backend plugins
 
 In the previous part of this guide, we looked at how to get started with writing data source plugins for Grafana. For many data sources, integrating a custom data source can be done completely in the Grafana browser client. For others, you might want the plugin to be able to continue running even after closing your browser window, such as alerting, or authentication.
 
@@ -78,18 +78,16 @@ Positive
 
 - Build the plugin binary.
 
+```
+go build -o ./dist/my-datasource_darwin_amd64 ./backend
+```
+
 In order for Grafana to discover our plugin, we have to build a binary with the following suffixes, depending on the machine you're using to run Grafana:
 
 ```
 _linux_amd64
 _darwin_amd64
 _windows_amd64.exe
-```
-
-I'm running Grafana on my MacBook, so I'll go ahead and build a Darwin binary:
-
-```
-go build -o ./dist/csv-datasource_darwin_amd64 ./backend
 ```
 
 The binary needs to be bundled into `./dist` directory together with the frontend assets.
@@ -107,7 +105,7 @@ The value should be the name of the binary, with the suffix removed.
 - Restart Grafana and verify that your plugin is running:
 
 ```
-ps aux | grep csv-datasource
+ps aux | grep my-datasource
 ```
 
 ## Add a backend handler

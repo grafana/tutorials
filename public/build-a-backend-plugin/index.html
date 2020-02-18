@@ -53,16 +53,16 @@
 </ul>
 <h2 is-upgraded>What you&#39;ll need</h2>
 <ul>
-<li>Grafana version 6.4+</li>
+<li>Grafana version 7.0+</li>
 <li>NodeJS</li>
 <li>yarn</li>
-<li>Go</li>
+<li>Go 1.11+</li>
 </ul>
 
 
       </google-codelab-step>
       
-      <google-codelab-step label="Create a backend plugin" duration="0">
+      <google-codelab-step label="Backend plugins" duration="0">
         <p>In the previous part of this guide, we looked at how to get started with writing data source plugins for Grafana. For many data sources, integrating a custom data source can be done completely in the Grafana browser client. For others, you might want the plugin to be able to continue running even after closing your browser window, such as alerting, or authentication.</p>
 <p>Luckily, Grafana has support for <em>backend plugins</em>, which lets your data source plugin communicate with a process running on the server.</p>
 <p>Last time, we started writing a data source plugin that would read CSV files. Let&#39;s see how a backend plugin lets you read a file on the server and return the data back to the client.</p>
@@ -107,15 +107,12 @@ func main() {
 <aside class="special"><p>The Grafana backend plugin system uses the <a href="https://github.com/hashicorp/go-plugin" target="_blank">go-plugin</a> library from <a href="https://www.hashicorp.com/" target="_blank">Hashicorp</a>, and while communication happens over gRPC, here we&#39;ll use a Go client library that wraps the boilerplate for you.</p>
 </aside>
 <ul>
-<li>Build the plugin binary.</li>
+<li>Build the plugin binary. <br><code>go build -o ./dist/my-datasource_darwin_amd64 ./backend<br></code></li>
 </ul>
 <p>In order for Grafana to discover our plugin, we have to build a binary with the following suffixes, depending on the machine you&#39;re using to run Grafana:</p>
 <pre><code>_linux_amd64
 _darwin_amd64
 _windows_amd64.exe
-</code></pre>
-<p>I&#39;m running Grafana on my MacBook, so I&#39;ll go ahead and build a Darwin binary:</p>
-<pre><code>go build -o ./dist/csv-datasource_darwin_amd64 ./backend
 </code></pre>
 <p>The binary needs to be bundled into <code>./dist</code> directory together with the frontend assets.</p>
 <ul>
@@ -127,7 +124,7 @@ _windows_amd64.exe
 </code></pre>
 <p>The value should be the name of the binary, with the suffix removed.</p>
 <ul>
-<li>Restart Grafana and verify that your plugin is running: <br><code>ps aux | grep csv-datasource<br></code></li>
+<li>Restart Grafana and verify that your plugin is running: <br><code>ps aux | grep my-datasource<br></code></li>
 </ul>
 
 
