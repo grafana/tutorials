@@ -48,7 +48,116 @@ Duration: 1
 
 ## App plugins
 
-Coming soon ...
+App plugins is a special type of plugin that lets you bundle other plugins to create a complete experience.
+
+One such an example is the [Grafana App for Kubernetes](https://grafana.com/grafana/plugins/grafana-kubernetes-app).
+
+In the next step, you'll learn how to bundle resources within your Grafana app, such as dashboards and other plugins.
+
+## Bundle resources
+
+For every type of resource you want to bundle, create a subdirectory:
+
+```shell
+src/
+  dashboards/
+    stats.json
+  datasources/
+    my-datasource/
+      plugin.json
+  panels/
+    my-panel/
+      plugin.json
+  plugin.json
+```
+
+The `includes` field in `plugin.json` defines all resources to bundle with the app.
+
+### Dashboards
+
+```json
+"includes": [
+  {
+    "type": "dashboard",
+    "name": "Lots of Stats",
+    "path": "dashboards/stats.json"
+  }
+]
+```
+
+### Data sources
+
+```json
+"includes": [
+  {
+    "type": "datasource",
+    "name": "My data source"
+  }
+]
+```
+
+### Panels
+
+```json
+"includes": [
+  {
+    "type": "panel",
+    "name": "My panel"
+  }
+]
+```
+
+## Create custom pages
+
+App plugins also allows you to create custom pages.
+
+### Root page
+
+The root page is a ReactJS component that extends [AppRootProps](https://github.com/grafana/grafana/blob/45b7de1910819ad0faa7a8aeac2481e675870ad9/packages/grafana-data/src/types/app.ts#L11).
+
+```tsx
+import { AppRootProps } from '@grafana/data';
+
+interface Props extends AppRootProps {}
+
+export class MyRootPage<MyAppSettings> extends PureComponent<Props> {
+    // ...
+}
+```
+
+- Configure your app to use the root page:
+
+```tsx
+export const plugin = new AppPlugin<MyAppSettings>()
+  .setRootPage(MyRootPage);
+```
+
+### Config pages
+
+A config page is a ReactJS component that extends [PluginConfigPageProps](https://github.com/grafana/grafana/blob/df1d43167af035c6819923ecce135056f37c79c2/packages/grafana-data/src/types/plugin.ts#L111-L114).
+
+```tsx
+import { PluginConfigPageProps, AppPluginMeta } from '@grafana/data';
+
+interface Props extends PluginConfigPageProps<AppPluginMeta<MyAppSettings>> {}
+
+export class MyPage extends PureComponent<Props> {
+    // ...
+}
+```
+
+- Then add your config page to the root page:
+
+```tsx
+export const plugin = new AppPlugin<MyAppSettings>()
+  .setRootPage(MyRootPage)
+  .addConfigPage({
+    title: 'My Page',
+    icon: 'fa fa-info',
+    body: MyPage,
+    id: 'my-page',
+  });
+```
 
 ## Congratulations
 
