@@ -1,16 +1,15 @@
+---
+title: Build a Panel Plugin with D3
 summary: Learn how to use D3.js in your panel plugins.
 id: build-a-panel-plugin-with-d3
-categories: Plugins
+categories: ["plugins"]
 tags: beginner
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
+---
 
-# Build a panel plugin with D3.js
-
-## Introduction
-
-Duration: 1
+{{% tutorials/step duration="1" title="Introduction" %}}
 
 Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel using [D3.js](https://d3js.org/).
 
@@ -30,19 +29,18 @@ In this tutorial, you'll build a simple, but complete bar graph panel.
 - NodeJS
 - yarn
 
-## Set up your environment
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Set up your environment" %}}
 
-Duration: 1
+{{< tutorials/shared "set-up-environment" >}}
 
-[[**import** [set-up-environment](shared/set-up-environment.md)]]
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Create a new plugin" %}}
 
-## Create a new plugin
+{{< tutorials/shared "create-plugin" >}}
 
-Duration: 1
-
-[[**import** [create-plugin](shared/create-plugin.md)]]
-
-## Data-driven transformations
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Data-driven transformations" %}}
 
 [D3.js](https://d3js.org/) is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
 
@@ -126,7 +124,8 @@ draw() {
 
 Congratulations, you've created a dynamic bar chart! Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
 
-## Theme your panel
+{{% /tutorials/step %}}
+{{% tutorials/step title="Theme your panel" %}}
 
 To provide your users with a consistent look-and-feel, you'll want to use the same colors as the built-in panels.
 
@@ -177,9 +176,8 @@ const { width, height, theme } = this.props;
 ```tsx
 style('background-color', theme.colors.red)
 ```
-
-## Complete example
-
+{{% /tutorials/step %}}
+{{% tutorials/step title="Complete example" %}}
 ```tsx
 import React, { PureComponent } from 'react';
 import { withTheme } from '@grafana/ui';
@@ -235,7 +233,9 @@ class PartialSimplePanel extends PureComponent<Props> {
 
 export const SimplePanel = withTheme(PartialSimplePanel);
 ```
-
-## Congratulations
+{{% /tutorials/step %}}
+{{% tutorials/step title="Congratulations" %}}
 
 Congratulations, you made it to the end of this tutorial!
+
+{{% /tutorials/step %}}

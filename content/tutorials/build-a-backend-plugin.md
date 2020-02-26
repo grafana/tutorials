@@ -1,16 +1,15 @@
+---
+title: Build a Backend Plugin
 summary: Discover how you can extend your data source plugin with a backend.
 id: build-a-backend-plugin
-categories: Plugins
+categories: ["plugins"]
 tags: intermediate
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
+---
 
-# Build a backend plugin
-
-## Overview
-
-Duration: 1
+{{% tutorials/step duration="1" title="Overview" %}}
 
 In this codelab, you'll learn how to build a backend plugin to support your data source plugin.
 
@@ -25,7 +24,8 @@ In this codelab, you'll learn how to build a backend plugin to support your data
 - yarn
 - Go 1.11+
 
-## Backend plugins
+{{% /tutorials/step %}}
+{{% tutorials/step title="Backend Plugins" %}}
 
 In the previous part of this guide, we looked at how to get started with writing data source plugins for Grafana. For many data sources, integrating a custom data source can be done completely in the Grafana browser client. For others, you might want the plugin to be able to continue running even after closing your browser window, such as alerting, or authentication.
 
@@ -106,7 +106,8 @@ The value should be the name of the binary, with the suffix removed.
 ps aux | grep my-datasource
 ```
 
-## Add a backend handler
+{{% /tutorials/step %}}
+{{% tutorials/step title="Add a backend handler" %}}
 
 - Add two structs to represent the query and the options:
 
@@ -160,7 +161,8 @@ func (d *MyDataSource) Query(ctx context.Context, tr sdk.TimeRange, ds sdk.DataS
 }
 ```
 
-## Use the backend plugin from the client
+{{% /tutorials/step %}}
+{{% tutorials/step title="Use the backend plugin from the client" %}}
 
 Let's make the `testDatasource` call our backend to make sure it's responding correctly.
 
@@ -213,3 +215,5 @@ testDatasource() {
 ```
 
 - Confirm that the client is able to call our backend plugin by hitting **Save & Test** on your data source. It should give you a green message saying _Data source is working_.
+
+{{% /tutorials/step %}}

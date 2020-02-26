@@ -1,16 +1,15 @@
+---
+title: Build an app plugin
 summary: Learn how to create an app plugin.
 id: build-an-app-plugin
-categories: Plugins
+categories: ["plugins"]
 tags: intermediate
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
+---
 
-# Build an app plugin
-
-## Introduction
-
-Duration: 1
+{{% tutorials/step duration="1" title="Introduction" %}}
 
 An app plugin lets you offer a complete monitoring experience, by bundling plugins along with custom pages. Custom pages lets you add sign-up forms, documentation, or even control panels to manage external services.
 
@@ -28,28 +27,29 @@ In this tutorial, you'll build an app plugin that bundles a data source, panel, 
 - NodeJS
 - yarn
 
-## Set up your environment
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Set up your environment" %}}
 
-Duration: 1
+{{< tutorials/shared "set-up-environment" >}}
 
-[[**import** [set-up-environment](shared/set-up-environment.md)]]
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Create a new plugin" %}}
 
-## Create a new plugin
+{{< tutorials/shared "create-plugin" >}}
 
-Duration: 1
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Anatomy of a plugin" %}}
 
-[[**import** [create-plugin](shared/create-plugin.md)]]
+{{< tutorials/shared "plugin-anatomy" >}}
 
-## Anatomy of a plugin
-
-Duration: 1
-
-[[**import** [plugin-anatomy](shared/plugin-anatomy.md)]]
-
-## App plugins
+{{% /tutorials/step %}}
+{{% tutorials/step title="App plugins" %}}
 
 Coming soon ...
 
-## Congratulations
+{{% /tutorials/step %}}
+{{% tutorials/step title="Congratulations" %}}
 
 Congratulations, you made it to the end of this tutorial!
+
+{{% /tutorials/step %}}

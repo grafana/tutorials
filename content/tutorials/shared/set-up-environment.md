@@ -1,3 +1,6 @@
+---
+title: Set up Environment
+---
 Before you can get started building plugins, you need to set up your environment for plugin development.
 
 To discover plugins, Grafana scans a _plugin directory_, the location of which depends on your operating system.

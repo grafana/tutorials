@@ -1,16 +1,15 @@
-summary: Learn how to create a custom visualization for your dashboards.
+---
+title: Build a Panel Plugin
+summary: Learn at how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
-categories: Plugins
+categories: ["plugins"]
 tags: beginner
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
+---
 
-# Build a panel plugin
-
-## Introduction
-
-Duration: 1
+{{% tutorials/step duration="1" title="Introduction" %}}
 
 Panels are the building blocks of Grafana. They allow you to visualize data in different ways. While Grafana has several types of panels already built-in, you can also build your own panel, to add support other visualizations.
 
@@ -30,25 +29,23 @@ In this tutorial, you'll build a simple, but complete panel that will visualize 
 - NodeJS
 - yarn
 
-## Set up your environment
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Set up your environment" %}}
 
-Duration: 1
+{{< tutorials/shared "set-up-environment" >}}
 
-[[**import** [set-up-environment](shared/set-up-environment.md)]]
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Create a new plugin" %}}
 
-## Create a new plugin
+{{< tutorials/shared "create-plugin" >}}
 
-Duration: 1
+{{% /tutorials/step %}}
+{{% tutorials/step duration="1" title="Anatomy of a plugin" %}}
 
-[[**import** [create-plugin](shared/create-plugin.md)]]
+{{< tutorials/shared "plugin-anatomy" >}}
 
-## Anatomy of a plugin
-
-Duration: 1
-
-[[**import** [plugin-anatomy](shared/plugin-anatomy.md)]]
-
-## Panel plugins
+{{% /tutorials/step %}}
+{{% tutorials/step title="Panel plugins" %}}
 
 Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
 
@@ -87,7 +84,8 @@ Now that you can view your panel, make a change to the panel plugin:
 1. Run `yarn dev` to build the plugin.
 1. In the browser, reload Grafana with the new changes.
 
-## Configure your panel
+{{% /tutorials/step %}}
+{{% tutorials/step title="Configure your panel" %}}
 
 Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By adding a _panel editor_ to your plugin, your panel will be able to accept user input, or _options_.
 
@@ -116,8 +114,8 @@ onTextChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, text: target.value });
   };
 ```
-
-## Access time series data
+{{% /tutorials/step %}}
+{{% tutorials/step title="Access time series data" %}}
 
 Most panels visualize dynamic data from a Grafana data source. You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
 
@@ -157,7 +155,9 @@ Here's an example of what a query result that contains a data frame can look lik
 ```
 
 The current panel implementation only displays the number of series returned. Try changing it to display the current value, i.e. the last value in a series.
-
-## Congratulations
+{{% /tutorials/step %}}
+{{% tutorials/step title="Congratulations" %}}
 
 Congratulations, you made it to the end of this tutorial!
+
+{{% /tutorials/step %}}
