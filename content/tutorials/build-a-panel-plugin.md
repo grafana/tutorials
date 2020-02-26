@@ -53,7 +53,7 @@ Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). 
 
 ### The `render` function
 
-The `render` function in `SimplePanel.tsx` determines how Grafana displays the panel in a dashboard.
+The `render` function in `SimplePanel.js` determines how Grafana displays the panel in a dashboard.
 
 ### Panel properties
 
@@ -61,9 +61,9 @@ The [PanelProps](https://github.com/grafana/grafana/blob/747b546c260f9a448e2cb56
 
 You can access the panel properties through `this.props`, as seen in your plugin.
 
-**SimplePanel.tsx**
+**SimplePanel.js**
 
-```tsx
+```js
 const { options, data, width, height } = this.props;
 ```
 
@@ -91,7 +91,7 @@ Sometimes you want to offer the users of your panel to configure the behavior of
 
 A panel editor is a React component that extends `PureComponent<PanelEditorProps<SimpleOptions>>`. Here, `SimpleOptions` is a TypeScript interface that defines the available options.
 
-```tsx
+```js
 export const defaults: SimpleOptions = {
   text: 'The default text!',
 };
@@ -99,9 +99,9 @@ export const defaults: SimpleOptions = {
 
 Just like the panel itself, the panel editor is a React component, which returns a form that lets users update the value of the options defined by `SimpleOptions`.
 
-**SimpleEditor.tsx**
+**SimpleEditor.js**
 
-```tsx
+```js
 <FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
 ```
 
@@ -109,7 +109,7 @@ The `onChange` attribute on the `FormField` lets you update the panel properties
 
 You can update the value of an option, by calling `this.props.onOptionsChange`:
 
-```tsx
+```js
 onTextChanged = ({ target }: any) => {
     this.props.onOptionsChange({ ...this.props.options, text: target.value });
   };
@@ -119,7 +119,7 @@ onTextChanged = ({ target }: any) => {
 
 Most panels visualize dynamic data from a Grafana data source. You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
 
-```tsx
+```js
 const { data } = this.props;
 ```
 

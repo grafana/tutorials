@@ -48,15 +48,15 @@ In fact, D3.js is already bundled with Grafana, and you can access it by importi
 
 - Import the `select` function from `d3`:
 
-**SimplePanel.tsx**
+**SimplePanel.js**
 
-```tsx
+```js
 import { select } from 'd3';
 ```
 
 - Create a function called `draw`, where we'll construct our chart, and call it in `componentDidMount`, and `componentDidUpdate`. By doing this, the `render` function returns a prebuilt chart to avoid rebuilding the chart on every call to `render`.
 
-```tsx
+```js
 class SimplePanel extends PureComponent<Props> {
   containerElement: any;
 
@@ -96,7 +96,7 @@ You've seen how to use D3.js to create a container element with some hard-coded 
 
 - Update the `draw` function with the following code:
 
-```tsx
+```js
 draw() {
   const { width, height } = this.props;
 
@@ -131,9 +131,9 @@ To provide your users with a consistent look-and-feel, you'll want to use the sa
 
 In this step, you'll learn how to use the colors from the current theme.
 
-- In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
+- In `SimplePanel.js`, add a `GrafanaTheme` property to the `PanelProps`.
 
-```tsx
+```js
 interface Props extends PanelProps<SimpleOptions> {
   theme: GrafanaTheme;
 }
@@ -141,7 +141,7 @@ interface Props extends PanelProps<SimpleOptions> {
 
 `GrafanaTheme` is available from the `grafana/data` package:
 
-```tsx
+```js
 import { PanelProps, GrafanaTheme } from '@grafana/data';
 ```
 
@@ -149,36 +149,36 @@ The `theme` property is not set by default, so you need to use the `withTheme` t
 
 - Rename `SimplePanel` to `PartialSimplePanel`.
 
-```tsx
+```js
 class PartialSimplePanel extends PureComponent<Props>
 ```
 
 - Import `withTheme` from `grafana/ui`.
 
-```tsx
+```js
 import { withTheme } from '@grafana/ui';
 ```
 
 - Export the `SimplePanel`, now complete with a theme. `withTheme` assigns the current theme to the `theme` property.
 
-```tsx
+```js
 export const SimplePanel = withTheme(PartialSimplePanel);
 ```
 
 The theme property is now available from within the component.
 
-```tsx
+```js
 const { width, height, theme } = this.props;
 ```
 
 - Replace the current background color with a color from the theme.
 
-```tsx
+```js
 style('background-color', theme.colors.red)
 ```
 {{% /tutorials/step %}}
 {{% tutorials/step title="Complete example" %}}
-```tsx
+```js
 import React, { PureComponent } from 'react';
 import { withTheme } from '@grafana/ui';
 import { PanelProps, GrafanaTheme } from '@grafana/data';

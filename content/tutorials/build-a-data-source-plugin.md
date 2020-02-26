@@ -90,15 +90,15 @@ export interface MyQuery extends DataQuery {
 
 Now that you've defined the query model you wish to support, the next step is to bind the model to a form. The `FormField` is a text field component from `grafana/ui` that lets you register a listener, which will be invoked whenever the form field value changes.
 
-**QueryEditor.tsx**
+**QueryEditor.js**
 
-```tsx
+```js
 <FormField value={queryText || ''} onChange={this.onQueryTextChange} label="Query Text"></FormField>
 ```
 
 The registered listener, `onQueryTextChange`, calls `onChange` to update the current query:
 
-```tsx
+```js
 onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onChange, query } = this.props;
     onChange({ ...query, queryText: event.target.value });
@@ -120,7 +120,7 @@ The config editor looks similar to the query editor, in that it defines a model 
 
 **types.ts**
 
-```tsx
+```js
 export interface MyDataSourceOptions extends DataSourceJsonData {
   path?: string;
 }
@@ -128,9 +128,9 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 
 Just like query editor, the form field in the config editor calls the registered listener whenever the value changes.
 
-**ConfigEditor.tsx**
+**ConfigEditor.js**
 
-```tsx
+```js
 <FormField
   label="Path"
   onChange={this.onPathChange}
