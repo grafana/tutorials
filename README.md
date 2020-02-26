@@ -16,6 +16,12 @@ Docker >= 2.1.0.3
 
 1. Run `make tutorials`. This launches a preview of the website at `http://localhost:3002/tutorials/` which will refresh automatically when changes to content in the `content/tutorials` directory are made.
 
+## Deploy changes to grafana.com
+
+When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `tutorials-sync` branch.
+
+In order to make those changes live, open a PR in the website repo that merges the `tutorials-sync` branch into `master`. Then follow the publishing guidelines in that repo.
+
 ## Resources
 
 - [Google Codelabs Tools](https://github.com/googlecodelabs/tools)
