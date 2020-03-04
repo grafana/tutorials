@@ -90,7 +90,7 @@ export interface MyQuery extends DataQuery {
 
 Now that you've defined the query model you wish to support, the next step is to bind the model to a form. The `FormField` is a text field component from `grafana/ui` that lets you register a listener, which will be invoked whenever the form field value changes.
 
-**QueryEditor.js**
+**QueryEditor.tsx**
 
 ```js
 <FormField value={queryText || ''} onChange={this.onQueryTextChange} label="Query Text"></FormField>
