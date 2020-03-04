@@ -53,7 +53,7 @@ Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). 
 
 ### The `render` function
 
-The `render` function in `SimplePanel.js` determines how Grafana displays the panel in a dashboard.
+The `render` function in `SimplePanel.tsx` determines how Grafana displays the panel in a dashboard.
 
 ### Panel properties
 
