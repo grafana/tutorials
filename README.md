@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
 
-[Grafana Tutorials](https://robbymilo-tutorials--grafana.netlify.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
+[Grafana Tutorials](https://grafana.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
 
 ![Screenshot](screenshot.png)
 
