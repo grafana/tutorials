@@ -61,7 +61,7 @@ The [PanelProps](https://github.com/grafana/grafana/blob/747b546c260f9a448e2cb56
 
 You can access the panel properties through `this.props`, as seen in your plugin.
 
-**SimplePanel.js**
+**SimplePanel.tsx**
 
 ```js
 const { options, data, width, height } = this.props;
