@@ -99,7 +99,7 @@ export const defaults: SimpleOptions = {
 
 Just like the panel itself, the panel editor is a React component, which returns a form that lets users update the value of the options defined by `SimpleOptions`.
 
-**SimpleEditor.js**
+**SimpleEditor.tsx**
 
 ```js
 <FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
