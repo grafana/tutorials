@@ -48,7 +48,7 @@ In fact, D3.js is already bundled with Grafana, and you can access it by importi
 
 - Import the `select` function from `d3`:
 
-**SimplePanel.js**
+**SimplePanel.tsx**
 
 ```js
 import { select } from 'd3';
