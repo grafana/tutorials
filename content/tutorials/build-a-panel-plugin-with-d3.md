@@ -131,7 +131,7 @@ To provide your users with a consistent look-and-feel, you'll want to use the sa
 
 In this step, you'll learn how to use the colors from the current theme.
 
-- In `SimplePanel.js`, add a `GrafanaTheme` property to the `PanelProps`.
+- In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
 
 ```js
 interface Props extends PanelProps<SimpleOptions> {
