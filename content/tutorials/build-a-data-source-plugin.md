@@ -128,7 +128,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 
 Just like query editor, the form field in the config editor calls the registered listener whenever the value changes.
 
-**ConfigEditor.js**
+**ConfigEditor.tsx**
 
 ```js
 <FormField
