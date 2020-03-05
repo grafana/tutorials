@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
 
-[Grafana Tutorials](https://storage.googleapis.com/grafana-tutorials/index.html) are step-by-step guides that help you make the most of Grafana.
+[Grafana Tutorials](https://grafana.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
 
 ![Screenshot](screenshot.png)
 
@@ -10,26 +10,17 @@
 
 ## Requirements
 
-Tutorials are built using [claat](https://github.com/googlecodelabs/tools/tree/master/claat):
+Docker >= 2.1.0.3
 
-**Important:** This repository currently needs a [fork](https://github.com/marcusolsson/tools/tree/markdown-import), that support fragment imports for Markdown. For more information, refer to the [pull request](https://github.com/googlecodelabs/tools/pull/375).
+## Build the tutorials
 
-## Usage
+1. Run `make tutorials`. This launches a preview of the website at `http://localhost:3002/tutorials/` which will refresh automatically when changes to content in the `content/tutorials` directory are made.
 
-To build the static site, run the build script:
+## Deploy changes to grafana.com
 
-```
-./build.sh
-```
+When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `tutorials-sync` branch.
 
-## Development
-
-To run a web server inside the `public` directory:
-
-```
-cd public
-claat serve
-```
+In order to make those changes live, open a PR in the website repo that merges the `tutorials-sync` branch into `master`. Then follow the publishing guidelines in that repo.
 
 ## Resources
 

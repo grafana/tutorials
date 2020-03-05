@@ -1,23 +1,30 @@
-name: Build and Publish to Google Cloud Storage Bucket
+name: publish_tutorials
 
 on:
   push:
     branches:
-      - master
+    - master
+    paths:
+    - 'content/tutorials/**'
 
 jobs:
-  setup-build-publish-deploy:
-    name: Setup, Build, and Publish
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          version: "270.0.0"
-          service_account_email: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
-          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-
-      - run: |
-          gsutil -m -h "Cache-Control:no-cache,max-age=0" cp -r public/* ${{ secrets.GCS_BUCKET }}
+    - uses: actions/checkout@v1
+    - name: publish-to-git
+      uses: ./.github/actions/gha-publish-to-git
+      id: publish
+      with:
+        repository: grafana/website
+        branch: tutorials-sync
+        host: github.com
+        github_pat: '${{ secrets.GH_BOT_ACCESS_TOKEN }}'
+        source_folder: content/tutorials
+        target_folder: content/tutorials
+    - shell: bash
+      run: |
+        test -n "${{ steps.publish.outputs.commit_hash }}"
+        test -n "${{ steps.publish.outputs.working_directory }}"
