@@ -217,10 +217,14 @@ testDatasource() {
 - Confirm that the client is able to call our backend plugin by hitting **Save & Test** on your data source. It should give you a green message saying _Data source is working_.
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Debugging backend plugin" %}}
-Insofar as bakend plugin is running as a [separate process](https://github.com/hashicorp/go-plugin#architecture), it's not possible to debug it as a part of Grafana server. Also, it's not possible to just run plugin with debugging config from IDE or code editor, because subprocess should be spawned by grafana-server. Fortunately, debugging is reachable by attaching [delve](https://github.com/go-delve/delve) debugger to running process.
+{{% tutorials/step title="Debug your backend plugin" %}}
+Since the backend plugin is running as a [separate process](https://github.com/hashicorp/go-plugin#architecture), it's not possible to debug it through the Grafana server. Nor is it possible to run the plugin with debugging config from an IDE or a code editor, because the subprocess is spawned by grafana-server. 
 
-First of all, you need to build plugin with several flags improving debugging experience. `-gcflags=all="-N -l"` disables compiler optimizations and inlining.
+Fortunately, you can debug your plugin by attaching the [delve](https://github.com/go-delve/delve) debugger to a running process.
+
+To improve the debugging experience, you need to build the plugin with additional flags. 
+
+- Disable compiler optimizations and inlining by adding `-gcflags=all="-N -l"` when you build your plugin:
 
 ```
 go build -gcflags=all="-N -l" -o ./dist/my-datasource_linux_amd64 ./backend
@@ -231,7 +235,9 @@ Restart grafana-server or kill running plugin instance to restart plugin.
 pkill my-datasource
 ```
 
-Now it's possible to attach to plugin process with `dlv attach`. Here's a script which runs delve in headless mode and attaches to plugin. Pay attention to `ptrace_scope` section if you're running Linux - attaching debugger might be prevented by default.
+- Attach to plugin process, using `dlv attach`. 
+
+Here's a script which runs delve in headless mode and attaches to plugin. Pay attention to `ptrace_scope` section if you're running Linux—attaching debugger might be prevented by default.
 
 ```bash
 #!/bin/bash
@@ -260,7 +266,7 @@ dlv attach ${PLUGIN_PID} --headless --listen=:${PORT} --api-version 2 --log
 pkill dlv
 ```
 
-Save script to `debug-backend.sh` and run it. You will get headless delve running on `3222` port. Finally, you can connect to delve from your IDE. This is an example configuration for [VS Code](https://code.visualstudio.com/):
+Save script to `debug-backend.sh` and run it. You'll get headless delve running on `3222` port. Finally, you can connect to delve from your IDE. This is an example configuration for [VS Code](https://code.visualstudio.com/):
 
 ```json
 {
