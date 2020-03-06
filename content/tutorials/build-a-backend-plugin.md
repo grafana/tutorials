@@ -217,3 +217,66 @@ testDatasource() {
 - Confirm that the client is able to call our backend plugin by hitting **Save & Test** on your data source. It should give you a green message saying _Data source is working_.
 
 {{% /tutorials/step %}}
+{{% tutorials/step title="Debugging backend plugin" %}}
+Insofar as bakend plugin is running as a [separate process](https://github.com/hashicorp/go-plugin#architecture), it's not possible to debug it as a part of Grafana server. Also, it's not possible to just run plugin with debugging config from IDE or code editor, because subprocess should be spawned by grafana-server. Fortunately, debugging is reachable by attaching [delve](https://github.com/go-delve/delve) debugger to running process.
+
+First of all, you need to build plugin with several flags improving debugging experience. `-gcflags=all="-N -l"` disables compiler optimizations and inlining.
+
+```
+go build -gcflags=all="-N -l" -o ./dist/my-datasource_linux_amd64 ./backend
+```
+
+Restart grafana-server or kill running plugin instance to restart plugin.
+```
+pkill my-datasource
+```
+
+Now it's possible to attach to plugin process with `dlv attach`. Here's a script which runs delve in headless mode and attaches to plugin. Pay attention to `ptrace_scope` section if you're running Linux - attaching debugger might be prevented by default.
+
+```bash
+#!/bin/bash
+if [ "$1" == "-h" ]; then
+  echo "Usage: ${BASH_SOURCE[0]} [plugin process name] [port]"
+  exit
+fi
+
+PORT="${2:-3222}"
+PLUGIN_NAME="${1:-my-datasource}"
+
+if [ "$OSTYPE" == "linux-gnu" ]; then
+  ptrace_scope=`cat /proc/sys/kernel/yama/ptrace_scope`
+  if [ "$ptrace_scope" != 0 ]; then
+    echo "WARNING: ptrace_scope set to value other than 0, this might prevent debugger from connecting, try writing \"0\" to /proc/sys/kernel/yama/ptrace_scope.
+Read more at https://www.kernel.org/doc/Documentation/security/Yama.txt"
+    read -p "Set ptrace_scope to 0? y/N (default N)" set_ptrace_input
+    if [ "$set_ptrace_input" == "y" ] || [ "$set_ptrace_input" == "Y" ]; then
+      echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    fi
+  fi
+fi
+
+PLUGIN_PID=`pgrep ${PLUGIN_NAME}`
+dlv attach ${PLUGIN_PID} --headless --listen=:${PORT} --api-version 2 --log
+pkill dlv
+```
+
+Save script to `debug-backend.sh` and run it. You will get headless delve running on `3222` port. Finally, you can connect to delve from your IDE. This is an example configuration for [VS Code](https://code.visualstudio.com/):
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug backend plugin",
+      "type": "go",
+      "request": "attach",
+      "mode": "remote",
+      "port": 3222,
+      "host": "127.0.0.1",
+    },
+  ]
+}
+
+```
+
+{{% /tutorials/step %}}
