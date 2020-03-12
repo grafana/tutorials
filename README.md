@@ -4,8 +4,6 @@
 
 [Grafana Tutorials](https://grafana.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
 
-![Screenshot](screenshot.png)
-
 **Important:** This project is in early development, and is not fit for production use. The tutorials are based on experimental APIs, which are subject to change.
 
 ## Requirements
