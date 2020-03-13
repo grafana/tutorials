@@ -31,6 +31,8 @@ In this tutorial, you'll learn how to use Grafana to set up a monitoring solutio
 
 This tutorial uses a sample application to demonstrate some of the features in Grafana. To complete the exercises in this tutorial, you need to download the files to your local machine.
 
+In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/), and [Loki](https://grafana.com/oss/loki/).
+
 - Using [Git](https://git-scm.com/), clone the example code:
 
 ```
@@ -49,7 +51,7 @@ cd monitoring-intro-workshop
 docker-compose up -d
 ```
 
-The first time you run `docker-compose up -d`, Docker downloads all the necessary resources for this tutorial. This might take a few minutes, depending on your internet connection.
+The first time you run `docker-compose up -d`, Docker downloads all the necessary resources for the tutorial. This might take a few minutes, depending on your internet connection.
 
 - Ensure all services are up-and-running:
 
@@ -59,20 +61,26 @@ docker-compose ps
 
 All services should report their state as "Up".
 
-- Browse to [localhost:8081](http://localhost:8081) to start using the sample application.
+- Browse to the sample application on [localhost:8081](http://localhost:8081).
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Add a Prometheus data source" %}}
+{{% tutorials/step title="Add a metrics data source" %}}
+
+The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database.
+
+To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
 
 - In the side bar, click **Configuration** -> **Data Sources**.
 - Click **Add data source**, and select "Prometheus" from the list of available data sources.
 - In the URL box, type "http://prometheus:9090".
 - Click **Save & Test** to save your changes.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Explore time series" %}}
+Prometheus is now available as a data source in Grafana.
 
-Grafana lets you explore and compare metrics from your data sources.
+{{% /tutorials/step %}}
+{{% tutorials/step title="Explore your metrics" %}}
+
+Grafana Explore, introduced in Grafana 6.0, is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
 
 - In the side bar, click **Explore**.
 - In the **Query** box, type the following, and press Enter:
@@ -83,58 +91,56 @@ tns_request_duration_seconds_count
 
 - In the top right corner, click the drop down on the **Run Query** button, and select "5s" to have Grafana run your query every 5 seconds.
 
-PromQL is a powerful query language that lets you apply transformations to your queries. Since `tns_request_duration_seconds_count` is a counter, it will only increase. For something more interesting, try the rate and sum functions:
+> You just made your first _PromQL_ query. [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is a powerful query language that lets you select and aggregate time series data stored in Prometheus.
+
+`tns_request_duration_seconds_count` is a _counter_, a type of metric whose value only ever increases. Rather than visualizing the actual value, it's common to use counters to calculate the _rate of change_, i.e. how fast the value increases.
 
 - Add the `rate` function to your query to visualize the rate of requests per second:
 
 ```
-irate(tns_request_duration_seconds_count[5m])
+rate(tns_request_duration_seconds_count[5m])
 ```
+
+As you can see in the graph legend, the query returns a time series for every method, route, and status code. PromQL lets you group time series by labels.
 
 - Add the `sum` function to your query to group time series by route:
 
 ```
-sum(irate(tns_request_duration_seconds_count[5m])) by(route)
+sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 ```
 
 - Go back to the sample application and generate some traffic by adding new links, voting, or just refresh the browser.
 
-> If you don't want to manually refresh the browser, hey is a great tool to generate traffic.
-
-```
-hey -n 10 -c 10 -m GET http://localhost:8081
-hey -n 10 -c 10 -m POST -H "Content-Type: application/x-www-form-urlencoded" -d "title=Example&url=http://example.com" http://localhost:8081/post
-```
+> Depending on your use case, you might want to group on other labels. Try grouping by other labels, such as `status_code`, by changing the `by(route)` part of the query.
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Add a Loki data source" %}}
+{{% tutorials/step title="Add a logging data source" %}}
+
+Grafana 6.0 introduced support for logging data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
 - In the side bar, click **Configuration** -> **Data Sources**.
 - Click **Add data source**, and select "Loki" from the list of available data sources.
 - In the URL box, type [http://loki:3100](http://loki:3100).
 - Click **Save & Test** to save your changes.
 
+Loki is now available as a data source in Grafana.
+
 {{% /tutorials/step %}}
-{{% tutorials/step title="Explore logs" %}}
+{{% tutorials/step title="Explore your logs" %}}
 
-
-- In the side bar, click **Configuration** -> **Data Sources**.
-
-- Click **Add data source**, and select **Loki** from the list of available data sources.
-
-- In the **URL** box, type `http://loki:3100`.
-
-- Click **Save & Test** to save your changes.
-
-### Explore logs
+Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well.
 
 - In the side bar, click **Explore**.
 - In the dropdown at the top, select the "Loki" data source.
-- In the **Query** box, type the following, and press Enter to display all logs within the log file of the sample application:
+- In the **Query** box, type:
 
 ```
 {filename="/var/log/tns-app.log"}
 ```
+
+- Press Enter to display all logs within the log file of the sample application.
+
+Not only does Loki let you filter logs based on labels, but on specific occurrences:
 
 - Filter log lines based on a substring:
 
@@ -203,13 +209,13 @@ Next, we'll add one for _Errors_, and _Duration_.
 - Add another Graph panel for _Errors_:
 
 ```
-sum(irate(tns_request_duration_seconds_count{status_code!~"2.."}[5m]))
+sum(rate(tns_request_duration_seconds_count{status_code!~"2.."}[5m]))
 ```
 
 - Add a third Graph panel to display _Duration_:
 
 ```
-histogram_quantile(0.99, sum(irate(tns_request_duration_seconds_bucket[5m])) by(le))
+histogram_quantile(0.99, sum(rate(tns_request_duration_seconds_bucket[5m])) by(le))
 ```
 
 To be able to troubleshoot any errors, let's add a logs panel to our dashboard:
