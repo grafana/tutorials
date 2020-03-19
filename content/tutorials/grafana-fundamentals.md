@@ -175,8 +175,6 @@ sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 ```
 
 - In the **Legend** box, enter "{{route}}" to rename the time series in the legend.
-- Click the **Visualization** panel tab to the left to go to the visualization settings for the panel.
-- Enable the **Stack** option to stack the series on top of each other. This makes it easier to see the total traffic across all routes.
 - Click the **General** panel tab, and change the title to "Traffic".
 - Click the arrow in the top-left corner to go back to the dashboard view.
 - Click the **Save dashboard** icon at the top of the dashboard, to save your dashboard.
@@ -187,11 +185,18 @@ sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 Whenever things go bad, it can be invaluable to understand the context in which the system failed. Time of last deploy, or database migration can offer insight into what might have caused an outage. Annotations lets you add custom events to your graphs.
 
 - To manually add an annotation, left-click anywhere in your graph, and click **Add annotation**.
-- Describe what you did, and optionally add tags for more context.
+- In the **Description** box, type "Migrated user database".
+- In the **Tags** box, type "migration".
 
-Let your team know that you did some testing for a while, by clicking and dragging an interval, while pressing Ctrl (or Cmd on macOS).
+Grafana also lets you annotate a time interval, through _region annotations_.
 
-Instead of manually annotating your dashboards, you can tell Grafana to get annotations from a data source.
+- While pressing Ctrl (or Cmd on macOS), click and drag across the graph using your left mouse button.
+- In the **Description** box, type "Performed load tests".
+- In the **Tags** box, type "testing".
+
+Adding annotations to your dashboards is a great way to communicate important events to the rest of your team.
+
+Manually annotating your dashboard is fine for those one-off events. For regularly occurring events, such as deploying a new release, Grafana supports querying annotations from one of your data sources:
 
 - Select **Dashboard settings** from the top of the dashboard view.
 - Click **Annotations**, then **New Annotation Query**.
