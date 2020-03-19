@@ -213,38 +213,6 @@ Manually annotating your dashboard is fine for those one-off events. For regular
 The log lines returned by your query are now displayed as annotations in the graph.
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Build a RED dashboard" %}}
-
-RED, or Rate, Errors, and Duration, is a method for monitoring services. Let's create a RED dashboard for our sample application.
-
-In the last exercise, you created a panel to visualize the _Rate_ of requests, or traffic.
-
-Next, we'll add one for _Errors_, and _Duration_.
-
-- Add another Graph panel for _Errors_:
-
-```
-sum(rate(tns_request_duration_seconds_count{status_code!~"2.."}[5m]))
-```
-
-- Add a third Graph panel to display _Duration_:
-
-```
-histogram_quantile(0.99, sum(rate(tns_request_duration_seconds_bucket[5m])) by(le))
-```
-
-To be able to troubleshoot any errors, let's add a logs panel to our dashboard:
-
-- Create another panel with a Logs visualization.
-- In the **Query** settings, select the "Loki" data source, and enter the query:
-
-```
-{filename="/var/log/tns-app.log"}
-```
-
-- Go back to you dashboard. With the current dashboard, we can quickly see when an error occurred, and what may have caused it.
-
-{{% /tutorials/step %}}
 {{% tutorials/step title="Alerting" %}}
 
 For this exercise, you'll be sending alerts using Webhooks. Before you can do that, you need to set up a _request bin_:
