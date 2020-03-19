@@ -137,23 +137,23 @@ Prometheus is now available as a data source in Grafana.
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
 
 - In the side bar, click the **Explore** icon (compass).
-- In the **Query** field, where it says *Enter a PromQL query*, enter `the following text` and then press Enter.
+- In the **Query editor**, where it says *Enter a PromQL query*, enter `the following text` and then press Enter.
   A graph appears.
 - In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
-> You just made your first _PromQL_ query. [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is a powerful query language that lets you select and aggregate time series data stored in Prometheus.
+You just made your first _PromQL_ query! [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is a powerful query language that lets you select and aggregate time series data stored in Prometheus.
 
-`tns_request_duration_seconds_count` is a _counter_, a type of metric whose value only ever increases. Rather than visualizing the actual value, it's common to use counters to calculate the _rate of change_, i.e. how fast the value increases.
+`tns_request_duration_seconds_count` is a _counter_, a type of metric whose value only ever increases. Rather than visualizing the actual value, you can use counters to calculate the _rate of change_, i.e. how fast the value increases.
 
-- Add the `rate` function to your query to visualize the rate of requests per second:
+- Add the `rate` function to your query to visualize the rate of requests per second. Enter the following in the **Query editor** and then press Enter.
 
 ```
 rate(tns_request_duration_seconds_count[5m])
 ```
 
-As you can see in the graph legend, the query returns a time series for every method, route, and status code. PromQL lets you group time series by labels.
+As you can see in the graph legend, the query returns a time series for every method, route, and status code. ((Wait, what? No it doesn't. This is confusing. You need to tell them what the legend is on the screen (different colored lines) and explain this more simply. At first, I was confused because job and instance were all listed, but after inspecting them for a few seconds, I realized that those were all the same.)) 
 
-- Add the `sum` function to your query to group time series by route:
+- PromQL lets you group time series by labels. Add the `sum` function to your query to group time series by route:
 
 ```
 sum(rate(tns_request_duration_seconds_count[5m])) by(route)
