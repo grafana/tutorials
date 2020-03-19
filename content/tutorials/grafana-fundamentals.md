@@ -123,7 +123,7 @@ The sample application exposes metrics which are stored in [Prometheus](https://
 
 To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
 
-- In the side bar, click the **Configuration** icon (a gear) and then click **Data Sources**.
+- In the side bar, click the **Configuration** (gear) icon, and then click **Data Sources**.
 - Click **Add data source**. 
 - In the list of data sources, click **Prometheus**.
 - In the URL box, type **http://prometheus:9090**.
@@ -136,7 +136,7 @@ Prometheus is now available as a data source in Grafana.
 
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
 
-- In the side bar, click the **Explore** icon (compass).
+- In the side bar, click the **Explore** (compass rose) icon.
 - In the **Query editor**, where it says *Enter a PromQL query*, enter `the following text` and then press Enter.
   A graph appears.
 - In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
@@ -159,18 +159,19 @@ As you can see in the graph legend, the query returns a time series for every me
 sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 ```
 
-- Go back to the sample application and generate some traffic by adding new links, voting, or just refresh the browser.
+- Go back to the sample application and generate some traffic by adding new links, voting, or just refresh the browser. ((This would be a great place to have them change the time picker at the top. I added some stuff, but I thought nothing changed because it was just very small lines at the far right. If they change the time picker to 5 minutes or 15 minutes, then the changes will be far more obvious.))
 
 > Depending on your use case, you might want to group on other labels. Try grouping by other labels, such as `status_code`, by changing the `by(route)` part of the query.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add a logging data source" %}}
 
-Grafana 6.0 introduced support for logging data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
+Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
-- In the side bar, click **Configuration** -> **Data Sources**.
-- Click **Add data source**, and select "Loki" from the list of available data sources.
-- In the URL box, type [http://loki:3100](http://loki:3100).
+- In the side bar, click the **Configuration** (gear) icon, and then click **Data Sources**.
+- Click **Add data source**. 
+- In the list of data sources, click **Loki**.
+- In the URL box, enter [http://loki:3100](http://loki:3100).
 - Click **Save & Test** to save your changes.
 
 Loki is now available as a data source in Grafana.
