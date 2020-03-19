@@ -14,35 +14,45 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 
 In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
 
-### What you'll learn
+### What you'll learn how to:
 
-- How to explore metrics and logs
-- How to build dashboards
-- How to annotate dashboards
-- How to set up alerts
+- Explore metrics and logs
+- Build dashboards
+- Annotate dashboards
+- Set up alerts
 
 ### What you'll need
 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Set up the sample application" %}}
 
 This tutorial uses a sample application to demonstrate some of the features in Grafana. To complete the exercises in this tutorial, you need to download the files to your local machine.
 
-In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/), and [Loki](https://grafana.com/oss/loki/).
+In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/) and [Loki](https://grafana.com/oss/loki/).
 
-- Clone the [example code](https://github.com/grafana/tutorial-environment) using [Git](https://git-scm.com/):
+- Clone the [Tutorial environment Git repository](https://github.com/grafana/tutorial-environment). 
+
+If using Git Desktop, then click the link above, click **Clone or download**, and then click [Open in Desktop](https://git-scm.com/).
+
+Or in the command line (`cmd` for Windows), enter:
 
 ```
 git clone https://github.com/grafana/tutorial-environment.git
 ```
 
-- Go to the directory where you cloned this repository:
+- Change to the directory where you cloned this repository:
 
 ```
+# Linux or Mac
 cd tutorial-environment
+
+# Windows example, replace the path with the one on your system
+
+cd "C:\GitFiles\tutorial-environment"
 ```
 
 - Make sure Docker is running:
@@ -50,6 +60,7 @@ cd tutorial-environment
 ```
 docker ps
 ```
+MARCUS - How do I know if it is running? I got a list of column names but no text. However, the Docker icon in my hidden icons says Docker is running.
 
 - Start the sample application:
 
@@ -59,13 +70,15 @@ docker-compose up -d
 
 The first time you run `docker-compose up -d`, Docker downloads all the necessary resources for the tutorial. This might take a few minutes, depending on your internet connection.
 
+> **Note:** If you already have Grafana, Loki, or Prometheus running on your system, then you might see errors because the Docker image is trying to use ports that your local installations are already using. Stop the services, then run 
+
 - Ensure all services are up-and-running:
 
 ```
 docker-compose ps
 ```
 
-All services should report their state as "Up".
+All services should report their status as "Up <time>".
 
 - Browse to the sample application on [localhost:8081](http://localhost:8081).
 
@@ -75,27 +88,27 @@ The sample application, Grafana News, lets you post links and vote for the ones 
 
 To add a link:
 
-- In the **Title** box, type "Example".
-- In the **URL** box, type "https://example.com".
+- In **Title**, enter **Example**.
+- In **URL**, enter **https://example.com**.
 - Click **Submit** to add the link.
 
-To vote for a link:
+The link appears in the list under the Grafana News heading.
 
-- In the list of links, click the triangle icon next to the name of the link.
+To vote for a link, click the triangle icon next to the name of the link.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Log in to Grafana" %}}
 
 Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
 
-- Browse to [localhost:3000](http://localhost:3000).
-- In the **email or username** box, type "admin".
-- In the **password** box, type "admin".
+- Browse to [localhost:3001](http://localhost:3001).
+- In the **email or username** box, type **admin**.
+- In the **password** box, type **admin**.
 - Click **Log In**.
 
 The first time you log in, you're asked to change your password:
 
-- In the **New password** box, type your new password .
+- In the **New password** box, type your new password.
 - In the **Confirm new password** box, type the same password.
 - Click **Save**.
 
@@ -106,30 +119,27 @@ To the far left you can see the _sidebar_, a set of quick access icons for navig
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add a metrics data source" %}}
 
-The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database.
+The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
 
 To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
 
-- In the side bar, click **Configuration** -> **Data Sources**.
-- Click **Add data source**, and select "Prometheus" from the list of available data sources.
-- In the URL box, type "http://prometheus:9090".
-- Click **Save & Test** to save your changes.
+- In the side bar, click the **Configuration** icon (a gear) and then click **Data Sources**.
+- Click **Add data source**. 
+- In the list of data sources, click **Prometheus**.
+- In the URL box, type **http://prometheus:9090**.
+- Click **Save & Test**.
 
 Prometheus is now available as a data source in Grafana.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Explore your metrics" %}}
 
-Grafana Explore, introduced in Grafana 6.0, is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
+Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
 
-- In the side bar, click **Explore**.
-- In the **Query** box, type the following, and press Enter:
-
-```
-tns_request_duration_seconds_count
-```
-
-- In the top right corner, click the drop down on the **Run Query** button, and select "5s" to have Grafana run your query every 5 seconds.
+- In the side bar, click the **Explore** icon (compass).
+- In the **Query** field, where it says *Enter a PromQL query*, enter `the following text` and then press Enter.
+  A graph appears.
+- In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
 > You just made your first _PromQL_ query. [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is a powerful query language that lets you select and aggregate time series data stored in Prometheus.
 
