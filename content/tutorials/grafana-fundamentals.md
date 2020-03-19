@@ -161,7 +161,11 @@ Grafana only shows logs within the current time interval. This lets you narrow d
 {{% /tutorials/step %}}
 {{% tutorials/step title="Build a dashboard" %}}
 
-Panels are the building blocks of Grafana dashboards. Every panel consists by a _query_ and a _visualization_.
+A dashboard gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
+
+Dashboards are made up of _panels_, each representing a part of the story you want your dashboard to tell.
+
+Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
 
 - In the side bar, click **Create** to create a new dashboard.
 - Click **Add query**, and enter the query from earlier:
