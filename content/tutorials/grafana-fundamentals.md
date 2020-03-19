@@ -33,16 +33,16 @@ This tutorial uses a sample application to demonstrate some of the features in G
 
 In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/), and [Loki](https://grafana.com/oss/loki/).
 
-- Clone the [example code](https://github.com/grafana/monitoring-intro-workshop) using [Git](https://git-scm.com/):
+- Clone the [example code](https://github.com/grafana/tutorial-environment) using [Git](https://git-scm.com/):
 
 ```
-git clone https://github.com/grafana/monitoring-intro-workshop.git
+git clone https://github.com/grafana/tutorial-environment.git
 ```
 
 - Go to the directory where you cloned this repository:
 
 ```
-cd monitoring-intro-workshop
+cd tutorial-environment
 ```
 
 - Make sure Docker is running:
