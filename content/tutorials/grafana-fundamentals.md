@@ -69,6 +69,40 @@ All services should report their state as "Up".
 
 - Browse to the sample application on [localhost:8081](http://localhost:8081).
 
+### Grafana News
+
+The sample application, Grafana News, lets you post links and vote for the ones you like.
+
+To add a link:
+
+- In the **Title** box, type "Example".
+- In the **URL** box, type "https://example.com".
+- Click **Submit** to add the link.
+
+To vote for a link:
+
+- In the list of links, click the triangle icon next to the name of the link.
+
+{{% /tutorials/step %}}
+{{% tutorials/step title="Log in to Grafana" %}}
+
+Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
+
+- Browse to [localhost:3000](http://localhost:3000).
+- In the **email or username** box, type "admin".
+- In the **password** box, type "admin".
+- Click **Log In**.
+
+The first time you log in, you're asked to change your password:
+
+- In the **New password** box, type your new password .
+- In the **Confirm new password** box, type the same password.
+- Click **Save**.
+
+The first thing you see is the Home dashboard, which helps you get started.
+
+To the far left you can see the _sidebar_, a set of quick access icons for navigating Grafana.
+
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add a metrics data source" %}}
 
@@ -213,16 +247,24 @@ Manually annotating your dashboard is fine for those one-off events. For regular
 The log lines returned by your query are now displayed as annotations in the graph.
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Alerting" %}}
+{{% tutorials/step title="Set up an alert" %}}
 
-For this exercise, you'll be sending alerts using Webhooks. Before you can do that, you need to set up a _request bin_:
+Alerts allows you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
+
+Configuring alerting consists of two parts: _Alert rules_ and _notification channels_.
+
+Alert rules are defined by one or more _conditions_ that are regularly evaluated by Grafana. Whenever the conditions of an alert rule are met, the Grafana notifies the channels configured for that alert.
+
+### Configure a notification channel
+
+In this step, you'll be sending alerts using _web hooks_. To be able to test your alerts, you first need to have a place to send them:
 
 - Browse to [requestbin.com](https://requestbin.com)
 - Unselect **Private (requires log in)**, and click **Create Request Bin**.
 - You request bin is now waiting for the first request.
 - Copy the endpoint URL.
 
-Next, you'll configure a _notification channel_.
+Next, you'll configure a notification channel for web hooks, to send notifications to your Request Bin:
 
 - In the side bar, click **Alerting** -> **Notification channels**.
 - Click **Add channel**.
@@ -231,12 +273,14 @@ Next, you'll configure a _notification channel_.
 - In the **Url** box, paste the endpoint to your request bin.
 - Click **Send Test** to send a test alert to your request bin.
 
-Now that Grafana knows how to notify you, it's time to set up an alert.
+### Configure an alert rule
+
+Now that Grafana knows how to notify you, it's time to set up an alert rule:
 
 - Go to the dashboard you just created, and **Edit** the Traffic panel.
 - Click the bell icon to the left of the panel editor to access the settings for alerting.
 - In the **Name** box, type "My alert".
-- In the **Evaluate every** box, type "5s".
+- In the **Evaluate every** box, type "5s". For the purpose of this tutorial, the evaluation interval is intentionally shorter than what's recommended, to make it easier to test.
 - In the **For** box, type "0m".
 - Change the alert condition to:
 
@@ -252,9 +296,22 @@ This condition will evaluate whether the last value of any of the time series fr
 
 You now have an alert set up to send a notification using a web hook. See if you can trigger it by generating some traffic on the sample application.
 
-- Browse to [localhost:8081](http://localhost:8081), and refresh the page repeatedly to generate traffic.
+- Browse to [localhost:8081](http://localhost:8081).
+- Refresh the page repeatedly to generate traffic.
 
 When Grafana triggers the alert, it sends a request to the web hook you set up earlier.
+
+- Browse to the Request Bin you created earlier, to inspect the alert notification.
+
+### Pause an alert
+
+Once you've acknowledged an alert, consider pausing it. This can be useful to avoid sending subsequent alerts, while you work on a fix.
+
+- In the side bar, click **Alerting** -> **Alert Rules**. All the alert rules configured so far are listed, along with their current state.
+- Find your alert in the list, and click the **Pause** icon on the right. The **Pause** icon turns into a **Play** icon.
+- Click the **Play** icon to resume evaluation of your alert.
+
+Read more about [alert rules](https://grafana.com/docs/grafana/latest/alerting/rules/) and [notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
