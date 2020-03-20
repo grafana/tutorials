@@ -179,26 +179,26 @@ Loki is now available as a data source in Grafana.
 {{% /tutorials/step %}}
 {{% tutorials/step title="Explore your logs" %}}
 
-Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well.
+Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well. ((Remember, I am a noob. I don't know what an ad hoc query is, so you should explain it.))
 
-- In the side bar, click **Explore**.
-- In the dropdown at the top, select the "Loki" data source.
-- In the **Query** box, type:
+- In the side bar, click the **Explore** (compass) icon.
+- In the data source list at the top, select the **Loki** data source.
+- In the **Query editor**, enter:
 
 ```
 {filename="/var/log/tns-app.log"}
 ```
 
-- Press Enter to display all logs within the log file of the sample application.
+- Grafana displays all logs within the log file of the sample application. ((As a noob, I have no idea what I am looking at. You might want to explain what the graph means and what those lines of text at the bottom mean.))
 
-Not only does Loki let you filter logs based on labels, but on specific occurrences:
+Not only does Loki let you filter logs based on labels, but on specific occurrences.
 
-- Filter log lines based on a substring:
+- Enter the following query to filter log lines based on a substring:
 
 ```
 {filename="/var/log/tns-app.log"} |= "error"
 ```
-
+((I got no results from this query until I clicked **Scan for older logs**.))
 Grafana only shows logs within the current time interval. This lets you narrow down your logs to a certain time.
 
 - Click and drag over a log occurrence in the graph to filter logs based on time.
