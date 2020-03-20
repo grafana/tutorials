@@ -123,7 +123,7 @@ The sample application exposes metrics which are stored in [Prometheus](https://
 
 To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
 
-- In the side bar, click the **Configuration** (gear) icon, and then click **Data Sources**.
+- In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 - Click **Add data source**. 
 - In the list of data sources, click **Prometheus**.
 - In the URL box, type **http://prometheus:9090**.
@@ -161,14 +161,14 @@ sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 
 - Go back to the sample application and generate some traffic by adding new links, voting, or just refresh the browser. ((This would be a great place to have them change the time picker at the top. I added some stuff, but I thought nothing changed because it was just very small lines at the far right. If they change the time picker to 5 minutes or 15 minutes, then the changes will be far more obvious.))
 
-> Depending on your use case, you might want to group on other labels. Try grouping by other labels, such as `status_code`, by changing the `by(route)` part of the query.
+Depending on your use case, you might want to group on other labels. Try grouping by other labels, such as `status_code`, by changing the `by(route)` part of the query.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add a logging data source" %}}
 
 Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
-- In the side bar, click the **Configuration** (gear) icon, and then click **Data Sources**.
+- In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 - Click **Add data source**. 
 - In the list of data sources, click **Loki**.
 - In the URL box, enter [http://loki:3100](http://loki:3100).
@@ -179,7 +179,7 @@ Loki is now available as a data source in Grafana.
 {{% /tutorials/step %}}
 {{% tutorials/step title="Explore your logs" %}}
 
-Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well. ((Remember, I am a noob. I don't know what an ad hoc query is, so you should explain it.))
+Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well. ((MARCUS - Remember, I am a noob. I don't know what an ad hoc query is, so you should explain it.))
 
 - In the side bar, click the **Explore** (compass) icon.
 - In the data source list at the top, select the **Loki** data source.
@@ -201,25 +201,27 @@ Not only does Loki let you filter logs based on labels, but on specific occurren
 ((I got no results from this query until I clicked **Scan for older logs**.))
 Grafana only shows logs within the current time interval. This lets you narrow down your logs to a certain time.
 
-- Click and drag over a log occurrence in the graph to filter logs based on time.
+- Click and drag over a log occurrence in the graph to filter logs based on time. ((Not clear what a log occurrence is. Perhaps you mean graph data?))
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Build a dashboard" %}}
 
-A dashboard gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
+A _dashboard_*_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
 
-Dashboards are made up of _panels_, each representing a part of the story you want your dashboard to tell.
+Dashboards are made up _panels_, each representing a part of the story you want your dashboard to tell.
+((MARCUS - Feels like we should have had this definition earlier, when we were exploring the first panel.))
 
-Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
+Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed. ((Feels like we should have had this definition earlier, when we were exploring the first panel.))
 
-- In the side bar, click **Create** to create a new dashboard.
-- Click **Add query**, and enter the query from earlier:
+- In the side bar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
+- Click **Add query**. 
+- In the **Query editor**, enter the query from earlier and then press Enter:
 
 ```
-sum(rate(tns_request_duration_seconds_count[5m])) by(route)
+
 ```
 
-- In the **Legend** box, enter "{{route}}" to rename the time series in the legend.
+- In the **Legend** field, enter "{{route}}" to rename the time series in the legend. The graph legend updates when you click outside the field.
 - Click the **General** panel tab, and change the title to "Traffic".
 - Click the arrow in the top-left corner to go back to the dashboard view.
 - Click the **Save dashboard** icon at the top of the dashboard, to save your dashboard.
