@@ -87,9 +87,9 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-Repeat the following steps for each user.
-
 #### Create a team:
+
+Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click **New team**.
@@ -97,6 +97,8 @@ Repeat the following steps for each user.
 1. Click **Create**.
 
 #### Add a user to a team
+
+Repeat the following steps for each user:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click the team you want to add a user to.
@@ -122,7 +124,7 @@ You'll be creating two folder, _Analytics_ and _Application_, where each team ca
 | Application | Marketing   | View        |
 |             | Engineering | Edit        |
 
-Repeat the following steps for each folder and team.
+Repeat the following steps for each folder.
 
 #### Add a folder for each team:
 
@@ -130,6 +132,15 @@ Repeat the following steps for each folder and team.
 1. To create a folder, click **New Folder**.
 1. In the **Name** box, type the name of the folder.
 1. Click **Create**.
+
+#### Remove Viewer role from folder permissions
+
+By default, when you create a folder, users with the Viewer role are granted permission to view the folder.
+
+In the example, Acme Corporation wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
+
+1. Go to the **Permissions** tab.
+1. Remove the Viewer role from the list, by clicking the red button on the right.
 
 #### Grant folder permissions to a team:
 
