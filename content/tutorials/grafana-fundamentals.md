@@ -14,14 +14,14 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 
 In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
 
-### What you'll learn how to:
+### You'll learn how to:
 
 - Explore metrics and logs
 - Build dashboards
 - Annotate dashboards
 - Set up alerts
 
-### What you'll need
+### You'll need:
 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/)
@@ -38,7 +38,7 @@ In this step, you'll set up the sample application, as well as supporting servic
 
 If using Git Desktop, then click the link above, click **Clone or download**, and then click [Open in Desktop](https://git-scm.com/).
 
-Or in the command line (`cmd` for Windows), enter:
+Or in the command line, enter:
 
 ```
 git clone https://github.com/grafana/tutorial-environment.git
@@ -50,9 +50,9 @@ git clone https://github.com/grafana/tutorial-environment.git
 # Linux or Mac
 cd tutorial-environment
 
-# Windows example, replace the path with the one on your system
+# Windows
 
-cd "C:\GitFiles\tutorial-environment"
+cd "<path to where you cloned the repository>"
 ```
 
 - Make sure Docker is running:
@@ -60,7 +60,8 @@ cd "C:\GitFiles\tutorial-environment"
 ```
 docker ps
 ```
-MARCUS - How do I know if it is running? I got a list of column names but no text. However, the Docker icon in my hidden icons says Docker is running.
+
+No errors means it is running. If you get an error, than start Docker and then run the command again.
 
 - Start the sample application:
 
@@ -70,7 +71,7 @@ docker-compose up -d
 
 The first time you run `docker-compose up -d`, Docker downloads all the necessary resources for the tutorial. This might take a few minutes, depending on your internet connection.
 
-> **Note:** If you already have Grafana, Loki, or Prometheus running on your system, then you might see errors because the Docker image is trying to use ports that your local installations are already using. Stop the services, then run 
+> **Note:** If you already have Grafana, Loki, or Prometheus running on your system, then you might see errors because the Docker image is trying to use ports that your local installations are already using. Stop the services, then run the command again.
 
 - Ensure all services are up-and-running:
 
@@ -78,7 +79,7 @@ The first time you run `docker-compose up -d`, Docker downloads all the necessar
 docker-compose ps
 ```
 
-All services should report their status as "Up <time>".
+All services should report their status as `Up`.
 
 - Browse to the sample application on [localhost:8081](http://localhost:8081).
 
@@ -101,15 +102,15 @@ To vote for a link, click the triangle icon next to the name of the link.
 
 Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
 
-- Browse to [localhost:3001](http://localhost:3001). ((MARCUS - We should probably note all cases where we change the default port to let them know why we did it and what the default port is.))
-- In the **email or username** box, type **admin**.
-- In the **password** box, type **admin**.
+- Browse to [localhost:3000](http://localhost:3000).
+- In **email or username**, type **admin**.
+- In **password**, enter **admin**.
 - Click **Log In**.
 
 The first time you log in, you're asked to change your password:
 
-- In the **New password** box, type your new password.
-- In the **Confirm new password** box, type the same password.
+- In **New password**, enter your new password.
+- In **Confirm new password**, enter the same password.
 - Click **Save**.
 
 The first thing you see is the Home dashboard, which helps you get started.
@@ -137,7 +138,7 @@ Prometheus is now available as a data source in Grafana.
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to understand the metrics exposed by the sample application.
 
 - In the side bar, click the **Explore** (compass rose) icon.
-- In the **Query editor**, where it says *Enter a PromQL query*, enter `the following text` and then press Enter.
+- In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Enter.
   A graph appears.
 - In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
@@ -208,7 +209,7 @@ Grafana only shows logs within the current time interval. This lets you narrow d
 
 A _dashboard_*_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
 
-Dashboards are made up _panels_, each representing a part of the story you want your dashboard to tell.
+Dashboards consist of _panels_, each representing a part of the story you want your dashboard to tell.
 ((MARCUS - Feels like we should have had this definition earlier, when we were exploring the first panel.))
 
 Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed. ((Feels like we should have had this definition earlier, when we were exploring the first panel.))
@@ -221,9 +222,9 @@ Every panel consists by a _query_ and a _visualization_. The query defines _what
 sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 ```
 
-- In the **Legend** field, enter `{{route}}` to rename the time series in the legend. The graph legend updates when you click outside the field.
+- In the **Legend** field, enter **{{route}}** to rename the time series in the legend. The graph legend updates when you click outside the field.
   Four icons on the left allow you to navigate between the **Queries**, **Visualization**, **General**, and **Alert** tabs. Hover your mouse over the icons to see the name of each tab. 
-- In the **General** tab, change the title to `Traffic`.
+- In the **General** tab, change the panel title to "Traffic".
 - Click the **Go Back** arrow in the top-left corner to go back to the dashboard view.
 - Click the **Save dashboard** (disk) icon at the top of the dashboard to save your dashboard.
 - Enter a name in the **New name** field and then click **Save**.
@@ -258,7 +259,7 @@ Add a region annotation.
 Manually annotating your dashboard is fine for those single events. For regularly occurring events, such as deploying a new release, Grafana supports querying annotations from one of your data sources. Let's create an annotation using the Loki data source we added earlier.
 ((One hallmark of tutorials is friendly language like this. We hold their hand and walk them through what we are doing and why.))
 
-- At the top of the dashboard, click the **Dashboard settings** (gear) icon. ((It would be so much better if we could just embed small images of the icons in the text.))
+- At the top of the dashboard, click the **Dashboard settings** (gear) icon.
 - In Annotations, click **Add Annotation Query**.
 - In **Name**, enter **Errors**.
 - In **Data source**, select **Loki**.
@@ -279,11 +280,11 @@ The log lines returned by your query are now displayed as annotations in the gra
 Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
 
 Alerts consists of two parts: 
+* _Notification channel_ - How the alert is delivered. When the conditions of an _alert rule_ are met, the Grafana notifies the channels configured for that alert.
 * _Alert rules_ - When the alert is triggered. Alert rules are defined by one or more _conditions_ that are regularly evaluated by Grafana.
-* _Notification channel_ - How the alert is delivered. When the conditions of an alert rule are met, the Grafana notifies the channels configured for that alert.
 
 ### Configure a notification channel
-((Just above, we list the parts of an alert as alert rules and notification channels. If possible, we should perform the tasks in the same order. If not possible, then we should rewrite the points above so they make sense in the reverse order.))
+
 In this step, you'll send alerts using _web hooks_. To test your alerts, you first need to have a place to send them.
 
 - Browse to [requestbin.com](https://requestbin.com)
