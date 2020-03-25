@@ -206,7 +206,7 @@ Grafana only shows logs within the current time interval. This lets you narrow d
 {{% /tutorials/step %}}
 {{% tutorials/step title="Build a dashboard" %}}
 
-A _dashboard_*_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
+A _dashboard_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
 
 Dashboards are made up _panels_, each representing a part of the story you want your dashboard to tell.
 ((MARCUS - Feels like we should have had this definition earlier, when we were exploring the first panel.))
