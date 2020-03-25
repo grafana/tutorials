@@ -34,7 +34,7 @@ This tutorial uses a sample application to demonstrate some of the features in G
 
 In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/) and [Loki](https://grafana.com/oss/loki/).
 
-- Clone the [Tutorial environment Git repository](https://github.com/grafana/tutorial-environment). 
+- Clone the [Tutorial environment repository](https://github.com/grafana/tutorial-environment). 
 
 If using Git Desktop, then click the link above, click **Clone or download**, and then click [Open in Desktop](https://git-scm.com/).
 
