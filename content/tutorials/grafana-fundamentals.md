@@ -36,7 +36,7 @@ In this step, you'll set up the sample application, as well as supporting servic
 
 - Clone the [Tutorial environment repository](https://github.com/grafana/tutorial-environment). 
 
-If using Git Desktop, then click the link above, click **Clone or download**, and then click [Open in Desktop](https://git-scm.com/).
+> If using GitHub Desktop, then click the link above, click **Clone or download**, and then click **Open in Desktop**.
 
 Or in the command line (`cmd` for Windows), enter:
 
