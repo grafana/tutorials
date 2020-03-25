@@ -36,7 +36,7 @@ In this step, you'll set up the sample application, as well as supporting servic
 
 - Clone the [Tutorial environment repository](https://github.com/grafana/tutorial-environment). 
 
-If using Git Desktop, then click the link above, click **Clone or download**, and then click [Open in Desktop](https://git-scm.com/).
+> If using GitHub Desktop, then click the link above, click **Clone or download**, and then click **Open in Desktop**.
 
 Or in the command line, enter:
 
@@ -207,7 +207,7 @@ Grafana only shows logs within the current time interval. This lets you narrow d
 {{% /tutorials/step %}}
 {{% tutorials/step title="Build a dashboard" %}}
 
-A _dashboard_*_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
+A _dashboard_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
 
 Dashboards consist of _panels_, each representing a part of the story you want your dashboard to tell.
 ((MARCUS - Feels like we should have had this definition earlier, when we were exploring the first panel.))
@@ -249,7 +249,7 @@ In the next part of the tutorial, we will simulate some common use cases that so
 ((Marcus - Since we are having them tag the annotations, you might want to demonstrate how to use them, or at least explain what they do.))
 Grafana also lets you annotate a time interval, with _region annotations_.
 
-Add a region annotation.
+Add a region annotation:
 
 - Press Ctrl (or Cmd on macOS), then click and drag across the graph to select an area.
 - In **Description**, enter **Performed load tests**.
