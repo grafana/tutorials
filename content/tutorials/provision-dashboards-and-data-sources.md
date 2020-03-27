@@ -26,7 +26,7 @@ draft: true
 
 As the number of dashboards and data sources grows within your organization, manually managing changes and permissions can become tedious and error-prone.
 
-Configuration as code is the practice of storing the the configuration of your system as version controlled, human-readable configuration files, rather than in a database.
+Configuration as code is the practice of storing the the configuration of your system as a set of version controlled, human-readable configuration files, rather than in a database.
 
 Encouraging reuse becomes important in order to avoid multiple teams redesigning the same dashboards. These configuration files can be reused across environments to avoid duplicated resources.
 
@@ -36,10 +36,10 @@ Grafana supports configuration as code through _provisioning_. The resources tha
 - [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources)
 - [Notification channels](https://grafana.com/docs/grafana/latest/administration/provisioning/#alert-notification-channels)
 
+In this tutorial, you'll learn how to provision dashboards and data sources.
+
 {{% /tutorials/step %}}
 {{% tutorials/step title="Set the provisioning directory" %}}
-
-Grafana regularly looks in a specified directory for configuration files containing provisioning manifests.
 
 To tell Grafana where to find these config files, configure the `provisioning` property in the main config file for Grafana:
 
@@ -65,17 +65,15 @@ provisioning/
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a data source" %}}
 
-Data source definitions are defined in a manifest.
+Each data source config file contains a manifest that specifies the desired state of a set of data sources.
 
-Each configuration file contains a manifest that specifies the desired state of a set of data sources.
+At start-up, Grafana loads the configuration files and provisions the data sources listed in the manifests.
 
-Grafana provisions data sources on start-up.
+Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features/datasources/testdata/) data source that we can use for our dashboards.
 
 #### Create a data source manifest:
 
-Let's configure a Prometheus data source by provisioning it.
-
-- In the `provisioning/datasources/` directory, create a file called `datasources.yaml` with the following content:
+- In the `provisioning/datasources/` directory, create a file called `default.yaml` with the following content:
 
 ```yaml
 apiVersion: 1
@@ -83,46 +81,185 @@ apiVersion: 1
 datasources:
   - name: TestData DB
     type: testdata
-
-  - name: Prometheus
-    type: prometheus
-    url: http://localhost:9090
 ```
 
-- Restart Grafana.
-
-The new Prometheus data sources has been added to the list of data sources, with a time interval of 15s.
+- Restart Grafana to see the new changes. The TestData DB appears in the list of data sources.
 
 The configuration options can vary between different types of data sources. For more information on how to configure a specific data source type, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a dashboard" %}}
 
-Each configuration file contains a manifest that specifies the desired state of a set of _dashboard providers_.
+Each dashboard config file contains a manifest that specifies the desired state of a set of _dashboard providers_.
 
-A dashboard provider tells Grafana where to find the dashboard definitions, and where to create them.
+A dashboard provider tells Grafana where to find the dashboard definitions and where to put them.
 
 Grafana regularly checks for changes to the dashboard definitions (by default every **10 seconds**).
 
-#### Create a dashboard provider manifest:
+First, let's define a dashboard provider so that Grafana knows where to find the dashboards.
 
-- Create a file called `dashboards.yaml` with the following content:
+#### Define a dashboard provider:
+
+- Create a file called `provider.yaml` with the following content:
 
 ```yaml
 apiVersion: 1
 
 providers:
-  - name: Default      # A uniquely identifiable name for the provider
+  - name: Default    # A uniquely identifiable name for the provider
     folder: Services # The folder where to place the dashboards
-    type: file         # ???
+    type: file       # ???
     options:
       path: /var/lib/grafana/dashboards # The path to the dashboard definitions
 ```
 
-For more information on how to configure data sources, refer to [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards).
+For more information on how to configure dashboard providers, refer to [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards).
+
+#### Create a dashboard definition
+
+- In the dashboard definitions directory you specified in the dashboard provider, i.e. `options.path`, create a file called `cluster.json` with the following content:
+
+```json
+{
+   "__inputs": [ ],
+   "__requires": [ ],
+   "annotations": {
+      "list": [ ]
+   },
+   "editable": false,
+   "gnetId": null,
+   "graphTooltip": 0,
+   "hideControls": false,
+   "id": null,
+   "links": [ ],
+   "panels": [
+      {
+         "aliasColors": { },
+         "bars": false,
+         "dashLength": 10,
+         "dashes": false,
+         "datasource": "TestData DB",
+         "fill": 1,
+         "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 0
+         },
+         "id": 2,
+         "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+         },
+         "lines": true,
+         "linewidth": 1,
+         "links": [ ],
+         "nullPointMode": "null",
+         "percentage": false,
+         "pointradius": 5,
+         "points": false,
+         "renderer": "flot",
+         "repeat": null,
+         "seriesOverrides": [ ],
+         "spaceLength": 10,
+         "stack": false,
+         "steppedLine": false,
+         "targets": [ ],
+         "thresholds": [ ],
+         "timeFrom": null,
+         "timeShift": null,
+         "title": "CPU Usage",
+         "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+         },
+         "type": "graph",
+         "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": [ ]
+         },
+         "yaxes": [
+            {
+               "format": "short",
+               "label": null,
+               "logBase": 1,
+               "max": null,
+               "min": null,
+               "show": true
+            },
+            {
+               "format": "short",
+               "label": null,
+               "logBase": 1,
+               "max": null,
+               "min": null,
+               "show": true
+            }
+         ]
+      }
+   ],
+   "refresh": "",
+   "rows": [ ],
+   "schemaVersion": 16,
+   "style": "dark",
+   "tags": [
+      "kubernetes"
+   ],
+   "templating": {
+      "list": [ ]
+   },
+   "time": {
+      "from": "now-6h",
+      "to": "now"
+   },
+   "timepicker": {
+      "refresh_intervals": [
+         "5s",
+         "10s",
+         "30s",
+         "1m",
+         "5m",
+         "15m",
+         "30m",
+         "1h",
+         "2h",
+         "1d"
+      ],
+      "time_options": [
+         "5m",
+         "15m",
+         "1h",
+         "6h",
+         "12h",
+         "24h",
+         "2d",
+         "7d",
+         "30d"
+      ]
+   },
+   "timezone": "browser",
+   "title": "Cluster",
+   "version": 0
+}
+```
+
+- Restart Grafana to provision the new dashboard (or wait 10 seconds for Grafana to automatically create the dashboard).
+
+As you can see, even for a relatively simple dashboard, the dashboard definition isn't something you'd want to craft by hand. In the next step, we'll instead see how you can generate dashboard definitions.
 
 {{% /tutorials/step %}}
-{{% tutorials/step title="Provision a dashboard with Grafonnet" %}}
+{{% tutorials/step title="Create dashboards with Grafonnet" %}}
 
 Dashboard definitions define every aspect of a Grafana dashboard. As a result, they can get big and unwieldly.
 
@@ -186,6 +323,8 @@ For more information on about how you can use Grafonnet, refer to the [project p
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
+
+Congratulations, you made it to the end of this tutorial!
 
 ### Learn more
 
