@@ -48,7 +48,7 @@ There are three types of organization roles in Grafana:
 
 > **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. ((Do we want to point to play.grafana.com as an example?))
 
-### Exercise
+### Exercise: Add a user
 
 Acme Corporation has asked you to add a group of early adopters.
 
@@ -61,17 +61,15 @@ Acme Corporation has asked you to add a group of early adopters.
 
 Repeat the following steps for each of the employees.
 
-#### Add a user:
-
-1. In the sidebar, click the **Server Admin** (shield) icon.
+1. On the sidebar, click the **Server Admin** (shield) icon.
 2. In the Users tab, click **New user**.
-3. In the **Name** box, type the name of the user.
-4. In the **Email** box, type the email of the user.
-5. In the **Username** box, type the username that the user will use to log in.
-6. In the **Password** box, type a password. The user will be able to change their password once they log in.
-7. Click **Create** to create the user.
+3. In **Name**, enter the name of the user.
+4. In **E-mail**, enter the email of the user.
+5. In **Username**, enter the username that the user will use to log in.
+6. In **Password**, enter a password. The user will be able to change their password once they log in.
+7. Click **Create** to create the user account.
 
-When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now though. In the next step, you'll grant them more permissions by adding them to a _team_.
+When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to a _team_.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Assign users to teams" %}}
@@ -80,7 +78,7 @@ Instead of granting permissions to individual users, teams let you grant permiss
 
 Teams are useful when onboarding new colleagues. If you add a user to a team, they will get access to the same resources as that team.
 
-### Exercise
+### Exercise: Create a team
 
 In this exercise, you'll assign the users to their corresponding team:
 
@@ -91,14 +89,12 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-#### Create a team:
-
 Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
-1. Click **New team**.
-1. In the **Name** box, type the name of the team.
-1. Click **Create**.
+2. Click **New team**.
+3. In the **Name** box, type the name of the team.
+4. Click **Create**.
 
 #### Add a user to a team
 
