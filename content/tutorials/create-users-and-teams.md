@@ -96,15 +96,15 @@ Repeat the following steps for each team:
 3. In the **Name** box, type the name of the team.
 4. Click **Create**.
 
-#### Add a user to a team
+### Exercise: Add a user to a team
 
 Repeat the following steps for each user:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
-1. Click the team you want to add a user to.
-1. Click **Add member**.
-1. In the **Add team member** box, select the user.
-1. Click **Add to team**.
+2. Click the team you want to add a user to.
+3. Click **Add member**.
+4. In the **Add team member** box, select the user.
+5. Click **Add to team**.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Manage resource access with folders" %}}
