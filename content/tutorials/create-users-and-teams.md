@@ -23,7 +23,7 @@ Create users and organize them into teams. Manage resource access for each user 
 
 ### What you'll build
 
-A fictional company, Acme Corporation, has asked you to configure Grafana for their teams.
+_Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 
@@ -47,7 +47,7 @@ There are three types of organization roles in Grafana:
 
 ### Exercise
 
-Acme Corporation has asked you to add a group of early adopters.
+Graphona has asked you to add a group of early adopters.
 
 | Name              | Email                     | Username          |
 |-------------------|---------------------------|-------------------|
@@ -62,10 +62,10 @@ Repeat the following steps for each of the employees.
 
 1. In the sidebar, click **Server Admin** -> **Users**.
 1. Click **New user**.
-1. In the **Name** box, type the name of the user.
-1. In the **Email** box, type the email of the user.
-1. In the **Username** box, type the username that the user will use to log in.
-1. In the **Password** box, type a password. The user will be able to change their password once they log in.
+1. In the **Name** box, enter the name of the user.
+1. In the **Email** box, enter the email of the user.
+1. In the **Username** box, enter the username that the user will use to log in.
+1. In the **Password** box, enter a password. The user will be able to change their password once they log in.
 1. Click **Create** to create the user.
 
 When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now though. In the next step, you'll grant them more permissions by adding them to a _team_.
@@ -94,7 +94,7 @@ Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click **New team**.
-1. In the **Name** box, type the name of the team.
+1. In the **Name** box, enter the name of the team.
 1. Click **Create**.
 
 #### Add a user to a team
@@ -131,14 +131,14 @@ Repeat the following steps for each folder.
 
 1. In the sidebar, click **Dashboards** -> **Manage**.
 1. To create a folder, click **New Folder**.
-1. In the **Name** box, type the name of the folder.
+1. In the **Name** box, enter the name of the folder.
 1. Click **Create**.
 
 #### Remove Viewer role from folder permissions
 
 By default, when you create a folder, users with the Viewer role are granted permission to view the folder.
 
-In the example, Acme Corporation wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
+In the example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
 
 1. Go to the **Permissions** tab.
 1. Remove the Viewer role from the list, by clicking the red button on the right.
@@ -160,7 +160,7 @@ However, there are times when you need to configure permissions on a more granul
 
 ### Exercise
 
-Acme Corporation has hired a consultant to assist the Marketing team. The consultant should only be able to access the _SEO_ dashboard in the _Analytics_ folder.
+Graphona has hired a consultant to assist the Marketing team. The consultant should only be able to access the _SEO_ dashboard in the _Analytics_ folder.
 
 | Name       | Email                            | Username   |
 |------------|----------------------------------|------------|
@@ -170,10 +170,10 @@ Acme Corporation has hired a consultant to assist the Marketing team. The consul
 
 1. In the sidebar, click **Server Admin** -> **Users**.
 1. Click **New user**.
-1. In the **Name** box, type the name of the user.
-1. In the **Email** box, type the email of the user.
-1. In the **Username** box, type the username that the user will use to log in.
-1. In the **Password** box, type a password. The user will be able to change 1.heir password once they log in.
+1. In the **Name** box, enter the name of the user.
+1. In the **Email** box, enter the email of the user.
+1. In the **Username** box, enter the username that the user will use to log in.
+1. In the **Password** box, enter a password. The user will be able to change 1.heir password once they log in.
 1. Click **Create** to create the user.
 
 #### Grant a user permission to view dashboard

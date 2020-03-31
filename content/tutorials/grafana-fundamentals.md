@@ -14,14 +14,14 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 
 In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
 
-### You'll learn how to:
+### What you'll learn:
 
-- Explore metrics and logs
-- Build dashboards
-- Annotate dashboards
-- Set up alerts
+- How to explore metrics and logs
+- How to build dashboards
+- How to annotate dashboards
+- How to set up alerts
 
-### You'll need:
+### What you'll need:
 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/)
