@@ -62,10 +62,10 @@ Repeat the following steps for each of the employees.
 
 1. In the sidebar, click **Server Admin** -> **Users**.
 1. Click **New user**.
-1. In the **Name** box, type the name of the user.
-1. In the **Email** box, type the email of the user.
-1. In the **Username** box, type the username that the user will use to log in.
-1. In the **Password** box, type a password. The user will be able to change their password once they log in.
+1. In the **Name** box, enter the name of the user.
+1. In the **Email** box, enter the email of the user.
+1. In the **Username** box, enter the username that the user will use to log in.
+1. In the **Password** box, enter a password. The user will be able to change their password once they log in.
 1. Click **Create** to create the user.
 
 When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now though. In the next step, you'll grant them more permissions by adding them to a _team_.
@@ -94,7 +94,7 @@ Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click **New team**.
-1. In the **Name** box, type the name of the team.
+1. In the **Name** box, enter the name of the team.
 1. Click **Create**.
 
 #### Add a user to a team
@@ -131,7 +131,7 @@ Repeat the following steps for each folder.
 
 1. In the sidebar, click **Dashboards** -> **Manage**.
 1. To create a folder, click **New Folder**.
-1. In the **Name** box, type the name of the folder.
+1. In the **Name** box, enter the name of the folder.
 1. Click **Create**.
 
 #### Remove Viewer role from folder permissions
@@ -170,10 +170,10 @@ Acme Corporation has hired a consultant to assist the Marketing team. The consul
 
 1. In the sidebar, click **Server Admin** -> **Users**.
 1. Click **New user**.
-1. In the **Name** box, type the name of the user.
-1. In the **Email** box, type the email of the user.
-1. In the **Username** box, type the username that the user will use to log in.
-1. In the **Password** box, type a password. The user will be able to change 1.heir password once they log in.
+1. In the **Name** box, enter the name of the user.
+1. In the **Email** box, enter the email of the user.
+1. In the **Username** box, enter the username that the user will use to log in.
+1. In the **Password** box, enter a password. The user will be able to change 1.heir password once they log in.
 1. Click **Create** to create the user.
 
 #### Grant a user permission to view dashboard
