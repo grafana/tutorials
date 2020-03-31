@@ -23,7 +23,7 @@ Create users and organize them into teams. Manage resource access for each user 
 
 ### What you'll build
 
-A fictional company, Acme Corporation, has asked you to configure Grafana for their teams.
+_Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 
@@ -47,7 +47,7 @@ There are three types of organization roles in Grafana:
 
 ### Exercise
 
-Acme Corporation has asked you to add a group of early adopters.
+Graphona has asked you to add a group of early adopters.
 
 | Name              | Email                     | Username          |
 |-------------------|---------------------------|-------------------|
@@ -138,7 +138,7 @@ Repeat the following steps for each folder.
 
 By default, when you create a folder, users with the Viewer role are granted permission to view the folder.
 
-In the example, Acme Corporation wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
+In the example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
 
 1. Go to the **Permissions** tab.
 1. Remove the Viewer role from the list, by clicking the red button on the right.
@@ -160,7 +160,7 @@ However, there are times when you need to configure permissions on a more granul
 
 ### Exercise
 
-Acme Corporation has hired a consultant to assist the Marketing team. The consultant should only be able to access the _SEO_ dashboard in the _Analytics_ folder.
+Graphona has hired a consultant to assist the Marketing team. The consultant should only be able to access the _SEO_ dashboard in the _Analytics_ folder.
 
 | Name       | Email                            | Username   |
 |------------|----------------------------------|------------|
