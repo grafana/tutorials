@@ -27,8 +27,8 @@ This tutorial is useful for admins and others who want to learn how to manage us
 _Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 ### You will
-* Create users and organize them into teams. 
-* Manage resource access for each user and team through roles and folders.
+- Create users and organize them into teams. 
+- Manage resource access for each user and team through roles and folders.
 
 ### Prerequisites
 
@@ -47,7 +47,7 @@ There are three types of organization roles in Grafana:
 - **Viewer -** For viewing dashboards.
 
 
-> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. ((Do we want to point to play.grafana.com as an example?))
+> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. That's how Grafana Labs made play.grafana.com publicly available.
 
 ### Exercise: Add a user
 
@@ -63,12 +63,12 @@ Graphona has asked you to add a group of early adopters.
 Repeat the following steps for each of the employees.
 
 1. On the sidebar, click the **Server Admin** (shield) icon.
-2. In the Users tab, click **New user**.
-3. In **Name**, enter the name of the user.
-4. In **E-mail**, enter the email of the user.
-5. In **Username**, enter the username that the user will use to log in.
-6. In **Password**, enter a password. The user will be able to change their password once they log in.
-7. Click **Create** to create the user account.
+1. In the Users tab, click **New user**.
+1. In **Name**, enter the name of the user.
+1. In **E-mail**, enter the email of the user.
+1. In **Username**, enter the username that the user will use to log in.
+1. In **Password**, enter a password. The user will be able to change their password once they log in.
+1. Click **Create** to create the user account.
 
 When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to a _team_.
 
@@ -93,19 +93,19 @@ In this exercise, you'll assign the users to their corresponding team:
 Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
-2. Click **New team**.
-3. In the **Name** box, type the name of the team.
-4. Click **Create**.
+1. Click **New team**.
+1. In **Name**, enter the name of the team.
+1. Click **Create**.
 
 ### Exercise: Add a user to a team
 
 Repeat the following steps for each user:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
-2. Click the team you want to add a user to.
-3. Click **Add member**.
-4. In the **Add team member** box, select the user.
-5. Click **Add to team**.
+1. Click the team you want to add a user to.
+1. Click **Add member**.
+1. In the **Add team member** box, select the user.
+1. Click **Add to team**.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Manage resource access with folders" %}}
