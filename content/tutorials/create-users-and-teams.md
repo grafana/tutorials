@@ -26,9 +26,9 @@ This tutorial is useful for admins and others who want to learn how to manage us
 
 _Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
-### You will
-- Create users and organize them into teams. 
-- Manage resource access for each user and team through roles and folders.
+In this scenario, you'll:
+* Create users and organize them into teams. 
+* Manage resource access for each user and team through roles and folders.
 
 ### Prerequisites
 
