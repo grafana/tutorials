@@ -24,7 +24,7 @@ In this tutorial, you'll learn how to use Grafana to set up a monitoring solutio
 ### What you'll need:
 
 - [Docker](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/)
+- [Docker Compose](https://docs.docker.com/compose/) (included in Docker for Desktop for macOS and Windows)
 - [Git](https://git-scm.com/)
 
 {{% /tutorials/step %}}
@@ -70,7 +70,7 @@ The first time you run `docker-compose up -d`, Docker downloads all the necessar
 docker-compose ps
 ```
 
-All services should report their **State as `Up`.
+In the **State** column, it should say `Up` for all services.
 
 - Browse to the sample application on [localhost:8081](http://localhost:8081).
 
@@ -93,6 +93,7 @@ To vote for a link, click the triangle icon next to the name of the link.
 
 Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
 
+- Open a new tab.
 - Browse to [localhost:3000](http://localhost:3000).
 - In **email or username**, enter **admin**.
 - In **password**, enter **admin**.
@@ -128,7 +129,7 @@ Prometheus is now available as a data source in Grafana.
 
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to create ad-hoc queries to understand the metrics exposed by the sample application.
 
-> Ad-hoc queries are queries that are made interactively, with the purpose of explorating data. An ad-hoc query is commonly followed by another, more specific query.
+> Ad-hoc queries are queries that are made interactively, with the purpose of exploring data. An ad-hoc query is commonly followed by another, more specific query.
 
 - In the side bar, click the **Explore** (compass rose) icon.
 - In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Enter.
@@ -250,7 +251,6 @@ Add a region annotation:
 - In **Tags**, enter **testing**.
 
 Manually annotating your dashboard is fine for those single events. For regularly occurring events, such as deploying a new release, Grafana supports querying annotations from one of your data sources. Let's create an annotation using the Loki data source we added earlier.
-((One hallmark of tutorials is friendly language like this. We hold their hand and walk them through what we are doing and why.))
 
 - At the top of the dashboard, click the **Dashboard settings** (gear) icon.
 - In Annotations, click **Add Annotation Query**.
@@ -266,6 +266,8 @@ Manually annotating your dashboard is fine for those single events. For regularl
 - Click the **Go back** arrow to return to your dashboard.
 
 The log lines returned by your query are now displayed as annotations in the graph.
+
+Being able to combine data from multiple data sources in one graph allows you to correlate information from both Prometheus and Loki.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Set up an alert" %}}
@@ -293,6 +295,7 @@ Next, configure a notification channel for web hooks to send notifications to yo
 - In **Type**, select **webhook**.
 - In **Url**, paste the endpoint to your request bin.
 - Click **Send Test** to send a test alert to your request bin.
+- Navigate back to the request bin you created earlier. On the left side, there's now a `POST /` entry. Click it to see what information is sent by Grafana.
 - Click **Save**.
 
 ### Configure an alert rule
