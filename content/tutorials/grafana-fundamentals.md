@@ -275,6 +275,7 @@ Being able to combine data from multiple data sources in one graph allows you to
 Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
 
 Alerts consists of two parts:
+
 * _Notification channel_ - How the alert is delivered. When the conditions of an _alert rule_ are met, the Grafana notifies the channels configured for that alert.
 * _Alert rules_ - When the alert is triggered. Alert rules are defined by one or more _conditions_ that are regularly evaluated by Grafana.
 
