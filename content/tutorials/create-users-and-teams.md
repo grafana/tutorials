@@ -49,7 +49,7 @@ There are three types of organization roles in Grafana:
 
 > **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. That's how Grafana Labs made play.grafana.com publicly available.
 
-### Exercise: Add a user
+### Exercise
 
 Graphona has asked you to add a group of early adopters.
 
@@ -59,6 +59,8 @@ Graphona has asked you to add a group of early adopters.
 | Brenda Tilman     | brenda.tilman@example.com | brenda.tilman     |
 | Mada Rawdha Tahan | mada.rawdha.tahan@example | mada.rawdha.tahan |
 | Yuan Yang         | yuan.yang@example.com     | yuan.yang         |
+
+#### Add a user
 
 Repeat the following steps for each of the employees.
 
@@ -79,7 +81,7 @@ Instead of granting permissions to individual users, teams let you grant permiss
 
 Teams are useful when onboarding new colleagues. If you add a user to a team, they will get access to the same resources as that team.
 
-### Exercise: Create a team
+### Exercise
 
 In this exercise, you'll assign the users to their corresponding team:
 
@@ -90,6 +92,8 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
+#### Create a team
+
 Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
@@ -97,7 +101,7 @@ Repeat the following steps for each team:
 1. In **Name**, enter the name of the team.
 1. Click **Create**.
 
-### Exercise: Add a user to a team
+#### Add a user to a team
 
 Repeat the following steps for each user:
 
