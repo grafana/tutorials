@@ -29,3 +29,4 @@ Since Grafana only loads plugins on start-up, you need to restart the container 
 ```
 docker restart grafana
 ```
+
