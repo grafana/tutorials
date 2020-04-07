@@ -14,8 +14,7 @@ draft: true
 
 This tutorial is useful for admins and others who want to learn how to manage users. In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 
-
-### You'll learn to
+In this tutorial, you'll:
 
 - Add users.
 - Assign users to teams.
@@ -27,13 +26,12 @@ This tutorial is useful for admins and others who want to learn how to manage us
 _Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 In this scenario, you'll:
-* Create users and organize them into teams. 
+* Create users and organize them into teams.
 * Manage resource access for each user and team through roles and folders.
 
 ### Prerequisites
 
 - Grafana 7.0
-((Does it matter if it is installed, running on Docker, or accessed some other way?))
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add users" %}}
@@ -47,7 +45,7 @@ There are three types of organization roles in Grafana:
 - **Viewer -** For viewing dashboards.
 
 
-> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. That's how Grafana Labs made play.grafana.com publicly available.
+> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. That's how Grafana Labs made https://play.grafana.com publicly available.
 
 ### Exercise
 
