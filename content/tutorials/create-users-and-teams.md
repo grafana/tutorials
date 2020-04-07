@@ -12,38 +12,42 @@ draft: true
 
 {{% tutorials/step duration="1" title="Introduction" %}}
 
-Create users and organize them into teams. Manage resource access for each user and team through roles and folders.
+This tutorial is useful for admins and others who want to learn how to manage users. In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 
-### What you'll learn
 
-- How to add users
-- How to assign users to teams
-- How to manage dashboard access using folders
-- How to override access for individual dashboards
+### You'll learn to
 
-### What you'll build
+- Add users.
+- Assign users to teams.
+- Manage dashboard access using folders.
+- Override access for individual dashboards.
+
+### Scenario
 
 _Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
-In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
+In this scenario, you'll:
+* Create users and organize them into teams. 
+* Manage resource access for each user and team through roles and folders.
 
-### What you'll need
+### Prerequisites
 
 - Grafana 7.0
+((Does it matter if it is installed, running on Docker, or accessed some other way?))
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Add users" %}}
 
-In Grafana, all users are granted an _organization role_ that determines what resources the user can access.
+In Grafana, all users are granted an _organization role_ that determines what resources they can access.
 
 There are three types of organization roles in Grafana:
 
-- **Admin**, for managing data sources, teams, and users within an organization.
-- **Editor**, for creating and editing dashboards.
-- **Viewer**, for viewing dashboards.
+- **Admin -** For managing data sources, teams, and users within an organization.
+- **Editor -** For creating and editing dashboards.
+- **Viewer -** For viewing dashboards.
 
 
-> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user.
+> **Note**: You can also configure Grafana to allow [anonymous access](https://grafana.com/docs/grafana/latest/auth/overview/#anonymous-authentication), to make dashboards available even to those who don't have a Grafana user account. That's how Grafana Labs made play.grafana.com publicly available.
 
 ### Exercise
 
@@ -56,19 +60,19 @@ Graphona has asked you to add a group of early adopters.
 | Mada Rawdha Tahan | mada.rawdha.tahan@example | mada.rawdha.tahan |
 | Yuan Yang         | yuan.yang@example.com     | yuan.yang         |
 
+#### Add a user
+
 Repeat the following steps for each of the employees.
 
-#### Add a user:
+1. On the sidebar, click the **Server Admin** (shield) icon.
+1. In the Users tab, click **New user**.
+1. In **Name**, enter the name of the user.
+1. In **E-mail**, enter the email of the user.
+1. In **Username**, enter the username that the user will use to log in.
+1. In **Password**, enter a password. The user will be able to change their password once they log in.
+1. Click **Create** to create the user account.
 
-1. In the sidebar, click **Server Admin** -> **Users**.
-1. Click **New user**.
-1. In the **Name** box, enter the name of the user.
-1. In the **Email** box, enter the email of the user.
-1. In the **Username** box, enter the username that the user will use to log in.
-1. In the **Password** box, enter a password. The user will be able to change their password once they log in.
-1. Click **Create** to create the user.
-
-When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now though. In the next step, you'll grant them more permissions by adding them to a _team_.
+When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to a _team_.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Assign users to teams" %}}
@@ -88,13 +92,13 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-#### Create a team:
+#### Create a team
 
 Repeat the following steps for each team:
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click **New team**.
-1. In the **Name** box, enter the name of the team.
+1. In **Name**, enter the name of the team.
 1. Click **Create**.
 
 #### Add a user to a team
