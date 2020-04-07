@@ -26,6 +26,7 @@ In this tutorial, you'll:
 _Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 In this scenario, you'll:
+
 * Create users and organize them into teams.
 * Manage resource access for each user and team through roles and folders.
 
@@ -90,9 +91,9 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-#### Create a team
+Repeat the following steps for each team and user.
 
-Repeat the following steps for each team:
+#### Create a team
 
 1. In the sidebar, click **Configuration** -> **Teams**.
 1. Click **New team**.
@@ -101,10 +102,6 @@ Repeat the following steps for each team:
 
 #### Add a user to a team
 
-Repeat the following steps for each user:
-
-1. In the sidebar, click **Configuration** -> **Teams**.
-1. Click the team you want to add a user to.
 1. Click **Add member**.
 1. In the **Add team member** box, select the user.
 1. Click **Add to team**.
@@ -142,6 +139,8 @@ By default, when you create a folder, users with the Viewer role are granted per
 
 In the example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
 
+1. In the sidebar, click **Dashboards** -> **Manage**.
+1. Hover your cursor over the folder name, and click the cog icon to the right.
 1. Go to the **Permissions** tab.
 1. Remove the Viewer role from the list, by clicking the red button on the right.
 
@@ -178,11 +177,17 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 1. In the **Password** box, enter a password. The user will be able to change 1.heir password once they log in.
 1. Click **Create** to create the user.
 
+#### Create a dashboard
+
+1. In the sidebar, click the **Create** (plus) icon, to create a new dashboard.
+1. In the top right corner, click the cog icon to go to **Dashboard settings**.
+1. In **Name**, enter **SEO**.
+1. Click the box next to **Folder** and select "Analytics".
+1. Click the **Go back** arrow and then click the **Save dashboard** icon.
+
 #### Grant a user permission to view dashboard
 
-1. In the sidebar, click **Dashboard** -> **Manage**.
-1. In the Analytics folder, click the TODO dashboard.
-1. In the top right corner, click the cog icon to go to **Dashboard settings**.
+1. In the top right corner of your dashboard, click the cog icon to go to **Dashboard settings**.
 1. Go to the **Permissions** tab, and click **Add Permission**.
 1. In the **Add Permission For** dialog, make sure "User" is selected in the first box.
 1. In the second box, select the user to grant access to.
