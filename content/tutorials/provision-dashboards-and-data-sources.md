@@ -85,7 +85,7 @@ datasources:
 
 - Restart Grafana to see the new changes. The TestData DB appears in the list of data sources.
 
-The configuration options can vary between different types of data sources. For more information on how to configure a specific data source type, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
+> The configuration options can vary between different types of data sources. For more information on how to configure a specific data source type, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a dashboard" %}}
@@ -100,7 +100,7 @@ First, let's define a dashboard provider so that Grafana knows where to find the
 
 #### Define a dashboard provider:
 
-- Create a file called `provider.yaml` with the following content:
+- In the `provisioning/dashboards/` directory, create a file called `default.yaml` with the following content:
 
 ```yaml
 apiVersion: 1
@@ -108,7 +108,7 @@ apiVersion: 1
 providers:
   - name: Default    # A uniquely identifiable name for the provider
     folder: Services # The folder where to place the dashboards
-    type: file       # ???
+    type: file
     options:
       path: /var/lib/grafana/dashboards # The path to the dashboard definitions
 ```
@@ -255,71 +255,6 @@ For more information on how to configure dashboard providers, refer to [Dashboar
 ```
 
 - Restart Grafana to provision the new dashboard (or wait 10 seconds for Grafana to automatically create the dashboard).
-
-As you can see, even for a relatively simple dashboard, the dashboard definition isn't something you'd want to craft by hand. In the next step, we'll instead see how you can generate dashboard definitions.
-
-{{% /tutorials/step %}}
-{{% tutorials/step title="Create dashboards with Grafonnet" %}}
-
-Dashboard definitions define every aspect of a Grafana dashboard. As a result, they can get big and unwieldly.
-
-There are a number of tools that aim to make it easier to define dashboards:
-
-- [grafana-dash-gen](https://github.com/uber/grafana-dash-gen) (Javascript)
-- [grafanalib](https://github.com/weaveworks/grafanalib) (Python)
-- [grafonnet-lib](https://github.com/grafana/grafonnet-lib) (Jsonnet)
-- [grafyaml](https://docs.openstack.org/infra/grafyaml/) (YAML)
-
-In this tutorial, you'll use Grafonnet, a [Jsonnet](https://jsonnet.org/) library for generating Grafana dashboards.
-
-Jsonnet is a data templating language developed by Google, that extends the JSON format with features like variables and functions.
-
-#### Install Grafonnet
-
-- Install [Jsonnet](https://jsonnet.org/). Instructions on how to install Jsonnet is available on the [GitHub page](https://github.com/google/jsonnet).
-- Clone the [grafonnet-lib](https://github.com/grafana/grafonnet-lib) repository in your preferred work space:
-
-```
-git clone https://github.com/grafana/grafonnet-lib.git
-```
-
-#### Generate a dashboard
-
-- Create a file called `cluster.jsonnet` with the following content:
-
-```jsonnet
-local grafana = import 'grafonnet/grafana.libsonnet';
-local dashboard = grafana.dashboard;
-local graphPanel = grafana.graphPanel;
-
-dashboard.new(
-  'Cluster',
-  schemaVersion=16,
-  tags=['kubernetes'],
-).addPanel(
-  graphPanel.new(
-    title='CPU Usage',
-    datasource='TestData DB',
-  ),
-  gridPos={
-    x: 0,
-    y: 0,
-    w: 24,
-    h: 8,
-  }
-)
-```
-
-- Open a terminal and change the directory to where `cluster.jsonnet` is located:
-
-```
-jsonnet -J <path> cluster.jsonnet > cluster.json
-```
-
-Where `<path>` is the path to where you cloned grafonnet-lib.
-
-For more information on about how you can use Grafonnet, refer to the [project page](https://github.com/grafana/grafonnet-lib).
-
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
