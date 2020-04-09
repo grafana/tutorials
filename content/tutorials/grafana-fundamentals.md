@@ -156,7 +156,7 @@ PromQL lets you group the time series by their labels, using the `sum` function.
 sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 ```
 
-- Go back to the sample application and generate some traffic by adding new links, voting, or just refresh the browser.
+- Go back to the [sample application](https://localhost:8081) and generate some traffic by adding new links, voting, or just refresh the browser.
 
 - In the upper right corner, click the _time picker_, and select **Last 5 minutes**. By zooming in on the last few minutes, it's easier to see when you receive new data.
 
@@ -328,7 +328,7 @@ You now have an alert set up to send a notification using a web hook. See if you
 
 - Browse to [localhost:8081](http://localhost:8081).
 - Refresh the page repeatedly to generate traffic.
-  When Grafana triggers the alert, it sends a request to the web hook you set up earlier. ((I did this, it did not generate an alert.))
+  When Grafana triggers the alert, it sends a request to the web hook you set up earlier.
 - Browse to the Request Bin you created earlier, to inspect the alert notification.
 
 ### Pause an alert
