@@ -67,21 +67,21 @@ Repeat the following steps for each of the employees.
 1. In **Name**, enter the name of the user.
 1. In **E-mail**, enter the email of the user.
 1. In **Username**, enter the username that the user will use to log in.
-1. In **Password**, enter a password. The user will be able to change their password once they log in.
+1. In **Password**, enter a password. The user can change their password once they log in.
 1. Click **Create** to create the user account.
 
-When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to a _team_.
+When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to _teams_.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Assign users to teams" %}}
 
 Instead of granting permissions to individual users, teams let you grant permissions to a group of users.
 
-Teams are useful when onboarding new colleagues. If you add a user to a team, they will get access to the same resources as that team.
+Teams are useful when onboarding new colleagues. If you add a user to a team, they get access to all resources assigned to that team.
 
 ### Exercise
 
-In this exercise, you'll assign the users to their corresponding team:
+In this exercise, you'll assign users to their corresponding team.
 
 | Username          | Team        |
 |-------------------|-------------|
@@ -90,20 +90,22 @@ In this exercise, you'll assign the users to their corresponding team:
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-Repeat the following steps for each team and user.
+You will create a team, then add users to it. You will then repeat the process with the second team and the remaining users.
 
 #### Create a team
 
-1. In the sidebar, click **Configuration** -> **Teams**.
+1. In the sidebar, hover your mouse over the **Configuration** (gear) icon and then click **Teams**.
 1. Click **New team**.
-1. In **Name**, enter the name of the team.
-1. Click **Create**.
+2. In **Name**, enter the name of the team: either _Marketing_ or _Engineering_. You do not need to enter an email.
+3. Click **Create**.
 
 #### Add a user to a team
 
 1. Click **Add member**.
-1. In the **Add team member** box, select the user.
+1. In the **Add team member** box, select the user you want to add to the team. Refer to the table above for team assignments.
 1. Click **Add to team**.
+
+When you are done, you will have two teams with two users assigned to each.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Manage resource access with folders" %}}
@@ -114,7 +116,7 @@ Use folders to organize collections of related dashboards.
 
 The Marketing team is going to use Grafana for analytics, while the Engineering team wants to monitor the application they're building.
 
-You'll be creating two folder, _Analytics_ and _Application_, where each team can add their own dashboards. The teams still want to be able to view each other's dashboards:
+You'll create two folders, _Analytics_ and _Application_, where each team can add their own dashboards. The teams still want to be able to view each other's dashboards.
 
 | Folder      | Team        | Permissions |
 |-------------|-------------|-------------|
@@ -125,31 +127,33 @@ You'll be creating two folder, _Analytics_ and _Application_, where each team ca
 
 Repeat the following steps for each folder.
 
-#### Add a folder for each team:
+#### Add a folder for each team
 
-1. In the sidebar, click **Dashboards** -> **Manage**.
+1. In the sidebar, hover your cursor over the **Dashboards** (four squares) icon and then click **Manage**.
 1. To create a folder, click **New Folder**.
-1. In the **Name** box, enter the name of the folder.
-1. Click **Create**.
+2. In **Name**, enter the folder name.
+3. Click **Create**.
 
 #### Remove Viewer role from folder permissions
 
-By default, when you create a folder, users with the Viewer role are granted permission to view the folder.
+By default, when you create a folder, all users with the Viewer role are granted permission to view the folder.
 
-In the example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
+In this example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
 
-1. In the sidebar, click **Dashboards** -> **Manage**.
+1. In the sidebar, hover your cursor over the **Dashboards** (four squares) icon and then click **Manage**.
 1. Hover your cursor over the folder name, and click the cog icon to the right.
 1. Go to the **Permissions** tab.
 1. Remove the Viewer role from the list, by clicking the red button on the right.
 
 #### Grant folder permissions to a team:
 
-1. Go to the **Permissions** tab, and click **Add Permission**.
+1. Go to the **Permissions** tab, and then click **Add Permission**.
 1. In the **Add Permission For** dialog, make sure "Team" is selected in the first box.
 1. In the second box, select the team to grant access to.
 1. In the third box, select the access you want to grant.
 1. Click **Save**.
+
+When you are finished, you will have two empty folders, the contents of which can only be viewed by members of the Marketing or Engineering teams. Only Marketing team members can edit the contents of the Analytics folder, only Engineering team members can edit the contents of the Application folder.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Define granular permissions" %}}
@@ -160,7 +164,7 @@ However, there are times when you need to configure permissions on a more granul
 
 ### Exercise
 
-Graphona has hired a consultant to assist the Marketing team. The consultant should only be able to access the _SEO_ dashboard in the _Analytics_ folder.
+Graphona has hired a consultant to assist the Marketing team. The consultant should only be able to access the SEO dashboard in the Analytics folder.
 
 | Name       | Email                            | Username   |
 |------------|----------------------------------|------------|
@@ -170,11 +174,11 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 
 1. In the sidebar, click **Server Admin** -> **Users**.
 1. Click **New user**.
-1. In the **Name** box, enter the name of the user.
-1. In the **Email** box, enter the email of the user.
-1. In the **Username** box, enter the username that the user will use to log in.
-1. In the **Password** box, enter a password. The user will be able to change 1.heir password once they log in.
-1. Click **Create** to create the user.
+2. In **Name**, enter the name of the user.
+3. In **Email**, enter the email of the user.
+4. In **Username**, enter the username that the user will use to log in.
+5. In **Password**, enter a password. The user can change their password once they log in.
+6. Click **Create** to create the user.
 
 #### Create a dashboard
 
