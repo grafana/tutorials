@@ -172,30 +172,35 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 
 #### Add a new user
 
-1. In the sidebar, click **Server Admin** -> **Users**.
-1. Click **New user**.
-2. In **Name**, enter the name of the user.
-3. In **Email**, enter the email of the user.
-4. In **Username**, enter the username that the user will use to log in.
-5. In **Password**, enter a password. The user can change their password once they log in.
-6. Click **Create** to create the user.
+1. On the sidebar, click the **Server Admin** (shield) icon.
+1. In the Users tab, click **New user**.
+1. In **Name**, enter the name of the user.
+1. In **E-mail**, enter the email of the user.
+1. In **Username**, enter the username that the user will use to log in.
+1. In **Password**, enter a password. The user can change their password once they log in.
+1. Click **Create user** to create the user account.
 
 #### Create a dashboard
 
-1. In the sidebar, click the **Create** (plus) icon, to create a new dashboard.
+1. In the sidebar, click the **Create** (plus) icon to create a new dashboard.
 1. In the top right corner, click the cog icon to go to **Dashboard settings**.
 1. In **Name**, enter **SEO**.
-1. Click the box next to **Folder** and select "Analytics".
-1. Click the **Go back** arrow and then click the **Save dashboard** icon.
+1. In the **Folder** list, select **Analytics**.
+1. Click the **Go back** arrow and then click the **Save dashboard** (disk) icon.
+1. Click **Save**.
 
 #### Grant a user permission to view dashboard
 
 1. In the top right corner of your dashboard, click the cog icon to go to **Dashboard settings**.
 1. Go to the **Permissions** tab, and click **Add Permission**.
-1. In the **Add Permission For** dialog, make sure "User" is selected in the first box.
-1. In the second box, select the user to grant access to.
+1. In the **Add Permission For** dialog, select **User** in the first box.
+1. In the second box, select the user to grant access to: Luc Masson.
 1. In the third box, select **View**.
 1. Click **Save**.
+1. Click **Save dashboard**.
+1. Add a note about giving Luc Masson Viewer permission for the dashboard and then click **Save**.
+
+You have created a new user and given them unique permissions to view contents of a folder.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
@@ -204,9 +209,9 @@ Congratulations, you made it to the end of this tutorial!
 
 In this tutorial, you've configured Grafana for an organization:
 
-- You've added users to your organization
-- You've created teams to manage permissions for groups of users.
-- You've configured permissions for folders and dashboard.
+- You added users to your organization.
+- You created teams to manage permissions for groups of users.
+- You configured permissions for folders and dashboard.
 
 ### Learn more
 
