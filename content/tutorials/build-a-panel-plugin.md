@@ -15,15 +15,11 @@ Panels are the building blocks of Grafana. They allow you to visualize data in d
 
 For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel).
 
-### What you'll build
+In this tutorial, you'll:
 
-In this tutorial, you'll build a simple, but complete panel that will visualize health of a service through the use of color.
+- Build a simple, but complete panel that will visualize health of a service through the use of color
 
-### What you'll learn
-
-- How to create a plugin
-
-### What you'll need
+### Prerequisites
 
 - Grafana version 7.0+
 - NodeJS

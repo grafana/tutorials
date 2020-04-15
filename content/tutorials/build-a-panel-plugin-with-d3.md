@@ -15,15 +15,12 @@ Panels are the building blocks of Grafana, and allow you to visualize data in di
 
 For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/guides/basic_concepts/#panel).
 
-### What you'll build
+In this tutorial, you'll:
 
-In this tutorial, you'll build a simple, but complete bar graph panel.
+- Build a simple, but complete bar graph panel
+- Learn how to use D3.js to build a panel using data-driven transformations
 
-### What you'll learn
-
-- How to use D3.js to build a panel using data-driven transformations.
-
-### What you'll need
+### Prerequisites
 
 - Grafana version 7.0+
 - NodeJS

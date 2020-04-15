@@ -12,12 +12,12 @@ draft: true
 
 {{% tutorials/step duration="1" title="Introduction" %}}
 
-### What you'll learn
+In this tutorial, you'll:
 
-- How to provision dashboard
-- How to provision data sources
+- Provision dashboards
+- Provision data sources
 
-### What you'll need
+### Prerequisites
 
 - Grafana 7.0
 
