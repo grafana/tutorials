@@ -172,7 +172,7 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 
 #### Add a new user
 
-1. On the sidebar, click the **Server Admin** (shield) icon.
+1. In the sidebar, click the **Server Admin** (shield) icon.
 1. In the Users tab, click **New user**.
 1. In **Name**, enter the name of the user.
 1. In **E-mail**, enter the email of the user.
