@@ -200,7 +200,7 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 1. Click **Save dashboard**.
 1. Add a note about giving Luc Masson Viewer permission for the dashboard and then click **Save**.
 
-You have created a new user and given them unique permissions to view contents of a folder.
+You've created a new user and given them unique permissions to view contents of a folder.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
