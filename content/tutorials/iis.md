@@ -45,11 +45,13 @@ Restart the Grafana server after changing the config file.
 
 1. Open the IIS Manager and click on the parent website
 2. In the admin console for this website, double click on the URL Rewrite option:
-    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_admin_console.png"  max-width= "800px" >}}
+
+{{< docs-imagebox img="/static/img/docs/tutorials/IIS_admin_console.png"  max-width= "800px" >}}
 
 3. Click on the `Add Rule(s)...` action
 4. Choose the Blank Rule template for an Inbound Rule
-    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_add_inbound_rule.png"  max-width= "800px" >}}
+
+{{< docs-imagebox img="/static/img/docs/tutorials/IIS_add_inbound_rule.png"  max-width= "800px" >}}
 
 5. Create an Inbound Rule for the parent website (localhost:8080 in this example) with the following settings:
   - pattern: `grafana(/)?(.*)`
@@ -58,7 +60,7 @@ Restart the Grafana server after changing the config file.
   - check the `Append query string` checkbox
   - check the `Stop processing of subsequent rules` checkbox
 
-    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_url_rewrite.png"  max-width= "800px" >}}
+{{< docs-imagebox img="/static/img/docs/tutorials/IIS_url_rewrite.png"  max-width= "800px" >}}
 
 Finally, navigate to `http://localhost:8080/grafana` (replace `http://localhost:8080` with your parent domain) and you should come to the Grafana login page.
 

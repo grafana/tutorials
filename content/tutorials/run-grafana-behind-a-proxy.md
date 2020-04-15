@@ -127,6 +127,6 @@ This is the rewrite rule that is generated in the `web.config`:
   </rewrite>
 ```
 
-See the [tutorial on IIS URL Rewrites](http://docs.grafana.org/tutorials/iis/) for more in-depth instructions.
+See the [tutorial on IIS URL Rewrites](/tutorials/iis/) for more in-depth instructions.
 
 {{% /tutorials/step %}}
