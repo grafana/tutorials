@@ -90,7 +90,7 @@ In this exercise, you'll assign users to their corresponding team.
 | almaz.russom      | Engineering |
 | yuan.yang         | Engineering |
 
-You will create a team, then add users to it. You will then repeat the process with the second team and the remaining users.
+You'll create a team, then add users to it. You'll then repeat the process with the second team and the remaining users.
 
 #### Create a team
 
