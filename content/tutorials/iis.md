@@ -8,7 +8,7 @@ status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 draft: true
-aliases: ["/docs/grafana/latest/tutorials/iis/"]
+# aliases: ["/docs/grafana/latest/tutorials/iis/"]
 ---
 
 # Use IIS with URL Rewrite as a Reverse Proxy

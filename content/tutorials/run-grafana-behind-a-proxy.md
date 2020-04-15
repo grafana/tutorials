@@ -8,7 +8,7 @@ status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 draft: true
-aliases: ["/docs/grafana/latest/installation/behind_proxy/"]
+# aliases: ["/docs/grafana/latest/installation/behind_proxy/"]
 ---
 
 {{% tutorials/step title="Introduction" %}}
