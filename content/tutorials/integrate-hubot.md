@@ -8,6 +8,7 @@ status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 draft: true
+aliases: ["/docs/grafana/latest/tutorials/hubot_howto/"]
 ---
 
 # Integrate Hubot with Grafana
