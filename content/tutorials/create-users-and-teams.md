@@ -97,7 +97,7 @@ You'll create a team, then add users to it. You'll then repeat the process with 
 1. In the sidebar, hover your mouse over the **Configuration** (gear) icon and then click **Teams**.
 1. Click **New team**.
 1. In **Name**, enter the name of the team: either _Marketing_ or _Engineering_. You do not need to enter an email.
-3. Click **Create**.
+1. Click **Create**.
 
 #### Add a user to a team
 
