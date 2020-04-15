@@ -153,7 +153,7 @@ In this example, Graphona wants to explicitly grant teams access to folders. To 
 1. In the third box, select the access you want to grant.
 1. Click **Save**.
 
-When you are finished, you will have two empty folders, the contents of which can only be viewed by members of the Marketing or Engineering teams. Only Marketing team members can edit the contents of the Analytics folder, only Engineering team members can edit the contents of the Application folder.
+When you're finished, you'll have two empty folders, the contents of which can only be viewed by members of the Marketing or Engineering teams. Only Marketing team members can edit the contents of the Analytics folder, only Engineering team members can edit the contents of the Application folder.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Define granular permissions" %}}
