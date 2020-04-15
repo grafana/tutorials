@@ -21,9 +21,7 @@ This guide will show you how to install and configure the [Hubot-Grafana](https:
 > *Amazon S3 Required*: The hubot-grafana script will upload the rendered graphs to Amazon S3. This
 > is so Hipchat and Slack can show them reliably (they require the image to be publicly available).
 
-<div class="text-center">
-  <img src="/img/docs/tutorials/hubot_grafana.png" class="center"></a>
-</div>
+{{< docs-imagebox img="/static/img/docs/tutorials/hubot_grafana.png"  max-width= "800px" >}}
 
 ## What is Hubot?
 
@@ -71,7 +69,7 @@ To verify that this feature works try the `Direct link to rendered image` link i
 
 ### Grafana API Key
 
-{{< docs-imagebox img="/img/docs/v2/orgdropdown_api_keys.png" max-width="150px" class="docs-image--right">}}
+{{< docs-imagebox img="/static/img/docs/v2/orgdropdown_api_keys.png" max-width="150px" class="docs-image--right">}}
 
 You need to set the environment variable `HUBOT_GRAFANA_API_KEY` to a Grafana API Key. You can add these from the API Keys page which you find in the Organization dropdown.
 
@@ -114,10 +112,7 @@ Now you can add an alias like this:
 
 - `hubot alias graf-lb=graf db loadbalancers:2 now-20m`
 
-<div class="text-center">
-  Using the alias:<br>
-  <img src="/img/docs/tutorials/hubot_grafana2.png" class="center"></a>
-</div>
+{{< docs-imagebox img="/static/img/docs/tutorials/hubot_grafana2.png"  max-width= "800px" >}}
 
 ## Summary
 

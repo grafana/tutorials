@@ -45,11 +45,11 @@ Restart the Grafana server after changing the config file.
 
 1. Open the IIS Manager and click on the parent website
 2. In the admin console for this website, double click on the URL Rewrite option:
-    {{< docs-imagebox img="/img/docs/tutorials/IIS_admin_console.png"  max-width= "800px" >}}
+    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_admin_console.png"  max-width= "800px" >}}
 
 3. Click on the `Add Rule(s)...` action
 4. Choose the Blank Rule template for an Inbound Rule
-    {{< docs-imagebox img="/img/docs/tutorials/IIS_add_inbound_rule.png"  max-width= "800px" >}}
+    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_add_inbound_rule.png"  max-width= "800px" >}}
 
 5. Create an Inbound Rule for the parent website (localhost:8080 in this example) with the following settings:
   - pattern: `grafana(/)?(.*)`
@@ -58,7 +58,7 @@ Restart the Grafana server after changing the config file.
   - check the `Append query string` checkbox
   - check the `Stop processing of subsequent rules` checkbox
 
-    {{< docs-imagebox img="/img/docs/tutorials/IIS_url_rewrite.png"  max-width= "800px" >}}
+    {{< docs-imagebox img="/static/img/docs/tutorials/IIS_url_rewrite.png"  max-width= "800px" >}}
 
 Finally, navigate to `http://localhost:8080/grafana` (replace `http://localhost:8080` with your parent domain) and you should come to the Grafana login page.
 
@@ -73,7 +73,7 @@ When navigating to the Grafana URL (`http://localhost:8080/grafana` in the examp
 
 ### Grafana Website only shows text with no images or css
 
-{{< docs-imagebox img="/img/docs/tutorials/IIS_proxy_error.png"  max-width= "800px" >}}
+{{< docs-imagebox img="/static/img/docs/tutorials/IIS_proxy_error.png"  max-width= "800px" >}}
 
 1. The `root_url` setting in the Grafana config file does not match the parent URL with subpath. This could happen if the root_url is commented out by mistake (`;` is used for commenting out a line in .ini files):
 

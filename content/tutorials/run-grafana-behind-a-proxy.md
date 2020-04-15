@@ -10,34 +10,48 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 draft: true
 ---
 
-# Run Grafana behind a reverse proxy
+{{% tutorials/step title="Introduction" %}}
 
-It should be straight forward to get Grafana up and running behind a reverse proxy. But here are some things that you might run into.
+In this tutorial, you'll configure Grafana to run behind a reverse proxy.
 
-Links and redirects will not be rendered correctly unless you set the server.domain setting.
-```bash
-[server]
-domain = foo.bar
-```
+When running Grafana behind a proxy, you need to configure the domain name to let Grafana know how to render links and redirects correctly.
 
-To use sub *path* ex `http://foo.bar/grafana` make sure to include `/grafana` in the end of root_url.
-Otherwise Grafana will not behave correctly. See example below.
-
-## Examples
-Here are some example configurations for running Grafana behind a reverse proxy.
-
-### Grafana configuration (ex http://foo.bar)
+- In the Grafana configuration file, change `server.domain` to the domain name you'll be using:
 
 ```bash
 [server]
-domain = foo.bar
+domain = example.com
 ```
 
-### Nginx configuration
+- Restart Grafana for the new changes to take effect.
 
-Nginx is a high performance load balancer, web server and reverse proxy: https://www.nginx.com/
+You can also serve Grafana behind a _sub path_, such as `http://example.com/grafana`.
 
-#### Nginx configuration with HTTP and Reverse Proxy enabled
+To serve Grafana behind a sub path:
+
+- Include the sub path at the end of the `root_url`.
+- Set `serve_from_sub_path` to `true`.
+
+```bash
+[server]
+domain = example.com
+root_url = %(protocol)s://%(domain)s:%(http_port)s/grafana/
+serve_from_sub_path = true
+```
+
+Next, you need to configure your reverse proxy. You can find example configuration for the following:
+
+- [NGINX](#1)
+- [HAProxy](#2)
+- [IIS](#3)
+
+{{% /tutorials/step %}}
+{{% tutorials/step title="Configure NGINX" %}}
+
+[NGINX](https://www.nginx.com) is a high performance load balancer, web server, and reverse proxy.
+
+- In your NGINX configuration file, add a new `server` block:
+
 ```nginx
 server {
   listen 80;
@@ -50,54 +64,11 @@ server {
 }
 ```
 
-### Grafana configuration with hosting HTTPS in Nginx (ex https://foo.bar)
+- Reload the NGINX configuration.
+- Navigate to port 80 on the machine NGINX is running on. You're greeted by the Grafana login page.
 
-```bash
-[server]
-domain = foo.bar
-root_url = https://foo.bar
-```
+To configure NGINX to serve Grafana under a _sub path_, update the `location` block:
 
-#### Nginx configuration with HTTPS, Reverse Proxy, HTTP to HTTPS redirect and URL re-writes enabled
-
-Instead of http://foo.bar:3000/?orgId=1, this configuration will redirect all HTTP requests to HTTPS and re-write the URL so that port 3000 isn't visible and will result in https://foo.bar/?orgId=1
-
-```nginx
-server {
-  listen 80;
-  server_name foo.bar;
-  return 301 https://foo.bar$request_uri;
-}
-
-server {
-  listen 443 ssl http2;
-  server_name foo.bar;
-  root /usr/share/nginx/html;
-  index index.html index.htm;
-  ssl_certificate /etc/nginx/certs/foo_bar.crt;
-  ssl_certificate_key /etc/nginx/certs/foo_bar_decrypted.key;
-  ssl_protocols TLSv1.2;
-  ssl_ciphers HIGH:!aNULL:!MD5;
-
-  location / {
-   rewrite /(.*) /$1  break;
-   proxy_pass http://localhost:3000/;
-   proxy_redirect off;
-   proxy_set_header Host $host;
-  }
-}
-```
-
-### Examples with **sub path** (ex http://foo.bar/grafana)
-
-#### Grafana configuration with sub path
-```bash
-[server]
-domain = foo.bar
-root_url = %(protocol)s://%(domain)s/grafana/
-```
-
-#### Nginx configuration with sub path
 ```nginx
 server {
   listen 80;
@@ -110,7 +81,11 @@ server {
 }
 ```
 
-#### HAProxy configuration with sub path
+{{% /tutorials/step %}}
+{{% tutorials/step title="Configure HAProxy" %}}
+
+To configure HAProxy to serve Grafana under a _sub path_:
+
 ```bash
 frontend http-in
   bind *:80
@@ -126,23 +101,12 @@ backend grafana_backend
   server grafana localhost:3000
 ```
 
-### IIS URL Rewrite Rule (Windows) with Subpath
+{{% /tutorials/step %}}
+{{% tutorials/step title="Configure IIS" %}}
 
-IIS requires that the URL Rewrite module is installed.
+> IIS requires that the URL Rewrite module is installed.
 
-Given:
-
-- subpath `grafana`
-- Grafana installed on `http://localhost:3000`
-- server config:
-
-    ```bash
-    [server]
-    domain = localhost:8080
-    root_url = %(protocol)s://%(domain)s/grafana/
-    ```
-
-Create an Inbound Rule for the parent website (localhost:8080 in this example) in IIS Manager with the following settings:
+To configure IIS to serve Grafana under a _sub path_, create an Inbound Rule for the parent website in IIS Manager with the following settings:
 
 - pattern: `grafana(/)?(.*)`
 - check the `Ignore case` checkbox
@@ -164,3 +128,5 @@ This is the rewrite rule that is generated in the `web.config`:
 ```
 
 See the [tutorial on IIS URL Rewrites](http://docs.grafana.org/tutorials/iis/) for more in-depth instructions.
+
+{{% /tutorials/step %}}
