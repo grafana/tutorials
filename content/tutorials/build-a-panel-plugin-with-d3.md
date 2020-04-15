@@ -1,5 +1,5 @@
 ---
-title: Build a Panel Plugin with D3
+title: Build a panel plugin with D3.js
 summary: Learn how to use D3.js in your panel plugins.
 id: build-a-panel-plugin-with-d3
 categories: ["plugins"]

@@ -1,5 +1,5 @@
 ---
-title: Build a Panel Plugin
+title: Build a panel plugin
 summary: Learn at how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
 categories: ["plugins"]

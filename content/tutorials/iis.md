@@ -1,5 +1,5 @@
 ---
-title: Use IIS with URL Rewrite as a Reverse Proxy
+title: Use IIS with URL Rewrite as a reverse proxy
 summary: Learn how to set up Grafana behind IIS with URL Rewrite.
 id: iis
 categories: ["administration"]

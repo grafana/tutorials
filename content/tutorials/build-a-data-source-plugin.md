@@ -1,5 +1,5 @@
 ---
-title: Build a Data Source Plugin
+title: Build a data source plugin
 summary: Create a plugin to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: ["plugins"]
