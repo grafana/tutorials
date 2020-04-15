@@ -132,7 +132,7 @@ Repeat the following steps for each folder.
 1. In the sidebar, hover your cursor over the **Dashboards** (four squares) icon and then click **Manage**.
 1. To create a folder, click **New Folder**.
 2. In **Name**, enter the folder name.
-3. Click **Create**.
+1. Click **Create**.
 
 #### Remove Viewer role from folder permissions
 
