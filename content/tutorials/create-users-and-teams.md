@@ -105,7 +105,7 @@ You'll create a team, then add users to it. You'll then repeat the process with 
 1. In the **Add team member** box, select the user you want to add to the team. Refer to the table above for team assignments.
 1. Click **Add to team**.
 
-When you are done, you will have two teams with two users assigned to each.
+When you're done, you'll have two teams with two users assigned to each.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Manage resource access with folders" %}}
