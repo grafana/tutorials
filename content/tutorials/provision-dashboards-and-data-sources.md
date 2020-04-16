@@ -12,12 +12,12 @@ draft: true
 
 {{% tutorials/step duration="1" title="Introduction" %}}
 
-Learn how you can reuse dashboards and data sources across multiple teams, by provisioning Grafana from version-controlled configuration files.
+Learn how you can reuse dashboards and data sources across multiple teams by provisioning Grafana from version-controlled configuration files.
 
 In this tutorial, you'll:
 
-- Provision dashboards
-- Provision data sources
+- Provision dashboards.
+- Provision data sources.
 
 ### Prerequisites
 
@@ -26,27 +26,29 @@ In this tutorial, you'll:
 {{% /tutorials/step %}}
 {{% tutorials/step title="Configuration as code" %}}
 
-As the number of dashboards and data sources grows within your organization, manually managing changes can become tedious and error-prone. Encouraging reuse becomes important to avoid multiple teams redesigning the same dashboards.
-
 Configuration as code is the practice of storing the the configuration of your system as a set of version controlled, human-readable configuration files, rather than in a database. These configuration files can be reused across environments to avoid duplicated resources.
+
+As the number of dashboards and data sources grows within your organization, manually managing changes can become tedious and error-prone. Encouraging reuse becomes important to avoid multiple teams redesigning the same dashboards.
 
 Grafana supports configuration as code through _provisioning_. The resources that currently supports provisioning are:
 
 - [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards)
 - [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources)
-- [Notification channels](https://grafana.com/docs/grafana/latest/administration/provisioning/#alert-notification-channels)
+- [Alert notification channels](https://grafana.com/docs/grafana/latest/administration/provisioning/#alert-notification-channels)
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Set the provisioning directory" %}}
 
-Before you can start provisioning resources, Grafana needs to know where to find these config files.
+Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. A provisioning directory NEED DEFINITION/EXPLANATION.
 
-By default, Grafana looks for a provisioning directory in the configuration directory, but you can configure this yourself by setting the `paths.provisioning` property in the main config file:
+By default, Grafana looks for a provisioning directory in the configuration directory (grafana > conf). You can set a different path by setting the `paths.provisioning` property in the main config file: ((Is this something I might want to do as an admin specifically? Like set this path to a network drive folder?))
 
 ```ini
 [paths]
 provisioning = <path to config files>
 ```
+
+For more information about configuration files, refer to [Configuration](https://grafana.com/docs/grafana/latest/installation/configuration/) in the [Grafana documentation](https://grafana.com/docs/grafana/latest/).
 
 The provisioning directory assumes the following structure:
 
@@ -60,14 +62,14 @@ provisioning/
     <yaml files>
 ```
 
-Next, let's look at how to provision a data source.
+Next, we'll look at how to provision a data source.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a data source" %}}
 
-Each data source config file contains a _manifest_ that specifies the desired state of a set of data sources.
+Each data source configuration file contains a _manifest_ that specifies the desired state of a set of data sources. ((I'm a little lost. Is this specific to provisioning or is it in general? I infer from the next paragraph that it is probably provisioning-only, but you should probably clarify that up front.))
 
-At start-up, Grafana loads the configuration files and provisions the data sources listed in the manifests.
+At startup, Grafana loads the configuration files and provisions the data sources listed in the manifests.
 
 Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features/datasources/testdata/) data source that you can use for your dashboards.
 
