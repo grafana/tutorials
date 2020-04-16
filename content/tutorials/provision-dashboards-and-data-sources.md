@@ -8,6 +8,7 @@ status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 draft: true
+weight: 40
 ---
 
 {{% tutorials/step duration="1" title="Introduction" %}}

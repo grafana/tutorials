@@ -8,6 +8,7 @@ tags: beginner
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
+weight: 10
 ---
 
 {{% tutorials/step duration="1" title="Introduction" %}}
