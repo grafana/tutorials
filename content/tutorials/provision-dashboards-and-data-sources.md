@@ -22,6 +22,7 @@ In this tutorial, you'll:
 ### Prerequisites
 
 - Grafana 7.0
+- Administrator privileges on the system you are doing the tutorial on
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Configuration as code" %}}
@@ -75,20 +76,20 @@ Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features
 
 #### Create a data source manifest
 
-- In the `provisioning/datasources/` directory, create a file called `default.yaml` with the following content:
+1. In the `provisioning/datasources/` directory, create a file called `default.yaml` with the following content:
 
-```yaml
-apiVersion: 1
+   ```yaml
+   apiVersion: 1
 
-datasources:
-  - name: TestData DB
-    type: testdata
-```
+   datasources:
+     - name: TestData DB
+       type: testdata
+   ```
 
-- Restart Grafana to load the new changes.
-- In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
+1. Restart Grafana to load the new changes.
+1. In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
 
-> The configuration options can vary between different types of data sources. For more information on how to configure a specific data source type, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
+> The configuration options can vary between different types of data sources. For more information on how to configure a specific data source, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a dashboard" %}}
@@ -97,13 +98,13 @@ Each dashboard config file contains a manifest that specifies the desired state 
 
 A dashboard provider tells Grafana where to find the dashboard definitions and where to put them.
 
-Grafana regularly checks for changes to the dashboard definitions (by default every **10 seconds**).
+Grafana regularly checks for changes to the dashboard definitions (by default every 10 seconds).
 
-First, let's define a dashboard provider so that Grafana knows where to find the dashboards.
+Let's define a dashboard provider so that Grafana knows where to find the dashboards we want to provision.
 
 #### Define a dashboard provider
 
-- In the `provisioning/dashboards/` directory, create a file called `default.yaml` with the following content:
+In the `provisioning/dashboards/` directory, create a file called `default.yaml` with the following content:
 
 ```yaml
 apiVersion: 1
@@ -115,15 +116,16 @@ providers:
     options:
       path: /var/lib/grafana/dashboards # The path to the dashboard definitions
 ```
+((I do not have this path in my Grafana installation on my Windows machine. This is my path: C:\Program Files\GrafanaLabs\grafana\public\dashboards))
 
 For more information on how to configure dashboard providers, refer to [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards).
 
 #### Create a dashboard definition
 
-- In the dashboard definitions directory you specified in the dashboard provider, i.e. `options.path`, create a file called `cluster.json` with the following content:
+1. In the dashboard definitions directory you specified in the dashboard provider, i.e. `options.path`, create a file called `cluster.json` with the following content:
 
-```json
-{
+   ```json
+   {
    "__inputs": [ ],
    "__requires": [ ],
    "annotations": {
@@ -254,13 +256,14 @@ For more information on how to configure dashboard providers, refer to [Dashboar
    "timezone": "browser",
    "title": "Cluster",
    "version": 0
-}
-```
+   }
+   ```
 
-- Restart Grafana to provision the new dashboard (or wait 10 seconds for Grafana to automatically create the dashboard).
-- In the sidebar, hover the cursor over **Dashboards** (squares) icon, and click **Manage**. The dashboard appears in a **Services** folder.
+1. Restart Grafana to provision the new dashboard or wait 10 seconds for Grafana to automatically create the dashboard.
+1. In the sidebar, hover the cursor over **Dashboards** (squares) icon, and thenclick **Manage**. The dashboard appears in a **Services** folder.
+((I replaced the options.path with C:\Program Files\GrafanaLabs\grafana\public\dashboards in my JSON file, and this did not work for me. I might have the file in the wrong place, but it is the only "dashboards" folder in the grafana directory, so more likely that the path is the wrong format.))
 
-> If you don't specify an `id` in the dashboard definition, Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict.
+> If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict. ((I have no idea where I would do this in the file. I see two different ID fields, and one has a "2" in it already.))
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
