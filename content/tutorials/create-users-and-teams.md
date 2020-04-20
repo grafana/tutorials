@@ -216,7 +216,6 @@ In this tutorial, you've configured Grafana for an organization:
 
 ### Learn more
 
-- What is an [Organization](https://grafana.com/docs/grafana/latest/guides/basic_concepts/#organization)?
 - [Organization Roles](https://grafana.com/docs/grafana/latest/permissions/organization_roles/)
 - [Permissions Overview](https://grafana.com/docs/grafana/latest/permissions/overview/)
 
