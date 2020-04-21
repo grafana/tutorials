@@ -154,6 +154,59 @@ onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
 ```
 
 {{% /tutorials/step %}}
+{{% tutorials/step title="Add support for logs" %}}
+
+In addition to metrics, data sources can also return logs.
+
+To let Grafana know that a data source supports log data, add `"logs": true` to `plugin.json`:
+
+```js
+{
+  "type": "datasource",
+  "name": "logging",
+  "id": "marcusolsson-logging",
+  "metrics": true,
+  "logs": true,
+  ...
+}
+```
+
+Grafana considers any data frames with at least one time field and one text field to be logs data.
+
+To make a data source return logs data, construct a data frame like this one:
+
+```js
+return new MutableDataFrame({
+  refId: query.refId,
+  fields: [
+    { name: 'time', type: FieldType.time, values: [from, to] },
+    { name: 'message', type: FieldType.string, values: ['foo', 'bar'] },
+  ],
+});
+```
+
+You can add additional information about each log line by adding more fields. If you add more text fields, the first one will be considered the actual log line. The rest will be treated as parsed fields.
+
+You can also add additional metadata to the entire log data, by adding labels to the message field. This can be used to add information about the filename from where the logs were ingested.
+
+```js
+{ name: 'message', type: FieldType.string, values: ['foo', 'bar'], labels: { filename: "file.txt" } }
+```
+
+To set the level for each log line, add a `level` field:
+
+```js
+return new MutableDataFrame({
+  refId: query.refId,
+  fields: [
+    { name: 'time', type: FieldType.time, values: [from, to] },
+    { name: 'message', type: FieldType.string, values: ['foo', 'bar'] },
+    { name: 'level', type: FieldType.string, values: ['info', 'error'] },
+  ],
+});
+```
+
+{{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
 
 Congratulations, you made it to the end of this tutorial!
