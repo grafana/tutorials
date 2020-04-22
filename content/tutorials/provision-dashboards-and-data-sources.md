@@ -40,9 +40,11 @@ Grafana supports configuration as code through _provisioning_. The resources tha
 {{% /tutorials/step %}}
 {{% tutorials/step title="Set the provisioning directory" %}}
 
-Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. A provisioning directory NEED DEFINITION/EXPLANATION.
+Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. The provisioning directory contains configuration files that are applied whenever Grafana starts and continuously while running.
 
-By default, Grafana looks for a provisioning directory in the configuration directory (grafana > conf). You can set a different path by setting the `paths.provisioning` property in the main config file: ((Is this something I might want to do as an admin specifically? Like set this path to a network drive folder?))
+By default, Grafana looks for a provisioning directory in the configuration directory (grafana > conf) on the system where Grafana is installed. However, if you are a Grafana Administrator, then you might want to place the config files in a shared resource like a network folder, so you would need to change the path to the provisioning directory.
+
+You can set a different path by setting the `paths.provisioning` property in the main config file:
 
 ```ini
 [paths]
@@ -68,7 +70,7 @@ Next, we'll look at how to provision a data source.
 {{% /tutorials/step %}}
 {{% tutorials/step title="Provision a data source" %}}
 
-Each data source configuration file contains a _manifest_ that specifies the desired state of a set of data sources. ((I'm a little lost. Is this specific to provisioning or is it in general? I infer from the next paragraph that it is probably provisioning-only, but you should probably clarify that up front.))
+Each data source provisioning config file contains a _manifest_ that specifies the desired state of a set of provisioned data sources.
 
 At startup, Grafana loads the configuration files and provisions the data sources listed in the manifests.
 
@@ -86,8 +88,8 @@ Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features
        type: testdata
    ```
 
-1. Restart Grafana to load the new changes.
-1. In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
+2. Restart Grafana to load the new changes.
+3. In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
 
 > The configuration options can vary between different types of data sources. For more information on how to configure a specific data source, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
@@ -114,9 +116,10 @@ providers:
     folder: Services # The folder where to place the dashboards
     type: file
     options:
-      path: /var/lib/grafana/dashboards # The path to the dashboard definitions
+      path:  <path to dashboard definitions> # The path to the dashboard definitions
+            # Default path for Windows: C:/Program Files/GrafanaLabs/grafana/public/dashboards # The path to the dashboard definitions
+            # Default path for Mac or Linux is: /var/lib/grafana/dashboards
 ```
-((I do not have this path in my Grafana installation on my Windows machine. This is my path: C:\Program Files\GrafanaLabs\grafana\public\dashboards))
 
 For more information on how to configure dashboard providers, refer to [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards).
 
@@ -259,11 +262,10 @@ For more information on how to configure dashboard providers, refer to [Dashboar
    }
    ```
 
-1. Restart Grafana to provision the new dashboard or wait 10 seconds for Grafana to automatically create the dashboard.
-1. In the sidebar, hover the cursor over **Dashboards** (squares) icon, and thenclick **Manage**. The dashboard appears in a **Services** folder.
-((I replaced the options.path with C:\Program Files\GrafanaLabs\grafana\public\dashboards in my JSON file, and this did not work for me. I might have the file in the wrong place, but it is the only "dashboards" folder in the grafana directory, so more likely that the path is the wrong format.))
+2. Restart Grafana to provision the new dashboard or wait 10 seconds for Grafana to automatically create the dashboard.
+3. In the sidebar, hover the cursor over **Dashboards** (squares) icon, and thenclick **Manage**. The dashboard appears in a **Services** folder.
 
-> If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict. ((I have no idea where I would do this in the file. I see two different ID fields, and one has a "2" in it already.))
+> If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict.
 
 {{% /tutorials/step %}}
 {{% tutorials/step title="Congratulations" %}}
