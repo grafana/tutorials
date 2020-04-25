@@ -11,7 +11,7 @@ draft: true
 weight: 40
 ---
 
-{{% tutorials/step duration="1" title="Introduction" %}}
+{{< tutorials/step duration="1" title="Introduction" >}}
 
 Learn how you can reuse dashboards and data sources across multiple teams by provisioning Grafana from version-controlled configuration files.
 
@@ -25,8 +25,8 @@ In this tutorial, you'll:
 - Grafana 7.0
 - Administrator privileges on the system you are doing the tutorial on
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Configuration as code" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Configuration as code" >}}
 
 Configuration as code is the practice of storing the the configuration of your system as a set of version controlled, human-readable configuration files, rather than in a database. These configuration files can be reused across environments to avoid duplicated resources.
 
@@ -38,8 +38,8 @@ Grafana supports configuration as code through _provisioning_. The resources tha
 - [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources)
 - [Alert notification channels](https://grafana.com/docs/grafana/latest/administration/provisioning/#alert-notification-channels)
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Set the provisioning directory" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Set the provisioning directory" >}}
 
 Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. The provisioning directory contains configuration files that are applied whenever Grafana starts and continuously while running.
 
@@ -68,8 +68,8 @@ provisioning/
 
 Next, we'll look at how to provision a data source.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Provision a data source" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Provision a data source" >}}
 
 Each data source provisioning config file contains a _manifest_ that specifies the desired state of a set of provisioned data sources.
 
@@ -94,8 +94,8 @@ Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features
 
 > The configuration options can vary between different types of data sources. For more information on how to configure a specific data source, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Provision a dashboard" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Provision a dashboard" >}}
 
 Each dashboard config file contains a manifest that specifies the desired state of a set of _dashboard providers_.
 
@@ -268,8 +268,8 @@ For more information on how to configure dashboard providers, refer to [Dashboar
 
 > If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Congratulations" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
 
@@ -284,4 +284,4 @@ Dashboard definitions can get unwieldly as more panels and configurations are ad
 
 - [Provisioning Grafana](https://grafana.com/docs/grafana/latest/administration/provisioning/)
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}

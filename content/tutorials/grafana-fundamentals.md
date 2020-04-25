@@ -11,7 +11,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 10
 ---
 
-{{% tutorials/step duration="1" title="Introduction" %}}
+{{< tutorials/step duration="1" title="Introduction" >}}
 
 In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
 
@@ -28,8 +28,8 @@ In this tutorial, you'll:
 - [Docker Compose](https://docs.docker.com/compose/) (included in Docker for Desktop for macOS and Windows)
 - [Git](https://git-scm.com/)
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Set up the sample application" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Set up the sample application" >}}
 
 This tutorial uses a sample application to demonstrate some of the features in Grafana. To complete the exercises in this tutorial, you need to download the files to your local machine.
 
@@ -89,8 +89,8 @@ The link appears in the list under the Grafana News heading.
 
 To vote for a link, click the triangle icon next to the name of the link.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Log in to Grafana" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Log in to Grafana" >}}
 
 Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
 
@@ -110,8 +110,8 @@ The first thing you see is the Home dashboard, which helps you get started.
 
 To the far left you can see the _sidebar_, a set of quick access icons for navigating Grafana.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Add a metrics data source" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Add a metrics data source" >}}
 
 The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
 
@@ -125,8 +125,8 @@ To be able to visualize the metrics from Prometheus, you first need to add it as
 
 Prometheus is now available as a data source in Grafana.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Explore your metrics" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Explore your metrics" >}}
 
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to create ad-hoc queries to understand the metrics exposed by the sample application.
 
@@ -163,8 +163,8 @@ sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 
 Depending on your use case, you might want to group on other labels. Try grouping by other labels, such as `status_code`, by changing the `by(route)` part of the query.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Add a logging data source" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Add a logging data source" >}}
 
 Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
@@ -176,8 +176,8 @@ Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). J
 
 Loki is now available as a data source in Grafana.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Explore your logs" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Explore your logs" >}}
 
 Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well.
 
@@ -203,8 +203,8 @@ Grafana only shows logs within the current time interval. This lets you narrow d
 
 - Click and drag across the bars in the graph to filter logs based on time.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Build a dashboard" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Build a dashboard" >}}
 
 A _dashboard_ gives you an at-a-glance view of your data and lets you track metrics through different visualizations.
 
@@ -227,8 +227,8 @@ sum(rate(tns_request_duration_seconds_count[5m])) by(route)
 - Click the **Save dashboard** (disk) icon at the top of the dashboard to save your dashboard.
 - Enter a name in the **New name** field and then click **Save**.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Annotate events" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Annotate events" >}}
 
 We monitor systems for many reasons, but a common use case is to monitor systems that might go down.
 
@@ -270,8 +270,8 @@ The log lines returned by your query are now displayed as annotations in the gra
 
 Being able to combine data from multiple data sources in one graph allows you to correlate information from both Prometheus and Loki.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Set up an alert" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Set up an alert" >}}
 
 Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
 
@@ -340,8 +340,8 @@ Once you've acknowledged an alert, consider pausing it. This can be useful to av
 - Find your alert in the list, and click the **Pause** icon on the right. The **Pause** icon turns into a **Play** icon.
 - Click the **Play** icon to resume evaluation of your alert.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Congratulations" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
 
@@ -350,5 +350,5 @@ Congratulations, you made it to the end of this tutorial!
 - [Alert rules](https://grafana.com/docs/grafana/latest/alerting/rules/)
 - [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}
 

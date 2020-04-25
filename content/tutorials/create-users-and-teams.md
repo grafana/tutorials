@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 20
 ---
 
-{{% tutorials/step duration="1" title="Introduction" %}}
+{{< tutorials/step duration="1" title="Introduction" >}}
 
 This tutorial is useful for admins and others who want to learn how to manage users. In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 
@@ -34,8 +34,8 @@ In this scenario, you'll:
 
 - Grafana 7.0
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Add users" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Add users" >}}
 
 In Grafana, all users are granted an _organization role_ that determines what resources they can access.
 
@@ -73,8 +73,8 @@ Repeat the following steps for each of the employees.
 
 When you create a user, they're granted the Viewer role, which means that they won't be able to make any changes to any of the resources in Grafana. That's ok for now, though. In the next step, you'll grant some users more permissions by adding them to _teams_.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Assign users to teams" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Assign users to teams" >}}
 
 Instead of granting permissions to individual users, teams let you grant permissions to a group of users.
 
@@ -108,8 +108,8 @@ You'll create a team, then add users to it. You'll then repeat the process with 
 
 When you're done, you'll have two teams with two users assigned to each.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Manage resource access with folders" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Manage resource access with folders" >}}
 
 Use folders to organize collections of related dashboards.
 
@@ -156,8 +156,8 @@ In this example, Graphona wants to explicitly grant teams access to folders. To 
 
 When you're finished, you'll have two empty folders, the contents of which can only be viewed by members of the Marketing or Engineering teams. Only Marketing team members can edit the contents of the Analytics folder, only Engineering team members can edit the contents of the Application folder.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Define granular permissions" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Define granular permissions" >}}
 
 By using folders and teams, you avoid having to manage permissions for individual users.
 
@@ -203,8 +203,8 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 
 You've created a new user and given them unique permissions to view contents of a folder.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Congratulations" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
 
@@ -219,4 +219,4 @@ In this tutorial, you've configured Grafana for an organization:
 - [Organization Roles](https://grafana.com/docs/grafana/latest/permissions/organization_roles/)
 - [Permissions Overview](https://grafana.com/docs/grafana/latest/permissions/overview/)
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}

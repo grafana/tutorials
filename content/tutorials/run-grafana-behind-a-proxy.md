@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 aliases: ["/docs/grafana/latest/installation/behind_proxy/"]
 ---
 
-{{% tutorials/step title="Introduction" %}}
+{{< tutorials/step title="Introduction" >}}
 
 In this tutorial, you'll configure Grafana to run behind a reverse proxy.
 
@@ -45,8 +45,8 @@ Next, you need to configure your reverse proxy. You can find example configurati
 - [HAProxy](#2)
 - [IIS](#3)
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Configure NGINX" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Configure NGINX" >}}
 
 [NGINX](https://www.nginx.com) is a high performance load balancer, web server, and reverse proxy.
 
@@ -81,8 +81,8 @@ server {
 }
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Configure HAProxy" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Configure HAProxy" >}}
 
 To configure HAProxy to serve Grafana under a _sub path_:
 
@@ -101,8 +101,8 @@ backend grafana_backend
   server grafana localhost:3000
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Configure IIS" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Configure IIS" >}}
 
 > IIS requires that the URL Rewrite module is installed.
 
@@ -129,4 +129,4 @@ This is the rewrite rule that is generated in the `web.config`:
 
 See the [tutorial on IIS URL Rewrites](/tutorials/iis/) for more in-depth instructions.
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}

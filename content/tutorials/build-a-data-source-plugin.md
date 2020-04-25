@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 70
 ---
 
-{{% tutorials/step duration="1" title="Introduction" %}}
+{{< tutorials/step duration="1" title="Introduction" >}}
 
 Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There's a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.
 
@@ -26,23 +26,23 @@ In this tutorial, you'll:
 - NodeJS
 - yarn
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Set up your environment" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Set up your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Create a new plugin" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Create a new plugin" >}}
 
 {{< tutorials/shared "create-plugin" >}}
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Anatomy of a plugin" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Anatomy of a plugin" >}}
 
 {{< tutorials/shared "plugin-anatomy" >}}
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Data source plugins" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Data source plugins" >}}
 
 A data source in Grafana must extend the `DataSourceApi` interface, which requires you to defines two methods: `query` and `testDatasource`.
 
@@ -69,8 +69,8 @@ Positive
 async testDatasource()
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Support custom queries" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Support custom queries" >}}
 
 Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called _PromQL_. No matter what query language your databases are using, Grafana lets you build support for it.
 
@@ -112,8 +112,8 @@ If you want the query to run automatically after updating the query, you can add
 onRunQuery();
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step duration="1" title="Configure your data source" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step duration="1" title="Configure your data source" >}}
 
 To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A _config editor_ lets you users configure your data source plugin to fit their needs.
 
@@ -153,9 +153,9 @@ onPathChange = (event: ChangeEvent<HTMLInputElement>) => {
   };
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Congratulations" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}

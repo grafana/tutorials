@@ -11,7 +11,7 @@ weight: 30
 draft: true
 ---
 
-{{% tutorials/step title="Introduction" %}}
+{{< tutorials/step title="Introduction" >}}
 
 Grafana plugins lets you extend and customize your Grafana experience. Familiarize yourself with the [official Grafana plugins page](https://grafana.com/grafana/plugins) to find and install new plugins.
 
@@ -24,8 +24,8 @@ In this tutorial, you'll:
 
 - Grafana 7.0
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Explore available plugins" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Explore available plugins" >}}
 
 To browse all available plugins, check out the [Plugins](https://grafana.com/grafana/plugins) page. There you can find both official plugins by Grafana, as well as plugins built by the community.
 
@@ -35,8 +35,8 @@ There are three types of plugins:
 - [Data sources plugins](https://grafana.com/grafana/plugins?type=datasource) add support for additional data sources, such as [Google BigQuery](https://grafana.com/grafana/plugins/doitintl-bigquery-datasource).
 - [Application plugins](https://grafana.com/grafana/plugins?type=app) bundles data sources and dashboards with custom pages to offer a complete monitoring experience, such as the [Kubernetes application](https://grafana.com/grafana/plugins/grafana-kubernetes-app).
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Install a plugin on Hosted Grafana" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Install a plugin on Hosted Grafana" >}}
 
 Let's add support for visualizing maps, by installing the [Worldmap Panel plugin](https://grafana.com/grafana/plugins/grafana-worldmap-panel).
 
@@ -68,8 +68,8 @@ To remove a plugin:
 
 > It may take a minute before the plugin is removed. If the plugin is still in the plugin list, check back again once your instance has restarted.
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Install a plugin on local Grafana" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Install a plugin on local Grafana" >}}
 
 To manage plugins on a local instance of Grafana, we recommend the [Grafana command-line tool](https://grafana.com/docs/grafana/latest/administration/cli).
 
@@ -103,8 +103,8 @@ To remove a plugin, enter the following command in your terminal:
 grafana-cli plugins remove <plugin-id>
 ```
 
-{{% /tutorials/step %}}
-{{% tutorials/step title="Congratulations" %}}
+{{< /tutorials/step >}}
+{{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
 
@@ -113,4 +113,4 @@ Congratulations, you made it to the end of this tutorial!
 - Explore what more you can do with the [Grafana command-line tool](https://grafana.com/docs/grafana/latest/administration/cli)
 - Learn how to [build your own panel plugin](/tutorials/build-a-panel-plugin)
 
-{{% /tutorials/step %}}
+{{< /tutorials/step >}}
