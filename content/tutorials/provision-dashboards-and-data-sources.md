@@ -11,7 +11,7 @@ draft: true
 weight: 40
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 Learn how you can reuse dashboards and data sources across multiple teams by provisioning Grafana from version-controlled configuration files.
 

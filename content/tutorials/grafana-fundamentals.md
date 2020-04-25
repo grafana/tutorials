@@ -11,7 +11,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 10
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
 

@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 50
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 Panels are the building blocks of Grafana. They allow you to visualize data in different ways. While Grafana has several types of panels already built-in, you can also build your own panel, to add support other visualizations.
 
@@ -27,17 +27,17 @@ In this tutorial, you'll:
 - yarn
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Set up your environment" >}}
+{{< tutorials/step title="Set up your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Create a new plugin" >}}
+{{< tutorials/step title="Create a new plugin" >}}
 
 {{< tutorials/shared "create-plugin" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Anatomy of a plugin" >}}
+{{< tutorials/step title="Anatomy of a plugin" >}}
 
 {{< tutorials/shared "plugin-anatomy" >}}
 

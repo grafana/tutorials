@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 20
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 This tutorial is useful for admins and others who want to learn how to manage users. In this tutorial, you'll add multiple users, organize them into teams, and make sure they're only able to access the resources they need.
 

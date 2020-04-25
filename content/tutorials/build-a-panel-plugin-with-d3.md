@@ -10,7 +10,7 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 60
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel using [D3.js](https://d3js.org/).
 
@@ -28,17 +28,17 @@ In this tutorial, you'll:
 - yarn
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Set up your environment" >}}
+{{< tutorials/step title="Set up your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Create a new plugin" >}}
+{{< tutorials/step title="Create a new plugin" >}}
 
 {{< tutorials/shared "create-plugin" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Data-driven transformations" >}}
+{{< tutorials/step title="Data-driven transformations" >}}
 
 [D3.js](https://d3js.org/) is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
 
