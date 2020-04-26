@@ -84,33 +84,69 @@ Now that you can view your panel, make a change to the panel plugin:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure your panel" >}}
 
-Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By adding a _panel editor_ to your plugin, your panel will be able to accept user input, or _options_.
+Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By configuring  _panel options_ for your plugin, your panel will be able to accept user input, or _options_.
 
-A panel editor is a React component that extends `PureComponent<PanelEditorProps<SimpleOptions>>`. Here, `SimpleOptions` is a TypeScript interface that defines the available options.
+To configure  _panel options_ specify options type for the plugin:
 
-```js
-export const defaults: SimpleOptions = {
-  text: 'The default text!',
-};
+**types.ts**
+
+```ts
+type SeriesSize = 'sm' | 'md' | 'lg';
+
+// interface defining panel options type
+export interface SimpleOptions {
+  text: string;
+  showSeriesCount: boolean;
+  seriesCountSize: SeriesSize;
+}
 ```
 
-Just like the panel itself, the panel editor is a React component, which returns a form that lets users update the value of the options defined by `SimpleOptions`.
+Next, to configure the options UI use [`setPanelOptions`](https://github.com/grafana/grafana/blob/master/packages/grafana-data/src/panel/PanelPlugin.ts#L209) method from `PanelPlugin`:
 
-**SimpleEditor.tsx**
+**module.ts**
 
-```js
-<FormField label="Text" labelWidth={5} inputWidth={20} type="text" onChange={this.onTextChanged} value={options.text || ''} />
+```ts
+export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel)
+    .setPanelOptions(builder => {
+      return builder
+        .addTextInput({
+          path: 'text',
+          name: 'Simple text option',
+          description: 'Description of panel option',
+          defaultValue: 'Default value of text input option',
+        })
+        .addBooleanSwitch({
+          path: 'showSeriesCount',
+          name: 'Show series counter',
+          defaultValue: false,
+        })
+        .addRadio({
+          path: 'seriesCountSize',
+          name: 'Series counter size',
+          defaultValue: 'sm',
+          settings: {
+            options: [
+              {
+                value: 'sm',
+                label: 'Small',
+              },
+              {
+                value: 'md',
+                label: 'Medium',
+              },
+              {
+                value: 'lg',
+                label: 'Large',
+              },
+            ],
+          },
+          showIf: config => config.showSeriesCount,
+        });
+    });
 ```
 
-The `onChange` attribute on the `FormField` lets you update the panel properties. Here, `onTextChanged` is a function that updates the panel properties whenever the value of the `FormField` changes.
+Grafana will automatically create _panel options_ editor for you and display it in the panel editor sidebar under "Display options" section.
 
-You can update the value of an option, by calling `this.props.onOptionsChange`:
-
-```js
-onTextChanged = ({ target }: any) => {
-    this.props.onOptionsChange({ ...this.props.options, text: target.value });
-  };
-```
 {{< /tutorials/step >}}
 {{< tutorials/step title="Access time series data" >}}
 
