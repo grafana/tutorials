@@ -4,10 +4,8 @@ summary: Treat your configuration as code.
 id: provision-dashboards-and-data-sources
 categories: ["administration"]
 tags: intermediate
-status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
-draft: true
 weight: 40
 ---
 
@@ -117,9 +115,9 @@ providers:
     folder: Services # The folder where to place the dashboards
     type: file
     options:
-      path:  <path to dashboard definitions> # The path to the dashboard definitions
-            # Default path for Windows: C:/Program Files/GrafanaLabs/grafana/public/dashboards # The path to the dashboard definitions
-            # Default path for Mac or Linux is: /var/lib/grafana/dashboards
+      path:  <path to dashboard definitions>
+            # Default path for Windows: C:/Program Files/GrafanaLabs/grafana/public/dashboards
+            # Default path for Linux is: /var/lib/grafana/dashboards
 ```
 
 For more information on how to configure dashboard providers, refer to [Dashboards](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards).
