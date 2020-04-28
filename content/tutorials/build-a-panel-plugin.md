@@ -98,7 +98,7 @@ Panel options are defined in a _panel options object_. `SimpleOptions` is an int
    type CircleColor = 'red' | 'green' | 'blue';
    ```
 
-2. In the `SimpleObject` interface, add a new option called `color`:
+2. In the `SimpleOptions` interface, add a new option called `color`:
 
    ```
    color: CircleColor;
