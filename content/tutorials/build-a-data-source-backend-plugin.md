@@ -35,8 +35,6 @@ In this tutorial, you'll:
 {{% /tutorials/step %}}
 {{% tutorials/step duration="1" title="Create a new plugin" %}}
 
-<!-- {{< tutorials/shared "create-plugin" >}} -->
-
 To build a backend for your data source plugin grafana requires binary that Grafana can execute when it loads plugin during start-up. In this guide, we will build a binary using our backend plugin SDK in Go.
 
 The easiest way to get started is to clone one of our test data datasources. Navigate to the plugin folder that you configured in step 1 and type:
@@ -45,7 +43,7 @@ The easiest way to get started is to clone one of our test data datasources. Nav
 npx @grafana/toolkit plugin:create my-plugin
 ```
 
-select `Backend Datasource Plugin`
+select `Backend Datasource Plugin` and follow the rest of the guide.
 
 ```
 cd my-plugin
