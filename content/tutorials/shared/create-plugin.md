@@ -9,7 +9,7 @@ Tooling for modern web development can be tricky to wrap your head around. While
 1\. In the plugin directory, create a plugin from template using the `plugin:create` command:
 
 ```
-npx @grafana/toolkit plugin:create my-plugin
+npx "@grafana/toolkit"@canary plugin:create my-plugin
 ```
 
 2\. Change directory.

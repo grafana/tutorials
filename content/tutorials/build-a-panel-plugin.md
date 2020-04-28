@@ -58,7 +58,7 @@ The [PanelProps](https://github.com/grafana/grafana/blob/747b546c260f9a448e2cb56
 
 You can access the panel properties through `this.props`, as seen in your plugin.
 
-**SimplePanel.tsx**
+**src/SimplePanel.tsx**
 
 ```js
 const { options, data, width, height } = this.props;
@@ -82,70 +82,115 @@ Now that you can view your panel, make a change to the panel plugin:
 1. In the browser, reload Grafana with the new changes.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Configure your panel" >}}
+{{< tutorials/step title="Add panel options" >}}
 
-Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By configuring  _panel options_ for your plugin, your panel will be able to accept user input, or _options_.
+Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By configuring  _panel options_ for your plugin, your panel will be able to accept user input.
 
-To configure  _panel options_ specify options type for the plugin:
+In the previous step, you changed the fill color of the circle in the code. Let's change the code so that the plugin user can configure the color from the panel editor.
 
-**types.ts**
+#### Add an option
+
+Panel options are defined in a _panel options object_. `SimpleOptions` is an interface that describes the options object.
+
+1. In `types.ts`, add a `CircleColor` type to hold the colors the users can choose from:
+
+   ```
+   type CircleColor = 'red' | 'green' | 'blue';
+   ```
+
+2. In the `SimpleObject` interface, add a new option called `color`:
+
+   ```
+   color: CircleColor;
+   ```
+
+Here's the updated options definition:
+
+**src/types.ts**
 
 ```ts
 type SeriesSize = 'sm' | 'md' | 'lg';
+type CircleColor = 'red' | 'green' | 'blue';
 
 // interface defining panel options type
 export interface SimpleOptions {
   text: string;
   showSeriesCount: boolean;
   seriesCountSize: SeriesSize;
+  color: CircleColor;
 }
 ```
 
-Next, to configure the options UI use [`setPanelOptions`](https://github.com/grafana/grafana/blob/master/packages/grafana-data/src/panel/PanelPlugin.ts#L209) method from `PanelPlugin`:
+#### Add an option control
 
-**module.ts**
+To change the option from the panel editor, you need to bind the `color` option to an _option control_.
 
-```ts
-export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel)
-    .setPanelOptions(builder => {
-      return builder
-        .addTextInput({
-          path: 'text',
-          name: 'Simple text option',
-          description: 'Description of panel option',
-          defaultValue: 'Default value of text input option',
-        })
-        .addBooleanSwitch({
-          path: 'showSeriesCount',
-          name: 'Show series counter',
-          defaultValue: false,
-        })
-        .addRadio({
-          path: 'seriesCountSize',
-          name: 'Series counter size',
-          defaultValue: 'sm',
-          settings: {
-            options: [
-              {
-                value: 'sm',
-                label: 'Small',
-              },
-              {
-                value: 'md',
-                label: 'Medium',
-              },
-              {
-                value: 'lg',
-                label: 'Large',
-              },
-            ],
-          },
-          showIf: config => config.showSeriesCount,
-        });
-    });
-```
+Grafana supports a range of option controls, such as text inputs, switches, and radio groups.
 
-Grafana will automatically create _panel options_ editor for you and display it in the panel editor sidebar under "Display options" section.
+Let's create a radio control and bind it to the `color` option.
+
+1. In `src/module.ts`, add the control at the end of the builder:
+
+   ```ts
+   .addRadio({
+     path: 'color',
+     name: 'Circle color',
+     defaultValue: 'red',
+     settings: {
+       options: [
+         {
+           value: 'red',
+           label: 'Red',
+         },
+         {
+           value: 'green',
+           label: 'Green',
+         },
+         {
+           value: 'blue',
+           label: 'Blue',
+         },
+       ],
+     }
+   });
+   ```
+
+   The `path` is used to bind the control to an option. You can bind a control to nested option by specifying the full path within a options object, for example `colors.background`.
+
+Grafana builds an options editor for you and displays it in the panel editor sidebar in the **Display** section.
+
+#### Use the new option
+
+You're almost done. You've added a new option and a corresponding control to change the value. But the plugin isn't using the option yet. Let's change that.
+
+1. To convert option value to the colors used by the current theme, add a `switch` statement right before the `return` statement in `SimplePanel.tsx`.
+
+   **src/SimplePanel.tsx**
+
+   ```ts
+   let color;
+   switch (options.color) {
+     case 'red':
+       color = theme.palette.redBase;
+       break;
+     case 'green':
+       color = theme.palette.greenBase;
+       break;
+     case 'blue':
+       color = theme.palette.blue95;
+       break;
+   }
+   ```
+
+1. Configure the circle to use the color.
+
+   ```
+   <g>
+     <circle style={{ fill: color }} r={100} />
+   </g>
+   ```
+
+Now, when you change the color in the panel editor, the fill color of the circle changes as well.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Access time series data" >}}
