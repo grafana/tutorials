@@ -50,6 +50,7 @@ cd my-plugin
 ```
 
 To build the plugin
+
 ```
 yarn install
 yarn build
@@ -62,17 +63,18 @@ mage -v buildAll
 The folders and files used to build the backend for the data source are
 
 | file/folder         | description                                                                                                                                         |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Magefile.go`       | It’s not a requirement to use mage build files but we strongly recommend using that so that you can use the build steps provided in the plugin SDK. |
 | `/src/plugins.json` | A JSON file describing the backend plugin                                                                                                           |
 | `/pkg/plugin.go`    | Starting point of the plugin binary. We suggest that you keep this small and have all data source code in another package                           |
 | `/pkg/datasource`   | The data source implementation in the plugin.                                                                                                       |
 
 #### plugin.json
+
 When building a backend plugin these fields are important.
 
 | field      | description                                                                                                            |
-|------------|------------------------------------------------------------------------------------------------------------------------|
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- |
 | backend    | should be set to `true` for backend plugins. This tells Grafana that it should start a binary when loading the plugin. |
 | executable | is the name of the executable that grafana expects to start                                                            |
 | alerting   | Should be set to true if your backend datasource supports alerting                                                     |
@@ -99,10 +101,11 @@ Each request contains multiple queries to reduce traffic between Grafana and plu
 So you need to loop over the slice of queries, process each query and return the results of all queries.
 
 In the tutorial we have extract a function named `query` to take care of each query model.
-Since each plugin have their own unique query model, Grafana sends it to the backend as JSON. Therefore the plugin needs
+Since each plugin have their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
 to Unmarshal the query model into something easier to work with.
 
-As you can see the sample only returning countries. Try to extend the plugin to return other types of data.
+As you can see the sample only returns static numbers. Try to extend the plugin to return other types of data.
+You can read more about how to (build data frames in our docs)[https://grafana.com/docs/grafana/latest/plugins/developing/dataframes].
 
 {{< /tutorials/step >}}
 {{< tutorials/step duration="1" title="Add support for health checks" >}}
