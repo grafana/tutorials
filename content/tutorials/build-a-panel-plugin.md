@@ -231,6 +231,11 @@ Here's an example of what a query result that contains a data frame can look lik
 ```
 
 The current panel implementation only displays the number of series returned. Try changing it to display the current value, i.e. the last value in a series.
+{{% /tutorials/step %}}
+{{< tutorials/step title="Publish your plugin" >}}
+
+{{< tutorials/shared "publish-your-plugin" >}}
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
