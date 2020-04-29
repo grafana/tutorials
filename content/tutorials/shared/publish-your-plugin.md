@@ -30,7 +30,7 @@ For users to be able to use the plugin without building it themselves, you need 
 
 1. Create a release tag:
    ```
-   git tag <version>
+   git tag -a <version>
    ```
 
 1. Push to GitHub:
