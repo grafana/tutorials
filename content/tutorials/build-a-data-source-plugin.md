@@ -12,6 +12,8 @@ weight: 70
 
 {{< tutorials/step title="Introduction" >}}
 
+> **IMPORTANT**: This tutorial is currently in **beta** and requires Grafana 7.0, which is scheduled for release in May. Some of the features mentioned may not work for earlier versions.
+
 Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There's a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.
 
 In this tutorial, you'll:
