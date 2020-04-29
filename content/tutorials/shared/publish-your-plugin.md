@@ -8,9 +8,9 @@ For users to be able to use the plugin without building it themselves, you need 
 
 #### Create a plugin release
 
-1. Create a branch called `releases`:
+1. Create a branch called `release-<version>`:
    ```
-   git checkout -b releases
+   git checkout -b release-<version>
    ```
 
 1. Do a production build
