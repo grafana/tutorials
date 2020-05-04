@@ -87,8 +87,8 @@ Let's configure a [TestData DB](https://grafana.com/docs/grafana/latest/features
        type: testdata
    ```
 
-2. Restart Grafana to load the new changes.
-3. In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
+1. Restart Grafana to load the new changes.
+1. In the sidebar, hover the cursor over the **Configuration** (gear) icon and click **Data Sources**. The TestData DB appears in the list of data sources.
 
 > The configuration options can vary between different types of data sources. For more information on how to configure a specific data source, refer to [Data sources](https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources).
 
@@ -261,8 +261,8 @@ For more information on how to configure dashboard providers, refer to [Dashboar
    }
    ```
 
-2. Restart Grafana to provision the new dashboard or wait 10 seconds for Grafana to automatically create the dashboard.
-3. In the sidebar, hover the cursor over **Dashboards** (squares) icon, and then click **Manage**. The dashboard appears in a **Services** folder.
+1. Restart Grafana to provision the new dashboard or wait 10 seconds for Grafana to automatically create the dashboard.
+1. In the sidebar, hover the cursor over **Dashboards** (squares) icon, and then click **Manage**. The dashboard appears in a **Services** folder.
 
 > If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict.
 

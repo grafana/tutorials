@@ -60,8 +60,7 @@ The `DataQueryRequest` object contains the queries, or _targets_, that the user 
 
 After you receive the results from your database query, you need to return it as a _data frame_—the data format that Grafana uses internally.
 
-Positive
-: The term _target_ originates from Graphite, and the earlier days of Grafana when Graphite was the only supported data source. As Grafana gained support for more data sources, the term "target" became synonymous with any type of query.
+> The term _target_ originates from Graphite, and the earlier days of Grafana when Graphite was the only supported data source. As Grafana gained support for more data sources, the term "target" became synonymous with any type of query.
 
 ### Test your data source
 

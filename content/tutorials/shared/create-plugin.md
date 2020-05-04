@@ -6,33 +6,32 @@ Tooling for modern web development can be tricky to wrap your head around. While
 
 [grafana-toolkit](https://github.com/grafana/grafana/tree/master/packages/grafana-toolkit) is a CLI application that simplifies Grafana plugin development, so that you can focus on code. The toolkit takes care of building and testing for you.
 
-1\. In the plugin directory, create a plugin from template using the `plugin:create` command:
+1. In the plugin directory, create a plugin from template using the `plugin:create` command:
 
-```
-npx "@grafana/toolkit"@canary plugin:create my-plugin
-```
+   ```
+   npx "@grafana/toolkit"@canary plugin:create my-plugin
+   ```
 
-2\. Change directory.
+1. Change directory.
 
-```
-cd my-plugin
-```
+   ```
+   cd my-plugin
+   ```
 
-3\. Download necessary dependencies:
+1. Download necessary dependencies:
 
-```
-yarn install
-```
+   ```
+   yarn install
+   ```
 
-4\. Build the plugin:
+1. Build the plugin:
 
-```
-yarn dev
-```
+   ```
+   yarn dev
+   ```
 
-5\. Restart the Grafana server for Grafana to discover your plugin.
-
-6\. Open Grafana and go to **Configuration** -> **Plugins**. Make sure that your plugin is there.
+1. Restart the Grafana server for Grafana to discover your plugin.
+1. Open Grafana and go to **Configuration** -> **Plugins**. Make sure that your plugin is there.
 
 By default, Grafana logs whenever it discovers a plugin:
 
