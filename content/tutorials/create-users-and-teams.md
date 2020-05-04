@@ -27,8 +27,8 @@ _Graphona_, a fictional telemarketing company, has asked you to configure Grafan
 
 In this scenario, you'll:
 
-* Create users and organize them into teams.
-* Manage resource access for each user and team through roles and folders.
+- Create users and organize them into teams.
+- Manage resource access for each user and team through roles and folders.
 
 ### Prerequisites
 

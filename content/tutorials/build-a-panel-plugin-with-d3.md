@@ -52,39 +52,39 @@ In fact, D3.js is already bundled with Grafana, and you can access it by importi
 import { select } from 'd3';
 ```
 
-- Create a function called `draw`, where we'll construct our chart, and call it in `componentDidMount`, and `componentDidUpdate`. By doing this, the `render` function returns a prebuilt chart to avoid rebuilding the chart on every call to `render`.
+1. Create a function called `draw`, where we'll construct our chart, and call it in `componentDidMount`, and `componentDidUpdate`. By doing this, the `render` function returns a prebuilt chart to avoid rebuilding the chart on every call to `render`.
 
-```js
-class SimplePanel extends PureComponent<Props> {
-  containerElement: any;
+   ```js
+   class SimplePanel extends PureComponent<Props> {
+     containerElement: any;
 
-  componentDidMount() {
-    this.draw();
-  }
+     componentDidMount() {
+       this.draw();
+     }
 
-  componentDidUpdate() {
-    this.draw();
-  }
+     componentDidUpdate() {
+       this.draw();
+     }
 
-  draw() {
-    const { width, height } = this.props;
+     draw() {
+       const { width, height } = this.props;
 
-    const chart = select(this.containerElement)
-      .html('')
-      .attr('width', width)
-      .attr('height', height)
-      .text('Hello, world!');
-  }
+       const chart = select(this.containerElement)
+         .html('')
+         .attr('width', width)
+         .attr('height', height)
+         .text('Hello, world!');
+     }
 
-  render() {
-    return <div ref={element => (this.containerElement = element)}></div>;
-  }
-}
-```
+     render() {
+       return <div ref={element => (this.containerElement = element)}></div>;
+     }
+   }
+   ```
 
-Notice that, in the `render` function, the `ref` attribute lets you replace the `div` with your `containerElement`.
+   Notice that, in the `render` function, the `ref` attribute lets you replace the `div` with your `containerElement`.
 
-- Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+1. Run `yarn dev`, and reload Grafana to reflect the changes you've made.
 
 When you add the panel to your dashboard, it will have the text 'Hello, world!' written in it.
 
@@ -92,33 +92,33 @@ When you add the panel to your dashboard, it will have the text 'Hello, world!' 
 
 You've seen how to use D3.js to create a container element with some hard-coded text in it. Next, you'll build the graph from actual data.
 
-- Update the `draw` function with the following code:
+1. Update the `draw` function with the following code:
 
-```js
-draw() {
-  const { width, height } = this.props;
+   ```js
+   draw() {
+     const { width, height } = this.props;
 
-  const data = [4, 8, 15, 16, 23, 42];
+     const data = [4, 8, 15, 16, 23, 42];
 
-  const maxValue = Math.max.apply(Math, data.map(o => o));
+     const maxValue = Math.max.apply(Math, data.map(o => o));
 
-  const chart = select(this.containerElement)
-    .html('')
-    .attr('width', width)
-    .attr('height', height);
+     const chart = select(this.containerElement)
+       .html('')
+       .attr('width', width)
+       .attr('height', height);
 
-  chart
-    .selectAll('div')
-    .data(data)
-    .enter()
-    .append('div')
-    .style('height', height / data.length + 'px')
-    .style('width', d => (d * width) / maxValue + 'px')
-    .style('background-color', 'blue');
-}
-```
+     chart
+       .selectAll('div')
+       .data(data)
+       .enter()
+       .append('div')
+       .style('height', height / data.length + 'px')
+       .style('width', d => (d * width) / maxValue + 'px')
+       .style('background-color', 'blue');
+   }
+   ```
 
-- Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
+1. Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
 
 Congratulations, you've created a dynamic bar chart! Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
 
@@ -129,53 +129,55 @@ To provide your users with a consistent look-and-feel, you'll want to use the sa
 
 In this step, you'll learn how to use the colors from the current theme.
 
-- In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
+1. In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
 
-```js
-interface Props extends PanelProps<SimpleOptions> {
-  theme: GrafanaTheme;
-}
-```
+   ```js
+   interface Props extends PanelProps<SimpleOptions> {
+     theme: GrafanaTheme;
+   }
+   ```
 
-`GrafanaTheme` is available from the `grafana/data` package:
+   `GrafanaTheme` is available from the `grafana/data` package:
 
-```js
-import { PanelProps, GrafanaTheme } from '@grafana/data';
-```
+   ```js
+   import { PanelProps, GrafanaTheme } from '@grafana/data';
+   ```
 
-The `theme` property is not set by default, so you need to use the `withTheme` to provide the current theme to the panel.
+   The `theme` property is not set by default, so you need to use the `withTheme` to provide the current theme to the panel.
 
-- Rename `SimplePanel` to `PartialSimplePanel`.
+1. Rename `SimplePanel` to `PartialSimplePanel`.
 
-```js
-class PartialSimplePanel extends PureComponent<Props>
-```
+   ```js
+   class PartialSimplePanel extends PureComponent<Props>
+   ```
 
-- Import `withTheme` from `grafana/ui`.
+1. Import `withTheme` from `grafana/ui`.
 
-```js
-import { withTheme } from '@grafana/ui';
-```
+   ```js
+   import { withTheme } from '@grafana/ui';
+   ```
 
-- Export the `SimplePanel`, now complete with a theme. `withTheme` assigns the current theme to the `theme` property.
+1. Export the `SimplePanel`, now complete with a theme. `withTheme` assigns the current theme to the `theme` property.
 
-```js
-export const SimplePanel = withTheme(PartialSimplePanel);
-```
+   ```js
+   export const SimplePanel = withTheme(PartialSimplePanel);
+   ```
 
-The theme property is now available from within the component.
+   The theme property is now available from within the component.
 
-```js
-const { width, height, theme } = this.props;
-```
+   ```js
+   const { width, height, theme } = this.props;
+   ```
 
-- Replace the current background color with a color from the theme.
+1. Replace the current background color with a color from the theme.
 
-```js
-style('background-color', theme.colors.red)
-```
+   ```js
+   style('background-color', theme.colors.red)
+   ```
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Complete example" >}}
+
 ```js
 import React, { PureComponent } from 'react';
 import { withTheme } from '@grafana/ui';
