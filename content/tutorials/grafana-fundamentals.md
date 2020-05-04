@@ -191,17 +191,35 @@ Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you 
 
 1. Grafana displays all logs within the log file of the sample application. The height of each bar encodes the number of logs that were generated at that time.
 
+Grafana only shows logs within the current time interval. This lets you narrow down your logs to a certain time.
+
+- Click and drag across the bars in the graph to filter logs based on time.
+
 Not only does Loki let you filter logs based on labels, but on specific occurrences.
 
+<<<<<<< HEAD
 1. Enter the following query to filter log lines based on a substring:
+=======
+Let's generate an error, and analyze it with Explore.
+
+- In the [sample application](http://localhost:8081), post a new link without a URL. You'll get an error in your browser that says `empty url`.
+
+- Go back to Grafana and enter the following query to filter log lines based on a substring:
+>>>>>>> Update fundamentals for Grafana 7.0
 
    ```
    {filename="/var/log/tns-app.log"} |= "error"
    ```
 
+<<<<<<< HEAD
    Grafana only shows logs within the current time interval. This lets you narrow down your logs to a certain time.
 
 1. Click and drag across the bars in the graph to filter logs based on time.
+=======
+- Click on the log line that says `level=error msg="empty url"` to see more information about the error.
+
+Logs are helpful for understanding what went wrong. Later in this tutorial, you'll see how you can correlate logs with metrics from Prometheus to better understand the context of the error.
+>>>>>>> Update fundamentals for Grafana 7.0
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Build a dashboard" >}}
@@ -212,14 +230,21 @@ Dashboards consist of _panels_, each representing a part of the story you want y
 
 Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
 
+<<<<<<< HEAD
 1. In the side bar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
 1. Click **Add query**.
 1. In the **Query editor**, enter the query from earlier and then press Enter:
+=======
+- In the side bar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
+- Click **Add new panel**.
+- In the **Query editor** below the graph, enter the query from earlier and then press Enter:
+>>>>>>> Update fundamentals for Grafana 7.0
 
    ```
    sum(rate(tns_request_duration_seconds_count[5m])) by(route)
    ```
 
+<<<<<<< HEAD
 1. In the **Legend** field, enter **{{route}}** to rename the time series in the legend. The graph legend updates when you click outside the field.
 
    Four icons on the left allow you to navigate between the **Queries**, **Visualization**, **General**, and **Alert** tabs. Hover your mouse over the icons to see the name of each tab.
@@ -227,6 +252,13 @@ Every panel consists by a _query_ and a _visualization_. The query defines _what
 1. Click the **Go Back** arrow in the top-left corner to go back to the dashboard view.
 1. Click the **Save dashboard** (disk) icon at the top of the dashboard to save your dashboard.
 1. Enter a name in the **New name** field and then click **Save**.
+=======
+- In the **Legend** field, enter **{{route}}** to rename the time series in the legend. The graph legend updates when you click outside the field.
+- In the Panel editor on the right, under **Panel settings**, change the panel title to "Traffic".
+- Click **Apply** in the top-right corner to save the panel and go back to the dashboard view.
+- Click the **Save dashboard** (disk) icon at the top of the dashboard to save your dashboard.
+- Enter a name in the **New name** field and then click **Save**.
+>>>>>>> Update fundamentals for Grafana 7.0
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Annotate events" >}}
@@ -255,11 +287,19 @@ Add a region annotation:
 
 Manually annotating your dashboard is fine for those single events. For regularly occurring events, such as deploying a new release, Grafana supports querying annotations from one of your data sources. Let's create an annotation using the Loki data source we added earlier.
 
+<<<<<<< HEAD
 1. At the top of the dashboard, click the **Dashboard settings** (gear) icon.
 1. In Annotations, click **Add Annotation Query**.
 1. In **Name**, enter **Errors**.
 1. In **Data source**, select **Loki**.
 1. In **Query**, enter the following query:
+=======
+- At the top of the dashboard, click the **Dashboard settings** (gear) icon.
+- Go to **Annotations** and click **Add Annotation Query**.
+- In **Name**, enter **Errors**.
+- In **Data source**, select **Loki**.
+- In **Query**, enter the following query:
+>>>>>>> Update fundamentals for Grafana 7.0
 
    ```
    {filename="/var/log/tns-app.log"} |= "error"
@@ -307,6 +347,7 @@ Next, configure a notification channel for web hooks to send notifications to yo
 
 Now that Grafana knows how to notify you, it's time to set up an alert rule:
 
+<<<<<<< HEAD
 1. In the sidebar, click **Dashboards** -> **Manage**.
 1. Click the dashboard you created earlier.
 1. Click the Traffic panel title and then type **e**. This keyboard shortcut opens the panel in edit mode.
@@ -316,6 +357,18 @@ Now that Grafana knows how to notify you, it's time to set up an alert rule:
 1. In **Evaluate every**, enter **5s**. For the purpose of this tutorial, the evaluation interval is intentionally short to make it easier to test.
 1. In **For**, enter **0m**. This setting makes Grafana wait until an alert has fired for a given time, before Grafana sends the notification.
 1. In the Conditions section, you can change the white text by clicking it and then choosing a new option or typing text in the blank field.
+=======
+- In the sidebar, click **Dashboards** -> **Manage**.
+- Click the dashboard you created earlier.
+- Click the Traffic panel title and then click **Edit**.
+- Click the **Alert** tab under the graph to access the settings for alerting.
+- Click **Create Alert**.
+- In **Name**, enter **My alert**.
+- In **Evaluate every**, enter **5s**. For the purpose of this tutorial, the evaluation interval is intentionally short to make it easier to test.
+- In **For**, enter **0m**. This setting makes Grafana wait until an alert has fired for a given time, before Grafana sends the notification.
+- In the Conditions section, you can change the white text by clicking it and then choosing a new option or typing text in the blank field.
+  Change the alert condition to:
+>>>>>>> Update fundamentals for Grafana 7.0
 
    Change the alert condition to:
 
@@ -352,6 +405,9 @@ Congratulations, you made it to the end of this tutorial!
 
 ### Learn more
 
+- [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
+- [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
+- [Explore](https://grafana.com/docs/grafana/latest/features/explore/)
 - [Alert rules](https://grafana.com/docs/grafana/latest/alerting/rules/)
 - [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
