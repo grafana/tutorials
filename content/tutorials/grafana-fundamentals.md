@@ -226,7 +226,7 @@ Every panel consists by a _query_ and a _visualization_. The query defines _what
    ```
 
 1. In the **Legend** field, enter **{{route}}** to rename the time series in the legend. The graph legend updates when you click outside the field.
-1. In the Panel editor on the right, under **Panel settings**, change the panel title to "Traffic".
+1. In the Panel editor on the right, under **Settings**, change the panel title to "Traffic".
 1. Click **Apply** in the top-right corner to save the panel and go back to the dashboard view.
 1. Click the **Save dashboard** (disk) icon at the top of the dashboard to save your dashboard.
 1. Enter a name in the **New name** field and then click **Save**.
