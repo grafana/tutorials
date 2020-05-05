@@ -44,78 +44,105 @@ In this tutorial, you'll:
 
 In fact, D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
 
-- Import the `select` function from `d3`:
+1. Install the D3 type definitions:
 
-**SimplePanel.tsx**
-
-```js
-import { select } from 'd3';
-```
-
-1. Create a function called `draw`, where we'll construct our chart, and call it in `componentDidMount`, and `componentDidUpdate`. By doing this, the `render` function returns a prebuilt chart to avoid rebuilding the chart on every call to `render`.
-
-   ```js
-   class SimplePanel extends PureComponent<Props> {
-     containerElement: any;
-
-     componentDidMount() {
-       this.draw();
-     }
-
-     componentDidUpdate() {
-       this.draw();
-     }
-
-     draw() {
-       const { width, height } = this.props;
-
-       const chart = select(this.containerElement)
-         .html('')
-         .attr('width', width)
-         .attr('height', height)
-         .text('Hello, world!');
-     }
-
-     render() {
-       return <div ref={element => (this.containerElement = element)}></div>;
-     }
-   }
+   ```
+   yarn add @types/d3
    ```
 
-   Notice that, in the `render` function, the `ref` attribute lets you replace the `div` with your `containerElement`.
+1. Import the `select` function from `d3` in **SimplePanel.tsx**:
+
+   ```ts
+   import { select } from 'd3';
+   ```
+
+1. Import `useRef` and `useEffect` from `react`:
+
+   ```ts
+   import React, { useRef, useEffect } from 'react';
+   ```
+
+1. Replace the content of the SimplePanel component with the following:
+
+   ```ts
+   export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
+     const theme = useTheme();
+
+     const d3Container = useRef(null);
+
+     const values = [4, 8, 15, 16, 23, 42];
+
+     useEffect(() => {
+       if (d3Container.current) {
+         const chart = select(d3Container.current)
+           .attr('width', width)
+           .attr('height', height);
+
+         chart
+           .append('text')
+           .text('Hello world')
+           .attr('x', 10)
+           .attr('y', 10)
+           .attr('fill', theme.palette.greenBase);
+       }
+     }, [width, height, values, d3Container.current]);
+
+     return <svg ref={d3Container}></svg>;
+   };
+   ```
 
 1. Run `yarn dev`, and reload Grafana to reflect the changes you've made.
 
-When you add the panel to your dashboard, it will have the text 'Hello, world!' written in it.
+A panel with hard-coded text might not be win any prizes. In the next step, we'll see
 
-### Build a chart from data
+{{< /tutorials/step >}}
+{{< tutorials/step title="Build a graph from data" >}}
 
 You've seen how to use D3.js to create a container element with some hard-coded text in it. Next, you'll build the graph from actual data.
 
-1. Update the `draw` function with the following code:
+1. Update the panel with the following code:
 
-   ```js
-   draw() {
-     const { width, height } = this.props;
+   ```ts
+   export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
+     const theme = useTheme();
 
-     const data = [4, 8, 15, 16, 23, 42];
+     const d3Container = useRef(null);
 
-     const maxValue = Math.max.apply(Math, data.map(o => o));
+     const values = [4, 8, 15, 16, 23, 42];
 
-     const chart = select(this.containerElement)
-       .html('')
-       .attr('width', width)
-       .attr('height', height);
+     useEffect(() => {
+       if (d3Container.current) {
+         const maxValue = Math.max.apply(
+           Math,
+           values.map(o => o)
+         );
 
-     chart
-       .selectAll('div')
-       .data(data)
-       .enter()
-       .append('div')
-       .style('height', height / data.length + 'px')
-       .style('width', d => (d * width) / maxValue + 'px')
-       .style('background-color', 'blue');
-   }
+         const barHeight = height / values.length;
+
+         const chart = select(d3Container.current)
+           .html('')
+           .append('svg')
+           .attr('width', width)
+           .attr('height', height);
+
+         const bars = chart
+           .selectAll('rect')
+           .data(values)
+           .enter()
+           .append('rect');
+
+         bars
+           .attr('height', barHeight - 1)
+           .attr('width', d => (d / maxValue) * width)
+           .attr('transform', (d, i) => {
+             return 'translate(0,' + i * barHeight + ')';
+           })
+           .attr('fill', theme.palette.greenBase);
+       }
+     }, [width, height, values, d3Container.current]);
+
+     return <div ref={d3Container}></div>;
+   };
    ```
 
 1. Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
@@ -123,115 +150,56 @@ You've seen how to use D3.js to create a container element with some hard-coded 
 Congratulations, you've created a dynamic bar chart! Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Theme your panel" >}}
-
-To provide your users with a consistent look-and-feel, you'll want to use the same colors as the built-in panels.
-
-In this step, you'll learn how to use the colors from the current theme.
-
-1. In `SimplePanel.tsx`, add a `GrafanaTheme` property to the `PanelProps`.
-
-   ```js
-   interface Props extends PanelProps<SimpleOptions> {
-     theme: GrafanaTheme;
-   }
-   ```
-
-   `GrafanaTheme` is available from the `grafana/data` package:
-
-   ```js
-   import { PanelProps, GrafanaTheme } from '@grafana/data';
-   ```
-
-   The `theme` property is not set by default, so you need to use the `withTheme` to provide the current theme to the panel.
-
-1. Rename `SimplePanel` to `PartialSimplePanel`.
-
-   ```js
-   class PartialSimplePanel extends PureComponent<Props>
-   ```
-
-1. Import `withTheme` from `grafana/ui`.
-
-   ```js
-   import { withTheme } from '@grafana/ui';
-   ```
-
-1. Export the `SimplePanel`, now complete with a theme. `withTheme` assigns the current theme to the `theme` property.
-
-   ```js
-   export const SimplePanel = withTheme(PartialSimplePanel);
-   ```
-
-   The theme property is now available from within the component.
-
-   ```js
-   const { width, height, theme } = this.props;
-   ```
-
-1. Replace the current background color with a color from the theme.
-
-   ```js
-   style('background-color', theme.colors.red)
-   ```
-
-{{< /tutorials/step >}}
 {{< tutorials/step title="Complete example" >}}
 
-```js
-import React, { PureComponent } from 'react';
-import { withTheme } from '@grafana/ui';
-import { PanelProps, GrafanaTheme } from '@grafana/data';
-
+```ts
+import React, { useRef, useEffect } from 'react';
+import { PanelProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
+import { useTheme } from '@grafana/ui';
+
 import { select } from 'd3';
 
-interface Props extends PanelProps<SimpleOptions> {
-  theme: GrafanaTheme;
-}
+interface Props extends PanelProps<SimpleOptions> {}
 
-class PartialSimplePanel extends PureComponent<Props> {
-  containerElement: any;
+export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
+  const theme = useTheme();
 
-  componentDidMount() {
-    this.draw();
-  }
+  const d3Container = useRef(null);
 
-  componentDidUpdate() {
-    this.draw();
-  }
+  const values = [4, 8, 15, 16, 23, 42];
 
-  draw() {
-    const { width, height, theme } = this.props;
+  useEffect(() => {
+    if (d3Container.current) {
+      const maxValue = Math.max.apply(
+        Math,
+        values.map(o => o)
+      );
 
-    const data = [4, 8, 15, 16, 23, 42];
+      const barHeight = height / values.length;
 
-    const maxValue = Math.max.apply(
-      Math,
-      data.map(o => o)
-    );
+      const chart = select(d3Container.current)
+        .attr('width', width)
+        .attr('height', height);
 
-    const chart = select(this.containerElement)
-      .html('')
-      .attr('width', width)
-      .attr('height', height);
+      const bars = chart
+        .selectAll('rect')
+        .data(values)
+        .enter()
+        .append('rect');
 
-    chart
-      .selectAll('div')
-      .data(data)
-      .enter()
-      .append('div')
-      .style('height', height / data.length + 'px')
-      .style('width', d => (d * width) / maxValue + 'px')
-      .style('background-color', theme.colors.red);
-  }
+      bars
+        .attr('height', barHeight - 1)
+        .attr('width', d => (d / maxValue) * width)
+        .attr('transform', (d, i) => {
+          return 'translate(0,' + i * barHeight + ')';
+        })
+        .attr('fill', theme.palette.greenBase);
+    }
+  }, [width, height, values, d3Container.current]);
 
-  render() {
-    return <div ref={element => (this.containerElement = element)}></div>;
-  }
-}
-
-export const SimplePanel = withTheme(PartialSimplePanel);
+  return <svg ref={d3Container}></svg>;
+};
 ```
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
