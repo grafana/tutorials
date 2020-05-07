@@ -52,9 +52,9 @@ cd my-plugin
 To build the plugin
 
 ```
-yarn install
-yarn build
-mage -v buildAll
+yarn install --pure-lockfile
+ yarn build
+ mage -v buildAll
 ```
 
 {{< /tutorials/step >}}
