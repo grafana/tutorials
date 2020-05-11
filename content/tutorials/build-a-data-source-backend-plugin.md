@@ -58,7 +58,7 @@ yarn install --pure-lockfile
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Anatomy of a backend plugin" >}}
+{{< tutorials/step duration="1" title="Anatomy of a Backend Plugin" >}}
 
 The folders and files used to build the backend for the data source are
 
