@@ -71,50 +71,50 @@ The folders and files used to build the backend for the data source are
 
 #### plugin.json
 
-When building a backend plugin these fields are important.
+When building a backend plugin these fields are important:
 
 | field      | description                                                                                                            |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
-| backend    | should be set to `true` for backend plugins. This tells Grafana that it should start a binary when loading the plugin. |
-| executable | is the name of the executable that grafana expects to start                                                            |
-| alerting   | Should be set to true if your backend datasource supports alerting                                                     |
+| backend    | Should be set to `true` for backend plugins. This tells Grafana that it should start a binary when loading the plugin. |
+| executable | This is the name of the executable that Grafana expects to start.                                                           |
+| alerting   | Should be set to true if your backend datasource supports alerting.                                                     |
 
 #### /pkg/plugins.go
 
-This is file where you provide the backend SDK with handler functions by calling `backend.Serve({})`. <!-- TODO update serve function with new PR is merged -->
-In this tutorial we are building a backend for a datasource so we will provide an implementation of the `backend.QueryDataHandler` interface.
+This is the file where you provide the backend SDK with handler functions by calling `backend.Serve({})`. <!-- TODO update serve function with new PR is merged -->
+In this tutorial we are building a backend for a datasource, so we will provide an example implementation of the `backend.QueryDataHandler` interface.
 
 More about that in the next step!
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Manage data source configuration" >}}
+{{< tutorials/step duration="1" title="Manage Data Source Configuration" >}}
 
 explain life cycle management for data sources.
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="2" title="Data source backend plugins" >}}
+{{< tutorials/step duration="2" title="Data Source Backend Plugins" >}}
 
-Open the file `/pkg/datasource/sample-datasource.go` and you will see the `DatasourceInstance` struct which implements the `backend.QueryDataHandler` interface.
-The `QueryData` function on this struct is where the data fetching happens for data source plugin.
+We begin by opening the file `/pkg/datasource/sample-datasource.go`. In this file you will see the `DatasourceInstance` struct which implements the `backend.QueryDataHandler` interface.
+The `QueryData` function on this struct is where the data fetching happens for a data source plugin.
 
 Each request contains multiple queries to reduce traffic between Grafana and plugins.
-So you need to loop over the slice of queries, process each query and return the results of all queries.
+So you need to loop over the slice of queries, process each query, and then return the results of all queries.
 
 In the tutorial we have extract a function named `query` to take care of each query model.
-Since each plugin have their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
-to Unmarshal the query model into something easier to work with.
+Since each plugin has their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
+to `Unmarshal` the query model into something easier to work with.
 
-As you can see the sample only returns static numbers. Try to extend the plugin to return other types of data.
+You might have noticed that the sample only returns static numbers. Try to extend the plugin to return other types of data.
 You can read more about how to (build data frames in our docs)[https://grafana.com/docs/grafana/latest/plugins/developing/dataframes].
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Add support for health checks" >}}
+{{< tutorials/step duration="1" title="Add Support for Health Checks" >}}
 
-Implementing the health check handler allows Grafana to verify that a data source have been configured correctly.
-After a user have created a new datasource in Grafanas UI she can click the **Test** to verify that it works as expected.
+Implementing the health check handler allows Grafana to verify that a data source has been configured correctly.
+After a user has created a new datasource in Grafana's UI, she can click the **Test** to verify that it works as expected.
 
-In this sample datasource there is a 50/50% chance that the health check is successful. Make sure to return good error messages to
-the users, informing them about what is miss configured in the data source.
+In this sample data source, there is a 50% chance that the health check will be successful. Make sure to return appropriate error messages to
+the users, informing them about what is misconfigured in the data source.
 
 Open `/pkg/datasource/sample-datasource.go` and navigate to the `CheckHealth` function to see how the health check for this sample plugin is implemented.
 
