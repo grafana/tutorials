@@ -28,7 +28,7 @@ In this tutorial, you'll:
 - [Mage](https://magefile.org/)
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Set up your environment" >}}
+{{< tutorials/step duration="1" title="Setup Your Environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
