@@ -64,7 +64,7 @@ The folders and files used to build the backend for the data source are
 
 | file/folder         | description                                                                                                                                         |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Magefile.go`       | It’s not a requirement to use mage build files but we strongly recommend using that so that you can use the build steps provided in the plugin SDK. |
+| `Magefile.go`       | It’s not a requirement to use mage build files, but we strongly recommend using it so that you can use the build steps provided in the plugin SDK. |
 | `/src/plugins.json` | A JSON file describing the backend plugin                                                                                                           |
 | `/pkg/plugin.go`    | Starting point of the plugin binary. We suggest that you keep this small and have all data source code in another package                           |
 | `/pkg/datasource`   | The data source implementation in the plugin.                                                                                                       |
