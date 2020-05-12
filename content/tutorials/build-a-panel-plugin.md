@@ -54,28 +54,28 @@ The `render` function in `SimplePanel.tsx` determines how Grafana displays the p
 
 The [PanelProps](https://github.com/grafana/grafana/blob/747b546c260f9a448e2cb56319f796d0301f4bb9/packages/grafana-data/src/types/panel.ts#L27-L40) interface exposes runtime information about the panel, such as panel dimensions, and the current time range.
 
-You can access the panel properties through `this.props`, as seen in your plugin.
+You can access the panel properties through `props`, as seen in your plugin.
 
 **src/SimplePanel.tsx**
 
 ```js
-const { options, data, width, height } = this.props;
+const { options, data, width, height } = props;
 ```
 
 ### Development workflow
 
-Next, you'll learn the basic workflow of making a change to your panel, building it, and reloading Grafana to reflect the change you made.
+Next, you'll learn the basic workflow of making a change to your panel, building it, and reloading Grafana to reflect the changes you made.
 
 First, you need to add your panel to a dashboard:
 
 1. Open Grafana in your browser.
-1. Create a new dashboard, and select **Choose Visualization** in the **New Panel** view.
-1. Select your panel from the list of visualizations.
+1. Create a new dashboard, and add a new panel.
+1. Select your panel from the list of visualization types.
 1. Save the dashboard.
 
-Now that you can view your panel, make a change to the panel plugin:
+Now that you can view your panel, try making a change to the panel plugin:
 
-1. In the panel `render` function, change the fill color of the circle.
+1. In `SimplePanel.tsx`, change the fill color of the circle.
 1. Run `yarn dev` to build the plugin.
 1. In the browser, reload Grafana with the new changes.
 
@@ -182,7 +182,7 @@ You're almost done. You've added a new option and a corresponding control to cha
 
 1. Configure the circle to use the color.
 
-   ```
+   ```ts
    <g>
      <circle style={{ fill: color }} r={100} />
    </g>
@@ -191,46 +191,75 @@ You're almost done. You've added a new option and a corresponding control to cha
 Now, when you change the color in the panel editor, the fill color of the circle changes as well.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Access time series data" >}}
+{{< tutorials/step title="Create dynamic panels using data frames" >}}
 
-Most panels visualize dynamic data from a Grafana data source. You've already seen that the `this.props` object provides useful data to your panel. It also contains the results from a data source query, which you can access through the `data` property:
+Most panels visualize dynamic data from a Grafana data source. In this step, you'll create one circle per series, each with a radius equal to the last value in the series.
 
-```js
-const { data } = this.props;
+> To use data from queries in your panel, you need to set up a data source. If you don't have one available, you can use the [TestData DB](https://grafana.com/docs/grafana/latest/features/datasources/testdata) data source while developing.
+
+The results from a data source query within your panel are available in the `data` property inside your panel component.
+
+```ts
+const { data } = props;
 ```
 
-### Data frames
+`data.series` contains the series returned from a data source query. Each series is represented as a data structure called _data frame_. A data frame resembles a table, where data is stored by columns, or _fields_, instead of rows. Every value in a field share the same data type, such as string, number, or time.
 
-Data sources in Grafana return the results of a query in a format called _data frames_. A data frame is a _columnar data structure_, which means values are organized by fields, rather than by records.
+Here's an example of a data frame with a time field, `Time`, and a number field, `Value`:
 
-Columnar data is a common occurrence in analytics, as it can greatly reduce the amount data read.
+| Time          | Value |
+|---------------|-------|
+| 1589189388597 | 32.4  |
+| 1589189406480 | 27.2  |
+| 1589189513721 | 15.0  |
 
-Here's an example of what a query result that contains a data frame can look like:
+Let's see how you can retrieve data from a data frame and use it in your visualization.
 
-```json
-{
-  series: [
-    {
-      name: "My data frame",
-      fields: [
-        {
-          name: "Time",
-          type: "time",
-          values: [1576578517623, 1576578518236, 1576578519714]
-        },
-        {
-          name: "Value",
-          type: "number",
-          values: [0.0, 1.0, 2.0]
-        }
-      ],
-      length: 3,
-    }
-  ]
-}
-```
+1. Get the last value of each field of type `number`, by adding the following to `SimplePanel.tsx`, before the `return` statement:
 
-The current panel implementation only displays the number of series returned. Try changing it to display the current value, i.e. the last value in a series.
+   ```ts
+   const radii = data.series
+    .map(series => series.fields.find(field => field.type === 'number'))
+    .map(field => field?.values.get(field.values.length - 1));
+   ```
+
+   `radii` will contain the last values in each of the series that are returned from a data source query. You'll use these to set the radius for each circle.
+
+1. Change the `svg` element to the following:
+
+   ```ts
+   <svg
+     className={styles.svg}
+     width={width}
+     height={height}
+     xmlns="http://www.w3.org/2000/svg"
+     xmlnsXlink="http://www.w3.org/1999/xlink"
+     viewBox={`0 -${height / 2} ${width} ${height}`}
+   >
+     <g fill={color}>
+       {radii.map((radius, index) => {
+         const step = width / radii.length;
+         return <circle r={radius} transform={`translate(${index * step + step / 2}, 0)`} />;
+       })}
+     </g>
+   </svg>
+   ```
+
+   Note how we're creating a `<circle>` element for each value in `radii`:
+
+   ```ts
+   {radii.map((radius, index) => {
+     const step = width / radii.length;
+     return <circle r={radius} transform={`translate(${index * step + step / 2}, 0)`} />;
+   })}
+   ```
+
+   We use the `transform` here to distribute the circle horizontally within the panel.
+
+1. Rebuild your plugin and try it out by adding multiple queries to the panel. Refresh the dashboard.
+
+If you want to know more about data frames, check out our introduction to [Data frames](https://grafana.com/docs/grafana/latest/developers/plugins/data-frames/).
+
 {{% /tutorials/step %}}
 {{< tutorials/step title="Publish your plugin" >}}
 
