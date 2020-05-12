@@ -42,13 +42,9 @@ For more information about panels, refer to the documentation on [Panels](https:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Panel plugins" >}}
 
-Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html). The simplest panel consists of a single function, the `render` function, which returns the content of the panel.
+Since Grafana 6.x, panels are [ReactJS components](https://reactjs.org/docs/components-and-props.html).
 
 Prior to Grafana 6.0, plugins were written in [AngularJS](https://angular.io/). Even though we still support plugins written in AngularJS, we highly recommend that you write new plugins using ReactJS.
-
-### The `render` function
-
-The `render` function in `SimplePanel.tsx` determines how Grafana displays the panel in a dashboard.
 
 ### Panel properties
 
@@ -166,7 +162,7 @@ You're almost done. You've added a new option and a corresponding control to cha
    **src/SimplePanel.tsx**
 
    ```ts
-   let color;
+   let color: string;
    switch (options.color) {
      case 'red':
        color = theme.palette.redBase;
