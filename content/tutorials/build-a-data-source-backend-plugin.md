@@ -43,7 +43,7 @@ The easiest way to get started is to clone one of our test data datasources. Nav
 npx @grafana/toolkit plugin:create my-plugin
 ```
 
-select `Backend Datasource Plugin` and follow the rest of the guide.
+select `Backend Datasource Plugin` and follow the rest of the steps in the plugin scaffolding command.
 
 ```
 cd my-plugin
