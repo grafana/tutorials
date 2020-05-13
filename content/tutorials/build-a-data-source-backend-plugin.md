@@ -7,10 +7,10 @@ tags: beginner
 status: Published
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
-weight: 70
+weight: 75
 ---
 
-{{< tutorials/step duration="1" title="Introduction" >}}
+{{< tutorials/step title="Introduction" >}}
 
 Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There's a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. This tutorial teaches you to build a support for your data source.
 
@@ -28,12 +28,12 @@ In this tutorial, you'll:
 - [Mage](https://magefile.org/)
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Setup your environment" >}}
+{{< tutorials/step title="Set up your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Create a new plugin" >}}
+{{< tutorials/step title="Create a new plugin" >}}
 
 To build a backend for your data source plugin, Grafana requires a binary that it can execute when it loads the plugin during start-up. In this guide, we will build a binary using our backend plugin SDK in Go.
 
@@ -43,7 +43,7 @@ The easiest way to get started is to clone one of our test data datasources. Nav
 npx @grafana/toolkit plugin:create my-plugin
 ```
 
-select `Backend Datasource Plugin` and follow the rest of the steps in the plugin scaffolding command.
+Select `Backend Datasource Plugin` and follow the rest of the steps in the plugin scaffolding command.
 
 ```
 cd my-plugin
@@ -58,7 +58,7 @@ yarn install --pure-lockfile
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Anatomy of a backend plugin" >}}
+{{< tutorials/step title="Anatomy of a backend plugin" >}}
 
 The folders and files used to build the backend for the data source are
 
@@ -81,7 +81,7 @@ When building a backend plugin these fields are important:
 In the next step we will look at the query endpoint!
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="2" title="Implement data queries" >}}
+{{< tutorials/step title="Implement data queries" >}}
 
 We begin by opening the file `/pkg/datasource/sample-datasource.go`. In this file you will see the `DatasourceInstance` struct which implements the `backend.QueryDataHandler` interface.
 The `QueryData` method on this struct is where the data fetching happens for a data source plugin.
@@ -97,7 +97,7 @@ As you can see the sample only returns static numbers. Try to extend the plugin 
 You can read more about how to [build data frames in our docs](https://grafana.com/docs/grafana/latest/plugins/developing/dataframes).
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Add support for health checks" >}}
+{{< tutorials/step title="Add support for health checks" >}}
 
 Implementing the health check handler allows Grafana to verify that a data source has been configured correctly.
 After a user has created a new datasource in Grafana's UI, she can click the **Test** to verify that it works as expected.
