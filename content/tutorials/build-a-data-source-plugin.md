@@ -77,7 +77,7 @@ Most data sources offer a way to query specific data. MySQL and PostgreSQL use S
 
 Add support for custom queries to your data source, by implementing a your own _query editor_, a React component that enables users to build their own queries, through a user-friendly graphical interface.
 
-A query editor can be as simple a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.
+A query editor can be as simple as a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.
 
 The first step in designing your query editor is to define its _query model_. The query model defines the user input to your data source. The query model in the starter plugin you created, defines two values: the query text, and a constant.
 
