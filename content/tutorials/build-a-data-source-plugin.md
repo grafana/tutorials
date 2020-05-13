@@ -116,7 +116,7 @@ onRunQuery();
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure your data source" >}}
 
-To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A _config editor_ lets you users configure your data source plugin to fit their needs.
+To access a specific data source, you often need to configure things like hostname, credentials, or authentication method. A _config editor_ lets your users configure your data source plugin to fit their needs.
 
 The config editor looks similar to the query editor, in that it defines a model and binds it to a form.
 
