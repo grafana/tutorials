@@ -87,7 +87,7 @@ In this tutorial we are building a backend for a datasource, so we will provide 
 More about that in the next step!
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="2" title="Data source backend plugins" >}}
+{{< tutorials/step duration="2" title="Implement data queries" >}}
 
 We begin by opening the file `/pkg/datasource/sample-datasource.go`. In this file you will see the `DatasourceInstance` struct which implements the `backend.QueryDataHandler` interface.
 The `QueryData` function on this struct is where the data fetching happens for a data source plugin.
@@ -99,8 +99,8 @@ In the tutorial we have extract a function named `query` to take care of each qu
 Since each plugin has their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
 to `Unmarshal` the query model into something easier to work with.
 
-You might have noticed that the sample only returns static numbers. Try to extend the plugin to return other types of data.
-You can read more about how to (build data frames in our docs)[https://grafana.com/docs/grafana/latest/plugins/developing/dataframes].
+As you can see the sample only returns static numbers. Try to extend the plugin to return other types of data.
+You can read more about how to [build data frames in our docs](https://grafana.com/docs/grafana/latest/plugins/developing/dataframes).
 
 {{< /tutorials/step >}}
 {{< tutorials/step duration="1" title="Add Support for Health Checks" >}}
