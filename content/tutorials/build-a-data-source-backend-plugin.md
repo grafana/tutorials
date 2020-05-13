@@ -17,12 +17,12 @@ Grafana supports a wide range of data sources, including Prometheus, MySQL, and 
 In this tutorial, you'll:
 
 - Build a backend for your data source
-- Implement an health check for your data source
+- Implement a health check for your data source
 - Enable alerting for your data source
 
 ### Prerequisites
 
-- Knowledge about how data source are implemented in the frontend.
+- Knowledge about how data sources are implemented in the frontend.
 - Grafana version 7.0+
 - Go 1.14+
 - [Mage](https://magefile.org/)
@@ -49,7 +49,7 @@ select `Backend Datasource Plugin` and follow the rest of the steps in the plugi
 cd my-plugin
 ```
 
-To build the plugin
+To build the plugin:
 
 ```
 yarn install --pure-lockfile
@@ -84,12 +84,12 @@ In the next step we will look at the query endpoint!
 {{< tutorials/step duration="2" title="Implement data queries" >}}
 
 We begin by opening the file `/pkg/datasource/sample-datasource.go`. In this file you will see the `DatasourceInstance` struct which implements the `backend.QueryDataHandler` interface.
-The `QueryData` function on this struct is where the data fetching happens for a data source plugin.
+The `QueryData` method on this struct is where the data fetching happens for a data source plugin.
 
 Each request contains multiple queries to reduce traffic between Grafana and plugins.
 So you need to loop over the slice of queries, process each query, and then return the results of all queries.
 
-In the tutorial we have extract a function named `query` to take care of each query model.
+In the tutorial we have extracted a function named `query` to take care of each query model.
 Since each plugin has their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
 to `Unmarshal` the query model into something easier to work with.
 
