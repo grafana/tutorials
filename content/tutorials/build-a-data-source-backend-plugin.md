@@ -28,7 +28,7 @@ In this tutorial, you'll:
 - [Mage](https://magefile.org/)
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Setup Your Environment" >}}
+{{< tutorials/step duration="1" title="Setup your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
@@ -58,7 +58,7 @@ yarn install --pure-lockfile
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Anatomy of a Backend Plugin" >}}
+{{< tutorials/step duration="1" title="Anatomy of a backend plugin" >}}
 
 The folders and files used to build the backend for the data source are
 
@@ -97,7 +97,7 @@ As you can see the sample only returns static numbers. Try to extend the plugin 
 You can read more about how to [build data frames in our docs](https://grafana.com/docs/grafana/latest/plugins/developing/dataframes).
 
 {{< /tutorials/step >}}
-{{< tutorials/step duration="1" title="Add Support for Health Checks" >}}
+{{< tutorials/step duration="1" title="Add support for health checks" >}}
 
 Implementing the health check handler allows Grafana to verify that a data source has been configured correctly.
 After a user has created a new datasource in Grafana's UI, she can click the **Test** to verify that it works as expected.
