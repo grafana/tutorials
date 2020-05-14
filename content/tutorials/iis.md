@@ -27,6 +27,10 @@ If you have not already done it, then a requirement is to install URL Rewrite mo
 
 Download and install the URL Rewrite module for IIS: https://www.iis.net/downloads/microsoft/url-rewrite
 
+You will also need the Application Request Routing (ARR) module for IIS for proxy forwarding
+
+Download and install ARR module for IIS: https://www.iis.net/downloads/microsoft/application-request-routing 
+
 ## Grafana Config
 
 The Grafana config can be set by creating a file named `custom.ini` in the `conf` subdirectory of your Grafana installation. See the [installation instructions](http://docs.grafana.org/installation/windows/#configure) for more details.
@@ -42,6 +46,18 @@ root_url = %(protocol)s://%(domain)s/grafana/
 Restart the Grafana server after changing the config file.
 
 ## IIS Config
+
+### Forward Proxy
+
+1. Open the IIS Manager and click on the server
+2. In the admin console for the server, double click on the Application Request Routing option:
+3. Click the `Server Proxy Settings` action on the right-hand pane
+4. Select the `Enable proxy` checkbox so that it is enabled
+5. Click `Apply` and proceed with the URL Rewriting configuration
+
+**Note:** If you don't enable the Forward Proxy, you will most likely get 404 Not Found if you only apply the URL Rewrite rule
+
+### URL Rewriting
 
 1. Open the IIS Manager and click on the parent website
 2. In the admin console for this website, double click on the URL Rewrite option:
