@@ -1,4 +1,3 @@
-
 ---
 title: Grafana fundamentals
 summary: Get familiar with Grafana
