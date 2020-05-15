@@ -74,7 +74,7 @@ Build backend plugin binaries for Linux, Windows and Darwin to _dist_ directory:
 mage -v
 ```
 
-Now, lets verify that the plugin you've built so far can be used in Grafana when creating a new data source:
+Now, let's verify that the plugin you've built so far can be used in Grafana when creating a new data source:
 
 1. Restart your Grafana instance.
 1. Open Grafana in your web browser.
