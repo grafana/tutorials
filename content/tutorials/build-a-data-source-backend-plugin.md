@@ -79,11 +79,11 @@ Now, let's verify that the plugin you've built so far can be used in Grafana whe
 1. Restart your Grafana instance.
 1. Open Grafana in your web browser.
 1. Navigate via the side-menu to Configuration -> Data Sources.
-1. Click on the _Add data source_ button.
+1. Click **Add data source**.
 1. Find your newly created plugin and select it.
 1. Enter a suitable name and then click the _Save & Test_ button (ignores any errors reported for now).
 
-At this point you should have a newly created data source instance of your plugin, and it should be ready to use in a dashboard:
+You now have a new data source instance of your plugin that is ready to use in a dashboard:
 
 1. Navigate via the side-menu to Create -> Dashboard.
 1. Click on _Add new panel_.
