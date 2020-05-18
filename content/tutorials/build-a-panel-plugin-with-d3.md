@@ -12,8 +12,6 @@ weight: 60
 
 {{< tutorials/step title="Introduction" >}}
 
-> **IMPORTANT**: This tutorial is currently in **beta** and requires Grafana 7.0, which is scheduled for release in May. Some of the features mentioned may not work for earlier versions.
-
 Panels are the building blocks of Grafana, and allow you to visualize data in different ways. This tutorial gives you a hands-on walkthrough of creating your own panel using [D3.js](https://d3js.org/).
 
 For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/features/panels/panels/).
@@ -25,7 +23,7 @@ In this tutorial, you'll:
 
 ### Prerequisites
 
-- Grafana version 7.0+
+- Grafana 7.0
 - NodeJS
 - yarn
 
