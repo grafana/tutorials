@@ -49,7 +49,7 @@ The easiest way to get started is to clone one of our test data datasources. Nav
 npx @grafana/toolkit@next plugin:create my-plugin
 ```
 
-Select _Backend Datasource Plugin_ and follow the rest of the steps in the plugin scaffolding command.
+Select **Backend Datasource Plugin** and follow the rest of the steps in the plugin scaffolding command.
 
 ```bash
 cd my-plugin
@@ -78,17 +78,17 @@ Now, let's verify that the plugin you've built so far can be used in Grafana whe
 
 1. Restart your Grafana instance.
 1. Open Grafana in your web browser.
-1. Navigate via the side-menu to Configuration -> Data Sources.
+1. Navigate via the side-menu to **Configuration** -> **Data Sources**.
 1. Click **Add data source**.
 1. Find your newly created plugin and select it.
-1. Enter a suitable name and then click the _Save & Test_ button (ignores any errors reported for now).
+1. Enter a name and then click **Save & Test** (ignore any errors reported for now).
 
 You now have a new data source instance of your plugin that is ready to use in a dashboard:
 
-1. Navigate via the side-menu to Create -> Dashboard.
-1. Click on _Add new panel_.
+1. Navigate via the side-menu to **Create** -> **Dashboard**.
+1. Click **Add new panel**.
 1. In the query tab, select the data source you just created.
-1. You should now see a line graph rendered with one series consisting of two data points.
+1. A line graph is rendered with one series consisting of two data points.
 1. Save the dashboard.
 
 {{< /tutorials/step >}}
@@ -135,18 +135,18 @@ You can read more about how to [build data frames in our docs](https://grafana.c
 {{< tutorials/step title="Add support for health checks" >}}
 
 Implementing the health check handler allows Grafana to verify that a data source has been configured correctly.
-When editing a data source in Grafana's UI, you can click the _Save & Test_ button to verify that it works as expected.
+When editing a data source in Grafana's UI, you can **Save & Test** to verify that it works as expected.
 
 In this sample data source, there is a 50% chance that the health check will be successful. Make sure to return appropriate error messages to
 the users, informing them about what is misconfigured in the data source.
 
-Open `/pkg/sample-plugin.go`. In this file you will see the `SampleDatasource` struct also implements the [backend.CheckHealthHandler](https://pkg.go.dev/github.com/grafana/grafana-plugin-sdk-go/backend?tab=doc#CheckHealthHandler) interface. Navigate to the `CheckHealth` method to see how the health check for this sample plugin is implemented.
+Open `/pkg/sample-plugin.go`. In this file you'll see that the `SampleDatasource` struct also implements the [backend.CheckHealthHandler](https://pkg.go.dev/github.com/grafana/grafana-plugin-sdk-go/backend?tab=doc#CheckHealthHandler) interface. Navigate to the `CheckHealth` method to see how the health check for this sample plugin is implemented.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Enable Grafana Alerting" >}}
 
 1. Open _src/plugin.json_.
-1. Add the top level _backend_ property with a value of _true_ to specify that your plugin supports Grafana Alerting, e.g.
+1. Add the top level `backend` property with a value of `true` to specify that your plugin supports Grafana Alerting, e.g.
     ```json
     {
       ...
