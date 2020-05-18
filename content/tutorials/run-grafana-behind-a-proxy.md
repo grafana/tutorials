@@ -39,11 +39,7 @@ root_url = %(protocol)s://%(domain)s:%(http_port)s/grafana/
 serve_from_sub_path = true
 ```
 
-Next, you need to configure your reverse proxy. You can find example configuration for the following:
-
-- [NGINX](#2)
-- [HAProxy](#3)
-- [IIS](#4)
+Next, you need to configure your reverse proxy.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure NGINX" >}}
