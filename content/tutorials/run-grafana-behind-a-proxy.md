@@ -41,9 +41,9 @@ serve_from_sub_path = true
 
 Next, you need to configure your reverse proxy. You can find example configuration for the following:
 
-- [NGINX](#1)
-- [HAProxy](#2)
-- [IIS](#3)
+- [NGINX](#2)
+- [HAProxy](#3)
+- [IIS](#4)
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure NGINX" >}}
