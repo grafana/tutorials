@@ -190,6 +190,10 @@ Now that you've defined the query model you wish to support, the next step is to
    **QueryEditor.tsx**
 
    ```ts
+   const { queryText, constant, frequency } = query;
+   ```
+
+   ```ts
    <FormField
      width={4}
      value={frequency}
@@ -257,12 +261,14 @@ Just like query editor, the form field in the config editor calls the registered
    **ConfigEditor.tsx**
 
    ```ts
-   <FormField
-     label="Resolution"
-     onChange={this.onResolutionChange}
-     value={jsonData.resolution || 1000.0}
-     placeholder="Enter a number"
-   />
+   <div className="gf-form">
+     <FormField
+       label="Resolution"
+       onChange={this.onResolutionChange}
+       value={jsonData.resolution || ''}
+       placeholder="Enter a number"
+     />
+   </div>
    ```
 
 1. Add a event listener for the new option.
@@ -272,7 +278,7 @@ Just like query editor, the form field in the config editor calls the registered
      const { onOptionsChange, options } = this.props;
      const jsonData = {
        ...options.jsonData,
-       resolution: event.target.value,
+       resolution: parseFloat(event.target.value),
      };
      onOptionsChange({ ...options, jsonData });
    };
@@ -291,7 +297,7 @@ Just like query editor, the form field in the config editor calls the registered
      constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
        super(instanceSettings);
 
-       this.resolution = instanceSettings.jsonData.resolution;
+       this.resolution = instanceSettings.jsonData.resolution || 1000.0;
      }
 
      // ...
@@ -302,7 +308,7 @@ Just like query editor, the form field in the config editor calls the registered
    **src/DataSource.ts**
 
    ```ts
-   const step = duration / resolution;
+   const step = duration / this.resolution;
    ```
 
 {{< /tutorials/step >}}
