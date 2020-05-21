@@ -26,7 +26,7 @@ In this tutorial, you'll:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configuration as code" >}}
 
-Configuration as code is the practice of storing the the configuration of your system as a set of version controlled, human-readable configuration files, rather than in a database. These configuration files can be reused across environments to avoid duplicated resources.
+Configuration as code is the practice of storing the configuration of your system as a set of version controlled, human-readable configuration files, rather than in a database. These configuration files can be reused across environments to avoid duplicated resources.
 
 As the number of dashboards and data sources grows within your organization, manually managing changes can become tedious and error-prone. Encouraging reuse becomes important to avoid multiple teams redesigning the same dashboards.
 
@@ -39,7 +39,7 @@ Grafana supports configuration as code through _provisioning_. The resources tha
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set the provisioning directory" >}}
 
-Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. The provisioning directory contains configuration files that are applied whenever Grafana starts and continuously while running.
+Before you can start provisioning resources, Grafana needs to know where to find the _provisioning directory_. The provisioning directory contains configuration files that are applied whenever Grafana starts and continuously updated while running.
 
 By default, Grafana looks for a provisioning directory in the configuration directory (grafana > conf) on the system where Grafana is installed. However, if you are a Grafana Administrator, then you might want to place the config files in a shared resource like a network folder, so you would need to change the path to the provisioning directory.
 
