@@ -132,7 +132,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
 > Ad-hoc queries are queries that are made interactively, with the purpose of exploring data. An ad-hoc query is commonly followed by another, more specific query.
 
 1. In the side bar, click the **Explore** (compass rose) icon.
-1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Enter.
+1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
   A graph appears.
 1. In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
@@ -140,7 +140,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
 
    `tns_request_duration_seconds_count` is a _counter_, a type of metric whose value only ever increases. Rather than visualizing the actual value, you can use counters to calculate the _rate of change_, i.e. how fast the value increases.
 
-1. Add the `rate` function to your query to visualize the rate of requests per second. Enter the following in the **Query editor** and then press Enter.
+1. Add the `rate` function to your query to visualize the rate of requests per second. Enter the following in the **Query editor** and then press Shift + Enter.
 
    ```
    rate(tns_request_duration_seconds_count[5m])
@@ -214,11 +214,11 @@ A _dashboard_ gives you an at-a-glance view of your data and lets you track metr
 
 Dashboards consist of _panels_, each representing a part of the story you want your dashboard to tell.
 
-Every panel consists by a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
+Every panel consists of a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
 
 1. In the side bar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
 1. Click **Add new panel**.
-1. In the **Query editor** below the graph, enter the query from earlier and then press Enter:
+1. In the **Query editor** below the graph, enter the query from earlier and then press Shift + Enter:
 
    ```
    sum(rate(tns_request_duration_seconds_count[5m])) by(route)
