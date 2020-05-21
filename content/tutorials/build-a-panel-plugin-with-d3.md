@@ -168,10 +168,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
 
   useEffect(() => {
     if (d3Container.current) {
-      const maxValue = Math.max.apply(
-        Math,
-        values.map(o => o)
-      );
+      const maxValue = Math.max.apply(Math, values);
 
       const barHeight = height / values.length;
 
