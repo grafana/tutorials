@@ -112,10 +112,7 @@ You've seen how to use D3.js to create a container element with some hard-coded 
 
      useEffect(() => {
        if (d3Container.current) {
-         const maxValue = Math.max.apply(
-           Math,
-           values.map(o => o)
-         );
+         const maxValue = Math.max.apply(Math, values);
 
          const barHeight = height / values.length;
 
