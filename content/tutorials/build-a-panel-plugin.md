@@ -76,7 +76,7 @@ Now that you can view your panel, try making a change to the panel plugin:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add panel options" >}}
 
-Sometimes you want to offer the users of your panel to configure the behavior of your plugin. By configuring  _panel options_ for your plugin, your panel will be able to accept user input.
+Sometimes you want to offer the users of your panel an option to configure the behavior of your plugin. By configuring  _panel options_ for your plugin, your panel will be able to accept user input.
 
 In the previous step, you changed the fill color of the circle in the code. Let's change the code so that the plugin user can configure the color from the panel editor.
 
