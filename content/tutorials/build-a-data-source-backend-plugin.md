@@ -92,51 +92,48 @@ You now have a new data source instance of your plugin that is ready to use in a
 {{< /tutorials/step >}}
 {{< tutorials/step title="Anatomy of a backend plugin" >}}
 
-The folders and files used to build the backend for the data source are
+The folders and files used to build the backend for the data source are:
 
-| file/folder         | description                                                                                                                                          |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Magefile.go`       | It’s not a requirement to use mage build files, but we strongly recommend using it so that you can use the build targets provided by the plugin SDK. |
-| `/go.mod     `      | Go modules dependencies, [reference](https://golang.org/cmd/go/#hdr-The_go_mod_file)                                                                 |
+| file/folder        | description                                                                                                                                          |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Magefile.go`      | It’s not a requirement to use mage build files, but we strongly recommend using it so that you can use the build targets provided by the plugin SDK. |
+| `/go.mod     `     | Go modules dependencies, [reference](https://golang.org/cmd/go/#hdr-The_go_mod_file)                                                                 |
 | `/src/plugin.json` | A JSON file describing the backend plugin                                                                                                            |
-| `/pkg/main.go`      | Starting point of the plugin binary.                                                                                                                 |
+| `/pkg/main.go`     | Starting point of the plugin binary.                                                                                                                 |
 
 #### plugin.json
 
 The [plugin.json](https://grafana.com/docs/grafana/latest/developers/plugins/metadata/) file is required for all plugins. When building a backend plugin these properties are important:
 
-| property   | description                                                                                                            |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------- |
-| backend    | Should be set to `true` for backend plugins. This tells Grafana that it should start a binary when loading the plugin. |
+| property   | description                                                                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| backend    | Should be set to `true` for backend plugins. This tells Grafana that it should start a binary when loading the plugin.                                                           |
 | executable | This is the name of the executable that Grafana expects to start, see [plugin.json reference](https://grafana.com/docs/grafana/latest/developers/plugins/metadata/) for details. |
-| alerting   | Should be set to `true` if your backend datasource supports alerting.                                                  |
+| alerting   | Should be set to `true` if your backend datasource supports alerting.                                                                                                            |
 
 In the next step we will look at the query endpoint!
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Implement data queries" >}}
 
-We begin by opening the file `/pkg/sample-plugin.go`. In this file you will see the `SampleDatasource` struct which implements the [backend.QueryDataHandler](https://pkg.go.dev/github.com/grafana/grafana-plugin-sdk-go/backend?tab=doc#QueryDataHandler) interface.
-The `QueryData` method on this struct is where the data fetching happens for a data source plugin.
+We begin by opening the file `/pkg/sample-plugin.go`. In this file you will see the `SampleDatasource` struct which implements the [backend.QueryDataHandler](https://pkg.go.dev/github.com/grafana/grafana-plugin-sdk-go/backend?tab=doc#QueryDataHandler) interface. The `QueryData` method on this struct is where the data fetching happens for a data source plugin.
 
-Each request contains multiple queries to reduce traffic between Grafana and plugins.
-So you need to loop over the slice of queries, process each query, and then return the results of all queries.
+Each request contains multiple queries to reduce traffic between Grafana and plugins. So you need to loop over the slice of queries, process each query, and then return the results of all queries.
 
-In the tutorial we have extracted a method named `query` to take care of each query model.
-Since each plugin has their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs
-to `Unmarshal` the query model into something easier to work with.
+In the tutorial we have extracted a method named `query` to take care of each query model. Since each plugin has their own unique query model, Grafana sends it to the backend plugin as JSON. Therefore the plugin needs to `Unmarshal` the query model into something easier to work with.
 
 As you can see the sample only returns static numbers. Try to extend the plugin to return other types of data.
-You can read more about how to [build data frames in our docs](https://grafana.com/docs/grafana/latest/plugins/developing/dataframes).
+
+You can read more about how to [build data frames in our docs](https://grafana.com/docs/grafana/latest/developers/plugins/data-frames/).
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add support for health checks" >}}
 
 Implementing the health check handler allows Grafana to verify that a data source has been configured correctly.
+
 When editing a data source in Grafana's UI, you can **Save & Test** to verify that it works as expected.
 
-In this sample data source, there is a 50% chance that the health check will be successful. Make sure to return appropriate error messages to
-the users, informing them about what is misconfigured in the data source.
+In this sample data source, there is a 50% chance that the health check will be successful. Make sure to return appropriate error messages to the users, informing them about what is misconfigured in the data source.
 
 Open `/pkg/sample-plugin.go`. In this file you'll see that the `SampleDatasource` struct also implements the [backend.CheckHealthHandler](https://pkg.go.dev/github.com/grafana/grafana-plugin-sdk-go/backend?tab=doc#CheckHealthHandler) interface. Navigate to the `CheckHealth` method to see how the health check for this sample plugin is implemented.
 
@@ -156,10 +153,12 @@ Open `/pkg/sample-plugin.go`. In this file you'll see that the `SampleDatasource
     }
     ```
 1. Rebuild frontend parts of the plugin to _dist_ directory:
+
   ```bash
   yarn build
   ```
-2. Restart your Grafana instance.
+
+1. Restart your Grafana instance.
 1. Open Grafana in your web browser.
 1. Open the dashboard you created earlier in the _Create a new plugin_ step.
 1. Edit the existing panel.
@@ -167,7 +166,7 @@ Open `/pkg/sample-plugin.go`. In this file you'll see that the `SampleDatasource
 1. Click on _Create Alert_ button.
 1. Edit condition and specify  _IS ABOVE 10_. Change _Evaluate every_ to _10s_ and clear the _For_ field to make the alert rule evaluate quickly.
 1. Save the dashboard.
-1. After some time the alert rule should evaluate and transition into _Alerting_ state.
+1. After some time the alert rule evaluates and transitions into _Alerting_ state.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
