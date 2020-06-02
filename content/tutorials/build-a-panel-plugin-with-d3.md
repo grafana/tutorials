@@ -93,8 +93,6 @@ In fact, D3.js is already bundled with Grafana, and you can access it by importi
 
 1. Run `yarn dev`, and reload Grafana to reflect the changes you've made.
 
-A panel with hard-coded text might not be win any prizes. In the next step, we'll see
-
 {{< /tutorials/step >}}
 {{< tutorials/step title="Build a graph from data" >}}
 
