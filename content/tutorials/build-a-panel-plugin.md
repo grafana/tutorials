@@ -19,7 +19,7 @@ For more information about panels, refer to the documentation on [Panels](https:
 ### Prerequisites
 
 - Grafana 7.0
-- NodeJS
+- NodeJS 12.x
 - yarn
 
 {{< /tutorials/step >}}

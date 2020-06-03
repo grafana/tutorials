@@ -23,7 +23,7 @@ In this tutorial, you'll:
 ### Prerequisites
 
 - Grafana 7.0
-- NodeJS
+- NodeJS 12.x
 - yarn
 
 {{< /tutorials/step >}}
