@@ -17,8 +17,8 @@ Many people are running Grafana on Raspberry Pi as a way to monitor their home, 
 
 In this tutorial, you'll:
 
-- Set up a headless Raspberry Pi using Raspbian
-- Install Grafana on your Raspberry Pi
+- Set up a headless Raspberry Pi using Raspbian.
+- Install Grafana on your Raspberry Pi.
 
 ### Prerequisites
 
@@ -32,26 +32,30 @@ Before we can install Grafana, you first need to be configure your Raspberry Pi.
 
 For this tutorial, you'll configure your Raspberry Pi to be _headless_. This means you don't need to connect a monitor, keyboard, or mouse to your Raspberry Pi. All configuration is done from your regular computer.
 
-Before we get started, you need to download a couple of things.
+Before we get started, you need to download a couple of things. Do not install them yet.
 
 - [Raspbian Lite image](https://www.raspberrypi.org/downloads/raspbian/)
 
-  Raspbian is a Debian-based operating system for the Raspberry Pi. Since you're going to be running a headless Raspberry Pi, you won't be needing the desktop dependencies.
+  Raspbian is a Debian-based operating system for the Raspberry Pi. Since you're going to run a headless Raspberry Pi, you won't need the desktop dependencies.
 
 - [balenaEtcher](https://www.balena.io/etcher/).
 
-  We'll be using balenaEtcher to flash the Raspbian image to the SD card. It's available for Linux, macOS, and Windows.
+  We'll use balenaEtcher to flash the Raspbian image to the SD card. It's available for Linux, macOS, and Windows.
 
 #### Copy necessary files to the SD card
 
-Once you've downloaded both, and installed balenaEtcher, we can get started with installing Raspbian.
+Once you've downloaded both items, we can get started with installing Raspbian.
 
-1. Start balenaEtcher and follow the instructions to flash the Raspbian Lite image to the SD card.
-1. Eject the SD card from your computer, and insert it again.
+1. Install balenaEtcher.
+2. Start balenaEtcher and follow the instructions to flash the Raspbian Lite image to the SD card.
+3. Eject the SD card from your computer, and insert it again.
 
-While you could fire up the Raspberry Pi, we don't yet have any way of accessing it.
+While you _could_ fire up the Raspberry Pi now, we don't yet have any way of accessing it.
 
 1. Create an empty file called `ssh` in the boot directory. This enables SSH so that you can log in remotely.
+   
+   The net step is only required if you want the Raspberry Pi to connect to your wireless network. Otherwise, connect the it to your network by using a network cable.
+
 1. **(Optional)** Create a file called `wpa_supplicant.conf` in the boot directory:
 
    ```
@@ -64,8 +68,6 @@ While you could fire up the Raspberry Pi, we don't yet have any way of accessing
     psk="<Password for your WiFi>"
    }
    ```
-
-   This step is only required if you want the Raspberry Pi to connect to your wireless network. Otherwise, connect the it to your network by using a network cable.
 
 All the necessary files are now on the SD card. Let's start up the Raspberry Pi.
 
@@ -120,7 +122,7 @@ Grafana is now installed, but not yet running. To make sure Grafana starts up ev
    ```
    sudo /bin/systemctl start grafana-server
    ```
-   Grafana is now running on the machine, and is accessible from any device on the local network.
+   Grafana is now running on the machine and is accessible from any device on the local network.
 
 1. Open a browser and go to `http://<ip address>:3000`, where the IP address is the address that you used to connect to the Raspberry Pi earlier. You're greeted with the Grafana login page.
 1. Log in to Grafana with the default username `admin`, and the default password `admin`.
