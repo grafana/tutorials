@@ -6,7 +6,6 @@ categories: ["administration"]
 tags: beginner
 authors: Grafana Labs
 Feedback Link: https://github.com/grafana/tutorials/issues/new
-draft: true
 ---
 
 {{< tutorials/step title="Introduction" >}}
@@ -32,7 +31,7 @@ Before we can install Grafana, you first need to be configure your Raspberry Pi.
 
 For this tutorial, you'll configure your Raspberry Pi to be _headless_. This means you don't need to connect a monitor, keyboard, or mouse to your Raspberry Pi. All configuration is done from your regular computer.
 
-Before we get started, you need to download a couple of things. Do not install them yet.
+Before we get started, you need to download a couple of things. Don'tt install them yet.
 
 - [Raspbian Lite image](https://www.raspberrypi.org/downloads/raspbian/)
 
@@ -53,8 +52,8 @@ Once you've downloaded both items, we can get started with installing Raspbian.
 While you _could_ fire up the Raspberry Pi now, we don't yet have any way of accessing it.
 
 1. Create an empty file called `ssh` in the boot directory. This enables SSH so that you can log in remotely.
-   
-   The net step is only required if you want the Raspberry Pi to connect to your wireless network. Otherwise, connect the it to your network by using a network cable.
+
+   The next step is only required if you want the Raspberry Pi to connect to your wireless network. Otherwise, connect the it to your network by using a network cable.
 
 1. **(Optional)** Create a file called `wpa_supplicant.conf` in the boot directory:
 
