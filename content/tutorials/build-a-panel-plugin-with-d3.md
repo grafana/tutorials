@@ -18,8 +18,8 @@ For more information about panels, refer to the documentation on [Panels](https:
 
 In this tutorial, you'll:
 
-- Build a simple, but complete bar graph panel
-- Learn how to use D3.js to build a panel using data-driven transformations
+- Build a simple panel plugin to visualize a bar chart.
+- Learn how to use D3.js to build a panel using data-driven transformations.
 
 ### Prerequisites
 
@@ -38,159 +38,196 @@ In this tutorial, you'll:
 {{< tutorials/shared "create-plugin" >}}
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Data-driven transformations" >}}
+{{< tutorials/step title="Data-driven documents" >}}
 
 [D3.js](https://d3js.org/) is a JavaScript library for manipulating documents based on data. It lets you transform arbitrary data into HTML, and is commonly used for creating visualizations.
 
-In fact, D3.js is already bundled with Grafana, and you can access it by importing the `d3` package.
+Wait a minute. Manipulating documents based on data? That's sounds an awful lot like React. In fact, much of what you can accomplish with D3 you can already do with React. So before we start looking at D3, let's see how you can create an SVG from data, using only React.
+
+In **SimplePanel.tsx**, change `SimplePanel` to return an `svg` with a `rect` element.
+
+   ```ts
+   export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
+     const theme = useTheme();
+
+     return (
+       <svg width={width} height={height}>
+         <rect x={0} y={0} width={10} height={10} fill={theme.palette.greenBase} />
+       </svg>
+     );
+   };
+   ```
+
+One single rectangle might not be very exciting, so let's see how you can create rectangles from data.
+
+1. Create some data that we can visualize.
+
+   ```ts
+   const values = [4, 8, 15, 16, 23, 42];
+   ```
+
+1. Calculate the height of each bar based on the height of the panel.
+
+   ```ts
+   const barHeight = height / values.length;
+   ```
+
+1. Inside a SVG group, `g`, create a `rect` element for every value in the dataset. Each rectangle uses the value as its width.
+
+   ```ts
+   return (
+     <svg width={width} height={height}>
+       <g>
+         {values.map((value, i) => (
+           <rect x={0} y={i * barHeight} width={value} height={barHeight - 1} fill={theme.palette.greenBase} />
+         ))}
+       </g>
+     </svg>
+   );
+   ```
+
+1. Rebuild the plugin and reload your browser to see the changes you've made.
+
+As you can see, React is perfectly capable of dynamically creating HTML elements. In fact, creating elements using React is often faster than creating them using D3.
+
+So why would you use even use D3? In the next step, we'll see how you can take advantage of D3's data transformations.
+
+{{< /tutorials/step >}}
+{{< tutorials/step title="Transform data using D3.js" >}}
+
+In this step, you'll see how you can transform data using D3 before rendering it using React.
+
+D3 is already bundled with Grafana, and you can access it by importing the `d3` package. However, we're going to need the type definitions while developing.
 
 1. Install the D3 type definitions:
 
-   ```
-   yarn add @types/d3
+   ```bash
+   yarn add --dev @types/d3
    ```
 
-1. Import the `select` function from `d3` in **SimplePanel.tsx**:
+1. Import `d3` in **SimplePanel.tsx**.
 
    ```ts
-   import { select } from 'd3';
+   import * as d3 from 'd3';
    ```
 
-1. Import `useRef` and `useEffect` from `react`:
+In the previous step, we had to define the width of each bar in pixels. Instead, let's use _scales_ from the D3 library to make the width of each bar depend on the width of the panel.
+
+Scales are functions that map a range of values to another range of values. In this case, we want to map the values in our datasets to a position within our panel.
+
+1. Create a scale to map a value between 0 and the maximum value in the dataset, to a value between 0 and the width of the panel. We'll be using this to calculate the width of the bar.
 
    ```ts
-   import React, { useRef, useEffect } from 'react';
-   ```
+   const scale = d3
+     .scaleLinear()
+     .domain([0, d3.max(values) || 0.0])
+     .range([0, width]);
 
-1. Replace the content of the SimplePanel component with the following:
+1. Pass the value to the scale function to calculate the width of the bar in pixels.
 
    ```ts
-   export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
-     const theme = useTheme();
-
-     const d3Container = useRef(null);
-
-     const values = [4, 8, 15, 16, 23, 42];
-
-     useEffect(() => {
-       if (d3Container.current) {
-         const chart = select(d3Container.current)
-           .attr('width', width)
-           .attr('height', height);
-
-         chart
-           .append('text')
-           .text('Hello world')
-           .attr('x', 10)
-           .attr('y', 10)
-           .attr('fill', theme.palette.greenBase);
-       }
-     }, [width, height, values, d3Container.current]);
-
-     return <svg ref={d3Container}></svg>;
-   };
+   return (
+     <svg width={width} height={height}>
+       <g>
+         {values.map((value, i) => (
+           <rect x={0} y={i * barHeight} width={scale(value)} height={barHeight - 1} fill={theme.palette.greenBase} />
+         ))}
+       </g>
+     </svg>
+   );
    ```
 
-1. Run `yarn dev`, and reload Grafana to reflect the changes you've made.
+As you can see, even if we're using React to render the actual elements, the D3 library contains useful tools that you can use to transform your data before rendering it.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Build a graph from data" >}}
+{{< tutorials/step title="Add an axis" >}}
 
-You've seen how to use D3.js to create a container element with some hard-coded text in it. Next, you'll build the graph from actual data.
+Another useful tool in the D3 toolbox is the ability to generate _axes_. Adding axes to our chart makes it easier for the user to understand the differences between each bar.
 
-1. Update the panel with the following code:
+Let's see how you can use D3 to add a horizontal axis to your bar chart.
+
+1. Create a D3 axis. Notice that by using the same scale as before, we make sure that the bar width aligns with the ticks on the axis.
 
    ```ts
-   export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
-     const theme = useTheme();
-
-     const d3Container = useRef(null);
-
-     const values = [4, 8, 15, 16, 23, 42];
-
-     useEffect(() => {
-       if (d3Container.current) {
-         const maxValue = Math.max.apply(Math, values);
-
-         const barHeight = height / values.length;
-
-         const chart = select(d3Container.current)
-           .html('')
-           .append('svg')
-           .attr('width', width)
-           .attr('height', height);
-
-         const bars = chart
-           .selectAll('rect')
-           .data(values)
-           .enter()
-           .append('rect');
-
-         bars
-           .attr('height', barHeight - 1)
-           .attr('width', d => (d / maxValue) * width)
-           .attr('transform', (d, i) => {
-             return 'translate(0,' + i * barHeight + ')';
-           })
-           .attr('fill', theme.palette.greenBase);
-       }
-     }, [width, height, values, d3Container.current]);
-
-     return <div ref={d3Container}></div>;
-   };
+   const axis = d3.axisBottom(scale);
    ```
 
-1. Run `yarn dev`, and reload Grafana to see a bar chart that dynamically resizes to fit the panel.
+1. Generate the axis. While D3 needs to generate the elements for the axis, we can encapsulate it by generating them within an anonymous function which we pass as a `ref` to a group element `g`.
 
-Congratulations, you've created a dynamic bar chart! Still, you've only touched the surface of what's possible with D3. To learn more, check out the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery).
+   ```ts
+   <g
+     ref={node => {
+       d3.select(node).call(axis as any);
+     }}
+   />
+   ```
+
+By default, the axis renders at the top of the SVG element. We'd like to move it to the bottom, but to do that, we first need to make room for it by decreasing the height of each bar.
+
+1. Calculate the new bar height based on the padded height.
+
+   ```ts
+   const padding = 20;
+   const chartHeight = height - padding;
+   const barHeight = chartHeight / values.length;
+   ```
+
+1. Translate the axis by adding a transform to the `g` element.
+
+   ```ts
+   <g
+     transform={`translate(0, ${chartHeight})`}
+     ref={node => {
+       d3.select(node).call(axis as any);
+     }}
+   />
+   ```
+
+Congrats! You've created a simple and responsive bar chart.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Complete example" >}}
 
 ```ts
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { PanelProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { useTheme } from '@grafana/ui';
-
-import { select } from 'd3';
+import * as d3 from 'd3';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const theme = useTheme();
 
-  const d3Container = useRef(null);
-
   const values = [4, 8, 15, 16, 23, 42];
 
-  useEffect(() => {
-    if (d3Container.current) {
-      const maxValue = Math.max.apply(Math, values);
+  const scale = d3
+    .scaleLinear()
+    .domain([0, d3.max(values) || 0.0])
+    .range([0, width]);
 
-      const barHeight = height / values.length;
+  const axis = d3.axisBottom(scale);
 
-      const chart = select(d3Container.current)
-        .attr('width', width)
-        .attr('height', height);
+  const padding = 20;
+  const chartHeight = height - padding;
+  const barHeight = chartHeight / values.length;
 
-      const bars = chart
-        .selectAll('rect')
-        .data(values)
-        .enter()
-        .append('rect');
-
-      bars
-        .attr('height', barHeight - 1)
-        .attr('width', d => (d / maxValue) * width)
-        .attr('transform', (d, i) => {
-          return 'translate(0,' + i * barHeight + ')';
-        })
-        .attr('fill', theme.palette.greenBase);
-    }
-  }, [width, height, values, d3Container.current]);
-
-  return <svg ref={d3Container}></svg>;
+  return (
+    <svg width={width} height={height}>
+      <g>
+        {values.map((value, i) => (
+          <rect x={0} y={i * barHeight} width={scale(value)} height={barHeight - 1} fill={theme.palette.greenBase} />
+        ))}
+      </g>
+      <g
+        transform={`translate(0, ${chartHeight})`}
+        ref={node => {
+          d3.select(node).call(axis as any);
+        }}
+      />
+    </svg>
+  );
 };
 ```
 {{< /tutorials/step >}}
