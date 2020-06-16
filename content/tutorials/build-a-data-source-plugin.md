@@ -330,6 +330,6 @@ Learn how you can improve your plugin even further, by reading our advanced guid
 - [Add support for variables](https://grafana.com/docs/grafana/latest/developers/plugins/add-support-for-variables/)
 - [Add support for annotations](https://grafana.com/docs/grafana/latest/developers/plugins/add-support-for-annotations/)
 - [Add support for Explore queries](https://grafana.com/docs/grafana/latest/developers/plugins/add-support-for-explore-queries/)
-- [Build a logs data source](https://grafana.com/docs/grafana/latest/developers/plugins/build-a-logs-data-source/)
+- [Build a logs data source](https://grafana.com/docs/grafana/latest/developers/plugins/build-a-logs-data-source-plugin/)
 
 {{< /tutorials/step >}}
