@@ -6,36 +6,40 @@ Once you're happy with your plugin, it's time to package it, and submit to the p
 
 For users to be able to use the plugin without building it themselves, you need to make a production build of the plugin, and commit to a release branch in your repository.
 
+To submit a plugin to the plugin repository, you need to create a release of your plugin. While we recommend following the branching strategy outlined below, you're free to use one that makes more sense to you.
+
 #### Create a plugin release
 
-1. Create a branch called `release-<version>`:
+Let's create version 0.1.0 of our plugin.
+
+1. Create a branch called `release-0.1.x`.
    ```
-   git checkout -b release-<version>
+   git checkout -b release-0.1.x
    ```
 
-1. Do a production build
+1. Do a production build.
    ```
    yarn build
    ```
 
-1. Add the `dist` directory:
+1. Add the `dist` directory.
    ```
    git add -f dist
    ```
 
-1. Create the release commit:
+1. Create the release commit.
    ```
-   git commit -m "Release <version>"
-   ```
-
-1. Create a release tag:
-   ```
-   git tag -a <version>
+   git commit -m "Release v0.1.0"
    ```
 
-1. Push to GitHub:
+1. Create a release tag.
    ```
-   git push --follow-tags
+   git tag -a v0.1.0 -m "Create release tag v0.1.0"
+   ```
+
+1. Push to GitHub. `follow-tags` tells Git to push the release tag along with our release branch.
+   ```
+   git push --set-upstream origin release-0.1.x --follow-tags
    ```
 
 #### Submit the plugin
