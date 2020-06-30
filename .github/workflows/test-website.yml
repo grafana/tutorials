@@ -1,11 +1,6 @@
 name: test_website
 
-on:
-  push:
-    branches:
-    - pull_request
-    paths:
-    - 'content/tutorials/**'
+on: pull_request
 
 jobs:
   test:
