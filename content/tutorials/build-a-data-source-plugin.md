@@ -27,7 +27,7 @@ In this tutorial, you'll:
 - yarn
 
 {{< /tutorials/step >}}
-{{< tutorials/ste title="Set up your environment" >}}
+{{< tutorials/step title="Set up your environment" >}}
 
 {{< tutorials/shared "set-up-environment" >}}
 
