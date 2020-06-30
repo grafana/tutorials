@@ -16,7 +16,7 @@ Docker >= 2.1.0.3
 
 ## Deploy changes to grafana.com
 
-When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `master` branch.
+When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `master` branch. Follow the directions at https://github.com/grafana/website#publishing to make changes live.
 
 
 ## Resources
