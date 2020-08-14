@@ -328,10 +328,10 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
    import { getBackendSrv } from "grafana/runtime"
    ```
 
-1. Create a helper method `makeRequest` and use the `datasourceRequest` method to make a request to your API.
+1. Create a helper method `doRequest` and use the `datasourceRequest` method to make a request to your API.
 
    ```ts
-   async makeRequest(query: MyQuery) {
+   async doRequest(query: MyQuery) {
      const result = await getBackendSrv.datasourceRequest({
        method: "GET",
        url: baseUrl + "/metrics",
@@ -347,7 +347,7 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
    ```ts
    async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
      const promises = options.targets.map((query) =>
-       this.makeRequest(query).then((response) => {
+       this.doRequest(query).then((response) => {
          const frame = new MutableDataFrame({
            refId: query.refId,
            fields: [
