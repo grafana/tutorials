@@ -156,7 +156,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
    sum(rate(tns_request_duration_seconds_count[5m])) by(route)
    ```
 
-1. Go back to the [sample application](https://localhost:8081) and generate some traffic by adding new links, voting, or just refresh the browser.
+1. Go back to the [sample application](http://localhost:8081) and generate some traffic by adding new links, voting, or just refresh the browser.
 
 1. In the upper right corner, click the _time picker_, and select **Last 5 minutes**. By zooming in on the last few minutes, it's easier to see when you receive new data.
 
