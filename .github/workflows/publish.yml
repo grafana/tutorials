@@ -8,10 +8,20 @@ on:
     - 'content/tutorials/**'
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Build Website
+        run: |
+          mkdir -p docs
+          touch docs/menu.yaml
+          ls -al docs
+          docker run -v ${PWD}/docs:/hugo/content/docs/grafana/latest -v ${PWD}/content/tutorials:/hugo/content/tutorials --rm grafana/docs-base:latest /bin/bash -c 'make prod'
+  sync:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - run: git clone --single-branch --no-tags --depth 1 -b master https://grafanabot:${{ secrets.GH_BOT_ACCESS_TOKEN }}@github.com/grafana/website-sync ./.github/actions/website-sync
@@ -20,7 +30,7 @@ jobs:
       id: publish
       with:
         repository: grafana/website
-        branch: tutorials-sync
+        branch: master
         host: github.com
         github_pat: '${{ secrets.GH_BOT_ACCESS_TOKEN }}'
         source_folder: content/tutorials

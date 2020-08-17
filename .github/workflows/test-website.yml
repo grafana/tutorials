@@ -1,0 +1,16 @@
+name: test_website
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Build Website
+        run: |
+          mkdir -p docs
+          touch docs/menu.yaml
+          ls -al docs
+          docker run -v ${PWD}/docs:/hugo/content/docs/grafana/latest -v ${PWD}/content/tutorials:/hugo/content/tutorials --rm grafana/docs-base:latest /bin/bash -c 'make prod'
