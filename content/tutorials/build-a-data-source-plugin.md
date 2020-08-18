@@ -312,6 +312,63 @@ Just like query editor, the form field in the config editor calls the registered
    ```
 
 {{< /tutorials/step >}}
+{{< tutorials/step title="Get data from an external API" >}}
+
+So far, you've generated the data returned by the data source. A more realistic use case would be to fetch data from an external API.
+
+While you can use something like [axios](https://github.com/axios/axios) or the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make requests, we recommend using the [`getBackendSrv`](https://grafana.com/docs/grafana/latest/packages_api/runtime/getbackendsrv/) function from the [grafana/runtime](https://grafana.com/docs/grafana/latest/packages_api/runtime/) package.
+
+The main advantage of `getBackendSrv` is that it proxies requests through the Grafana server rather making the request from the browser. This is strongly recommended when making authenticated requests to an external API. For more information on authenticating external requests, refer to [Add authentication for data source plugins].
+
+1. Import `getBackendSrv`.
+
+   **src/DataSource.ts**
+
+   ```ts
+   import { getBackendSrv } from "grafana/runtime"
+   ```
+
+1. Create a helper method `doRequest` and use the `datasourceRequest` method to make a request to your API.
+
+   ```ts
+   async doRequest(query: MyQuery) {
+     const result = await getBackendSrv.datasourceRequest({
+       method: "GET",
+       url: baseUrl + "/metrics",
+       params: query,
+     })
+
+     return result;
+   }
+   ```
+
+1. Make a request for each query. `Promises.all` waits for all requests to finish before returning the data.
+
+   ```ts
+   async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
+     const promises = options.targets.map((query) =>
+       this.doRequest(query).then((response) => {
+         const frame = new MutableDataFrame({
+           refId: query.refId,
+           fields: [
+             { name: "Time", type: FieldType.time },
+             { name: "Value", type: FieldType.number },
+           ],
+         });
+
+         response.data.forEach((point: any) => {
+           frame.appendRow([point.time, point.value]);
+         });
+
+         return frame;
+       })
+     );
+
+     return Promise.all(promises).then((data) => ({ data }));
+   }
+   ```
+
+{{< /tutorials/step >}}
 {{< tutorials/step title="Publish your plugin" >}}
 
 {{< tutorials/shared "publish-your-plugin" >}}
