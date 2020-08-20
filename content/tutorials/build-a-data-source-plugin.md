@@ -328,13 +328,13 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
    import { getBackendSrv } from "grafana/runtime"
    ```
 
-1. Create a helper method `doRequest` and use the `datasourceRequest` method to make a request to your API.
+1. Create a helper method `doRequest` and use the `datasourceRequest` method to make a request to your API. Replace `https://api.example.com/metrics` to point to your own API endpoint.
 
    ```ts
    async doRequest(query: MyQuery) {
      const result = await getBackendSrv.datasourceRequest({
        method: "GET",
-       url: baseUrl + "/metrics",
+       url: "https://api.example.com/metrics",
        params: query,
      })
 
