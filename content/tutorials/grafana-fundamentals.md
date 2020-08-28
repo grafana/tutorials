@@ -233,11 +233,7 @@ Every panel consists of a _query_ and a _visualization_. The query defines _what
 {{< /tutorials/step >}}
 {{< tutorials/step title="Annotate events" >}}
 
-We monitor systems for many reasons, but a common use case is to monitor systems that might go down.
-
-Adding annotations to your dashboards is a great way to communicate important events to the rest of your team.
-
-When things go bad, it often helps if you understand the context in which the system failed. Time of last deploy, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to add custom events to your graphs.
+When things go bad, it often helps if you understand the context in which the failure occurred. Time of last deploy, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to represent such events directly on your graphs.
 
 In the next part of the tutorial, we will simulate some common use cases that someone would add annotations for.
 
@@ -357,7 +353,7 @@ Congratulations, you made it to the end of this tutorial!
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
 - [Explore](https://grafana.com/docs/grafana/latest/features/explore/)
-- [Alert rules](https://grafana.com/docs/grafana/latest/alerting/rules/)
+- [Alert rules](https://grafana.com/docs/grafana/latest/alerting/create-alerts/)
 - [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
 {{< /tutorials/step >}}
