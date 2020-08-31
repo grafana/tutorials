@@ -284,8 +284,9 @@ Alerts consists of two parts:
 
 In this step, you'll send alerts using _web hooks_. To test your alerts, you first need to have a place to send them.
 
-1. Browse to [requestbin.com](https://requestbin.com)
-1. Clear the **Private (requires log in)** check box, then click **Create Request Bin**.
+1. Browse to [requestbin.com](https://requestbin.com).
+1. Clear the **Private (requires log in)** check box.
+1. Click **Use Old Version** (which is publicly available).
 
    You request bin is now waiting for the first request.
 1. Copy the endpoint URL.
