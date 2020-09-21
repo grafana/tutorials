@@ -332,7 +332,7 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
 
    ```ts
    async doRequest(query: MyQuery) {
-     const result = await getBackendSrv.datasourceRequest({
+     const result = await getBackendSrv().datasourceRequest({
        method: "GET",
        url: "https://api.example.com/metrics",
        params: query,
