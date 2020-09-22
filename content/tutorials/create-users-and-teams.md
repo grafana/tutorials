@@ -23,7 +23,7 @@ In this tutorial, you'll:
 
 ### Scenario
 
-_Graphona_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
+_Grafana_, a fictional telemarketing company, has asked you to configure Grafana for their teams.
 
 In this scenario, you'll:
 
@@ -50,7 +50,7 @@ There are three types of organization roles in Grafana:
 
 ### Exercise
 
-Graphona has asked you to add a group of early adopters.
+Grafana has asked you to add a group of early adopters.
 
 | Name              | Email                     | Username          |
 |-------------------|---------------------------|-------------------|
@@ -139,7 +139,7 @@ Repeat the following steps for each folder.
 
 By default, when you create a folder, all users with the Viewer role are granted permission to view the folder.
 
-In this example, Graphona wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
+In this example, Grafana wants to explicitly grant teams access to folders. To support this, you need to remove the Viewer role from the list of permissions:
 
 1. In the sidebar, hover your cursor over the **Dashboards** (four squares) icon and then click **Manage**.
 1. Hover your cursor over the folder name, and click the cog icon to the right.
@@ -165,7 +165,7 @@ However, there are times when you need to configure permissions on a more granul
 
 ### Exercise
 
-Graphona has hired a consultant to assist the Marketing team. The consultant should only be able to access the SEO dashboard in the Analytics folder.
+Grafana has hired a consultant to assist the Marketing team. The consultant should only be able to access the SEO dashboard in the Analytics folder.
 
 | Name       | Email                            | Username   |
 |------------|----------------------------------|------------|
