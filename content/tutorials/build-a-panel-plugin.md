@@ -255,11 +255,6 @@ Let's see how you can retrieve data from a data frame and use it in your visuali
 If you want to know more about data frames, check out our introduction to [Data frames](https://grafana.com/docs/grafana/latest/developers/plugins/data-frames/).
 
 {{% /tutorials/step %}}
-{{< tutorials/step title="Publish your plugin" >}}
-
-{{< tutorials/shared "publish-your-plugin" >}}
-
-{{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!

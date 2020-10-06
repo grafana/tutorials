@@ -369,11 +369,6 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
    ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Publish your plugin" >}}
-
-{{< tutorials/shared "publish-your-plugin" >}}
-
-{{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
 Congratulations, you made it to the end of this tutorial!
