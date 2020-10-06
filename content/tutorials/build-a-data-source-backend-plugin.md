@@ -91,7 +91,7 @@ You now have a new data source instance of your plugin that is ready to use in a
 
 ### Troubleshooting
 
-#### Does the list of available data sources not contain your plugin?
+#### Grafana doesn't load my plugin
 
 As stated on the [plugin signature verification documentation](https://grafana.com/docs/grafana/latest/plugins/plugin-signature-verification/#backend-plugins):
 *if a backend plugin is not signed, then Grafana will not load or start it*. So, in order to get your data source backend plugin listed, **you need to
