@@ -89,6 +89,14 @@ You now have a new data source instance of your plugin that is ready to use in a
 1. A line graph is rendered with one series consisting of two data points.
 1. Save the dashboard.
 
+### Troubleshooting
+
+#### Grafana doesn't load my plugin
+
+By default, Grafana requires backend plugins to be signed. To load unsigned backend plugins, you need to
+configure Grafana to [allow unsigned plugins](https://grafana.com/docs/grafana/latest/plugins/plugin-signature-verification/#allow-unsigned-plugins).
+For more information, refer to [Plugin signature verification](https://grafana.com/docs/grafana/latest/plugins/plugin-signature-verification/#backend-plugins).
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Anatomy of a backend plugin" >}}
 
