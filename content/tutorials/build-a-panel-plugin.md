@@ -18,8 +18,8 @@ For more information about panels, refer to the documentation on [Panels](https:
 
 ### Prerequisites
 
-- Grafana 7.0
-- NodeJS 12.x
+- Grafana >=7.0
+- NodeJS >=14
 - yarn
 
 {{< /tutorials/step >}}
