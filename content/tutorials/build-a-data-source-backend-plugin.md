@@ -25,10 +25,10 @@ In this tutorial, you'll:
 ### Prerequisites
 
 - Knowledge about how data sources are implemented in the frontend.
-- Grafana 7.0
+- Grafana >=7.0
 - Go 1.14+
 - [Mage](https://magefile.org/)
-- NodeJS
+- NodeJS >=14
 - yarn
 
 {{< /tutorials/step >}}
