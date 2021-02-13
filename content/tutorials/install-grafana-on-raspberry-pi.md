@@ -16,7 +16,7 @@ Many people are running Grafana on Raspberry Pi as a way to monitor their home, 
 
 In this tutorial, you'll:
 
-- Set up a headless Raspberry Pi using Raspbian.
+- Set up a headless Raspberry Pi using Raspberry Pi OS (formerly Raspian).
 - Install Grafana on your Raspberry Pi.
 
 ### Prerequisites
@@ -31,22 +31,19 @@ Before we can install Grafana, you first need to be configure your Raspberry Pi.
 
 For this tutorial, you'll configure your Raspberry Pi to be _headless_. This means you don't need to connect a monitor, keyboard, or mouse to your Raspberry Pi. All configuration is done from your regular computer.
 
-Before we get started, you need to download a couple of things. Don'tt install them yet.
+Before we get started, you need to download the Raspberry Pi Imager. It's available for Linux, macOS, and Windows.
 
-- [Raspbian Lite image](https://www.raspberrypi.org/downloads/raspbian/)
+- [Raspberry Pi Imager](https://www.raspberrypi.org/software/)
 
-  Raspbian is a Debian-based operating system for the Raspberry Pi. Since you're going to run a headless Raspberry Pi, you won't need the desktop dependencies.
+#### Copy image to the SD card
 
-- [balenaEtcher](https://www.balena.io/etcher/).
+Once you've installed the Raspberry Pi Imager, you can use it to write  image to your SD card.
 
-  We'll use balenaEtcher to flash the Raspbian image to the SD card. It's available for Linux, macOS, and Windows.
-
-#### Copy necessary files to the SD card
-
-Once you've downloaded both items, we can get started with installing Raspbian.
-
-1. Install balenaEtcher.
-2. Start balenaEtcher and follow the instructions to flash the Raspbian Lite image to the SD card.
+1. Insert an empty SD card into your computer.
+2. Install Raspberry Pi Imager.
+3. Start Raspberry Pi Imager.
+4. For "Operating System" choose the category "Raspberry Pi OS (other)" and select "Raspberry Pi OS Lite (32-Bit)".
+5. Click "Write" and wait for the operation to finish.
 3. Eject the SD card from your computer, and insert it again.
 
 While you _could_ fire up the Raspberry Pi now, we don't yet have any way of accessing it.
@@ -58,13 +55,13 @@ While you _could_ fire up the Raspberry Pi now, we don't yet have any way of acc
 1. **(Optional)** Create a file called `wpa_supplicant.conf` in the boot directory:
 
    ```
-   ctrl_interface=/var/run/wpa_supplicant
+   ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
    update_config=1
    country=<Insert 2 letter ISO 3166-1 country code here>
 
    network={
-    ssid="<Name of your WiFi>"
-    psk="<Password for your WiFi>"
+    ssid="<Name of your wireless LAN>"
+    psk="<Password for your wireless LAN>"
    }
    ```
 
