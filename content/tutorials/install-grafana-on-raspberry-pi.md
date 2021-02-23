@@ -3,8 +3,8 @@ title: Install Grafana on Raspberry Pi
 summary: Get Grafana set up on your Raspberry Pi.
 id: install-grafana-on-raspberry-pi
 categories: ["administration"]
-tags: beginner
-authors: Grafana Labs
+tags: ["tag", "another tag"]
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 ---
 
@@ -19,11 +19,12 @@ In this tutorial, you'll:
 - Set up a headless Raspberry Pi using Raspbian.
 - Install Grafana on your Raspberry Pi.
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Raspberry Pi
 - SD card
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your Raspberry Pi" >}}
 

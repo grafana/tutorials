@@ -3,9 +3,9 @@ title: Build a panel plugin with D3.js
 summary: Learn how to use D3.js in your panel plugins.
 id: build-a-panel-plugin-with-d3
 categories: ["plugins"]
-tags: beginner
+tags: ["tag", "another tag"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 60
 ---
@@ -21,12 +21,13 @@ In this tutorial, you'll:
 - Build a simple panel plugin to visualize a bar chart.
 - Learn how to use D3.js to build a panel using data-driven transformations.
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana 7.0
 - NodeJS 12.x
 - yarn
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your environment" >}}
 

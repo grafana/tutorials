@@ -3,9 +3,9 @@ title: Build a data source backend plugin
 summary: Create a backend for your data source plugin.
 id: build-a-data-source-backend-plugin
 categories: ["plugins"]
-tags: beginner
+tags: ["tag", "another tag"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs", "torkel"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 75
 ---
@@ -22,14 +22,16 @@ In this tutorial, you'll:
 - Implement a health check for your data source
 - Enable Grafana Alerting for your data source
 
-### Prerequisites
+{{% class "prerequisite-section" %}}
+#### Prerequisites
 
 - Knowledge about how data sources are implemented in the frontend.
-- Grafana >=7.0
+- Grafana 7.0
 - Go 1.14+
 - [Mage](https://magefile.org/)
-- NodeJS >=14
+- NodeJS
 - yarn
+{{% /class %}}
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your environment" >}}

@@ -3,9 +3,9 @@ title: Build an app plugin
 summary: Learn at how to create an app for Grafana.
 id: build-an-app-plugin
 categories: ["plugins"]
-tags: beginner
+tags: ["tag", "another tag"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 50
 draft: true
@@ -17,12 +17,13 @@ App plugins are Grafana plugins that can bundle data source and panel plugins wi
 
 Data source and panel plugins will show up like normal plugins. The app pages will be available in the main menu.
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana 7.0
 - NodeJS 12.x
 - yarn
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your environment" >}}
 

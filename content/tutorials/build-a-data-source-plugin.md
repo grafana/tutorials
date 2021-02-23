@@ -3,9 +3,9 @@ title: Build a data source plugin
 summary: Create a plugin to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: ["plugins"]
-tags: beginner
+tags: ["tag", "another tag"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 70
 ---
@@ -20,12 +20,13 @@ In this tutorial, you'll:
 - Construct queries using the query editor
 - Configure your data source using the config editor
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana >=7.0
 - NodeJS >=14
 - yarn
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your environment" >}}
 
