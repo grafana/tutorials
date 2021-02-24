@@ -3,8 +3,8 @@ title: Provision dashboards and data sources
 summary: Treat your configuration as code.
 id: provision-dashboards-and-data-sources
 categories: ["administration"]
-tags: intermediate
-authors: Grafana Labs
+tags: ["intermediate"]
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 40
 ---
@@ -18,11 +18,12 @@ In this tutorial, you'll:
 - Provision dashboards.
 - Provision data sources.
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana 7.0
 - Administrator privileges on the system you are doing the tutorial on
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configuration as code" >}}
 

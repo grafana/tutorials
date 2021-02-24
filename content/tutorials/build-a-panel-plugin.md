@@ -3,9 +3,9 @@ title: Build a panel plugin
 summary: Learn at how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
 categories: ["plugins"]
-tags: beginner
+tags: ["beginner"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 50
 ---
@@ -16,12 +16,13 @@ Panels are the building blocks of Grafana. They allow you to visualize data in d
 
 For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/panels/).
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana >=7.0
 - NodeJS >=14
 - yarn
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your environment" >}}
 

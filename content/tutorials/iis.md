@@ -3,9 +3,9 @@ title: Use IIS with URL Rewrite as a reverse proxy
 summary: Learn how to set up Grafana behind IIS with URL Rewrite.
 id: iis
 categories: ["administration"]
-tags: advanced
+tags: ["advanced"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 aliases: ["/docs/grafana/latest/tutorials/iis/"]
 ---

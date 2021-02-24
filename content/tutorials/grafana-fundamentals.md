@@ -3,9 +3,9 @@ title: Grafana fundamentals
 summary: Get familiar with Grafana
 id: grafana-fundamentals
 categories: ["fundamentals"]
-tags: beginner
+tags: ["beginner"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 10
 ---
@@ -21,12 +21,13 @@ In this tutorial, you'll:
 - Annotate dashboards
 - Set up alerts
 
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/) (included in Docker for Desktop for macOS and Windows)
 - [Git](https://git-scm.com/)
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up the sample application" >}}
 

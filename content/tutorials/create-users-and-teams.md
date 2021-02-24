@@ -3,9 +3,9 @@ title: Create users and teams
 summary: Learn how to set up teams and users.
 id: create-users-and-teams
 categories: ["administration"]
-tags: beginner
+tags: ["beginner"]
 status: Published
-authors: Grafana Labs
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 20
 ---
@@ -30,10 +30,12 @@ In this scenario, you'll:
 - Create users and organize them into teams.
 - Manage resource access for each user and team through roles and folders.
 
+
+{{% class "prerequisite-section" %}}
 ### Prerequisites
 
 - Grafana 7.0
-
+{{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add users" >}}
 
