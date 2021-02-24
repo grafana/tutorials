@@ -3,7 +3,7 @@ title: Build a panel plugin with D3.js
 summary: Learn how to use D3.js in your panel plugins.
 id: build-a-panel-plugin-with-d3
 categories: ["plugins"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 status: Published
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new

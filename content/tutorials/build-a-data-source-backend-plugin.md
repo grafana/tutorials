@@ -3,9 +3,9 @@ title: Build a data source backend plugin
 summary: Create a backend for your data source plugin.
 id: build-a-data-source-backend-plugin
 categories: ["plugins"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 status: Published
-authors: ["grafana_labs", "torkel"]
+authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 75
 ---

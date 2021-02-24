@@ -3,7 +3,7 @@ title: Grafana fundamentals
 summary: Get familiar with Grafana
 id: grafana-fundamentals
 categories: ["fundamentals"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 status: Published
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new

@@ -3,7 +3,7 @@ title: Install Grafana on Raspberry Pi
 summary: Get Grafana set up on your Raspberry Pi.
 id: install-grafana-on-raspberry-pi
 categories: ["administration"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 ---

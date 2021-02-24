@@ -3,7 +3,7 @@ title: Create users and teams
 summary: Learn how to set up teams and users.
 id: create-users-and-teams
 categories: ["administration"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 status: Published
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new

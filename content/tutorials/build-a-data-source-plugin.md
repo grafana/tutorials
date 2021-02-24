@@ -3,7 +3,7 @@ title: Build a data source plugin
 summary: Create a plugin to add support for your own data sources.
 id: build-a-data-source-plugin
 categories: ["plugins"]
-tags: ["tag", "another tag"]
+tags: ["beginner"]
 status: Published
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
