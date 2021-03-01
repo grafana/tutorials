@@ -4,8 +4,6 @@
 
 [Grafana Tutorials](https://grafana.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
 
-**Important:** This project is in early development, and is not fit for production use. The tutorials are based on experimental APIs, which are subject to change.
-
 ## Requirements
 
 Docker >= 2.1.0.3
@@ -16,11 +14,6 @@ Docker >= 2.1.0.3
 
 ## Deploy changes to grafana.com
 
-When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `master` branch. Follow the directions at https://github.com/grafana/website#publishing to make changes live.
+When a PR is merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `master` branch.
 
-
-## Resources
-
-- [Google Codelabs Tools](https://github.com/googlecodelabs/tools)
-- [Google Developer Codelabs](https://codelabs.developers.google.com/)
-- [Ubuntu Tutorials](https://tutorials.ubuntu.com/)
+For information on how to make the changes live, refer to [Publishing](https://github.com/grafana/website#publishing).
