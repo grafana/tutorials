@@ -8,16 +8,17 @@ status: Published
 authors: ["grafana_labs"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 50
-draft: true
+draft: false
 ---
 
 {{< tutorials/step title="Introduction" >}}
 
-App plugins are Grafana plugins that can bundle data source and panel plugins within one package. They also enable the plugin author to create custom pages within Grafana. The custom pages enable the plugin author to include things like documentation, sign-up forms, or to control other services with HTTP requests.
+App plugins are Grafana plugins that can bundle data source and panel plugins within one package. They also let you create _custom pages_ within Grafana. Custom pages enable the plugin author to include things like documentation, sign-up forms, or to control other services over HTTP.
 
 Data source and panel plugins will show up like normal plugins. The app pages will be available in the main menu.
 
 {{% class "prerequisite-section" %}}
+
 ### Prerequisites
 
 - Grafana 7.0
@@ -44,11 +45,7 @@ Data source and panel plugins will show up like normal plugins. The app pages wi
 
 App plugins let you bundle resources such as dashboards, panels, and data sources into a single plugin.
 
-Any resource you want to include needs to be added to the `includes` property in the `plugin.json` file.
-
-App plugins need to be enabled before you can use them. Once they're enabled, they'll show up in the Grafana side menu.
-
-To add a resource to your app plugin, you need to include it to the `plugin.json`.
+Any resource you want to include needs to be added to the `includes` property in the `plugin.json` file. To add a resource to your app plugin, you need to include it to the `plugin.json`.
 
 Plugins that are included in an app plugin are available like any other plugin.
 
@@ -56,55 +53,45 @@ Dashboards and pages can be added to the app menu by setting `addToNav` to `true
 
 By setting `"defaultNav": true`, users can navigate to the dashboard by clicking the app icon in the side menu.
 
-
-#### Enable an app plugin
-
-TODO: How do you enable an app plugin?
-
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add a custom page" >}}
 
 App plugins let you extend the Grafana user interface through the use of _custom pages_.
 
-Any requests sent to `/a/<plugin-id>`, e.g. `/a/myorgid-simple-app/`, are routed to the _root page_ of the app plugin.
-
-The root page is a React component that returns the content for a given route.
+Any requests sent to `/a/<plugin-id>`, e.g. `/a/myorgid-simple-app/`, are routed to the _root page_ of the app plugin. The root page is a React component that returns the content for a given route.
 
 While you're free to implement your own routing, in this tutorial you'll use a tab-based navigation page that you can use by calling `onNavChange`.
 
 Let's add a tab for managing server instances.
 
-1. In `src/RootPage.tsx`, add another tab by adding another `NavModelItem` to the `tabs` array.
-
-   **RootPage.tsx**
+1. In the `src/pages` directory, add a new file called `Instances.tsx`. This component contains the content for the new tab.
 
    ```ts
-   const TAB_ID_INSTANCES = 'instances';
+   import { AppRootProps } from '@grafana/data';
+   import React, { FC } from 'react';
+
+   export const Instances: FC<AppRootProps> = ({ query, path, meta }) => {
+     return (
+       <p>Hello</p>
+     );
+   };
+   ```
+
+1. Register the page by adding it to the `pages` array in `src/pages/index.ts`.
+
+   **index.ts**
+
+   ```ts
+   import { Instances } from './Instances';
    ```
 
    ```ts
-   tabs.push({
+   {
+     component: Instances,
+     icon: 'file-alt',
+     id: 'instances',
      text: 'Instances',
-     icon: 'fa fa-fw fa-file-text-o',
-     url: pathWithoutLeadingSlash + '?tab=' + TAB_ID_INSTANCES,
-     id: TAB_ID_INSTANCES,
-   });
-   ```
-
-1. Create a React component for the tab content.
-
-   ```tsx
-   const Instances = () => <p>My instances</p>;
-   ```
-
-1. Render the tab content. The `query.tab` contains the id for the active tab. You can use it to decide which component to render.
-
-   ```ts
-   return (
-     <div>
-     {query.tab === TAB_ID_INSTANCES ?? <Instances />}
-     </div>
-   );
+   }
    ```
 
 1. Add the page to the app menu, by including it in `plugin.json`. This will be the main view of the app, so we'll set `defaultNav` to let users quickly get to it by clicking the app icon in the side menu.
@@ -131,9 +118,7 @@ Let's add a tab for managing server instances.
 
 Let's add a new configuration page where users are able to configure default zone and regions for any instances they create.
 
-1. In `module.ts`, add new configuration page using the `addConfigPage` method.
-
-   - `body` is the React component that renders the page content.
+1. In `module.ts`, add new configuration page using the `addConfigPage` method. `body` is the React component that renders the page content.
 
    **module.ts**
 
@@ -181,7 +166,7 @@ In this step, you'll add a data source to your app plugin. You can add panel plu
 1. In `src/`, create a new directory called `datasources`.
 1. Create a new data source using Grafana Toolkit in a temporary directory.
 
-   ```
+   ```bash
    mkdir tmp
    cd tmp
    npx @grafana/toolkit plugin:create my-datasource
@@ -189,7 +174,7 @@ In this step, you'll add a data source to your app plugin. You can add panel plu
 
 1. Move the `src` directory in the data source plugin to `src/datasources`, and rename it to `my-datasource`.
 
-   ```
+   ```bash
    mv ./my-datasource/src ../src/datasources/my-datasource
    ```
 
@@ -207,10 +192,6 @@ To let users know that your plugin bundles other plugins, you can optionally dis
      }
    ]
    ```
-
-#### Import dashboards automatically
-
-TODO: How do you auto-import dashboards (if possible)?
 
 #### Include external plugins
 
@@ -235,4 +216,3 @@ If you want to let users know that your app requires an existing plugin, you can
 Congratulations, you made it to the end of this tutorial!
 
 {{< /tutorials/step >}}
-
