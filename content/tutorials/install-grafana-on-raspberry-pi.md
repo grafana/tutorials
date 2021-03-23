@@ -16,7 +16,7 @@ Many people are running Grafana on Raspberry Pi as a way to monitor their home, 
 
 In this tutorial, you'll:
 
-- Set up a headless Raspberry Pi using Raspbian.
+- Set up a headless Raspberry Pi using Raspberry Pi OS (previously known as Raspbian).
 - Install Grafana on your Raspberry Pi.
 
 {{% class "prerequisite-section" %}}
@@ -28,27 +28,30 @@ In this tutorial, you'll:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up your Raspberry Pi" >}}
 
-Before we can install Grafana, you first need to be configure your Raspberry Pi.
+Before we can install Grafana, you first need to set up your Raspberry Pi.
 
 For this tutorial, you'll configure your Raspberry Pi to be _headless_. This means you don't need to connect a monitor, keyboard, or mouse to your Raspberry Pi. All configuration is done from your regular computer.
 
-Before we get started, you need to download a couple of things. Don'tt install them yet.
+#### Download and install Raspberry Pi Imager
 
-- [Raspbian Lite image](https://www.raspberrypi.org/downloads/raspbian/)
+Before we get started, you need to download and install the [Raspberry Pi Imager](https://www.raspberrypi.org/software/).
 
-  Raspbian is a Debian-based operating system for the Raspberry Pi. Since you're going to run a headless Raspberry Pi, you won't need the desktop dependencies.
+We'll use the Raspberry Pi Imager to flash the operating system image to the SD card. You download the imager directly from the official Raspberry Pi website and it's available for Ubuntu Linux, macOS, and Windows.
 
-- [balenaEtcher](https://www.balena.io/etcher/).
+Follow the directions on the website to download and install the imager.
 
-  We'll use balenaEtcher to flash the Raspbian image to the SD card. It's available for Linux, macOS, and Windows.
+#### Install Raspberry Pi OS
 
-#### Copy necessary files to the SD card
+Now it is time to install Raspberry Pi OS.
 
-Once you've downloaded both items, we can get started with installing Raspbian.
-
-1. Install balenaEtcher.
-2. Start balenaEtcher and follow the instructions to flash the Raspbian Lite image to the SD card.
-3. Eject the SD card from your computer, and insert it again.
+1. Insert the SD card into your regular computer from which you plan to install Raspberry Pi OS.
+1. Run the Raspberry Pi Imager that you downloaded and installed.
+1. To select an operating system, click **Choose OS** in the imager. You will be shown a list of available options.
+1. From the list, select **Raspberry Pi OS (other)** and then select **Raspberry Pi OS Lite**, which is a Debian-based operating system for the Raspberry Pi. Since you're going to run a headless Raspberry Pi, you won't need the desktop dependencies.
+1. To select where you want to put the operating system image, click **Choose Storage** in the imager and then select the SD card you already inserted into your computer.
+1. The final step in the imager to click **Write**. When you do, the imager will write the Raspberry Pi OS Lite image to the SD card and verify that it has been written correctly.
+1. Remove the SD card from the computer and, while your Raspberry Pi is still turned off, insert the SD card into the Raspberry Pi.
+1. Eject the SD card from your computer, and insert it again.
 
 While you _could_ fire up the Raspberry Pi now, we don't yet have any way of accessing it.
 
@@ -133,7 +136,7 @@ Congratulations! Grafana is now running on your Raspberry Pi. If the Raspberry P
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
-Congratulations, you've made it to the end of this tutorial!
+Congratulations, you've made it to the end of this tutorial! If you want to use Grafana without having to go through a full installation process, check out [Grafana Cloud](https://grafana.com/products/cloud/), which is designed to get users up and running quickly and easily. Grafana Cloud offers a free plan that is free and genuinely useful for hobbyists, testing, and small teams.
 
 ### Learn more
 
