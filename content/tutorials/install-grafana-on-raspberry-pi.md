@@ -16,7 +16,7 @@ Many people are running Grafana on Raspberry Pi as a way to monitor their home, 
 
 In this tutorial, you'll:
 
-- Set up a headless Raspberry Pi using Raspberry Pi OS (previously known as Raspbian).
+- Set up a Raspberry Pi using a version of Raspberry Pi OS (previously called "Raspbian") that does not require you to connect a keyboard or monitor (this is often called "headless").
 - Install Grafana on your Raspberry Pi.
 
 {{% class "prerequisite-section" %}}
@@ -136,7 +136,7 @@ Congratulations! Grafana is now running on your Raspberry Pi. If the Raspberry P
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
-Congratulations, you've made it to the end of this tutorial! If you want to use Grafana without having to go through a full installation process, check out [Grafana Cloud](https://grafana.com/products/cloud/), which is designed to get users up and running quickly and easily. Grafana Cloud offers a free plan that is free and genuinely useful for hobbyists, testing, and small teams.
+Congratulations, you've made it to the end of this tutorial! If you want to use Grafana without having to go through a full installation process, check out [Grafana Cloud](https://grafana.com/products/cloud/), which is designed to get users up and running quickly and easily. Grafana Cloud offers a forever free plan that is genuinely useful for hobbyists, testing, and small teams.
 
 ### Learn more
 
