@@ -11,5 +11,5 @@
 # In each subsection folders are ordered first by depth, then alphabetically.
 # This should make it easy to add new rules without breaking existing ones.
 
-# Documentation owner: TBD
-/content/ @marcusolsson @grafana/docs-squad
+# Documentation owner: Matthew Helmke
+/content/ @grafana/docs-squad @matthewhelmke
