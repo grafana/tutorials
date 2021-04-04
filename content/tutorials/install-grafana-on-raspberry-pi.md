@@ -50,7 +50,6 @@ Now it is time to install Raspberry Pi OS.
 1. From the list, select **Raspberry Pi OS (other)** and then select **Raspberry Pi OS Lite**, which is a Debian-based operating system for the Raspberry Pi. Since you're going to run a headless Raspberry Pi, you won't need the desktop dependencies.
 1. To select where you want to put the operating system image, click **Choose Storage** in the imager and then select the SD card you already inserted into your computer.
 1. The final step in the imager to click **Write**. When you do, the imager will write the Raspberry Pi OS Lite image to the SD card and verify that it has been written correctly.
-1. Remove the SD card from the computer and, while your Raspberry Pi is still turned off, insert the SD card into the Raspberry Pi.
 1. Eject the SD card from your computer, and insert it again.
 
 While you _could_ fire up the Raspberry Pi now, we don't yet have any way of accessing it.
