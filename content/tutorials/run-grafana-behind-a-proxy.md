@@ -63,7 +63,7 @@ server {
 - Reload the NGINX configuration.
 - Navigate to port 80 on the machine NGINX is running on. You're greeted by the Grafana login page.
 
-To configure NGINX to serve Grafana under a _sub path_, update the `location` block:
+To configure NGINX to serve Grafana under a _sub path_, update the `location` block, make sure this block is the first `location` block:
 
 ```nginx
 server {
@@ -71,7 +71,7 @@ server {
   root /usr/share/nginx/www;
   index index.html index.htm;
 
-  location /grafana/ {
+  location ~/grafana/ {
    proxy_pass http://localhost:3000/;
   }
 }
