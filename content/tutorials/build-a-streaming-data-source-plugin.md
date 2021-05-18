@@ -121,15 +121,28 @@ In Grafana channel consists of 3 parts delimited by `/`:
 * Namespace
 * Path
 
-Scope, namespace and path can only have ascii alphanumeric symbols (A-Z, a-z, 0-9), `_` (underscore) and `-` (dash) at the moment. 
-
 For example, channel `grafana/dashboard/xyz` has scope `grafana`, namespace `dashboard` and path `xyz`.
 
-Scope determines a purpose of channel in Grafana. For datasource plugin channels Grafana uses `ds` scope. Namespace in case of datasource channels is a datasource unique ID (UID) which is issued by Grafana at the moment of datasource creation. Path is a custom string which plugin authors free to choose themselves. I.e. `ds/<DATASOURCE_UID>/<CUSTOM_PATH>`
+Scope, namespace and path can only have ascii alphanumeric symbols (A-Z, a-z, 0-9), `_` (underscore) and `-` (dash) at the moment. The meaning of scope, namespace and path is context specific.
 
-Inside `SubscribeStream` implementation we check whether user allowed to subscribe on a channel path. If yes – we set a Channel field inside frame meta data. In our tutorial it's a `ds/<DATASOURCE_UID>/stream`.
+Scope determines a purpose of channel in Grafana. For datasource plugin channels Grafana uses `ds` scope. Namespace in case of datasource channels is a datasource unique ID (UID) which is issued by Grafana at the moment of datasource creation. Path is a custom string which plugin authors free to choose themselves (just make sure it consists of allowed symbols). I.e. datasource channel looks like `ds/<DATASOURCE_UID>/<CUSTOM_PATH>`.
 
-As soon as first subscriber joins channel Grafana opens a unidirectional stream to consume streaming frames from a plugin. To handle this and push data towards clients we implement `RunStream` method where we have a way to push JSON data to a channel. We can use it like this (error handling skipped):
+So to let frontend know that we are going to stream data we set a `Channel` field into frame meta data inside `QueryData` implementation. In our tutorial it's a `ds/<DATASOURCE_UID>/stream`. Frontend will issue a subscription request to this channel.
+
+Inside `SubscribeStream` implementation we check whether a user allowed to subscribe on a channel path. If yes – we return an OK status code to tell Grafana user can join a channel:
+
+```go
+status := backend.SubscribeStreamStatusPermissionDenied
+if req.Path == "stream" {
+    // Allow subscribing only on expected path.
+    status = backend.SubscribeStreamStatusOK
+}
+return &backend.SubscribeStreamResponse{
+    Status: status,
+}, nil
+```
+
+As soon as first subscriber joins a channel Grafana opens a unidirectional stream to consume streaming frames from a plugin. To handle this and to push data towards clients we implement a `RunStream` method which provides a way to push JSON data into a channel. So we can push data frame like this (error handling skipped):
 
 ```go
 frameJSON, _ := json.Marshal(frame)
@@ -138,11 +151,19 @@ _ = sender.Send(&backend.StreamPacket{
 })
 ```
 
-Open example datasource query editor and make sure `With Streaming` toggle is on. After doing this you should see a data displayed and then periodically updated from streaming frames coming from `RunStream` method.
+Open example datasource query editor and make sure `With Streaming` toggle is on. After doing this you should see a data displayed and then periodically updated by streaming frames coming periodically from `RunStream` method.
 
 The important thing to note is that Grafana opens unidirectional stream only once per channel upon the first subscriber joined. Every other subscription requests will be still authorized by `SubscribeStream` method but new `RunStream` won't be issued. I.e. you can have many active subscribers but only one running stream. At this moment this guarantee works for single Grafana instance, we are planning to support this for highly-available Grafana setup (many Grafana instances behind load-balancer) in the future releases.
 
-For the tutorial use case we only need to properly implement `SubscribeStream` and `RunStream` - we don't really need to handle publications to a channel but we still need to write `PublishStream` method to fully implement `backend.StreamHandler`. Inside `PublishStream` we just do not allow any publications from users since we are pushing data from a backend.
+Stream will be automatically closed as soon as all subscriber users left.
+
+For the tutorial use case we only need to properly implement `SubscribeStream` and `RunStream` - we don't really need to handle publications to a channel from users. But we still need to write `PublishStream` method to fully implement `backend.StreamHandler` interface. Inside `PublishStream` we just do not allow any publications from users since we are pushing data from a backend:
+
+```go
+return &backend.PublishStreamResponse{
+    Status: backend.PublishStreamStatusPermissionDenied,
+}, nil
+```
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
