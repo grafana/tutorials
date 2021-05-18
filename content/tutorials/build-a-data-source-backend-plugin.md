@@ -66,6 +66,7 @@ Run the following to update [Grafana plugin SDK for Go](https://grafana.com/docs
 
 ```bash
 go get -u github.com/grafana/grafana-plugin-sdk-go
+go mod tidy
 ```
 
 Build backend plugin binaries for Linux, Windows and Darwin to _dist_ directory:
