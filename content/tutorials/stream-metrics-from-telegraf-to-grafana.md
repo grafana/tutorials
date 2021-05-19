@@ -12,11 +12,11 @@ weight: 75
 
 {{< tutorials/step title="Introduction" >}}
 
-Grafana v8 introduced streaming capabilities - i.e. a way to push data to UI panels. In this tutorial we show how Grafana streaming capabilities can be used together with Telegraf to display data in near real-time.
+Grafana v8 introduced streaming capabilities – a way to push data to UI panels in near real-time. In this tutorial we show how Grafana real-time streaming capabilities can be used together with Telegraf to display a data.
 
 In this tutorial, you'll:
 
-- Setup Telegraf and output measurements directly to Grafana
+- Setup Telegraf and output measurements directly to Grafana in near real-time
 
 {{% class "prerequisite-section" %}}
 #### Prerequisites
@@ -34,10 +34,12 @@ First, you need to install Grafana and Telegraf. For Grafana [follow the instruc
 
 1. Run Grafana
 1. Log in and go to Configuration -> API Keys
-1. Press "Add API key" button and create a new API token with Admin role
+1. Press "Add API key" button and create a new API token with **Admin** role
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure and run Telegraf" >}}
+
+Telegraf is a plugin-driven server agent for collecting and sending metrics and events from databases, systems, and IoT sensors.
 
 In this tutorial we will be using Telegraf configuration like this:
 
@@ -57,7 +59,9 @@ In this tutorial we will be using Telegraf configuration like this:
     Authorization = "Bearer <Your API Key>"
 ```
 
-Make sure replacing `<Your API Key>` placeholder with your actual API key. Save this config into file and run Telegraf pointing to it. After running Telegraf will periodically (once in a second) report the state of total CPU usage on a host to Grafana. The only thing left here is create a dashboard with streaming data.
+Make sure replacing `<Your API Key>` placeholder with your actual API key. Save this config into file and run Telegraf pointing to it. Telegraf will periodically (once in a second) report the state of total CPU usage on a host to Grafana (which is supposed to be running on `http://localhost:3000`).
+
+The only thing left here is create a dashboard with streaming data.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Create dashboard with streaming data" >}}

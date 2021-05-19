@@ -102,7 +102,7 @@ For more information, refer to [Plugin signature verification](https://grafana.c
 {{< /tutorials/step >}}
 {{< tutorials/step title="Anatomy of a backend plugin" >}}
 
-As you may notice till this moment we did the same steps described in [build a backend datasource plugin tutorial](https://grafana.com/tutorials/build-a-data-source-backend-plugin/). At this point you should be familiar with its structure and a way how data querying and health check capabilities could be implemented. Let's make the next step and discuss how datasource plugin can handle data streaming.  
+As you may notice till this moment we did the same steps described in [build a backend datasource plugin tutorial](https://grafana.com/tutorials/build-a-data-source-backend-plugin/). At this point you should be familiar with backend plugin structure and a way how data querying and health check capabilities could be implemented. Let's make the next step and discuss how datasource plugin can handle data streaming.  
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add streaming capabilities" >}}
@@ -123,7 +123,7 @@ In Grafana channel consists of 3 parts delimited by `/`:
 
 For example, channel `grafana/dashboard/xyz` has scope `grafana`, namespace `dashboard` and path `xyz`.
 
-Scope, namespace and path can only have ascii alphanumeric symbols (A-Z, a-z, 0-9), `_` (underscore) and `-` (dash) at the moment. The meaning of scope, namespace and path is context specific.
+Scope, namespace and path can only have ascii alphanumeric symbols (A-Z, a-z, 0-9), `_` (underscore) and `-` (dash) at the moment. The path part can additionally have `/`, `.` and `=` symbols. The meaning of scope, namespace and path is context specific.
 
 Scope determines a purpose of channel in Grafana. For datasource plugin channels Grafana uses `ds` scope. Namespace in case of datasource channels is a datasource unique ID (UID) which is issued by Grafana at the moment of datasource creation. Path is a custom string which plugin authors free to choose themselves (just make sure it consists of allowed symbols). I.e. datasource channel looks like `ds/<DATASOURCE_UID>/<CUSTOM_PATH>`.
 
