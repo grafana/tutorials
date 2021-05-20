@@ -1,6 +1,6 @@
 ---
 title: Stream data from Telegraf to Grafana
-summary: Setup a Telegraf which will stream data to Grafana.
+summary: Use Telegraf to stream live data into Grafana.
 id: stream-data-from-telegraf-to-grafana
 categories: ["administration"]
 tags: ["beginner"]
