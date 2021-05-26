@@ -1,7 +1,7 @@
 ---
-title: Stream data from Telegraf to Grafana
-summary: Use Telegraf to stream live data into Grafana.
-id: stream-data-from-telegraf-to-grafana
+title: Stream metrics from Telegraf to Grafana
+summary: Use Telegraf to stream live metrics to Grafana.
+id: stream-metrics-from-telegraf-to-grafana
 categories: ["administration"]
 tags: ["beginner"]
 status: Published
@@ -51,13 +51,13 @@ In this tutorial we will be using Telegraf HTTP output plugin to send metrics in
   totalcpu = true
 
 [[outputs.http]]
-  url = "http://localhost:3000/api/live/push/telegraf"
+  url = "http://localhost:3000/api/live/push/custom_stream_id"
   data_format = "influx"
   [outputs.http.headers]
     Authorization = "Bearer <Your API Key>"
 ```
 
-Make sure to replace `<Your API Key>` placeholder with your actual API key created in the previous step. Save this config into `telegraf.conf` file and run Telegraf pointing to this config file. Telegraf will periodically (once in a second) report the state of total CPU usage on a host to Grafana (which is supposed to be running on `http://localhost:3000`).
+Make sure to replace `<Your API Key>` placeholder with your actual API key created in the previous step. Save this config into `telegraf.conf` file and run Telegraf pointing to this config file. Telegraf will periodically (once in a second) report the state of total CPU usage on a host to Grafana (which is supposed to be running on `http://localhost:3000`). Of couse you can replace `custom_stream_id` to something more meaningful for your use case.
 
 Inside Grafana Influx data is converted to Grafana data frames and then frames are published to Grafana Live channels. In this case, the channel where CPU data will be published is `stream/telegraf/cpu`. The `stream` scope is constant, the `telegraf` namespace is the last part of API URL set in Telegraf configuration (`http://localhost:3000/api/live/push/telegraf`) and the path is `cpu` - the name of a measurement.
 
@@ -91,7 +91,7 @@ If you aim for a high-frequency update sending then you may want to use the WebS
   totalcpu = true
 
 [[outputs.websocket]]
-  url = "ws://localhost:3000/api/live/push/telegraf"
+  url = "ws://localhost:3000/api/live/push/custom_stream_id"
   data_format = "influx"
   [outputs.websocket.headers]
     Authorization = "Bearer <Your API Key>"
