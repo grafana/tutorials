@@ -12,7 +12,7 @@ weight: 75
 
 {{< tutorials/step title="Introduction" >}}
 
-Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. In previous tutorials we have already shown how to extend Grafana capabilities to query custom data sources by [building a backend datasource plugin](https://grafana.com/tutorials/build-a-data-source-backend-plugin/). In this tutorial we take a step further and add streaming capabilities to the backend datasource plugin. Streaming allows plugins to push data to Grafana panels as soon as data appears (without periodic polling from UI side).
+Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. In previous tutorials we have shown how to extend Grafana capabilities to query custom data sources by [building a backend datasource plugin](https://grafana.com/tutorials/build-a-data-source-backend-plugin/). In this tutorial we take a step further and add streaming capabilities to the backend datasource plugin. Streaming allows plugins to push data to Grafana panels as soon as data appears (without periodic polling from UI side).
 
 For more information about backend plugins, refer to the documentation on [Backend plugins](https://grafana.com/docs/grafana/latest/developers/plugins/backend/).
 
