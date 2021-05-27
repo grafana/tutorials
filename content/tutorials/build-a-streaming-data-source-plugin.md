@@ -74,7 +74,7 @@ Build backend plugin binaries for Linux, Windows and Darwin to _dist_ directory:
 mage -v
 ```
 
-Now, let's verify that the plugin you've built so far can be used in Grafana when creating a new data source:
+Now, let's verify that the plugin you've built can be used in Grafana when creating a new data source:
 
 1. Restart your Grafana instance.
 1. Open Grafana in your web browser.
@@ -83,7 +83,7 @@ Now, let's verify that the plugin you've built so far can be used in Grafana whe
 1. Find your newly created plugin and select it.
 1. Enter a name and then click **Save & Test** (ignore any errors reported for now).
 
-You now have a new data source instance of your plugin that is ready to use in a dashboard:
+You now have a new data source instance of your plugin that is ready to use in a dashboard. To confirm, follow these steps:
 
 1. Navigate via the side-menu to **Create** -> **Dashboard**.
 1. Click **Add new panel**.
