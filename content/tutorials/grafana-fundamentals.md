@@ -347,12 +347,11 @@ Once you've acknowledged an alert, consider pausing it. This can be useful to av
 
 ### Clean up the local environment
 
-The tutorial has running Docker containers.
-When you want to clean up this local environment such that there are no
-running Docker containers,
-use `docker ps` to acquire the IDs of the tutorial's containers.
-Stop and remove each tutorial container with `docker kill` *`CONTAINER_ID`*.
-Replace *`CONTAINER_ID`* with the container's ID.
+The tutorial has running Docker containers. When you want to clean up this local tutorial environment, run
+
+```
+docker-compose down -v
+```
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
