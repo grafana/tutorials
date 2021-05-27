@@ -345,6 +345,14 @@ Once you've acknowledged an alert, consider pausing it. This can be useful to av
 1. Find your alert in the list, and click the **Pause** icon on the right. The **Pause** icon turns into a **Play** icon.
 1. Click the **Play** icon to resume evaluation of your alert.
 
+### Clean up the local environment
+
+The tutorial has running Docker containers. When you want to clean up this local tutorial environment, run
+
+```
+docker-compose down -v
+```
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Congratulations" >}}
 
