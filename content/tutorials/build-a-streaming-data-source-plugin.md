@@ -145,10 +145,8 @@ return &backend.SubscribeStreamResponse{
 As soon as the first subscriber joins a channel Grafana opens a unidirectional stream to consume streaming frames from a plugin. To handle this and to push data towards clients we implement a `RunStream` method which provides a way to push JSON data into a channel. So we can push data frame like this (error handling skipped):
 
 ```go
-frameJSON, _ := json.Marshal(frame)
-_ = sender.Send(&backend.StreamPacket{
-    Data: frameJSON,
-})
+// Send frame to stream including both frame schema and data frame parts.
+_ = sender.SendFrame(frame, data.IncludeAll)
 ```
 
 Open example datasource query editor and make sure `With Streaming` toggle is on. After doing this you should see data displayed and then periodically updated by streaming frames coming periodically from `RunStream` method.
