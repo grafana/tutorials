@@ -69,11 +69,11 @@ The only thing left here is to create a dashboard with streaming data.
 1. Create new dashboard
 1. Press Add empty panel
 1. Select `-- Grafana --` datasource
-1. Select `Live measurements` query type
-1. Find and select `stream/telegraf/cpu` measurement for Channel field
+1. Select `Live Measurements` query type
+1. Find and select `stream/custom_stream_id/cpu` measurement for Channel field
 1. Save dashboard changes
 
-After making these steps Grafana UI should subscribe to the channel `stream/telegraf/cpu` and you should see CPU data updates coming from Telegraf in near real-time.
+After making these steps Grafana UI should subscribe to the channel `stream/custom_stream_id/cpu` and you should see CPU data updates coming from Telegraf in near real-time.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Stream using WebSocket endpoint" >}}
