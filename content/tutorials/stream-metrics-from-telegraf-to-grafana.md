@@ -37,7 +37,7 @@ In this tutorial, you'll:
 
 Telegraf is a plugin-driven server agent for collecting and sending metrics and events from databases, systems, and IoT sensors.
 
-You can install it following [official installation instructions](https://docs.influxdata.com/telegraf/v1.18/introduction/installation/).
+You can install it following [official installation instructions](https://docs.influxdata.com/telegraf/latest/introduction/installation/).
 
 In this tutorial we will be using Telegraf HTTP output plugin to send metrics in Influx format to Grafana. We can use a configuration like this:
 
@@ -59,7 +59,7 @@ In this tutorial we will be using Telegraf HTTP output plugin to send metrics in
 
 Make sure to replace `<Your API Key>` placeholder with your actual API key created in the previous step. Save this config into `telegraf.conf` file and run Telegraf pointing to this config file. Telegraf will periodically (once in a second) report the state of total CPU usage on a host to Grafana (which is supposed to be running on `http://localhost:3000`). Of couse you can replace `custom_stream_id` to something more meaningful for your use case.
 
-Inside Grafana Influx data is converted to Grafana data frames and then frames are published to Grafana Live channels. In this case, the channel where CPU data will be published is `stream/telegraf/cpu`. The `stream` scope is constant, the `telegraf` namespace is the last part of API URL set in Telegraf configuration (`http://localhost:3000/api/live/push/telegraf`) and the path is `cpu` - the name of a measurement.
+Inside Grafana Influx data is converted to Grafana data frames and then frames are published to Grafana Live channels. In this case, the channel where CPU data will be published is `stream/custom_stream_id/cpu`. The `stream` scope is constant, the `custom_stream_id` namespace is the last part of API URL set in Telegraf configuration (`http://localhost:3000/api/live/push/telegraf`) and the path is `cpu` - the name of a measurement.
 
 The only thing left here is to create a dashboard with streaming data.
 
@@ -78,8 +78,7 @@ After making these steps Grafana UI should subscribe to the channel `stream/cust
 {{< /tutorials/step >}}
 {{< tutorials/step title="Stream using WebSocket endpoint" >}}
 
-If you aim for a high-frequency update sending then you may want to use the WebSocket output plugin of Telegraf instead of the HTTP output plugin we used here. There is [an ongoing pull request to Telegraf](https://github.com/influxdata/telegraf/pull/9188) we contributed that adds WebSocket output support. Once it's merged and released it will be possible to stream data to Grafana using a configuration like this:
-
+If you aim for a high-frequency update sending then you may want to use the WebSocket output plugin of Telegraf instead of the HTTP output plugin we used here. There is a [release candidate of Telegraf v1.19.0](https://github.com/influxdata/telegraf/releases/tag/v1.19.0-rc0) which contains a new WebSocket output plugin [we recently contributed](https://github.com/influxdata/telegraf/pull/9188). With Telegraf v1.19.0 it will be possible to stream data to Grafana using a configuration like this:
 
 ```
 [agent]
