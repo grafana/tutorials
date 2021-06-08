@@ -115,17 +115,15 @@ In short – implementing a streaming plugin means implementing a `backend.Strea
 
 When returning a `data.Frame` with initial data we can return a special field `Channel` to let the frontend know that we are going to stream data frames after initial data load. When the frontend receives a frame with a `Channel` set it automatically issues a subscription request to that channel.
 
-In Grafana channel consists of 3 parts delimited by `/`:
+Channel is a string identifier of topic to which clients can subscribe in Grafana Live. See a documentation of Grafana Live for [details about channel structure](https://grafana.com/docs/grafana/latest/live/live-channel/).
+
+As said in docs in Grafana Live channel consists of 3 parts delimited by `/`:
 
 * Scope
 * Namespace
 * Path
 
-For example, the channel `grafana/dashboard/xyz` has the scope `grafana`, namespace `dashboard`, and path `xyz`.
-
-Scope, namespace and path can only have ASCII alphanumeric symbols (A-Z, a-z, 0-9), `_` (underscore) and `-` (dash) at the moment. The path part can additionally have `/`, `.` and `=` symbols. The meaning of scope, namespace and path is context-specific.
-
-Scope determines the purpose of a channel in Grafana. For datasource plugin channels Grafana uses `ds` scope. Namespace in the case of datasource channels is a datasource unique ID (UID) which is issued by Grafana at the moment of datasource creation. The path is a custom string that plugin authors free to choose themselves (just make sure it consists of allowed symbols). I.e. datasource channel looks like `ds/<DATASOURCE_UID>/<CUSTOM_PATH>`.
+For datasource plugin channels Grafana uses `ds` scope. Namespace in the case of datasource channels is a datasource unique ID (UID) which is issued by Grafana at the moment of datasource creation. The path is a custom string that plugin authors free to choose themselves (just make sure it consists of allowed symbols). I.e. datasource channel looks like `ds/<DATASOURCE_UID>/<CUSTOM_PATH>`.
 
 So to let the frontend know that we are going to stream data we set a `Channel` field into frame metadata inside `QueryData` implementation. In our tutorial it's a `ds/<DATASOURCE_UID>/stream`. The frontend will issue a subscription request to this channel.
 
