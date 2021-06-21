@@ -126,3 +126,51 @@ This is the rewrite rule that is generated in the `web.config`:
 See the [tutorial on IIS URL Rewrites](/tutorials/iis/) for more in-depth instructions.
 
 {{< /tutorials/step >}}
+{{< tutorials/step title="Configure Traefik" >}}
+
+[Traefik](https://traefik.io/traefik/) Cloud Native Reverse Proxy / Load Balancer / Edge Router
+
+Using the docker provider the following labels will configure the router and service for a domain or subdomain routing.
+
+```yaml
+  labels:
+      traefik.http.routers.grafana.rule: Host(`grafana.example.com`)
+      traefik.http.services.grafana.loadbalancer.server.port: 3000
+```
+
+To deploy on a _sub path_
+```yaml
+  labels:
+      traefik.http.routers.grafana.rule: Host(`example.com`) && PathPrefix(`/grafana`)
+      traefik.http.services.grafana.loadbalancer.server.port: 3000
+```
+
+Examples using the file provider.
+
+```yaml
+http:
+  routers:
+    grafana:
+      rule: Host(`grafana.example.com`)
+      service: grafana
+  services:
+    grafana:
+      loadBalancer:
+        servers:
+          - url: http://192.168.30.10:3000
+```
+
+```yaml
+http:
+  routers:
+    grafana:
+      rule: Host(`example.com`) && PathPrefix(`/grafana`)
+      service: grafana
+  services:
+    grafana:
+      loadBalancer:
+        servers:
+          - url: http://192.168.30.10:3000
+```
+
+{{< /tutorials/step >}}
