@@ -78,7 +78,7 @@ After making these steps Grafana UI should subscribe to the channel `stream/cust
 {{< /tutorials/step >}}
 {{< tutorials/step title="Stream using WebSocket endpoint" >}}
 
-If you aim for a high-frequency update sending then you may want to use the WebSocket output plugin of Telegraf instead of the HTTP output plugin we used here. There is a [release candidate of Telegraf v1.19.0](https://github.com/influxdata/telegraf/releases/tag/v1.19.0-rc0) which contains a new WebSocket output plugin [we recently contributed](https://github.com/influxdata/telegraf/pull/9188). With Telegraf v1.19.0 it will be possible to stream data to Grafana using a configuration like this:
+If you aim for a high-frequency update sending then you may want to use the WebSocket output plugin of Telegraf (introduced in Telegraf v1.19.0) instead of the HTTP output plugin we used above. Configure WebSocket output plugin like this:
 
 ```
 [agent]
