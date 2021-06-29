@@ -268,9 +268,9 @@ For more information on how to configure dashboard providers, refer to [Dashboar
 > If you don't specify an `id` in the dashboard definition, then Grafana assigns one during provisioning. You can set the `id` yourself if you want to reference the dashboard from other dashboards. Be careful to not use the same `id` for multiple dashboards, as this will cause a conflict.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you learned how you to reuse dashboards and data sources across multiple teams by provisioning Grafana from version-controlled configuration files.
 
 Dashboard definitions can get unwieldly as more panels and configurations are added to them. There are a number of open source tools available to make it easier to manage dashboard definitions:
 

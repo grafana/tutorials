@@ -180,8 +180,8 @@ Open `/pkg/sample-plugin.go`. In this file you'll see that the `SampleDatasource
 1. After some time the alert rule evaluates and transitions into _Alerting_ state.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you created a backend for your data source plugin.
 
 {{< /tutorials/step >}}

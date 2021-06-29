@@ -370,11 +370,9 @@ The main advantage of `getBackendSrv` is that it proxies requests through the Gr
    ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
-
-You've built a complete data source plugin for Grafana that uses a query editor to control what data to visualize. You've added a data source option, commonly used to set connection options and more.
+In this tutorial you built a complete data source plugin for Grafana that uses a query editor to control what data to visualize. You've added a data source option, commonly used to set connection options and more.
 
 ### Learn more
 

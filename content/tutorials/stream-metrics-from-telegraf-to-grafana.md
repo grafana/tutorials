@@ -99,8 +99,8 @@ If you aim for a high-frequency update sending then you may want to use the WebS
 WebSocket avoids running all Grafana HTTP middleware on each request from Telegraf thus reducing Grafana backend CPU usage significantly.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial! Happy streaming!
+In this tutorial you learned how to use Telegraf to stream live metrics to Grafana.
 
 {{< /tutorials/step >}}

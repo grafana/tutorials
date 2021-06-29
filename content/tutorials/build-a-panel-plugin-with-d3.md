@@ -232,8 +232,8 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
 };
 ```
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you built a panel plugin with D3.js.
 
 {{< /tutorials/step >}}

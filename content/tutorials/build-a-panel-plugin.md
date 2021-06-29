@@ -1,6 +1,6 @@
 ---
 title: Build a panel plugin
-summary: Learn at how to create a custom visualization for your dashboards.
+summary: Learn how to create a custom visualization for your dashboards.
 id: build-a-panel-plugin
 categories: ["plugins"]
 tags: ["beginner"]
@@ -256,8 +256,8 @@ Let's see how you can retrieve data from a data frame and use it in your visuali
 If you want to know more about data frames, check out our introduction to [Data frames](https://grafana.com/docs/grafana/latest/developers/plugins/data-frames/).
 
 {{% /tutorials/step %}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you learned how to create a custom visualization for your dashboards.
 
 {{< /tutorials/step >}}

@@ -354,9 +354,9 @@ docker-compose down -v
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you learned about fundamental features of Grafana.
 
 ### Learn more
 
@@ -367,4 +367,3 @@ Congratulations, you made it to the end of this tutorial!
 - [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
 {{< /tutorials/step >}}
-

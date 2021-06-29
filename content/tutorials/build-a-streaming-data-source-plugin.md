@@ -162,8 +162,8 @@ return &backend.PublishStreamResponse{
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial! Happy streaming!
+In this tutorial you created a backend for your data source plugin with streaming capabilities.
 
 {{< /tutorials/step >}}
