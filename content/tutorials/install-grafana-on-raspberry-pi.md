@@ -133,9 +133,9 @@ Grafana is now installed, but not yet running. To make sure Grafana starts up ev
 Congratulations! Grafana is now running on your Raspberry Pi. If the Raspberry Pi is ever restarted or turned off, Grafana will start up whenever the machine regains power.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you've made it to the end of this tutorial! If you want to use Grafana without having to go through a full installation process, check out [Grafana Cloud](https://grafana.com/products/cloud/), which is designed to get users up and running quickly and easily. Grafana Cloud offers a forever free plan that is genuinely useful for hobbyists, testing, and small teams.
+If you want to use Grafana without having to go through a full installation process, check out [Grafana Cloud](https://grafana.com/products/cloud/), which is designed to get users up and running quickly and easily. Grafana Cloud offers a forever free plan that is genuinely useful for hobbyists, testing, and small teams.
 
 ### Learn more
 

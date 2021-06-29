@@ -174,3 +174,8 @@ http:
 ```
 
 {{< /tutorials/step >}}
+{{< tutorials/step title="Summary" >}}
+
+In this tutorial you learned how to run Grafana behind a reverse proxy.
+
+{{< /tutorials/step >}}

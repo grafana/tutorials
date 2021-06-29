@@ -211,8 +211,8 @@ If you want to let users know that your app requires an existing plugin, you can
 ```
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
+{{< tutorials/step title="Summary" >}}
 
-Congratulations, you made it to the end of this tutorial!
+In this tutorial you learned how to create an app plugin.
 
 {{< /tutorials/step >}}

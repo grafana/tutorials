@@ -206,9 +206,7 @@ Graphona has hired a consultant to assist the Marketing team. The consultant sho
 You've created a new user and given them unique permissions to view contents of a folder.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Congratulations" >}}
-
-Congratulations, you made it to the end of this tutorial!
+{{< tutorials/step title="Summary" >}}
 
 In this tutorial, you've configured Grafana for an organization:
 
