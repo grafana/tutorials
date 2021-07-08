@@ -10,8 +10,8 @@ If you would like to contribute a tutorial, please use [this template](./TEMPLAT
 
 ## Deploy changes to grafana.com
 
-When a PR is submitted, it must be reviewed by a Grafana employee, because it will ultimately post to the Grafana website.
+When a PR is submitted, it must be reviewed by a Grafana employee, because it will ultimately post to the Grafana website. The reviewer will either request/suggest edits or approve and merge on your behalf.
 
-Once the PR is approved and merged to master with changes in the `content/tutorials` directory, those changes are automatically synched to the grafana/website repo on the `master` branch.
+Once the PR is approved and merged to master with changes here, those changes are automatically synched to the `grafana/website` repo on the `master` branch and deployed to the website, typically in a few minutes, but may take longer if there is a queue.
 
-For information on how to make the changes live, refer to [Publishing](https://github.com/grafana/website#publishing).
+For more information on the general process, see the [main website repo documentation](https://github.com/grafana/website).
