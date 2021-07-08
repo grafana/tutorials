@@ -1,7 +1,7 @@
 ---
 title: Tutorials
 cascade:
-  search_type: tutorials
+  search_type: tutorial
 ---
 
 # Grafana tutorials
