@@ -1,5 +1,7 @@
 ---
 title: Tutorials
+cascade:
+  search_type: tutorials
 ---
 
 # Grafana tutorials
