@@ -46,16 +46,31 @@ Next, you need to configure your reverse proxy.
 
 [NGINX](https://www.nginx.com) is a high performance load balancer, web server, and reverse proxy.
 
-- In your NGINX configuration file, add a new `server` block:
+- In your NGINX configuration file inside `http` section, add the following:
 
 ```nginx
+# this is required to proxy Grafana Live WebSocket connections.
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
 server {
   listen 80;
   root /usr/share/nginx/html;
   index index.html index.htm;
 
   location / {
-   proxy_pass http://localhost:3000/;
+    proxy_pass http://localhost:3000/;
+  }
+
+  # Proxy Grafana Live WebSocket connections.
+  location /api/live {
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host $http_host;
+    proxy_pass http://localhost:3000/;
   }
 }
 ```
@@ -63,9 +78,17 @@ server {
 - Reload the NGINX configuration.
 - Navigate to port 80 on the machine NGINX is running on. You're greeted by the Grafana login page.
 
-To configure NGINX to serve Grafana under a _sub path_, update the `location` block, make sure this block is the first `location` block:
+For Grafana Live which uses WebSocket connections you may have to raise Nginx [worker_connections](https://nginx.org/en/docs/ngx_core_module.html#worker_connections) option which is 512 by default – which limits the number of possible concurrent connections with Grafana Live.
+
+To configure NGINX to serve Grafana under a _sub path_, update the `location` block:
 
 ```nginx
+# this is required to proxy Grafana Live WebSocket connections.
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
 server {
   listen 80;
   root /usr/share/nginx/www;
@@ -74,6 +97,15 @@ server {
   location ~/grafana/ {
    proxy_pass http://localhost:3000/;
   }
+
+  # Proxy Grafana Live WebSocket connections.
+  location ~/grafana/api/live {
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header Host $http_host;
+    proxy_pass http://localhost:3000/;
+  }  
 }
 ```
 
