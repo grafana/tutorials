@@ -133,15 +133,22 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
 > Ad-hoc queries are queries that are made interactively, with the purpose of exploring data. An ad-hoc query is commonly followed by another, more specific query.
 
 1. In the side bar, click the **Explore** (compass rose) icon.
-1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
-  A graph appears.
-1. In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
+1. Run a query to create a graph.
+
+   In the **Query editor**, enter the following PromQL query: `tns_request_duration_seconds_count`. 
+   
+   Press Shift + Enter to generate a line graph.
+1. Choose a time interval.
+   
+   In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
    You just made your first _PromQL_ query! [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is a powerful query language that lets you select and aggregate time series data stored in Prometheus.
 
    `tns_request_duration_seconds_count` is a _counter_, a type of metric whose value only ever increases. Rather than visualizing the actual value, you can use counters to calculate the _rate of change_, i.e. how fast the value increases.
 
-1. Add the `rate` function to your query to visualize the rate of requests per second. Enter the following in the **Query editor** and then press Shift + Enter.
+1. Add the `rate` function to your query to visualize the rate of requests per second. 
+   
+   Enter the following in the **Query editor** and then press Shift + Enter.
 
    ```
    rate(tns_request_duration_seconds_count[5m])
@@ -170,7 +177,7 @@ Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). J
 
 1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
-1. In the list of data sources, click **Loki**.
+1. Select **Loki** from the data source dropdown menu at the top of the screen.
 1. In the URL box, enter [http://loki:3100](http://loki:3100).
 1. Click **Save & Test** to save your changes.
 
@@ -346,7 +353,7 @@ Once you've acknowledged an alert, consider pausing it. This can be useful to av
 
 ### Clean up the local environment
 
-The tutorial has running Docker containers. When you want to clean up this local tutorial environment, run
+The tutorial has running Docker containers. To clean up your local tutorial environment, make sure you're in your project directory and run the following command:
 
 ```
 docker-compose down -v
