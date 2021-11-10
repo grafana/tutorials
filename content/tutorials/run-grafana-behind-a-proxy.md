@@ -66,9 +66,10 @@ server {
 
   # Proxy Grafana Live WebSocket connections.
   location /api/live {
+    rewrite  ^/(.*)  /$1 break;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
+    proxy_set_header Connection $connection_upgrade;
     proxy_set_header Host $http_host;
     proxy_pass http://localhost:3000/;
   }
@@ -94,18 +95,19 @@ server {
   root /usr/share/nginx/www;
   index index.html index.htm;
 
-  location ~/grafana/ {
+  location /grafana/ {
    proxy_pass http://localhost:3000/;
   }
 
   # Proxy Grafana Live WebSocket connections.
-  location ~/grafana/api/live {
+  location /grafana/api/live {
+    rewrite  ^/grafana/(.*)  /$1 break;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
+    proxy_set_header Connection $connection_upgrade;
     proxy_set_header Host $http_host;
     proxy_pass http://localhost:3000/;
-  }  
+  }
 }
 ```
 
