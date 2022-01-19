@@ -25,15 +25,15 @@ Clone this repo:
 git clone https://github.com/grafana/tutorials.git
 ```
 
-Now move into the project's root directory:
+Now move into this scripts 's root directory:
 
 ```sh
-cd tutorials
+cd tutorials/test-environments/nginx-grafana-test
 ```
 
-You will run all remaining commands from here.
+**You will run all remaining commands from here**.
 
-Next, you must add the absolute path to a local ssh public key. This ssh key-pair will allow you to enter and interact with the virtual machine. Keys are often stored in `~/.ssh`. You can follow this guide to create one.
+Next, you must add the absolute path to a local ssh public key. This ssh key-pair will allow you to enter and interact with the virtual machine. Keys are often stored in `~/.ssh`. [You can follow this guide to create one](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
 Note down the path to your public ssh key. It might look something like this:
 
