@@ -1,0 +1,6 @@
+gce_ssh_pub_key_file = "/Users/zuchka/.ssh/id_ed25519.pub"
+image_family         = "ubuntu-os-cloud"
+image_project        = "ubuntu-2004-lts"
+build                = "binary" # or "binary-subpath"
+machine_type         = "e2"
+cpu_count            = "2"
