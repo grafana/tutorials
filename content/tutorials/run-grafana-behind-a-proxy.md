@@ -82,6 +82,8 @@ server {
 
 For Grafana Live which uses WebSocket connections you may have to raise Nginx [worker_connections](https://nginx.org/en/docs/ngx_core_module.html#worker_connections) option which is 512 by default – which limits the number of possible concurrent connections with Grafana Live.
 
+Also, be aware that the above configuration will work only when the `proxy_pass` value for `location /` is a literal string. If you are using a variable here, [read this GitHub issue](https://github.com/grafana/grafana/issues/18299). You will need to add [an appropriate NGINX rewrite rule](https://www.nginx.com/blog/creating-nginx-rewrite-rules/).
+
 To configure NGINX to serve Grafana under a _sub path_, update the `location` block:
 
 ```nginx
