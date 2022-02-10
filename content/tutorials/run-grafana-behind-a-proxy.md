@@ -61,6 +61,7 @@ server {
   index index.html index.htm;
 
   location / {
+    proxy_set_header Host $http_host;
     proxy_pass http://localhost:3000/;
   }
 
@@ -96,7 +97,8 @@ server {
   index index.html index.htm;
 
   location /grafana/ {
-   proxy_pass http://localhost:3000/;
+    proxy_set_header Host $http_host; 
+    proxy_pass http://localhost:3000/;
   }
 
   # Proxy Grafana Live WebSocket connections.
