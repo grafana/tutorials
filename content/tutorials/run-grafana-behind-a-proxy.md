@@ -41,6 +41,63 @@ serve_from_sub_path = true
 
 Next, you need to configure your reverse proxy.
 
+
+{{< /tutorials/step >}}
+{{< tutorials/step title="Configure APACHE" >}}
+
+This section assumes basic familiarity with the Apache HTTP server.
+
+Make sure that the required modules are enabled: `a2enmod rewrite ssl proxy proxy_http proxy_wstunnel`
+
+Let's consider the case that Grafana runs a simple HTTP server on port 3000 and Apache runs an HTTPS server.
+This configuration requires Grafana to know about the reverse proxy and to be only accessed via the reverse proxy (otherwise a more complicated configuration using `mod_proxy_html`, `ProxyPreserveHost off` and `ProxyReversePass` is required).
+
+Because the protocol and port are different, we have to set the `root_url` explicitly in the Grafana configuration:
+
+```bash
+[server]
+domain = example.com
+root_url = https://%(domain)s/
+```
+
+The Apache configuration is as follows:
+
+```apache
+<VirtualHost *:80>
+  ServerName example.com
+
+  RewriteEngine on
+  RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+<VirtualHost *:443>
+  ServerName example.com
+
+  <Location "/">
+    ProxyPreserveHost on
+    ProxyPass http://localhost:3000/
+  </Location>
+
+  <Location "/api/live/">
+    ProxyPreserveHost on
+    ProxyPass ws://localhost:3000/api/live/
+  </Location>
+
+  # Insert your SSL configuration here:
+  # SSLCertificateFile ...
+  # SSLCertificateKeyFile ...
+  # etc.
+</VirtualHost>
+```
+
+The first `VirtualHost` simply redirects HTTP requests to HTTPS.
+The reverse proxy is configured in the second `VirtualHost`.
+
+- `ProxyPreserveHost` means that the `Host: example.com` line of the HTTP request is passed on to Grafana instead of being replaced by `Host: localhost`. This is important for security checks.
+- `ProxyPass` enables the reverse proxy and tells Apache the address of the Grafana server.
+- The second `Location` block is used to proxy websocket connections. Note that the protocol in the `ProxyPass` directive has been changed to `ws`.
+
+When using this setup, remember to configure your firewall so that port 3000 is not externally accessible.
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Configure NGINX" >}}
 
