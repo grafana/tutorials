@@ -1,7 +1,7 @@
 ---
-title: Grafana fundamentals
-summary: Get familiar with Grafana
-id: grafana-fundamentals
+title: Grafana Cloud fundamentals
+summary: Get familiar with Grafana Cloud
+id: grafana-fundamentals-cloud
 categories: ["fundamentals"]
 tags: ["beginner"]
 status: Published
@@ -12,7 +12,7 @@ weight: 10
 
 {{< tutorials/step title="Introduction" >}}
 
-In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
+In this tutorial, you'll learn how to use Grafana Cloud to set up a monitoring solution for your application.
 
 In this tutorial, you'll:
 
@@ -24,62 +24,19 @@ In this tutorial, you'll:
 {{% class "prerequisite-section" %}}
 ### Prerequisites
 
-- [Docker](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/) (included in Docker for Desktop for macOS and Windows)
-- [Git](https://git-scm.com/)
+- [A Grafana Cloud account](TK)
+
 {{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up the sample application" >}}
 
-This tutorial uses a sample application to demonstrate some of the features in Grafana. To complete the exercises in this tutorial, you need to download the files to your local machine.
-
-In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/) and [Loki](https://grafana.com/oss/loki/).
-
-1. Clone the [github.com/grafana/tutorial-environment](https://github.com/grafana/tutorial-environment) repository.
-
-   ```
-   git clone https://github.com/grafana/tutorial-environment.git
-   ```
-
-1. Change to the directory where you cloned this repository:
-
-   ```
-   cd tutorial-environment
-   ```
-
-1. Make sure Docker is running:
-
-   ```
-   docker ps
-   ```
-
-   No errors means it is running. If you get an error, then start Docker and then run the command again.
-
-1. Start the sample application:
-
-   ```
-   docker-compose up -d
-   ```
-
-   The first time you run `docker-compose up -d`, Docker downloads all the    necessary resources for the tutorial. This might take a few minutes, depending    on your internet connection.
-
-   > **Note:** If you already have Grafana, Loki, or Prometheus running on your system, then you might see errors because the Docker image is trying to use ports that your local installations are already using. Stop the services, then run the command again.
-
-1. Ensure all services are up-and-running:
-
-   ```
-   docker-compose ps
-   ```
-
-   In the **State** column, it should say `Up` for all services.
-
-1. Browse to the sample application on [localhost:8081](http://localhost:8081).
-
 ### Grafana News
 
-The sample application, Grafana News, lets you post links and vote for the ones you like.
+This tutorial uses a sample application called [Grafana News](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana News lets you post links and vote for the ones you like. You can view it here:
 
-To add a link:
+- [https://grafana.news](https://grafana.news)
+
+Now try adding a link:
 
 1. In **Title**, enter **Example**.
 1. In **URL**, enter **https://example.com**.
@@ -90,37 +47,23 @@ To add a link:
 To vote for a link, click the triangle icon next to the name of the link.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Log in to Grafana" >}}
+{{< tutorials/step title="Log in to Grafana Cloud" >}}
 
-Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
-
-1. Open a new tab.
-1. Browse to [localhost:3000](http://localhost:3000).
-1. In **email or username**, enter **admin**.
-1. In **password**, enter **admin**.
-1. Click **Log In**.
-
-   The first time you log in, you're asked to change your password:
-
-1. In **New password**, enter your new password.
-1. In **Confirm new password**, enter the same password.
-1. Click **Save**.
-
-The first thing you see is the Home dashboard, which helps you get started.
-
-To the far left you can see the _sidebar_, a set of quick access icons for navigating Grafana.
+Log in to your Grafana Cloud account. If you do not have an account, you can create a free forever account here.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add a metrics data source" >}}
 
-The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
+First, before adding a metrics data source, log in to your Grafana Cloud account. If you do not have an account, you can create a free-forever account here.
 
-To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
+Our sample application, Grafana News, exposes metrics that are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
+
+To visualize these metrics from Prometheus, you first need to add Prometheus Data Source Plugin in Grafana.
 
 1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
 1. In the list of data sources, click **Prometheus**.
-1. In the URL box, enter **http\://prometheus:9090**.
+1. In the URL box, enter `https://prometheus.grafana.news`.
 1. Click **Save & Test**.
 
    Prometheus is now available as a data source in Grafana.
@@ -157,7 +100,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
    sum(rate(tns_request_duration_seconds_count[5m])) by(route)
    ```
 
-1. Go back to the [sample application](http://localhost:8081) and generate some traffic by adding new links, voting, or just refresh the browser.
+1. Go back to the [sample application](https://grafana.news) and generate some traffic by adding new links, voting, or just refresh the browser.
 
 1. In the upper right corner, click the _time picker_, and select **Last 5 minutes**. By zooming in on the last few minutes, it's easier to see when you receive new data.
 
@@ -171,7 +114,7 @@ Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). J
 1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
 1. In the list of data sources, click **Loki**.
-1. In the URL box, enter [http://loki:3100](http://loki:3100).
+1. In the URL box, enter `https://loki.grafana.news`.
 1. Click **Save & Test** to save your changes.
 
 Loki is now available as a data source in Grafana.
@@ -197,7 +140,7 @@ Not only does Loki let you filter logs based on labels, but on specific occurren
 
 Let's generate an error, and analyze it with Explore.
 
-1. In the [sample application](http://localhost:8081), post a new link without a URL to generate an error in your browser that says `empty url`.
+1. In the [sample application](https://grafana.news), post a new link without a URL to generate an error in your browser that says `empty url`.
 1. Go back to Grafana and enter the following query to filter log lines based on a substring:
 
    ```
@@ -264,7 +207,6 @@ Manually annotating your dashboard is fine for those single events. For regularl
    {filename="/var/log/tns-app.log"} |= "error"
    ```
 
-<!--this add button is gone rn. look into this -->
 1. Click **Add**. Grafana displays the Annotations list, with your new annotation.
 1. Click the **Go back** arrow to return to your dashboard.
 
@@ -277,18 +219,12 @@ Being able to combine data from multiple data sources in one graph allows you to
 
 In this tutorial you learned about fundamental features of Grafana.
 
-### Clean up the local environment
-
-The tutorial leaves several Docker containers running. When you want to clean up this local tutorial environment, run
-
-```
-docker-compose down -v
-```
-
 ### Learn more
 
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
 - [Explore](https://grafana.com/docs/grafana/latest/features/explore/)
+- [Alert rules](https://grafana.com/docs/grafana/latest/alerting/create-alerts/)
+- [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
 {{< /tutorials/step >}}
