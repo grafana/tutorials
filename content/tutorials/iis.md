@@ -102,7 +102,7 @@ Configured address to serve Grafana: http://yourdomain.com/existingsubpath/grafa
 
 {{< figure src="/static/img/docs/tutorials/IIS_url_rewrite.png"  max-width="800px" >}}
 
-6. If your version of Grafana is greater than 8.3.5 you will also need to configure the reverse proxy to preserve host headers
+6. If your version of Grafana is greater than 8.3.5, you also need to configure the reverse proxy to preserve host headers.
   - This can be achived by configuring the IIS config file by running this in a cmd prompt
   `%windir%\system32\inetsrv\appcmd.exe set config -section:system.webServer/proxy -preserveHostHeader:true /commit:apphost`
   - More information here https://github.com/grafana/grafana/issues/45261
