@@ -28,7 +28,7 @@ Other Examples:
 
 ## Setup
 
-If you have not already done it, install the URL Rewrite module for IIS.
+Install the URL Rewrite module for IIS.
 
  - Download and install the URL Rewrite module for IIS: https://www.iis.net/downloads/microsoft/url-rewrite
 
