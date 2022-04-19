@@ -55,7 +55,7 @@ Configured address to serve Grafana: http://yourdomain.com:8080/grafana
 ------
 
 
-If you already had a subpath on your domain you would configure it like this
+If you already have a subpath on your domain, configure it as follows:
 - Your Parent Site Address: http://yourdomain.com/existingsubpath
 
  ```bash
