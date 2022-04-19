@@ -138,7 +138,7 @@ When navigating to the Grafana URL (`http://yourdomain.com:8080/grafana`) and a 
 
     The Rewrite URL should not include the subpath.
 
-    The Rewrite URL should contain the capture group from the pattern matching that returns the part of the URL after the subpath. The pattern used above returns 3 capture groups and the third one {R:2} returns the part of the URL after `http://yourdomain.com:8080/grafana/`.
+    The Rewrite URL should contain the capture group from the pattern matching that returns the part of the URL after the subpath. The pattern used above returns three capture groups and the third one {R:2} returns the part of the URL after `http://yourdomain.com:8080/grafana/`.
     
 ### You see an 'Error updating options: origin not allowed' error
 - Ensure you have undertaken step 6 above, to configure IIS to preserve host headers by edit IIS config by running this in cmd prompt:
