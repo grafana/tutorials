@@ -22,7 +22,7 @@ Example:
 Grafana as a subpath: http://yourdomain.com:8080/grafana
 
 Other Examples:
-- The parent site could also look like http://localhost:8080 if the application was only served on the local server.
+- If the application is only served on the local server, the parent site can also look like http://localhost:8080. 
 - If your domain is served using https on port 443, and thus the port is not normally entered in the address of your site, then the need to specify a port for the parent site in the configuration steps below can be eliminated.
  
 
