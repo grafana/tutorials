@@ -32,7 +32,7 @@ You will also learn how to:
 
 ### Grafana News
 
-This tutorial uses a sample application called [Grafana News](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana News lets you post links and vote for the ones you like. You can view it here:
+This tutorial uses a sample application called [Grafana news](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana news lets you post links and vote for the ones you like. You can view it here:
 
 - [https://grafana.news](https://grafana.news)
 
