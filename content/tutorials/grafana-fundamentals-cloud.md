@@ -124,7 +124,7 @@ Loki is now available as a data source in Grafana.
 
 Grafana Explore not only lets you make ad-hoc queries for metrics but lets you explore your logs as well.
 
-1. In the side bar, click the **Explore** (compass) icon.
+1. In the left navigation pane or side bar, click the **Explore** (compass) icon.
 1. In the data source list at the top, select the **Loki** data source.
 1. In the **Query editor**, enter:
 
