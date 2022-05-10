@@ -217,7 +217,7 @@ Being able to combine data from multiple data sources in one graph allows you to
 {{< /tutorials/step >}}
 {{< tutorials/step title="Summary" >}}
 
-In this tutorial you learned about fundamental features of Grafana.
+In this tutorial, you learned about the fundamental features of Grafana.
 
 ### Learn more
 
