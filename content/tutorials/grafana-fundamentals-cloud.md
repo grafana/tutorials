@@ -90,7 +90,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
    rate(tns_request_duration_seconds_count[5m])
    ```
 
-   Immediately below the graph there's an area where each time series is listed with a colored icon next to it. This area is called the _legend_.
+   Immediately below the graph, there's an area where each time series is listed with a colored icon next to it. This area is called the _legend_.
 
    PromQL lets you group the time series by their labels, using the `sum` function.
 
