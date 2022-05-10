@@ -111,7 +111,7 @@ Depending on your use case, you might want to group on other labels. Try groupin
 
 Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
-1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
+1. In the left navigation pane or side bar, hover your cursor over the  **Configuration** (gear) icon and then click **Data Sources**.
 1. Click **Add data source**.
 1. In the list of data sources, click **Loki**.
 1. In the URL box, enter `https://loki.grafana.news`.
