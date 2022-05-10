@@ -113,7 +113,7 @@ Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). J
 
 1. In the left navigation pane or side bar, hover your cursor over the  **Configuration** (gear) icon and then click **Data Sources**.
 1. Click **Add data source**.
-1. In the list of data sources, click **Loki**.
+1. From the list of data sources, click **Loki**.
 1. In the URL box, enter `https://loki.grafana.news`.
 1. Click **Save & Test** to save your changes.
 
