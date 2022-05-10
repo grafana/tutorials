@@ -14,7 +14,7 @@ weight: 10
 
 In this tutorial, you'll learn how to use Grafana Cloud to set up a monitoring solution for your application.
 
-In this tutorial, you'll:
+You will also learn how to:
 
 - Explore metrics and logs
 - Build dashboards
