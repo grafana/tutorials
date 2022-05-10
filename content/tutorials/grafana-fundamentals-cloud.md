@@ -136,7 +136,7 @@ Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you 
 
 1. Click and drag across the bars in the graph to filter logs based on time.
 
-Not only does Loki let you filter logs based on labels, but on specific occurrences.
+Loki lets you filter logs based on labels and also on specific occurrences.
 
 Let's generate an error, and analyze it with Explore.
 
