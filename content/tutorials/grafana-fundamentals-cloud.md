@@ -149,7 +149,7 @@ Let's generate an error, and analyze it with Explore.
 
 1. Click on the log line that says `level=error msg="empty url"` to see more information about the error.
 
-Logs are helpful for understanding what went wrong. Later in this tutorial, you'll see how you can correlate logs with metrics from Prometheus to better understand the context of the error.
+Logs help you identify and understand what went wrong. Later in this tutorial, you'll see how you can correlate logs with metrics from Prometheus to better understand the context of the error.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Build a dashboard" >}}
