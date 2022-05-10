@@ -73,7 +73,7 @@ To visualize these metrics from Prometheus, you first need to add Prometheus Dat
 
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to create ad-hoc queries to understand the metrics exposed by the sample application.
 
-> Ad-hoc queries are queries that are made interactively, with the purpose of exploring data. An ad-hoc query is commonly followed by another, more specific query.
+> Ad-hoc queries are created interactively to explore data. An ad-hoc query is commonly followed by another, more specific query.
 
 1. In the side bar, click the **Explore** (compass rose) icon.
 1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
