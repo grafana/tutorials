@@ -177,7 +177,7 @@ Every panel consists of a _query_ and a _visualization_. The query defines _what
 {{< /tutorials/step >}}
 {{< tutorials/step title="Annotate events" >}}
 
-When things go bad, it often helps if you understand the context in which the failure occurred. Time of last deploy, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to represent such events directly on your graphs.
+When things go bad, it often helps if you understand the context in which the failure occurred. Time of last deployment, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to represent such events directly on your graphs.
 
 In the next part of the tutorial, we will simulate some common use cases that someone would add annotations for.
 
