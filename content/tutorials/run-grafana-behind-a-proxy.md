@@ -70,7 +70,7 @@ server {
   }
 
   # Proxy Grafana Live WebSocket connections.
-  location /api/live {
+  location /api/live/ {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
@@ -105,13 +105,15 @@ server {
   root /usr/share/nginx/www;
   index index.html index.htm;
 
-  location /grafana {
+  location /grafana/ {
+    rewrite  ^/grafana/(.*)  /$1 break;
     proxy_set_header Host $http_host; 
     proxy_pass http://grafana;
   }
 
   # Proxy Grafana Live WebSocket connections.
-  location /grafana/api/live {
+  location /grafana/api/live/ {
+    rewrite  ^/grafana/(.*)  /$1 break;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
