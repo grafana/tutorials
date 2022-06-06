@@ -1,7 +1,7 @@
 ---
-title: Grafana fundamentals
-summary: Get familiar with Grafana
-id: grafana-fundamentals
+title: Grafana Cloud fundamentals
+summary: Get familiar with Grafana Cloud
+id: grafana-fundamentals-cloud
 categories: ["fundamentals"]
 tags: ["beginner"]
 status: Published
@@ -12,9 +12,9 @@ weight: 10
 
 {{< tutorials/step title="Introduction" >}}
 
-In this tutorial, you'll learn how to use Grafana to set up a monitoring solution for your application.
+In this tutorial, you'll learn how to use Grafana Cloud to set up a monitoring solution for your application.
 
-In this tutorial, you'll:
+You will also learn how to:
 
 - Explore metrics and logs
 - Build dashboards
@@ -24,62 +24,22 @@ In this tutorial, you'll:
 {{% class "prerequisite-section" %}}
 ### Prerequisites
 
-- [Docker](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/) (included in Docker for Desktop for macOS and Windows)
-- [Git](https://git-scm.com/)
+- [A Grafana Cloud account](TK)
+
 {{% /class %}}
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up the sample application" >}}
 
-This tutorial uses a sample application to demonstrate some of the features in Grafana. To complete the exercises in this tutorial, you need to download the files to your local machine.
+### Using `https://grafana.news`
 
-In this step, you'll set up the sample application, as well as supporting services, such as [Prometheus](https://prometheus.io/) and [Loki](https://grafana.com/oss/loki/).
+This tutorial uses a sample application called [Grafana news](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana news lets you post links and vote for the ones you like. You can view it here:
 
-1. Clone the [github.com/grafana/tutorial-environment](https://github.com/grafana/tutorial-environment) repository.
+- [https://grafana.news](https://grafana.news)
 
-   ```
-   git clone https://github.com/grafana/tutorial-environment.git
-   ```
 
-1. Change to the directory where you cloned this repository:
+### Adding links to Grafana news"
 
-   ```
-   cd tutorial-environment
-   ```
-
-1. Make sure Docker is running:
-
-   ```
-   docker ps
-   ```
-
-   No errors means it is running. If you get an error, then start Docker and then run the command again.
-
-1. Start the sample application:
-
-   ```
-   docker-compose up -d
-   ```
-
-   The first time you run `docker-compose up -d`, Docker downloads all the    necessary resources for the tutorial. This might take a few minutes, depending    on your internet connection.
-
-   > **Note:** If you already have Grafana, Loki, or Prometheus running on your system, then you might see errors because the Docker image is trying to use ports that your local installations are already using. Stop the services, then run the command again.
-
-1. Ensure all services are up-and-running:
-
-   ```
-   docker-compose ps
-   ```
-
-   In the **State** column, it should say `Up` for all services.
-
-1. Browse to the sample application on [localhost:8081](http://localhost:8081).
-
-### Grafana News
-
-The sample application, Grafana News, lets you post links and vote for the ones you like.
-
-To add a link:
+Now try adding a link:
 
 1. In **Title**, enter **Example**.
 1. In **URL**, enter **https://example.com**.
@@ -90,37 +50,23 @@ To add a link:
 To vote for a link, click the triangle icon next to the name of the link.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Log in to Grafana" >}}
+{{< tutorials/step title="Log in to Grafana Cloud" >}}
 
-Grafana is an open-source platform for monitoring and observability that lets you visualize and explore the state of your systems.
-
-1. Open a new tab.
-1. Browse to [localhost:3000](http://localhost:3000).
-1. In **email or username**, enter **admin**.
-1. In **password**, enter **admin**.
-1. Click **Log In**.
-
-   The first time you log in, you're asked to change your password:
-
-1. In **New password**, enter your new password.
-1. In **Confirm new password**, enter the same password.
-1. Click **Save**.
-
-The first thing you see is the Home dashboard, which helps you get started.
-
-To the far left you can see the _sidebar_, a set of quick access icons for navigating Grafana.
+Log in to your Grafana Cloud account. If you do not have an account, you can create a free forever account here.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add a metrics data source" >}}
 
-The sample application exposes metrics which are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
+First, before adding a metrics data source, log in to your Grafana Cloud account. If you do not have an account, you can create a free-forever account here.
 
-To be able to visualize the metrics from Prometheus, you first need to add it as a data source in Grafana.
+Our sample application, Grafana News, exposes metrics that are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
+
+To visualize these metrics from Prometheus, you first need to add Prometheus Data Source Plugin in Grafana.
 
 1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
 1. In the list of data sources, click **Prometheus**.
-1. In the URL box, enter **http\://prometheus:9090**.
+1. In the URL box, enter `https://prometheus.grafana.news`.
 1. Click **Save & Test**.
 
    Prometheus is now available as a data source in Grafana.
@@ -130,7 +76,7 @@ To be able to visualize the metrics from Prometheus, you first need to add it as
 
 Grafana Explore is a workflow for troubleshooting and data exploration. In this step, you'll be using Explore to create ad-hoc queries to understand the metrics exposed by the sample application.
 
-> Ad-hoc queries are queries that are made interactively, with the purpose of exploring data. An ad-hoc query is commonly followed by another, more specific query.
+> Ad-hoc queries are created interactively to explore data. An ad-hoc query is commonly followed by another, more specific query.
 
 1. In the side bar, click the **Explore** (compass rose) icon.
 1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
@@ -147,7 +93,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
    rate(tns_request_duration_seconds_count[5m])
    ```
 
-   Immediately below the graph there's an area where each time series is listed with a colored icon next to it. This area is called the _legend_.
+   Immediately below the graph, there's an area where each time series is listed with a colored icon next to it. This area is called the _legend_.
 
    PromQL lets you group the time series by their labels, using the `sum` function.
 
@@ -157,7 +103,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
    sum(rate(tns_request_duration_seconds_count[5m])) by(route)
    ```
 
-1. Go back to the [sample application](http://localhost:8081) and generate some traffic by adding new links, voting, or just refresh the browser.
+1. Go back to the [sample application](https://grafana.news) and generate some traffic by adding new links, voting, or by refreshing the browser.
 
 1. In the upper right corner, click the _time picker_, and select **Last 5 minutes**. By zooming in on the last few minutes, it's easier to see when you receive new data.
 
@@ -168,10 +114,10 @@ Depending on your use case, you might want to group on other labels. Try groupin
 
 Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
-1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
+1. In the left navigation pane or side bar, hover your cursor over the  **Configuration** (gear) icon and then click **Data Sources**.
 1. Click **Add data source**.
-1. In the list of data sources, click **Loki**.
-1. In the URL box, enter [http://loki:3100](http://loki:3100).
+1. From the list of data sources, click **Loki**.
+1. In the URL box, enter `https://loki.grafana.news`.
 1. Click **Save & Test** to save your changes.
 
 Loki is now available as a data source in Grafana.
@@ -179,25 +125,25 @@ Loki is now available as a data source in Grafana.
 {{< /tutorials/step >}}
 {{< tutorials/step title="Explore your logs" >}}
 
-Grafana Explore not only lets you make ad-hoc queries for metrics, but lets you explore your logs as well.
+Grafana Explore not only lets you make ad-hoc queries for metrics but lets you explore your logs as well.
 
-1. In the side bar, click the **Explore** (compass) icon.
-1. In the data source list at the top, select the **Loki** data source.
+1. In the left navigation pane or side bar, click the **Explore** (compass) icon.
+1. From the data source list at the top, select the **Loki** data source.
 1. In the **Query editor**, enter:
 
    ```
    {filename="/var/log/tns-app.log"}
    ```
 
-1. Grafana displays all logs within the log file of the sample application. The height of each bar encodes the number of logs that were generated at that time.
+Grafana displays all logs within the log file of the sample application. The height of each bar encodes the number of logs that were generated at that time.
 
-1. Click and drag across the bars in the graph to filter logs based on time.
+Now click and drag across the bars in the graph to filter logs based on time.
 
-Not only does Loki let you filter logs based on labels, but on specific occurrences.
+Loki lets you filter logs based on labels and also on specific occurrences.
 
 Let's generate an error, and analyze it with Explore.
 
-1. In the [sample application](http://localhost:8081), post a new link without a URL to generate an error in your browser that says `empty url`.
+1. In the [sample application](https://grafana.news), post a new link without a URL to generate an error in your browser that says `empty url`.
 1. Go back to Grafana and enter the following query to filter log lines based on a substring:
 
    ```
@@ -206,7 +152,7 @@ Let's generate an error, and analyze it with Explore.
 
 1. Click on the log line that says `level=error msg="empty url"` to see more information about the error.
 
-Logs are helpful for understanding what went wrong. Later in this tutorial, you'll see how you can correlate logs with metrics from Prometheus to better understand the context of the error.
+Logs help you identify and understand what went wrong. Later in this tutorial, you'll see how you can correlate logs with metrics from Prometheus to better understand the context of the error.
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Build a dashboard" >}}
@@ -234,9 +180,9 @@ Every panel consists of a _query_ and a _visualization_. The query defines _what
 {{< /tutorials/step >}}
 {{< tutorials/step title="Annotate events" >}}
 
-When things go bad, it often helps if you understand the context in which the failure occurred. Time of last deploy, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to represent such events directly on your graphs.
+When things go bad, it often helps if you understand the context in which the failure occurred. Time of last deployment, system changes, or database migration can offer insight into what might have caused an outage. Annotations allow you to represent such events directly on your graphs.
 
-In the next part of the tutorial, we will simulate some common use cases that someone would add annotations for.
+In the next part of the tutorial, we will simulate some common use cases where you can add annotations.
 
 1. To manually add an annotation, click anywhere in your graph, then click **Add annotation**.
 1. In **Description**, enter **Migrated user database**.
@@ -264,7 +210,6 @@ Manually annotating your dashboard is fine for those single events. For regularl
    {filename="/var/log/tns-app.log"} |= "error"
    ```
 
-<!--this add button is gone rn. look into this -->
 1. Click **Add**. Grafana displays the Annotations list, with your new annotation.
 1. Click the **Go back** arrow to return to your dashboard.
 
@@ -275,20 +220,14 @@ Being able to combine data from multiple data sources in one graph allows you to
 {{< /tutorials/step >}}
 {{< tutorials/step title="Summary" >}}
 
-In this tutorial you learned about fundamental features of Grafana.
-
-### Clean up the local environment
-
-The tutorial leaves several Docker containers running. When you want to clean up this local tutorial environment, run
-
-```
-docker-compose down -v
-```
+In this tutorial, you learned about the fundamental features of Grafana.
 
 ### Learn more
 
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
 - [Explore](https://grafana.com/docs/grafana/latest/features/explore/)
+- [Alert rules](https://grafana.com/docs/grafana/latest/alerting/create-alerts/)
+- [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
 
 {{< /tutorials/step >}}
