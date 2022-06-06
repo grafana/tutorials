@@ -30,11 +30,14 @@ You will also learn how to:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Set up the sample application" >}}
 
-### Grafana News
+### Using `https://grafana.news`
 
 This tutorial uses a sample application called [Grafana news](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana news lets you post links and vote for the ones you like. You can view it here:
 
 - [https://grafana.news](https://grafana.news)
+
+
+### Adding links to Grafana news"
 
 Now try adding a link:
 
@@ -132,9 +135,9 @@ Grafana Explore not only lets you make ad-hoc queries for metrics but lets you e
    {filename="/var/log/tns-app.log"}
    ```
 
-1. Grafana displays all logs within the log file of the sample application. The height of each bar encodes the number of logs that were generated at that time.
+Grafana displays all logs within the log file of the sample application. The height of each bar encodes the number of logs that were generated at that time.
 
-1. Click and drag across the bars in the graph to filter logs based on time.
+Now click and drag across the bars in the graph to filter logs based on time.
 
 Loki lets you filter logs based on labels and also on specific occurrences.
 
