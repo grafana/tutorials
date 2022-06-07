@@ -224,7 +224,7 @@ Annotations also work very well alongside alerts. In the next and final section,
 
 Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
 
-Grafana's new alerting platform debuted with Grafana 8. A year later, with Grafana 9, it became the default alerting method. In this step we will create a Grafana Managed Alert. Then we will trigger our new alert, which will send us an email notification.
+Grafana's new alerting platform debuted with Grafana 8. A year later, with Grafana 9, it became the default alerting method. In this step, we will create a Grafana Managed Alert. Then we will trigger our new alert, which will send us an email notification.
 
 The most basic alert consists of two parts:
 
