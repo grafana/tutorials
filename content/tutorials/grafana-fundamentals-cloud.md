@@ -261,7 +261,7 @@ Now that Grafana knows how to notify us, it's time to set up an alert rule:
 
 ### Trigger a Grafana Managed Alert
 
-We have now configured an alert rule and a contact point. Now lets see if we can trigger a Grafana Managed Alert by generating some traffic on our sample application.
+We have configured an alert rule and a contact point. Now lets see if we can trigger a Grafana Managed Alert by generating some traffic on our sample application.
 
 1. Browse to [Grafana News](https://grafana.news).
 1. Repeatedly click the vote button or refresh the page numerous times to generate a traffic spike.
