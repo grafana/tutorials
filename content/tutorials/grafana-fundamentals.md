@@ -283,14 +283,14 @@ Grafana's new alerting platform debuted with Grafana 8. A year later, with Grafa
 
 The most basic alert consists of two parts:
 
-1. A _Contact Point_ - A Contact point defines how Grafana delivers an alert. When the conditions of an _alert rule_ are met, Grafana notifies the contacnt points, or channels, configured for that alert. Some popular channels include email, webhooks, Slack notifications, and PagerDuty notifications. 
-1. An _Alert rule_ - An Alert rules defines one or more _conditions_ that Grafana regularly evaluates. When these evaluations meet the rule's criteria, the alert is triggered.
+1. A _Contact Point_ - A Contact point defines how Grafana delivers an alert. When the conditions of an _alert rule_ are met, Grafana notifies the contact points, or channels, configured for that alert. Some popular channels include email, webhooks, Slack notifications, and PagerDuty notifications. 
+1. An _Alert rule_ - An Alert rule defines one or more _conditions_ that Grafana regularly evaluates. When these evaluations meet the rule's criteria, the alert is triggered.
 
 To begin, let's set up a webhook Contact Point. Once we have a usable endpoint, we'll write an alert rule and trigger a notification.
 
 ### Create a Contact Point for Grafana Managed Alerts
 
-In this step, we'll set up a new Contact Point. This contact point will use the _webhooks_ channel. In order to make this work, we also need an endpoint for our webhook channel to receive the alert. We will use (requestbin.com)[https://requestbin.com] to quickly set up that test endpoint. This way we can make sure that our alert is actually sending a notification somewhere.
+In this step, we'll set up a new Contact Point. This contact point will use the _webhooks_ channel. In order to make this work, we also need an endpoint for our webhook channel to receive the alert. We will use [requestbin.com](https://requestbin.com) to quickly set up that test endpoint. This way we can make sure that our alert is actually sending a notification somewhere.
 
 1. Browse to [requestbin.com](https://requestbin.com).
 1. Under the **Create Request Bin** button, click the **public bin** link.
@@ -307,7 +307,7 @@ Next, let's configure a Contact Point in Grafana's Alerting UI to send notificat
 1. In **Type**, choose **webhook**. It's the last option in the dropdown.
 1. In **Url**, paste the endpoint to your request bin.
 1. Click **Test** to send a test alert to your request bin.
-1. Navigate back to the request bin you created earlier. On the left side, there's now a `POST /` entry. Click it to see what information is sent by Grafana.
+1. Navigate back to the request bin you created earlier. On the left side, there's now a `POST /` entry. Click it to see what information Grafana sent.
 1. Return to Grafana and click **Save contact point**.
 
 We have now created a dummy webhook endpoint and created a new Alerting Contact Point in Grafana. Now we can create an alert rule and link it to this new channel.
@@ -322,7 +322,7 @@ Now that Grafana knows how to notify us, it's time to set up an alert rule:
 1. For `Section 2`, find the `query A` box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press `Run query`. You should see some data in the graph.
 1. Now scroll down to the `query B` box. For `Operation` choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
 1. In `Section 3`, enter `30s` for the `Evaluate every` field. For the purposes of this tutorial, the evaluation interval is intentionally short. This makes it easier to test. In the `For` field, enter **0m**. This setting makes Grafana wait until an alert has fired for a given time before Grafana sends the notification.
-1. In `Section 4`, you can add some sample text to your summary message. [Read more about message tmeplating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
+1. In `Section 4`, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
 1. Click `Save and Exit` at the top of the page.
 1. Because we only have one contact point (our Request Bin webhook), our alerts will default to use it. As a system grows, admins can use the `Notification Policies` setting to organize and match alert rules to specific contact points.
 
