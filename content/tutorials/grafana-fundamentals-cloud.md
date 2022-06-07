@@ -243,7 +243,7 @@ In this step, we'll set up a new Contact Point. This contact point will use the 
 1. Click the `Test` button and then the `Send test notification` button. Now check your email. You should see an email from Grafana with a subject like `[FIRING:1] (TestAlert Grafana)`
 1. Return to Grafana and click **Save contact point**.
 
-We have now configured an email-based Contact point to use a personal email. Now we can create an alert rule and link it to this new channel.
+We have configured an email-based contact point to use a personal email. Now we can create an alert rule and link it to this new channel.
 
 ### Add an Alert Rule to Grafana
 
