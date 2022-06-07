@@ -24,7 +24,7 @@ You will also learn how to:
 {{% class "prerequisite-section" %}}
 ### Prerequisites
 
-- [A Grafana Cloud account](TK)
+- [A Grafana Cloud account](https://grafana.com/products/cloud/)
 
 {{% /class %}}
 {{< /tutorials/step >}}
@@ -238,9 +238,9 @@ To begin, let's create a contact point that will send us an email. Then we'll wr
 In this step, we'll set up a new Contact Point. This contact point will use the _email_ channel. Luckily, every Grafana Cloud instance comes with a default email contact point already added. Therefore, all we need to do is add a personal email to the configuration:
 
 1. In Grafana's side bar, hover your cursor over the **Alerting** (bell) icon and then click **Contact points**.
-1. You should see an entry below the `Contact points` heading called `grafana-default-email`. Click the pencil icon on the right-hand side to edit this Contact point.
+1. You should see an entry below the **Contact points** heading called `grafana-default-email`. Click the pencil icon on the right-hand side to edit this Contact point.
 1. Under addresses, add an email address that you can access. This is how we will test our alert. 
-1. Click the `Test` button and then the `Send test notification` button. Now check your email. You should see an email from Grafana with a subject like `[FIRING:1] (TestAlert Grafana)`
+1. Click the **Test** button and then the **Send test notification** button in the popup. Now check your email. You should see an email from Grafana with a subject like `[FIRING:1] (TestAlert Grafana)`
 1. Return to Grafana and click **Save contact point**.
 
 We have configured an email-based contact point to use a personal email. Now we can create an alert rule and link it to this new channel.
@@ -251,13 +251,13 @@ Now that Grafana knows how to notify us, it's time to set up an alert rule:
 
 1. In Grafana's side bar, hover the cursor over the **Alerting** (bell) icon and then click **Alert rules**.
 1. Click **+ New Alert Rule**.
-1. A new page will appear with four distinct sections. Let's review them one at a time. For `Section 1`, leave `Grafana Managed Alert` as the chosen alert type. Name the rule `fundamentals-test` and for `group` write `fundamentals`.
-1. For `Section 2`, find the `query A` box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press `Run query`. You should see some data in the graph.
-1. Now scroll down to the `query B` box. For `Operation` choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
-1. In `Section 3`, enter `30s` for the `Evaluate every` field. For the purposes of this tutorial, the evaluation interval is intentionally short. This makes it easier to test. In the `For` field, enter **0m**. This setting makes Grafana wait until an alert has fired for a given time before Grafana sends the notification.
-1. In `Section 4`, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
-1. Click `Save and Exit` at the top of the page.
-1. Because we only have one contact point (our email channel), our alerts will default to use it. As a system grows, admins can use the `Notification Policies` setting to organize and match alert rules to specific contact points.
+1. A new page will appear with four distinct sections. Let's review them one at a time. For **Section 1**, leave **Grafana Managed Alert** as the chosen alert type. Name the rule `fundamentals-test` and for **group** write `fundamentals`.
+1. For **Section 2**, find the **query A** box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press **Run query**. You should see some data in the graph.
+1. Now scroll down to the **query B** box. For **Operation** choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
+1. In **Section 3**, enter `30s` for the **Evaluate every** field. For the purposes of this tutorial, the evaluation interval is intentionally short. This makes it easier to test. In the **For** field, enter `0m`. This setting makes Grafana wait until an alert has fired for a given time before Grafana sends the notification.
+1. In **Section 4**, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
+1. Click **Save and Exit** at the top of the page.
+1. Because we only have one contact point (our email channel), our alerts will default to use it. As a system grows, admins can use the **Notification Policies** setting to organize and match alert rules to specific contact points.
 
 ### Trigger a Grafana Managed Alert
 
