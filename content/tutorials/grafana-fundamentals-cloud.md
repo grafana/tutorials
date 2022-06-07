@@ -217,6 +217,8 @@ The log lines returned by your query are now displayed as annotations in the gra
 
 Being able to combine data from multiple data sources in one graph allows you to correlate information from both Prometheus and Loki.
 
+Annotations also work very well alongside alerts. In the next and final section, we will set up an alert for our app `grafana.news` and then we will trigger it. This will provide a quick intro to our new Alerting platform.
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Create a Grafana Managed Alert" >}}
 
