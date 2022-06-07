@@ -338,10 +338,6 @@ Once the query `sum(rate(tns_request_duration_seconds_count[5m])) by(route)` ret
 {{< /tutorials/step >}}
 {{< tutorials/step title="Summary" >}}
 
-In this tutorial you learned about fundamental features of Grafana.
-
-### Clean up the local Grafana environment
-
 In this tutorial you learned about fundamental features of Grafana. To do so, we ran several Docker on your local machine. When you are ready to clean up this local tutorial environment, run this command:
 
 ```
