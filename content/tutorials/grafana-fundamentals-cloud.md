@@ -217,17 +217,69 @@ The log lines returned by your query are now displayed as annotations in the gra
 
 Being able to combine data from multiple data sources in one graph allows you to correlate information from both Prometheus and Loki.
 
+Annotations also work very well alongside alerts. In the next and final section, we will set up an alert for our app `grafana.news` and then trigger it. This will provide a quick introduction to our new Alerting platform.
+
+{{< /tutorials/step >}}
+{{< tutorials/step title="Create a Grafana Managed Alert" >}}
+
+Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
+
+Grafana's new alerting platform debuted with Grafana 8. A year later, with Grafana 9, it became the default alerting method. In this step, we will create a Grafana Managed Alert. Then we will trigger our new alert, which will send us an email notification.
+
+The most basic alert consists of two parts:
+
+1. A _Contact Point_ - A Contact point defines how Grafana delivers an alert. When the conditions of an _alert rule_ are met, Grafana notifies the contact points, or channels, configured for that alert. Some popular channels include email, webhooks, Slack notifications, and PagerDuty notifications. 
+1. An _Alert rule_ - An Alert rule defines one or more _conditions_ that Grafana regularly evaluates. When these evaluations meet the rule's criteria, the alert is triggered.
+
+To begin, let's create a contact point that will send us an email. Then we'll write an alert rule that will monitor grafana.news for any spikes in traffic. We will then simulate a spike and watch as our Grafana Managed Alert triggers and sends us an email notification.
+
+### Create a Contact Point for Grafana Managed Alerts
+
+In this step, we'll set up a new Contact Point. This contact point will use the _email_ channel. Luckily, every Grafana Cloud instance comes with a default email contact point already added. Therefore, all we need to do is add a personal email to the configuration:
+
+1. In Grafana's side bar, hover your cursor over the **Alerting** (bell) icon and then click **Contact points**.
+1. You should see an entry below the `Contact points` heading called `grafana-default-email`. Click the pencil icon on the right-hand side to edit this Contact point.
+1. Under addresses, add an email address that you can access. This is how we will test our alert. 
+1. Click the `Test` button and then the `Send test notification` button. Now check your email. You should see an email from Grafana with a subject like `[FIRING:1] (TestAlert Grafana)`
+1. Return to Grafana and click **Save contact point**.
+
+We have configured an email-based contact point to use a personal email. Now we can create an alert rule and link it to this new channel.
+
+### Add an Alert Rule to Grafana
+
+Now that Grafana knows how to notify us, it's time to set up an alert rule:
+
+1. In Grafana's side bar, hover the cursor over the **Alerting** (bell) icon and then click **Alert rules**.
+1. Click **+ New Alert Rule**.
+1. A new page will appear with four distinct sections. Let's review them one at a time. For `Section 1`, leave `Grafana Managed Alert` as the chosen alert type. Name the rule `fundamentals-test` and for `group` write `fundamentals`.
+1. For `Section 2`, find the `query A` box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press `Run query`. You should see some data in the graph.
+1. Now scroll down to the `query B` box. For `Operation` choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
+1. In `Section 3`, enter `30s` for the `Evaluate every` field. For the purposes of this tutorial, the evaluation interval is intentionally short. This makes it easier to test. In the `For` field, enter **0m**. This setting makes Grafana wait until an alert has fired for a given time before Grafana sends the notification.
+1. In `Section 4`, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
+1. Click `Save and Exit` at the top of the page.
+1. Because we only have one contact point (our email channel), our alerts will default to use it. As a system grows, admins can use the `Notification Policies` setting to organize and match alert rules to specific contact points.
+
+### Trigger a Grafana Managed Alert
+
+We have configured an alert rule and a contact point. Now lets see if we can trigger a Grafana Managed Alert by generating some traffic on our sample application.
+
+1. Browse to [Grafana News](https://grafana.news).
+1. Repeatedly click the vote button or refresh the page numerous times to generate a traffic spike.
+
+Once the Prometheus query `sum(rate(tns_request_duration_seconds_count[5m])) by(route)` returns a value greater than `0.2` Grafana will trigger our alert. Go to your email inbox. A new Grafana alert notification with details and metadata should appear.
+
 {{< /tutorials/step >}}
 {{< tutorials/step title="Summary" >}}
 
-In this tutorial, you learned about the fundamental features of Grafana.
+In this tutorial, you learned about the fundamental features of Grafana. But this is just the beginning. Check out the links below to continue your learning journey with Grafana's LGTM stack.
 
 ### Learn more
 
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
 - [Explore](https://grafana.com/docs/grafana/latest/features/explore/)
+- [Alerting Overview](https://grafana.com/docs/grafana/latest/alerting/)
 - [Alert rules](https://grafana.com/docs/grafana/latest/alerting/create-alerts/)
-- [Notification channels](https://grafana.com/docs/grafana/latest/alerting/notifications/).
+- [Contact Points](https://grafana.com/docs/grafana/latest/alerting/notifications/)
 
 {{< /tutorials/step >}}
