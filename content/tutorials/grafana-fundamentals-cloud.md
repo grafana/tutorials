@@ -271,7 +271,7 @@ Once the Prometheus query `sum(rate(tns_request_duration_seconds_count[5m])) by(
 {{< /tutorials/step >}}
 {{< tutorials/step title="Summary" >}}
 
-In this tutorial, you learned about the fundamental features of Grafana. But this is just the beginning. Check out the links below to continue your learning journey with the Grafana's LGTM stack.
+In this tutorial, you learned about the fundamental features of Grafana. But this is just the beginning. Check out the links below to continue your learning journey with Grafana's LGTM stack.
 
 ### Learn more
 

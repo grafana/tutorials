@@ -346,7 +346,7 @@ docker-compose down -v
 
 ### Learn more
 
-Check out the links below to continue your learning journey with the Grafana's LGTM stack.
+Check out the links below to continue your learning journey with Grafana's LGTM stack.
 
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
