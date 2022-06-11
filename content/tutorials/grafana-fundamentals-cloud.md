@@ -22,24 +22,22 @@ You will also learn how to:
 - Set up alerts
 
 {{% class "prerequisite-section" %}}
-### Prerequisites
+> Prerequisites
 
 - [A Grafana Cloud account](https://grafana.com/products/cloud/)
 
 {{% /class %}}
 {{< /tutorials/step >}}
-{{< tutorials/step title="Set up the sample application" >}}
+{{< tutorials/step title="Using `https://grafana.news`" >}}
 
-### Using `https://grafana.news`
-
-This tutorial uses a sample application called [Grafana news](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana news lets you post links and vote for the ones you like. You can view it here:
+This tutorial uses a sample application called [Grafana News](https://grafana.news) to demonstrate some of the features in Grafana Cloud. Grafana News lets you post links and vote for the ones you like. You can view it here:
 
 - [https://grafana.news](https://grafana.news)
 
 
-### Adding links to Grafana news"
+> **Adding links to Grafana news**
 
-Now try adding a link:
+Go to Grafana News and try adding a link:
 
 1. In **Title**, enter **Example**.
 1. In **URL**, enter **https://example.com**.
@@ -50,18 +48,16 @@ Now try adding a link:
 To vote for a link, click the triangle icon next to the name of the link.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Log in to Grafana Cloud" >}}
+{{< tutorials/step title="Log in to Grafana" >}}
 
-Log in to your Grafana Cloud account. If you do not have an account, you can create a free forever account here.
+Log in to your Grafana Cloud account. If you do not have an account, [you can create a free forever account here](https://grafana.com/products/cloud/).
 
 {{< /tutorials/step >}}
 {{< tutorials/step title="Add a metrics data source" >}}
 
-First, before adding a metrics data source, log in to your Grafana Cloud account. If you do not have an account, you can create a free-forever account here.
-
 Our sample application, Grafana News, exposes metrics that are stored in [Prometheus](https://prometheus.io/), a popular time series database (TSDB).
 
-To visualize these metrics from Prometheus, you first need to add Prometheus Data Source Plugin in Grafana.
+To visualize these metrics from Prometheus, you first need to add and configure the Prometheus Data Source Plugin in Grafana.
 
 1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
@@ -220,20 +216,20 @@ Being able to combine data from multiple data sources in one graph allows you to
 Annotations also work very well alongside alerts. In the next and final section, we will set up an alert for our app `grafana.news` and then trigger it. This will provide a quick introduction to our new Alerting platform.
 
 {{< /tutorials/step >}}
-{{< tutorials/step title="Create a Grafana Managed Alert" >}}
+{{< tutorials/step title="Set Up an Alert" >}}
 
 Alerts allow you to identify problems in your system moments after they occur. By quickly identifying unintended changes in your system, you can minimize disruptions to your services.
 
 Grafana's new alerting platform debuted with Grafana 8. A year later, with Grafana 9, it became the default alerting method. In this step, we will create a Grafana Managed Alert. Then we will trigger our new alert, which will send us an email notification.
 
-The most basic alert consists of two parts:
-
-1. A _Contact Point_ - A Contact point defines how Grafana delivers an alert. When the conditions of an _alert rule_ are met, Grafana notifies the contact points, or channels, configured for that alert. Some popular channels include email, webhooks, Slack notifications, and PagerDuty notifications. 
-1. An _Alert rule_ - An Alert rule defines one or more _conditions_ that Grafana regularly evaluates. When these evaluations meet the rule's criteria, the alert is triggered.
+>**The most basic alert consists of two parts**:
+>
+>1. A _Contact Point_ - A Contact point defines how Grafana delivers an alert. When the conditions of an _alert rule_ are met, Grafana notifies the contact points, or channels, configured for that alert. Some popular channels include email, webhooks, Slack notifications, and PagerDuty notifications. 
+>1. An _Alert rule_ - An Alert rule defines one or more _conditions_ that Grafana regularly evaluates. When these evaluations meet the rule's criteria, the alert is triggered.
 
 To begin, let's create a contact point that will send us an email. Then we'll write an alert rule that will monitor grafana.news for any spikes in traffic. We will then simulate a spike and watch as our Grafana Managed Alert triggers and sends us an email notification.
 
-### Create a Contact Point for Grafana Managed Alerts
+> Create a Contact Point for Grafana Managed Alerts
 
 In this step, we'll set up a new Contact Point. This contact point will use the _email_ channel. Luckily, every Grafana Cloud instance comes with a default email contact point already added. Therefore, all we need to do is add a personal email to the configuration:
 
@@ -245,7 +241,7 @@ In this step, we'll set up a new Contact Point. This contact point will use the 
 
 We have configured an email-based contact point to use a personal email. Now we can create an alert rule and link it to this new channel.
 
-### Add an Alert Rule to Grafana
+> Add an Alert Rule to Grafana
 
 Now that Grafana knows how to notify us, it's time to set up an alert rule:
 
@@ -259,7 +255,7 @@ Now that Grafana knows how to notify us, it's time to set up an alert rule:
 1. Click **Save and Exit** at the top of the page.
 1. Because we only have one contact point (our email channel), our alerts will default to use it. As a system grows, admins can use the **Notification Policies** setting to organize and match alert rules to specific contact points.
 
-### Trigger a Grafana Managed Alert
+> Trigger a Grafana Managed Alert
 
 We have configured an alert rule and a contact point. Now lets see if we can trigger a Grafana Managed Alert by generating some traffic on our sample application.
 
@@ -273,7 +269,7 @@ Once the Prometheus query `sum(rate(tns_request_duration_seconds_count[5m])) by(
 
 In this tutorial, you learned about the fundamental features of Grafana. But this is just the beginning. Check out the links below to continue your learning journey with Grafana's LGTM stack.
 
-### Learn more
+> Learn more
 
 - [Prometheus](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/)
 - [Loki](https://grafana.com/docs/grafana/latest/features/datasources/loki/)
