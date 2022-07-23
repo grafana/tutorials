@@ -71,7 +71,7 @@ In this step, you'll set up the sample application, as well as supporting servic
    docker-compose ps
    ```
 
-   In the **State** column, it should say `running` for all services.
+   In the **STATUS** column, it should say `running` for all services.
 
 1. Browse to the sample application on [localhost:8081](http://localhost:8081).
 
