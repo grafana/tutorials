@@ -304,7 +304,7 @@ Next, let's configure a Contact Point in Grafana's Alerting UI to send notificat
 1. Return to Grafana. In Grafana's side bar, hover your cursor over the **Alerting** (bell) icon and then click **Contact points**.
 1. Click **+ New Contact Point**.
 1. In **Name**, write **RequestBin**.
-1. In **Type**, choose **webhook**. It's the last option in the dropdown.
+1. In **Type**, choose **Webhook**. It's the second-last option in the dropdown.
 1. In **Url**, paste the endpoint to your request bin.
 1. Click **Test** to send a test alert to your request bin.
 1. Navigate back to the request bin you created earlier. On the left side, there's now a `POST /` entry. Click it to see what information Grafana sent.
