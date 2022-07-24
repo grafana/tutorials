@@ -317,7 +317,7 @@ We have now created a dummy webhook endpoint and created a new Alerting Contact 
 Now that Grafana knows how to notify us, it's time to set up an alert rule:
 
 1. In Grafana's side bar, hover the cursor over the **Alerting** (bell) icon and then click **Alert rules**.
-1. Click **+ New Alert Rule**.
+1. Click **+ New alert rule**.
 1. A new page will appear with four distinct sections. Let's review them one at a time. For **Section 1**, leave **Grafana Managed Alert** as the chosen alert type. Name the rule `fundamentals-test` and for **group** write `fundamentals`.
 1. For **Section 2**, find the **query A** box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press **Run query**. You should see some data in the graph.
 1. Now scroll down to the **query B** box. For **Operation** choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
