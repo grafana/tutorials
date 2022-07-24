@@ -251,7 +251,7 @@ Now that Grafana knows how to notify us, it's time to set up an alert rule:
 1. For **Section 2**, find the **query A** box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press **Run queries**. You should see some data in the graph.
 1. Now scroll down to the **query B** box. For **Operation** choose `Classic condition`. [You can read more about classic and multi-dimensional conditions here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/alerting-rules/create-grafana-managed-rule/#single-and-multi-dimensional-rule). For conditions enter the following: `WHEN last() OF A IS ABOVE 0.2`
 1. In **Section 3**, enter `30s` for the **Evaluate every** field. For the purposes of this tutorial, the evaluation interval is intentionally short. This makes it easier to test. In the **For** field, enter `0m`. This setting makes Grafana wait until an alert has fired for a given time before Grafana sends the notification.
-1. In **Section 4**, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/latest/alerting/unified-alerting/message-templating/).
+1. In **Section 4**, you can add some sample text to your summary message. [Read more about message templating here](https://grafana.com/docs/grafana/next/alerting/contact-points/message-templating/).
 1. Click **Save and Exit** at the top of the page.
 1. Because we only have one contact point (our email channel), our alerts will default to use it. As a system grows, admins can use the **Notification Policies** setting to organize and match alert rules to specific contact points.
 
