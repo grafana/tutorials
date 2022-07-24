@@ -255,7 +255,7 @@ Add a region annotation:
 Manually annotating your dashboard is fine for those single events. For regularly occurring events, such as deploying a new release, Grafana supports querying annotations from one of your data sources. Let's create an annotation using the Loki data source we added earlier.
 
 1. At the top of the dashboard, click the **Dashboard settings** (gear) icon.
-1. Go to **Annotations** and click **Add Annotation Query**.
+1. Go to **Annotations** and click **Add annotation Query**.
 1. In **Name**, enter **Errors**.
 1. In **Data source**, select **Loki**.
 1. In **Query**, enter the following query:
