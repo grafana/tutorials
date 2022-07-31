@@ -59,7 +59,7 @@ Our sample application, Grafana News, exposes metrics that are stored in [Promet
 
 To visualize these metrics from Prometheus, you first need to add and configure the Prometheus Data Source Plugin in Grafana.
 
-1. In the side bar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
+1. In the sidebar, hover your cursor over the  **Configuration** (gear) icon, and then click **Data Sources**.
 1. Click **Add data source**.
 1. In the list of data sources, click **Prometheus**.
 1. In the URL box, enter `https://prometheus.grafana.news`.
@@ -74,7 +74,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
 
 > Ad-hoc queries are created interactively to explore data. An ad-hoc query is commonly followed by another, more specific query.
 
-1. In the side bar, click the **Explore** (compass rose) icon.
+1. In the sidebar, click the **Explore** (compass rose) icon.
 1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
   A graph appears.
 1. In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
@@ -110,7 +110,7 @@ Depending on your use case, you might want to group on other labels. Try groupin
 
 Grafana supports log data sources, like [Loki](https://grafana.com/oss/loki/). Just like for metrics, you first need to add your data source to Grafana.
 
-1. In the left navigation pane or side bar, hover your cursor over the  **Configuration** (gear) icon and then click **Data Sources**.
+1. In the left navigation pane or sidebar, hover your cursor over the  **Configuration** (gear) icon and then click **Data Sources**.
 1. Click **Add data source**.
 1. From the list of data sources, click **Loki**.
 1. In the URL box, enter `https://loki.grafana.news`.
@@ -123,7 +123,7 @@ Loki is now available as a data source in Grafana.
 
 Grafana Explore not only lets you make ad-hoc queries for metrics but lets you explore your logs as well.
 
-1. In the left navigation pane or side bar, click the **Explore** (compass) icon.
+1. In the left navigation pane or sidebar, click the **Explore** (compass) icon.
 1. From the data source list at the top, select the **Loki** data source.
 1. In the **Query editor**, enter:
 
@@ -159,7 +159,7 @@ Dashboards consist of _panels_, each representing a part of the story you want y
 
 Every panel consists of a _query_ and a _visualization_. The query defines _what_ data you want to display, whereas the visualization defines _how_ the data is displayed.
 
-1. In the side bar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
+1. In the sidebar, hover your cursor over the **Create** (plus sign) icon and then click **Dashboard**.
 1. Click **Add new panel**.
 1. In the **Query editor** below the graph, enter the query from earlier and then press Shift + Enter:
 
@@ -233,7 +233,7 @@ To begin, let's create a contact point that will send us an email. Then we'll wr
 
 In this step, we'll set up a new Contact Point. This contact point will use the _email_ channel. Luckily, every Grafana Cloud instance comes with a default email contact point already added. Therefore, all we need to do is add a personal email to the configuration:
 
-1. In Grafana's side bar, hover your cursor over the **Alerting** (bell) icon and then click **Contact points**.
+1. In Grafana's sidebar, hover your cursor over the **Alerting** (bell) icon and then click **Contact points**.
 1. You should see an entry below the **Contact points** heading called `grafana-default-email`. Click the pencil icon on the right-hand side to edit this Contact point.
 1. Under addresses, add an email address that you can access. This is how we will test our alert. 
 1. Click the **Test** button and then the **Send test notification** button in the popup. Now check your email. You should see an email from Grafana with a subject like `[FIRING:1] (TestAlert Grafana)`
@@ -245,7 +245,7 @@ We have configured an email-based contact point to use a personal email. Now we 
 
 Now that Grafana knows how to notify us, it's time to set up an alert rule:
 
-1. In Grafana's side bar, hover the cursor over the **Alerting** (bell) icon and then click **Alert rules**.
+1. In Grafana's sidebar, hover the cursor over the **Alerting** (bell) icon and then click **Alert rules**.
 1. Click **+ New Alert Rule**.
 1. A new page will appear with four distinct sections. Let's review them one at a time. For **Section 1**, leave **Grafana Managed Alert** as the chosen alert type. Name the rule `fundamentals-test` and for **group** write `fundamentals`.
 1. For **Section 2**, find the **query A** box. Choose your Prometheus datasource and enter the same query that we used in our earlier panel: `sum(rate(tns_request_duration_seconds_count[5m])) by(route)`. Press **Run query**. You should see some data in the graph.
