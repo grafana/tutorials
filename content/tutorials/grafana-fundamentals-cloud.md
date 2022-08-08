@@ -75,7 +75,7 @@ Grafana Explore is a workflow for troubleshooting and data exploration. In this 
 > Ad-hoc queries are created interactively to explore data. An ad-hoc query is commonly followed by another, more specific query.
 
 1. In the sidebar, click the **Explore** (compass rose) icon.
-1. In the **Query editor**, where it says *Enter a PromQL query*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
+1. In the **Query editor**, where it says *Enter a PromQL query…*, enter `tns_request_duration_seconds_count` and then press Shift + Enter.
   A graph appears.
 1. In the top right corner, click the dropdown arrow on the **Run Query** button, and then select **5s**. Grafana runs your query and updates the graph every 5 seconds.
 
