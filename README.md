@@ -1,6 +1,6 @@
 # Grafana Tutorials
 
-[![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
+[![License](https://img.shields.io/github/license/grafana/tutorials)](LICENSE)
 
 [Grafana Tutorials](https://grafana.com/tutorials/) are step-by-step guides that help you make the most of Grafana.
 
