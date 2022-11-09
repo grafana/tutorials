@@ -164,12 +164,12 @@ An app plugin can contain panel and data source plugins that get installed along
 In this step, you'll add a data source to your app plugin. You can add panel plugins the same way by changing `datasource` to `panel`.
 
 1. In `src/`, create a new directory called `datasources`.
-1. Create a new data source using Grafana Toolkit in a temporary directory.
+1. Create a new data source using Grafana create-plugin tool in a temporary directory.
 
    ```bash
    mkdir tmp
    cd tmp
-   npx @grafana/toolkit plugin:create my-datasource
+   npx @grafana/create-plugin
    ```
 
 1. Move the `src` directory in the data source plugin to `src/datasources`, and rename it to `my-datasource`.
