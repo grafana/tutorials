@@ -45,7 +45,7 @@ In this tutorial, you'll:
 {{< /tutorials/step >}}
 {{< tutorials/step title="Data source plugins" >}}
 
-A data source in Grafana must extend the `DataSourceApi` interface, which requires you to defines two methods: `query` and `testDatasource`.
+A data source in Grafana must extend the `DataSourceApi` interface, which requires you to define two methods: `query` and `testDatasource`.
 
 ### The `query` method
 
