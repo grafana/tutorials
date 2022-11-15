@@ -151,7 +151,7 @@ Your data source is now sending data frames that Grafana can visualize. Next, we
 
 Most data sources offer a way to query specific data. MySQL and PostgreSQL use SQL, while Prometheus has its own query language, called _PromQL_. No matter what query language your databases are using, Grafana lets you build support for it.
 
-Add support for custom queries to your data source, by implementing a your own _query editor_, a React component that enables users to build their own queries, through a user-friendly graphical interface.
+Add support for custom queries to your data source, by implementing your own _query editor_, a React component that enables users to build their own queries, through a user-friendly graphical interface.
 
 A query editor can be as simple as a text field where the user edits the raw query text, or it can provide a more user-friendly form with drop-down menus and switches, that later gets converted into the raw query text before it gets sent off to the database.
 
