@@ -1,6 +1,6 @@
 # How to Create Grafana Alerts Using InfluxDB and Flux Queries
 
-## Introduction
+## Introduction 
 
 Grafana’s unified alerting system represents a powerful new approach to identifying when something is wrong or needs attention.  Many Grafana users have their data stored in InfluxDB.  Originally InfluxDB used InfluxQL as the query language, but beginning with v1.8, the company introduced Flux, an open source functional data scripting language designed for querying, analyzing, and acting on data.  Flux unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable.
 
