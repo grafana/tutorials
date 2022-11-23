@@ -2,11 +2,9 @@
 
 ## Introduction 
 
-Grafana’s new [unified alerting system](TK) represents a powerful new approach to identifying when something is wrong or needs attention. Many Grafana users have their data stored in InfluxDB. Originally, InfluxDB used [InfluxQL](TK) as the query language, but beginning with v1.8, the company introduced [Flux](TK), an open source functional data scripting language designed for querying, analyzing, and acting on data. Flux unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable.
+Grafana’s new [unified alerting system](TK) represents a powerful new approach to systems observability and incident response management. While the alerting platform is perhaps best known for it's strong integrations with Prometheus, the system works with numerous popular datasource including InfluxDB. Originally, InfluxDB used [InfluxQL](TK) as the query language, but beginning with v1.8, the company introduced [Flux](TK), an open source functional data scripting language designed for querying, analyzing, and acting on data. Flux unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable.
 
-Better bridge here.
-
-With the formalities out of the way, let’s dive into some examples…
+In this tutorial we will learn how to create Grafana alerts using InfluxDB and the newer Flux query language. We will cover five common scenarios from the most basic to the most complex. Together, these five scenarios will provide an excellent guide for almost any type of alerting query that you wish to create using Grafana and Flux.
 
 ## Example 1: How to Create a Grafana Alert When a Value is Above or Below a Set Threshold
 
