@@ -1,16 +1,28 @@
-# How to Create Grafana Alerts Using InfluxDB and the Flux Query Language
+---
+title: How to Create Grafana Alerts Using InfluxDB and the Flux Query Language
+summary: Create complex alerts from Flux queries in the new Grafana Alerting
+id: grafana-alerts-flux-queries
+categories: ["alerting"]
+tags: ["advanced"]
+status: published
+authors: ["[Grant Pinkos](https://community.grafana.com/u/grant2/summary)"]
+Feedback Link: https://github.com/grafana/tutorials/issues/new
+weight: 70
+---
 
-## Introduction 
+{{< tutorials/step title="Introduction" >}}
 
 [Grafana Alerting](https://grafana.com/docs/grafana/latest/alerting/) represents a powerful new approach to systems observability and incident response management. While the alerting platform is perhaps best known for it's strong integrations with Prometheus, the system works with numerous popular datasources including InfluxDB. In this tutorial we will learn how to create Grafana alerts using InfluxDB and the newer Flux query language. We will cover five common scenarios from the most basic to the most complex. Together, these five scenarios will provide an excellent guide for almost any type of alerting query that you wish to create using Grafana and Flux.
 
-## InfluxDB's Query Languages: InfluxQL vs. Flux
+{{< /tutorials/step >}}
+{{< tutorials/step title="InfluxDB's Query Languages: InfluxQL vs. Flux" >}}
 
 Before we dive into our alerting examples, it is worth considering the development of InfluxDB's two popular query languages: InfluxQL and Flux. Originally, InfluxDB used [InfluxQL](https://docs.influxdata.com/influxdb/v2.5/reference/syntax/influxql/spec/) as their query language, which uses a SQL-like syntax. But beginning with InfluxDB v1.8, the company introduced [Flux](https://docs.influxdata.com/flux/v0.x/), "an open source functional data scripting language designed for querying, analyzing, and acting on data." "Flux," its official documentation goes on to state, "unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable."
 
 In the following five examples we will see just how powerful and flexible the new Flux query language can be. We will also see just how well Flux pairs with Grafana Alerting.
 
-## Example 1: How to Create a Grafana Alert When a Value is Above or Below a Set Threshold
+{{< /tutorials/step >}}
+{{< tutorials/step title="Example 1: How to Create a Grafana Alert When a Value is Above or Below a Set Threshold" >}}
 
 Our first example uses a common real-world scenario for InfluxDB and Grafana Alerting. Popular with IoT and edge applications, InfluxDB excels at on-site, real-time observability. In this example, and in fact for many of the following examples, we will consider this hypothetical scenario: a number of fluid tanks that we are monitoring in a manufacturing plant. This scenario, [based on an actual application of InfluxDB and Alerting](grants-presentation-here), will allow us to work through Grafana's various alerting setups, progressing from the simplest to the most complex.
 
@@ -70,11 +82,16 @@ Note that the Reduce expression above is needed.  Without it, when previewing th
 
 And that is it. Using these three steps you can create a Flux-based Grafana Alert that will trigger on either of two thresholds from a single datasource. But what if you need to trigger an alert based on **multiple conditions and from multiple time-series**? In example two we will cover this very scenario.
 
-## Example 2: How to Create a Grafana Alert from Two Queries and Two Conditions
+{{< /tutorials/step >}}
+{{< tutorials/step title="Example 2: How to Create a Grafana Alert from Two Queries and Two Conditions" >}}
 
-Let's mix things up a bit for example 2 and leave our imaginary manufacturing plant. Imagine you're an assistant to the great Dr. Emmett Brown from Back to the Future, and Doc has tasked you with the following: "I want an alert sent to me every time both conditions for time travel are met: when the velocity of a vehicle reaches 88 mph and an object generates 1.21 jigowatts of electricity.
+Let's mix things up a bit for example 2 and leave our imaginary manufacturing plant. 
 
-Let's assume we tracking this data. Let's also assume that each of the above data sources come from different buckets. How do we alert on this? How do we use Grafana and Flux to alert on two distinct conditions originating from two distinct data sources?
+**Scenario:** Imagine you're an assistant to the great Dr. Emmett Brown from Back to the Future, and Doc has tasked you with the following challenge: 
+
+**Challenge:** "I want an alert sent to me every time both conditions for time travel are met: when the velocity of a vehicle reaches 88 miles per hour and an object generates 1.21 jigowatts of electricity."
+
+Let's assume we are tracking this data. Let's also assume that each of the above data sources comes from different buckets. How do we alert on this? How do we use Grafana and Flux to alert on two distinct conditions originating from two distinct data sources?
 
 Like we did in example 1, let's first mock up our queries. Our query for our vehicle data is very similar to our last query. We use a `from()`, `range()`, and a sequence of `filter()` functions. We then use `AggregateWindow()` and `yield()` to narrow our data even more. In this case, the result is a time series tracking the velocity of our 1983 DeLorean:
 
@@ -131,9 +148,16 @@ You can reference our documentation on [alert message templating](https://grafan
 
 In this example we showed how to create a Flux-based alert that uses two distinct conditions from two distinct queries that use data from two distinct data sources. For example three we will switch gears and tackle another popular alerting scenario: how to create an alert based on an aggregated (per day) value.
 
-## Example 3: How to Create a Grafana Alert Based on an Aggregated (Per Day) Value
+{{< /tutorials/step >}}
+{{< tutorials/step title="Example 3: How to Create a Grafana Alert Based on an Aggregated (Per Day) Value" >}}
 
-Alert when the power consumption (kWh) exceeds 5,000 kWh per day.  Let’s assume our electricity meter sends a reading to InfluxDB once per hour and contains the total kWh used for that hour.  The query & resulting time graph of the hourly data over a 7-day period is shown below:
+One of the most common requests in [Grafana's community forum](https://community.grafana.com) involves graphing daily eliectrical consumption and production. This sort of data is very often stored in InfluxDB. In this example we will see how to aggregate time series data into a per-day value and then alert on it.
+
+**Scenario:** Let’s assume our electricity meter sends a reading to InfluxDB once per hour and contains the total kWh used for that hour.  
+
+**Challenge:** Write a query that will aggregate these per-hours values into a per-day value. The create an alert that triggers when the power consumption (kWh) exceeds 5,000 kWh per day. 
+
+Let's begin by examining a typical query and the resulting time graph for our hourly data across a 7-day period. A query like this is shown below:
 
 ```flux
 from(bucket: "RetroEncabulator")
@@ -145,9 +169,11 @@ from(bucket: "RetroEncabulator")
 |> yield(name: "power")
 ```
 
+We can see the same pattern of Flux functions here that we say in examples 1 and 2. A query like this would produce a graph like the following:
+
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-10.png)
 
-Now, by simply changing the aggregateWindow function parameters, we can calculate the daily usage over the same 7-day period:
+Now let's adjust our query to calculate daily usage. With many datasources, this can be a rahter complex operation. But with Flux, by simply changing the aggregateWindow function parameters, we can calculate the daily usage over the same 7-day period:
 
 ```flux
 from(bucket: "RetroEncabulator")
@@ -159,25 +185,36 @@ from(bucket: "RetroEncabulator")
   |> yield(name: "power")
 ```
 
+Note how we've adjusted our `aggregateWindow()` function to `aggregateWindow(every: 1d, fn: sum)`. This results in a graph like so:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-11.png)
 
-Reduce Query A to a single value:
+Now that we have our per-day query correct, we can continue using the same pattern as before, adding expressions to reduce and perform math on our results.
+
+As before, let's reduce our query to a single value:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-12.png)
 
-Create a math expression to be alerted on and set the evaluation behavior:
-
+Now create a math expression to be alerted on and set the evaluation behavior. In this case we want to write `$B > 5000`:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-13.png)
 
-Preview of alerts:
+And now we are alerting on our daily electricity consumption whenever we exceed 5000 kWh. Here is preview of our alert:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-14.png)
 
-## Example 4: How to Create a Dynamic (Multidimensional) Grafana Alert Using Flux
+Plotting and aggregating exlectrical consumption is a common use case for combining InfluxDB and Grafana. Using Flux, we saw just how easy it can be to group our data by day and then alert on that daily value. In our next two examples we will examine the more complex for of Grafana Alert: multidimensional alerts.
 
-Let’s return to example 1, but this time let’s assume we have 5 tanks (A5, B4, C3, D2, and E1).  We can create a multidimensional alert to notify us when a value is exceeded on any tank is less than 30 °C or greater than 60 °C.
+{{< /tutorials/step >}}
+{{< tutorials/step title="Example 4: How to Create a Dynamic (Multidimensional) Grafana Alert Using Flux" >}}
+
+Let’s return to our fluid tanks from example 1, but this time let’s assume we have 5 tanks (A5, B4, C3, D2, and E1).  
+
+**Scenario:** We are now tracking the temperature in five tanks: A5, B4, C3, D2, and E1.
+
+**Challenge:** Create one multidimensional alert that will notify us whenever the temperature in **any** tank is less than 30 °C or greater than 60 °C.
+
+We begin, as always, by writing our initial query. This is very similar to our query in example 1, but note how our third `filter()` function captures the data from all five tanks and not just `A5`:
 
 ```flux
 from(bucket: "HyperEncabulator")
@@ -195,20 +232,32 @@ from(bucket: "HyperEncabulator")
 |> hourSelection(start: 7, stop: 23)`
 ```
 
+A query like the one above will produce a time series graph like this:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-15.png)
 
-Again, we create a Reduce expression for above query to reduce each of the above to a single value:
+Again, we now create a Reduce expression that will reduce the time series for each tank to a single value. This gives us five distinct temperatures:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-16.png)
 
-Finally, create a math expression to be alerted on:
+Finally, create a math expression to be alerted on. This is the exact same expression from example 1, `$B < 30 || $B > 60`:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-17.png)
 
-## Example 5: How to Create a Dynamic (Multidimensional) Grafana Alert Using Multiple Queries and Multiple Thresholds with Flux
+As we can see three tanks are within the acceptable thresholds while two tanks have crossed the upper boundary. This would trigger an alert for tanks `D2` and `E1`.
 
-Continuing with this same dataset, let’s assume that each tank has a temperature controller with a setpoint value that is also being stored in InfluxDB.  Better yet, let’s mix things up and assume each tank has a different setpoint, where we always need to be within 3 degrees of the setpoint.
+With multidimensional alerts we can avoid repeating ourselves. But what if the scenario were even more complex? In the next and final example, we will examine how to use multidimensional alerts to create the most dynamic alerts possible.
+
+{{< /tutorials/step >}}
+{{< tutorials/step title="Example 5: How to Create a Dynamic (Multidimensional) Grafana Alert Using Multiple Queries and Multiple Thresholds with Flux" >}}
+
+For this final example let's continue with our five fluid tanks and their five data-sets.
+
+**Scenario:** Let’s assume again that each tank has a temperature controller with a setpoint value that is stored in InfluxDB.  **But now**, let’s mix things up and assume that each tank has a *different* setpoint, where we always need to be within 3 degrees of the setpoint.
+
+**Challenge:** Create one multidimensional alert that will cover each unique scenario for each tank, triggering an alert whenever any tank's temperature moves beyond its unique allowable range.
+
+To better visualize this challenge, here is a table representing our five tanks, their temperature setpoints, and their allowable range:
 
 
 | Tank        | Setpoint    | Allowable Range (±3) |
@@ -219,7 +268,9 @@ Continuing with this same dataset, let’s assume that each tank has a temperatu
 | D2          | 72          | 69 to 75             |
 | E1          | 80          | 77 to 83             |
 
-We can create another multidimensional alert to cover all 5 tanks, and use Flux to compare the setpoint and actual value for each tank.  One multidimensional alert can monitor 5 separate tanks, each with different setpoints and actual values, but one common "allowable threshold" (i.e. a temperature difference of ±3 degrees).
+With Grafana Alerting, we can create a single multidimensional rule to cover all 5 tanks, and we can use Flux to compare the setpoint and actual value for each tank.  In other words, one multidimensional alert can monitor 5 separate tanks, each with different setpoints and actual values, but all with one common "allowable threshold" (i.e. a temperature difference of ±3 degrees).
+
+Let's begin with our data query. It is similar to our past queries, only now more complex. We must add extra functions to get our data into the proper format, including a `pivot()`, `map()`, `rename()`, `keep()`, and `drop()` function:
 
 ```flux
 from(bucket: "HyperEncabulator")
@@ -237,7 +288,7 @@ from(bucket: "HyperEncabulator")
  |> yield(name: "mean")
 ```
 
-Note in the above that we are calculating the difference between the actual and the setpoint.  The way Grafana parses the result from InfluxDB is that if a _value column is found, it is assumed to be a time-series.  The quick workaround is to add the following:
+Note in the above that we are calculating the difference between the actual and the setpoint.  The way Grafana parses the result from InfluxDB is that if a _value column is found, it is assumed to be a time-series.  The quick workaround is to add the following `rename()` function:
 
 ```flux
  |> rename(columns: {_value: "something"})
@@ -247,18 +298,22 @@ The above query results in this time series:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-18.png)
 
-Again, we create a Reduce expression for above query to reduce each of the above to a single value:
+Again, we then create a Reduce expression for the above query to reduce each of the above to a single value. This value represents the temperature differential between each tank's setpoint and it's actual real-time temperature:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-19.png)
 
-Finally, create a math expression to be alerted on:
+Finally, create a math expression to be alerted on. This time we will create a condition that checks if the absolute value of our reduce calculation is greater than 3, `abs($(B))>3.0`:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-20.png)
 
-The preview of alert states is as follows:
+We can now see that two tanks, `D2` and `E1`, are evaluating to true. When we preview the alert we can see that those two tanks will trigger a notification and change their state from `Normal` to `Alerting`:
 
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-21.png)
 ![image here](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-22.png)
 
-Flux queries and Grafana Unified Alerting are a powerful combination to identify practically any alertable conditions in your dataset, or across your entire system
+{{< /tutorials/step >}}
+{{< tutorials/step title="Conclusion" >}}
 
+Flux queries and Grafana Unified Alerting are a powerful combination to identify practically any alertable conditions in your dataset, or across your entire system. For more information on Grafana Alerting, [visit the documentation here](https://grafana.com/docs/grafana/latest/alerting/). For more information on the Flux query language, [you can visit that documentation as well](https://docs.influxdata.com/flux/v0.x/).
+
+{{< /tutorials/step >}}
