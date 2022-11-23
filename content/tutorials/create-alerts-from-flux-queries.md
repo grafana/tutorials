@@ -24,7 +24,7 @@ In the following five examples we will see just how powerful and flexible the ne
 {{< /tutorials/step >}}
 {{< tutorials/step title="Example 1: How to Create a Grafana Alert When a Value is Above or Below a Set Threshold" >}}
 
-Our first example uses a common real-world scenario for InfluxDB and Grafana Alerting. Popular with IoT and edge applications, InfluxDB excels at on-site, real-time observability. In this example, and in fact for many of the following examples, we will consider this hypothetical scenario: a number of fluid tanks that we are monitoring in a manufacturing plant. This scenario, [based on an actual application of InfluxDB and Alerting](grants-presentation-here), will allow us to work through Grafana's various alerting setups, progressing from the simplest to the most complex.
+Our first example uses a common real-world scenario for InfluxDB and Grafana Alerting. Popular with IoT and edge applications, InfluxDB excels at on-site, real-time observability. In this example, and in fact for many of the following examples, we will consider this hypothetical scenario: a number of fluid tanks that we are monitoring in a manufacturing plant. This scenario, [based on an actual application of InfluxDB and Alerting](https://grafana.com/go/grafanaconline/2021/plant-efficiency-grafana-cloud/), will allow us to work through Grafana's various alerting setups, progressing from the simplest to the most complex.
 
 For Example 1, let's consider the following: 
 
