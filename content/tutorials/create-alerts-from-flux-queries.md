@@ -54,7 +54,7 @@ This flux query will yield a time-series graph like this:
 
 ![grafana alerts from flux queries](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-00.png)
 
-With data now appearing in our rule setup, our next step is to create an [expression](https://grafana.com/docs/grafana/v9.0/panels/query-a-data-source/use-expressions-to-manipulate-data/about-expressions/#using-expressions). Move to Section `B`. For this scenario, we want to create a Reduce expression that will reduce the above to a single value. In this image, you can see that we have chosen to reduce on time-series data the `Last` value from input `A`. In this case, it returns a value 53 degrees celsius for Tank A5:
+With data now appearing in our rule setup, our next step is to create an [expression](https://grafana.com/docs/grafana/v9.0/panels/query-a-data-source/use-expressions-to-manipulate-data/about-expressions/#using-expressions). Move to Section `B`. For this scenario, we want to create a Reduce expression that will reduce the above to a single value. In this image, you can see that we have chosen to reduce our time-series data the `Last` value from input `A`. In this case, it returns a value 53 degrees celsius for Tank A5:
 
 ![grafana alerts from flux queries](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-01.png)
 
