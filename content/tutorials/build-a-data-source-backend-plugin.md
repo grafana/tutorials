@@ -27,9 +27,9 @@ In this tutorial, you'll:
 
 - Knowledge about how data sources are implemented in the frontend.
 - Grafana 7.0
-- Go 1.19+
+- Go ([Version](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/templates/backend/go.mod#L3))
 - [Mage](https://magefile.org/)
-- NodeJS
+- NodeJS ([Version](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/templates/common/package.json#L66))
 - yarn
 {{% /class %}}
 
@@ -78,11 +78,11 @@ mage -v
 Now, let's verify that the plugin you've built so far can be used in Grafana when creating a new data source:
 
 1. Restart your Grafana instance.
-1. Open Grafana in your web browser.
-1. Navigate via the side-menu to **Configuration** -> **Data Sources**.
-1. Click **Add data source**.
-1. Find your newly created plugin and select it.
-1. Enter a name and then click **Save & Test** (ignore any errors reported for now).
+2. Open Grafana in your web browser.
+3. Navigate via the side-menu to **Configuration** -> **Data Sources**.
+4. Click **Add data source**.
+5. Find your newly created plugin and select it.
+6. Enter a name and then click **Save & Test** (ignore any errors reported for now).
 
 You now have a new data source instance of your plugin that is ready to use in a dashboard:
 
