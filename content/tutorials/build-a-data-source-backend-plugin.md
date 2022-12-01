@@ -78,11 +78,11 @@ mage -v
 Now, let's verify that the plugin you've built so far can be used in Grafana when creating a new data source:
 
 1. Restart your Grafana instance.
-2. Open Grafana in your web browser.
-3. Navigate via the side-menu to **Configuration** -> **Data Sources**.
-4. Click **Add data source**.
-5. Find your newly created plugin and select it.
-6. Enter a name and then click **Save & Test** (ignore any errors reported for now).
+1. Open Grafana in your web browser.
+1. Navigate via the side-menu to **Configuration** -> **Data Sources**.
+1. Click **Add data source**.
+1. Find your newly created plugin and select it.
+1. Enter a name and then click **Save & Test** (ignore any errors reported for now).
 
 You now have a new data source instance of your plugin that is ready to use in a dashboard:
 
