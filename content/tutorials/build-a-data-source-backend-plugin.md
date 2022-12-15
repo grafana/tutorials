@@ -27,9 +27,9 @@ In this tutorial, you'll:
 
 - Knowledge about how data sources are implemented in the frontend.
 - Grafana 7.0
-- Go 1.14+
+- Go ([Version](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/templates/backend/go.mod#L3))
 - [Mage](https://magefile.org/)
-- NodeJS
+- NodeJS ([Version](https://github.com/grafana/plugin-tools/blob/main/packages/create-plugin/templates/common/package.json#L66))
 - yarn
 {{% /class %}}
 
