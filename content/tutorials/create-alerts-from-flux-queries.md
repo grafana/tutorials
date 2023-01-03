@@ -1,5 +1,5 @@
 ---
-title: How to Create Grafana Alerts Using InfluxDB and the Flux Query Language
+title: How to create Grafana alerts with InfluxDB and the Flux Query Language
 summary: Create complex alerts from Flux queries in the new Grafana Alerting
 id: grafana-alerts-flux-queries
 categories: ["alerting"]
@@ -10,49 +10,56 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 70
 ---
 
-{{< tutorials/step title="Introduction" >}}
+<!-- {{< tutorials/step title="Introduction" >}} -->
 
-[Grafana Alerting](https://grafana.com/docs/grafana/latest/alerting/) represents a powerful new approach to systems observability and incident response management. While the alerting platform is perhaps best known for its strong integrations with Prometheus, the system works with numerous popular datasources including InfluxDB. In this tutorial we will learn how to create Grafana alerts using InfluxDB and the newer Flux query language. We will cover five common scenarios from the most basic to the most complex. Together, these five scenarios will provide an excellent guide for almost any type of alerting query that you wish to create using Grafana and Flux.
+# How to create Grafana alerts with InfluxDB and the Flux query language
 
-{{< /tutorials/step >}}
-{{< tutorials/step title="InfluxDB's query languages: InfluxQL vs. Flux" >}}
+[Grafana Alerting](https://grafana.com/docs/grafana/latest/alerting/) represents a powerful new approach to systems observability and incident response management. While the alerting platform is perhaps best known for its strong integrations with Prometheus, the system works with numerous popular data sources including InfluxDB. In this tutorial we will learn how to create Grafana alerts using InfluxDB and the newer Flux query language. We will cover five common scenarios from the most basic to the most complex. Together, these five scenarios will provide an excellent guide for almost any type of alerting query that you wish to create using Grafana and Flux.
 
-Before we dive into our alerting examples, it is worth considering the development of InfluxDB's two popular query languages: InfluxQL and Flux. Originally, InfluxDB used [InfluxQL](https://docs.influxdata.com/influxdb/v2.5/reference/syntax/influxql/spec/) as their query language, which uses a SQL-like syntax. But beginning with InfluxDB v1.8, the company introduced [Flux](https://docs.influxdata.com/flux/v0.x/), "an open source functional data scripting language designed for querying, analyzing, and acting on data." "Flux," its official documentation goes on to state, "unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable."
+<!--{{< /tutorials/step >}}
+{{< tutorials/step title="InfluxDB's query languages: InfluxQL vs. Flux" >}}-->
+
+Before we dive into our alerting scenarios, it is worth considering the development of InfluxDB's two popular query languages: InfluxQL and Flux. Originally, InfluxDB used [InfluxQL](https://docs.influxdata.com/influxdb/v2.5/reference/syntax/influxql/spec/) as their query language, which uses a SQL-like syntax. But beginning with InfluxDB v1.8, the company introduced [Flux](https://docs.influxdata.com/flux/v0.x/), "an open source functional data scripting language designed for querying, analyzing, and acting on data." "Flux," its official documentation goes on to state, "unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable."
 
 In the following five examples we will see just how powerful and flexible the new Flux query language can be. We will also see just how well Flux pairs with Grafana Alerting.
 
-{{< /tutorials/step >}}
-{{< tutorials/step title="Example 1: how to create a Grafana Alert when a value is above or below a set threshold" >}}
+## Example 1: Create an alert when a value is above or below a set threshold
 
 Our first example uses a common real-world scenario for InfluxDB and Grafana Alerting. Popular with IoT and edge applications, InfluxDB excels at on-site, real-time observability. In this example, and in fact for many of the following examples, we will consider the hypothetical scenario where we are monitoring a number of fluid tanks in a manufacturing plant. This scenario, [based on an actual application of InfluxDB and Alerting](https://grafana.com/go/grafanaconline/2021/plant-efficiency-grafana-cloud/), will allow us to work through Grafana's various alerting setups, progressing from the simplest to the most complex.
 
-1. The challenge
-
-For Example 1, let's consider the following: 
+For Example 1, let's consider the following:
 
 **Scenario:** We are monitoring one tank, `A5`, for which we are storing real-time temperature data. We need to make sure that the temperature in this tank is always greater than 30 °C and less than 60 °C.
 
 **Challenge:** Write a Grafana Alert that will trigger whenever the temperature in tank `A5` crosses the lower threshold of 30 °C or the upper threshold of 60 °C.
 
-How would we do this?
+To do this, we'll: 
+    1. create a Grafana alert rule.
+    1. add a Flux query.
+    1. add expressions to the alert rule.
 
-2. Add an initial Flux query to your Grafana Alert rule
+### Create a Grafana Alert rule
 
-Let's begin by opening the Grafana alerting menu and choosing `Alert rules`. Then click the `New alert rule` button. Give your alert rule a name and then choose `Grafana managed alert`. For InfluxDB, you will always create a [Grafana managed rule](https://grafana.com/docs/grafana/latest/alerting/alerting-rules/create-grafana-managed-rule/#add-grafana-managed-rule)  
+1. Open the Grafana alerting menu and select **Alert rules**.
+1. Click **New alert rule** button. 
+1. Give your alert rule a name and then select **Grafana managed alert**. 
+        For InfluxDB, you will always create a [Grafana managed rule](https://grafana.com/docs/grafana/latest/alerting/alerting-rules/create-grafana-managed-rule/#add-grafana-managed-rule).
 
-Below this, still in the `Step 2` section of the Alert rule page, you will see three boxes: A query editor (`A`), and then two sections labelled `B` and `C`. You will use these three sections to construct your rule. Let's move through them one by one. 
+### Add an initial Flux query to the alert rule
 
-First, we want to query the data in our imaginary InfluxDB instance to obtain a time series graph of the temperature of tank A5. For this you would choose your InfluxDB datasource from the dropdown and then write a query like this:
+Still in the **Step 2** section of the Alert rule page, you will see three boxes: a query editor (`A`), and then two sections labelled `B` and `C`. You will use these three sections to construct your rule. Let's move through them one by one.
 
-```flux
-from(bucket: "RetroEncabulator")
-|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
-|> filter(fn: (r) => r["_measurement"] == "TemperatureData")
-|> filter(fn: (r) => r["Tank"] == "A5")
-|> filter(fn: (r) => r["_field"] == "Temperature")
-|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
-|> yield(name: "mean")
-```
+First, we want to query the data in our imaginary InfluxDB instance to obtain a time series graph of the temperature of tank A5. For this you would choose your InfluxDB data source from the dropdown and then write a query like this:
+
+    ```
+     from(bucket: "RetroEncabulator")
+    |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+    |> filter(fn: (r) => r["_measurement"] == "TemperatureData")
+    |> filter(fn: (r) => r["Tank"] == "A5")
+    |> filter(fn: (r) => r["_field"] == "Temperature")
+    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+    |> yield(name: "mean")
+    ```
 
 This is a fairly typical Flux query. Let's go through it function by function. We begin using [the `from()` function](https://docs.influxdata.com/flux/v0.x/stdlib/influxdata/influxdb/from/) to choose the correct bucket where our tank data resides. Then we use [a `range()` function](https://docs.influxdata.com/flux/v0.x/stdlib/universe/range/) to filter our rows based on time constraints. Then we pass our data through three [`filter()` functions](https://docs.influxdata.com/flux/v0.x/stdlib/universe/filter/) to narrow our results. We choose a specific [`measurement` (a special keyword in InfluxDB)](https://docs.influxdata.com/influxdb/v1.8/concepts/glossary/#measurement), then our tank in question (`A5`), and then a specific [`field` (another special keyword in InfluxDB)](https://docs.influxdata.com/influxdb/v1.8/concepts/glossary/#field). After this we pass the data into [an `aggregateWindow()` function](https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/), which downsamples our data into specific periods of time, and then finally [a `yield()` function](https://docs.influxdata.com/flux/v0.x/stdlib/universe/yield/), which specifies which final result we want: `mean`. 
 
@@ -60,7 +67,7 @@ This flux query will yield a time-series graph like this:
 
 ![grafana alerts from flux queries](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-00.png)
 
-3. Add expressions to your Grafana Alert rule
+### Add expressions to your Grafana Alert rule
 
 With data now appearing in our rule setup, our next step is to create an [expression](https://grafana.com/docs/grafana/v9.0/panels/query-a-data-source/use-expressions-to-manipulate-data/about-expressions/#using-expressions). Move to Section `B`. For this scenario, we want to create a Reduce expression that will reduce the above to a single value. In this image, you can see that we have chosen to reduce our time-series data the `Last` value from input `A`. In this case, it returns a value 53 degrees celsius for Tank A5:
 
@@ -95,7 +102,7 @@ Using these three steps you can create a Flux-based Grafana Alert that will trig
 
 Let's mix things up a bit for example 2 and leave our imaginary manufacturing plant. 
 
-1. The challenge
+## Example 2
 
 **Scenario:** Imagine you're an assistant to the great Dr. Emmett Brown from Back to the Future, and Doc has tasked you with the following challenge: 
 
@@ -103,7 +110,7 @@ Let's mix things up a bit for example 2 and leave our imaginary manufacturing pl
 
 Let's assume we are tracking this data in InfluxDB and Grafana. Let's also assume that each of the above data sources comes from different buckets. How do we alert on this? How do we use Grafana and Flux to alert on two distinct conditions originating from two distinct data sources?
 
-2. Add two Flux queries to your Grafana Alert rule
+### Add two Flux queries to your Grafana Alert rule
 
 Like we did in example 1, let's first mock up our queries. Our query for our vehicle data is very similar to our last query. We use a `from()`, `range()`, and a sequence of `filter()` functions. We then use `AggregateWindow()` and `yield()` to narrow our data even more. In this case, the result is a time series tracking the velocity of our 1983 DeLorean:
 
@@ -133,7 +140,7 @@ from(bucket: "HillValley")
 
 We are now ready to modify this data using expressions.
 
-3. Add expressions to your Grafana Alert rule
+### Add expressions to your Grafana Alert rule
 
 Let's now use the same steps to reduce each query to the last (most recent) value. Reducing Query `A` to a single value might look like this:
 
