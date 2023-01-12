@@ -5,7 +5,7 @@ id: grafana-alerts-flux-queries
 categories: ["alerting"]
 tags: ["advanced"]
 status: published
-authors: ["[Grant Pinkos](https://community.grafana.com/u/grant2/summary)"]
+authors: ["grant_pinkos"]
 Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 70
 ---
