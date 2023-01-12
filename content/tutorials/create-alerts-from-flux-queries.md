@@ -10,14 +10,9 @@ Feedback Link: https://github.com/grafana/tutorials/issues/new
 weight: 70
 ---
 
-<!-- {{< tutorials/step title="Introduction" >}} -->
-
 # How to create Grafana alerts with InfluxDB and the Flux query language
 
 [Grafana Alerting](https://grafana.com/docs/grafana/latest/alerting/) represents a powerful new approach to systems observability and incident response management. While the alerting platform is perhaps best known for its strong integrations with Prometheus, the system works with numerous popular data sources including InfluxDB. In this tutorial we will learn how to create Grafana alerts using InfluxDB and the newer Flux query language. We will cover five common scenarios from the most basic to the most complex. Together, these five scenarios will provide an excellent guide for almost any type of alerting query that you wish to create using Grafana and Flux.
-
-<!--{{< /tutorials/step >}}
-{{< tutorials/step title="InfluxDB's query languages: InfluxQL vs. Flux" >}}-->
 
 Before we dive into our alerting scenarios, it is worth considering the development of InfluxDB's two popular query languages: InfluxQL and Flux. Originally, InfluxDB used [InfluxQL](https://docs.influxdata.com/influxdb/v2.5/reference/syntax/influxql/spec/) as their query language, which uses a SQL-like syntax. But beginning with InfluxDB v1.8, the company introduced [Flux](https://docs.influxdata.com/flux/v0.x/), "an open source functional data scripting language designed for querying, analyzing, and acting on data." "Flux," its official documentation goes on to state, "unifies code for querying, processing, writing, and acting on data into a single syntax. The language is designed to be usable, readable, flexible, composable, testable, contributable, and shareable."
 
@@ -83,7 +78,6 @@ And here is a preview of this alert when the state is `Alerting`:
 
 ![grafana alerts from flux queries](https://raw.githubusercontent.com/grafana/tutorials/master/content/tutorials/assets/flux-alert-04.png)
 
-<!--note syntax for these?-->
 Note that the Reduce expression above is needed.  Without it, when previewing the results, Grafana would display `invalid format of evaluation results for the alert definition B: looks like time series data, only reduced data can be alerted on`.
 
 💡Tip: In case your locale is still stubbornly using Fahrenheit, we can modify the above Flux query by adding (before the aggregateWindow statement) a map() function to to convert (or map) the values from °C to °F.  Note that we are not creating a new field.  We are simply remapping the existing value.
