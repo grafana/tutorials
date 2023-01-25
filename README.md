@@ -18,7 +18,7 @@
 | grafana-fundamentals-cloud.md | https://github.com/grafana/cloud-docs (private) |
 | grafana-fundamentals.md | https://github.com/grafana/grafana |
 | iis.md | https://github.com/grafana/grafana |
-| \_index.md | https://github.com/grafana/website |
+| \_index.md | https://github.com/grafana/website (private) |
 | install-grafana-on-raspberry-pi.md | https://github.com/grafana/grafana |
 | integrate-hubot.md | https://github.com/grafana/grafana |
 | provision-dashboards-and-data-sources.md | https://github.com/grafana/grafana |
