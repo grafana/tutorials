@@ -5,6 +5,7 @@
 > To find the new location of an existing tutorial, refer to the following table:
 
 | File | New repository |
+| ---- | --------------- |
 | build-a-data-source-backend-plugin.md | https://github.com/grafana/grafana |
 | assets | https://github.com/grafana/grafana |
 | build-a-data-source-plugin.md | https://github.com/grafana/grafana |
